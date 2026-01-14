@@ -1,0 +1,6 @@
+source;share/carmen_player/hook/pythonpath.ps1
+source;share/carmen_player/hook/pythonpath.dsv
+source;share/carmen_player/hook/pythonpath.sh
+source;share/carmen_player/hook/ament_prefix_path.ps1
+source;share/carmen_player/hook/ament_prefix_path.dsv
+source;share/carmen_player/hook/ament_prefix_path.sh

@@ -1,0 +1,5 @@
+  File "/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player/log_publisher.py", line 12
+    LOG_FILE_PATH = 'C:\Users\david_mtuyw46\OneDrive\Documents\Projects\PortaMailCapstone\Datasets'
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 2-3: truncated \UXXXXXXXX escape
+

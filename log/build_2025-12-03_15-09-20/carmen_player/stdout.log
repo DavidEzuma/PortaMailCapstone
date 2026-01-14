@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/carmen_player/carmen_player.egg-info
+writing ../../build/carmen_player/carmen_player.egg-info/PKG-INFO
+writing dependency_links to ../../build/carmen_player/carmen_player.egg-info/dependency_links.txt
+writing entry points to ../../build/carmen_player/carmen_player.egg-info/entry_points.txt
+writing requirements to ../../build/carmen_player/carmen_player.egg-info/requires.txt
+writing top-level names to ../../build/carmen_player/carmen_player.egg-info/top_level.txt
+writing manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+reading manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+writing manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player
+copying carmen_player/log_publisher.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player
+copying carmen_player/__init__.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player
+running install
+running install_lib
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player
+copying /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player/log_publisher.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player
+copying /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player/__init__.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player
+byte-compiling /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player/log_publisher.py to log_publisher.cpython-312.pyc
+byte-compiling /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/share/ament_index
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/share/ament_index/resource_index
+creating /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/share/ament_index/resource_index/packages
+copying resource/carmen_player -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/share/ament_index/resource_index/packages
+copying package.xml -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/share/carmen_player
+running install_egg_info
+Copying ../../build/carmen_player/carmen_player.egg-info to /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info
+running install_scripts
+Installing play_log script to /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/carmen_player
+writing list of installed files to '/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log'

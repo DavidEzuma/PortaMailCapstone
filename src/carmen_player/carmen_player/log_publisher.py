@@ -52,7 +52,7 @@ class CarmenPlayer(Node):
             # SICK LMS 200 specs (typical for MIT datasets)
             scan.angle_min = -1.5708 # -90 degrees
             scan.angle_max = 1.5708  # +90 degrees
-            scan.angle_increment = 3.14159 / num_readings
+            scan.angle_increment = 3.14159 / (num_readings - 1)
             scan.range_min = 0.0
             scan.range_max = 80.0
             scan.ranges = ranges

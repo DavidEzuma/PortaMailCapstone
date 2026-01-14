@@ -1,0 +1,130 @@
+[0.000000] (-) TimerEvent: {}
+[0.000632] (carmen_player) JobQueued: {'identifier': 'carmen_player', 'dependencies': OrderedDict()}
+[0.001117] (carmen_player) JobStarted: {'identifier': 'carmen_player'}
+[0.098017] (-) TimerEvent: {}
+[0.198863] (-) TimerEvent: {}
+[0.300659] (-) TimerEvent: {}
+[0.403135] (-) TimerEvent: {}
+[0.504891] (-) TimerEvent: {}
+[0.606326] (-) TimerEvent: {}
+[0.707355] (-) TimerEvent: {}
+[0.808038] (-) TimerEvent: {}
+[0.911082] (-) TimerEvent: {}
+[1.012816] (-) TimerEvent: {}
+[1.113951] (-) TimerEvent: {}
+[1.214656] (-) TimerEvent: {}
+[1.315593] (-) TimerEvent: {}
+[1.416201] (-) TimerEvent: {}
+[1.516934] (-) TimerEvent: {}
+[1.618521] (-) TimerEvent: {}
+[1.720592] (-) TimerEvent: {}
+[1.822085] (-) TimerEvent: {}
+[1.924713] (-) TimerEvent: {}
+[2.026259] (-) TimerEvent: {}
+[2.127783] (-) TimerEvent: {}
+[2.229312] (-) TimerEvent: {}
+[2.330251] (-) TimerEvent: {}
+[2.431584] (-) TimerEvent: {}
+[2.532706] (-) TimerEvent: {}
+[2.633522] (-) TimerEvent: {}
+[2.735300] (-) TimerEvent: {}
+[2.837329] (-) TimerEvent: {}
+[2.939360] (-) TimerEvent: {}
+[3.040799] (-) TimerEvent: {}
+[3.142177] (-) TimerEvent: {}
+[3.243305] (-) TimerEvent: {}
+[3.345198] (-) TimerEvent: {}
+[3.448620] (-) TimerEvent: {}
+[3.550198] (-) TimerEvent: {}
+[3.651767] (-) TimerEvent: {}
+[3.753316] (-) TimerEvent: {}
+[3.854123] (-) TimerEvent: {}
+[3.955716] (-) TimerEvent: {}
+[4.057097] (-) TimerEvent: {}
+[4.157712] (-) TimerEvent: {}
+[4.258270] (-) TimerEvent: {}
+[4.358782] (-) TimerEvent: {}
+[4.459356] (-) TimerEvent: {}
+[4.559929] (-) TimerEvent: {}
+[4.661161] (-) TimerEvent: {}
+[4.761704] (-) TimerEvent: {}
+[4.862511] (-) TimerEvent: {}
+[4.963903] (-) TimerEvent: {}
+[5.064507] (-) TimerEvent: {}
+[5.165193] (-) TimerEvent: {}
+[5.266974] (-) TimerEvent: {}
+[5.368498] (-) TimerEvent: {}
+[5.469447] (-) TimerEvent: {}
+[5.570664] (-) TimerEvent: {}
+[5.614268] (carmen_player) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/carmen_player', 'build', '--build-base', '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build', 'install', '--record', '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/carmen_player', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'WSL_DISTRO_NAME': 'Ubuntu-24.04', 'WAYLAND_DISPLAY': 'wayland-0', 'COLCON_PREFIX_PATH': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', 'NAME': 'DESKTOP-I5QVHQR', 'WSL_INTEROP': '/run/WSL/346_interop', 'PULSE_SERVER': 'unix:/mnt/wslg/PulseServer', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Users/David/AppData/Local/Programs/Python/Python314/Scripts/:/mnt/c/Users/David/AppData/Local/Programs/Python/Python314/:/mnt/c/Users/David/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/David/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/David/AppData/Local/PowerToys/DSCModules/:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000/', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'WSL2_GUI_APPS_ENABLED': '1', 'HOSTTYPE': 'x86_64', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor', 'WSLENV': ''}, 'shell': False}
+[5.670834] (-) TimerEvent: {}
+[5.771547] (-) TimerEvent: {}
+[5.872993] (-) TimerEvent: {}
+[5.975885] (-) TimerEvent: {}
+[6.077069] (-) TimerEvent: {}
+[6.177933] (-) TimerEvent: {}
+[6.279430] (-) TimerEvent: {}
+[6.380782] (-) TimerEvent: {}
+[6.482228] (-) TimerEvent: {}
+[6.583711] (-) TimerEvent: {}
+[6.685237] (-) TimerEvent: {}
+[6.786670] (-) TimerEvent: {}
+[6.889473] (-) TimerEvent: {}
+[6.990763] (-) TimerEvent: {}
+[7.091885] (-) TimerEvent: {}
+[7.193229] (-) TimerEvent: {}
+[7.294860] (-) TimerEvent: {}
+[7.396293] (-) TimerEvent: {}
+[7.497017] (-) TimerEvent: {}
+[7.598554] (-) TimerEvent: {}
+[7.699818] (-) TimerEvent: {}
+[7.800470] (-) TimerEvent: {}
+[7.901172] (-) TimerEvent: {}
+[7.934453] (carmen_player) StdoutLine: {'line': b'running egg_info\n'}
+[7.982338] (carmen_player) StdoutLine: {'line': b'writing ../../build/carmen_player/carmen_player.egg-info/PKG-INFO\n'}
+[7.992922] (carmen_player) StdoutLine: {'line': b'writing dependency_links to ../../build/carmen_player/carmen_player.egg-info/dependency_links.txt\n'}
+[8.000109] (carmen_player) StdoutLine: {'line': b'writing entry points to ../../build/carmen_player/carmen_player.egg-info/entry_points.txt\n'}
+[8.001660] (-) TimerEvent: {}
+[8.007407] (carmen_player) StdoutLine: {'line': b'writing requirements to ../../build/carmen_player/carmen_player.egg-info/requires.txt\n'}
+[8.011933] (carmen_player) StdoutLine: {'line': b'writing top-level names to ../../build/carmen_player/carmen_player.egg-info/top_level.txt\n'}
+[8.101799] (-) TimerEvent: {}
+[8.154289] (carmen_player) StdoutLine: {'line': b"reading manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'\n"}
+[8.201945] (-) TimerEvent: {}
+[8.257862] (carmen_player) StdoutLine: {'line': b"writing manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'\n"}
+[8.262655] (carmen_player) StdoutLine: {'line': b'running build\n'}
+[8.263806] (carmen_player) StdoutLine: {'line': b'running build_py\n'}
+[8.285669] (carmen_player) StdoutLine: {'line': b'copying carmen_player/log_publisher.py -> /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player\n'}
+[8.302111] (-) TimerEvent: {}
+[8.345006] (carmen_player) StdoutLine: {'line': b'running install\n'}
+[8.358478] (carmen_player) StdoutLine: {'line': b'running install_lib\n'}
+[8.402256] (-) TimerEvent: {}
+[8.457370] (carmen_player) StdoutLine: {'line': b'copying /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player/log_publisher.py -> /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player\n'}
+[8.502427] (-) TimerEvent: {}
+[8.549115] (carmen_player) StdoutLine: {'line': b'byte-compiling /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player/log_publisher.py to log_publisher.cpython-312.pyc\n'}
+[8.602638] (-) TimerEvent: {}
+[8.632941] (carmen_player) StdoutLine: {'line': b'running install_data\n'}
+[8.670559] (carmen_player) StdoutLine: {'line': b'running install_egg_info\n'}
+[8.702766] (-) TimerEvent: {}
+[8.728125] (carmen_player) StdoutLine: {'line': b"removing '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info' (and everything under it)\n"}
+[8.802958] (-) TimerEvent: {}
+[8.811080] (carmen_player) StdoutLine: {'line': b'Copying ../../build/carmen_player/carmen_player.egg-info to /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info\n'}
+[8.903103] (-) TimerEvent: {}
+[9.003757] (-) TimerEvent: {}
+[9.104571] (-) TimerEvent: {}
+[9.173537] (carmen_player) StdoutLine: {'line': b'running install_scripts\n'}
+[9.204682] (-) TimerEvent: {}
+[9.305273] (-) TimerEvent: {}
+[9.405955] (-) TimerEvent: {}
+[9.507799] (-) TimerEvent: {}
+[9.609248] (-) TimerEvent: {}
+[9.709881] (-) TimerEvent: {}
+[9.753491] (carmen_player) StdoutLine: {'line': b'Installing play_log script to /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/carmen_player\n'}
+[9.770536] (carmen_player) StdoutLine: {'line': b"writing list of installed files to '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log'\n"}
+[9.810041] (-) TimerEvent: {}
+[9.817662] (carmen_player) CommandEnded: {'returncode': 0}
+[9.910174] (-) TimerEvent: {}
+[10.010717] (-) TimerEvent: {}
+[10.111310] (-) TimerEvent: {}
+[10.211955] (-) TimerEvent: {}
+[10.262168] (carmen_player) JobEnded: {'identifier': 'carmen_player', 'rc': 0}
+[10.292951] (-) EventReactorShutdown: {}

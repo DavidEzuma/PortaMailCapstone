@@ -1,0 +1,24 @@
+[4.366s] Invoking command in '/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/src/carmen_player': PYTHONPATH=/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/carmen_player build --build-base /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build install --record /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log --single-version-externally-managed install_data
+[6.070s] running egg_info
+[6.138s] writing ../../build/carmen_player/carmen_player.egg-info/PKG-INFO
+[6.155s] writing dependency_links to ../../build/carmen_player/carmen_player.egg-info/dependency_links.txt
+[6.169s] writing entry points to ../../build/carmen_player/carmen_player.egg-info/entry_points.txt
+[6.186s] writing requirements to ../../build/carmen_player/carmen_player.egg-info/requires.txt
+[6.196s] writing top-level names to ../../build/carmen_player/carmen_player.egg-info/top_level.txt
+[6.377s] reading manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+[6.525s] writing manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+[6.533s] running build
+[6.535s] running build_py
+[6.569s] copying carmen_player/log_publisher.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player
+[6.690s] running install
+[6.714s] running install_lib
+[6.885s] copying /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build/lib/carmen_player/log_publisher.py -> /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player
+[7.041s] byte-compiling /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player/log_publisher.py to log_publisher.cpython-312.pyc
+[7.147s] running install_data
+[7.206s] running install_egg_info
+[7.276s] removing '/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info' (and everything under it)
+[7.403s] Copying ../../build/carmen_player/carmen_player.egg-info to /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info
+[7.973s] running install_scripts
+[8.640s] Installing play_log script to /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/carmen_player
+[8.680s] writing list of installed files to '/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log'
+[8.775s] Invoked command in '/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/src/carmen_player' returned '0': PYTHONPATH=/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/carmen_player build --build-base /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build install --record /mnt/c/users/david_mtuyw46/OneDrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log --single-version-externally-managed install_data

@@ -1,0 +1,21 @@
+[5.388s] Invoking command in '/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/src/carmen_player': PYTHONPATH=/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/carmen_player build --build-base /mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build install --record /mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log --single-version-externally-managed install_data
+[6.840s] running egg_info
+[6.892s] writing ../../build/carmen_player/carmen_player.egg-info/PKG-INFO
+[6.905s] writing dependency_links to ../../build/carmen_player/carmen_player.egg-info/dependency_links.txt
+[6.914s] writing entry points to ../../build/carmen_player/carmen_player.egg-info/entry_points.txt
+[6.924s] writing requirements to ../../build/carmen_player/carmen_player.egg-info/requires.txt
+[6.938s] writing top-level names to ../../build/carmen_player/carmen_player.egg-info/top_level.txt
+[7.101s] reading manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+[7.271s] writing manifest file '../../build/carmen_player/carmen_player.egg-info/SOURCES.txt'
+[7.275s] running build
+[7.277s] running build_py
+[7.329s] running install
+[7.345s] running install_lib
+[7.545s] running install_data
+[7.586s] running install_egg_info
+[7.651s] removing '/mnt/c/Users/David/onedrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info' (and everything under it)
+[7.750s] Copying ../../build/carmen_player/carmen_player.egg-info to /mnt/c/Users/David/onedrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages/carmen_player-0.0.0-py3.12.egg-info
+[8.154s] running install_scripts
+[8.695s] Installing play_log script to /mnt/c/Users/David/onedrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/carmen_player
+[8.732s] writing list of installed files to '/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log'
+[8.801s] Invoked command in '/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/src/carmen_player' returned '0': PYTHONPATH=/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/install/carmen_player/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/carmen_player build --build-base /mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/build install --record /mnt/c/users/David/onedrive/Documents/Projects/PortaMailCapstone/build/carmen_player/install.log --single-version-externally-managed install_data
