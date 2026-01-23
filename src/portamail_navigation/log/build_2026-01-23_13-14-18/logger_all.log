@@ -1,0 +1,80 @@
+[1.050s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'portamail_navigation']
+[1.051s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=16, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['portamail_navigation'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7aa137388bc0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7aa13736be60>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7aa13736be60>>, mixin_verb=('build',))
+[1.099s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[1.100s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[1.100s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[1.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[1.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[1.101s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[1.102s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation'
+[1.104s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[1.104s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[1.105s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[1.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[1.106s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[1.107s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[1.107s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[1.107s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[1.108s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[1.131s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_cmake' and name 'portamail_navigation'
+[1.131s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[1.131s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[1.132s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[1.132s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[1.132s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[1.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[1.144s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[1.146s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 285 installed packages in /opt/ros/jazzy
+[1.147s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[1.174s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_args' from command line to 'None'
+[1.174s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_target' from command line to 'None'
+[1.174s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[1.174s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_clean_cache' from command line to 'False'
+[1.175s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_clean_first' from command line to 'False'
+[1.175s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'cmake_force_configure' from command line to 'False'
+[1.175s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'ament_cmake_args' from command line to 'None'
+[1.175s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'catkin_cmake_args' from command line to 'None'
+[1.175s] Level 5:colcon.colcon_core.verb:set package 'portamail_navigation' build argument 'catkin_skip_building_tests' from command line to 'False'
+[1.175s] DEBUG:colcon.colcon_core.verb:Building package 'portamail_navigation' with the following arguments: {'ament_cmake_args': None, 'build_base': '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/build/portamail_navigation', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation', 'merge_install': False, 'path': '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation', 'symlink_install': False, 'test_result_base': None}
+[1.176s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.177s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.177s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation' with build type 'ament_cmake'
+[1.177s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation'
+[1.179s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.180s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.180s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.248s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/build/portamail_navigation': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation -DCMAKE_INSTALL_PREFIX=/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation
+[10.750s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/build/portamail_navigation' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation -DCMAKE_INSTALL_PREFIX=/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation
+[10.771s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(portamail_navigation)
+[10.772s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation' for CMake module files
+[10.783s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation' for CMake config files
+[10.785s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/bin'
+[10.785s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/lib/pkgconfig/portamail_navigation.pc'
+[10.786s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/lib/python3.12/site-packages'
+[10.787s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/bin'
+[10.788s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/portamail_navigation/package.ps1'
+[10.800s] INFO:colcon.colcon_core.shell:Creating package descriptor '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/portamail_navigation/package.dsv'
+[10.812s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/portamail_navigation/package.sh'
+[10.823s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/portamail_navigation/package.bash'
+[10.835s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/portamail_navigation/package.zsh'
+[10.846s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation/share/colcon-core/packages/portamail_navigation)
+[10.866s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[10.867s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[10.869s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '1'
+[10.871s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[10.945s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[10.946s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[10.946s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[10.946s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[10.947s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[10.947s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[10.948s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/local_setup.ps1'
+[10.954s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/_local_setup_util_ps1.py'
+[10.961s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/setup.ps1'
+[10.967s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/local_setup.sh'
+[10.975s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/_local_setup_util_sh.py'
+[10.984s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/setup.sh'
+[10.992s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/local_setup.bash'
+[10.999s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/setup.bash'
+[11.005s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/local_setup.zsh'
+[11.012s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/setup.zsh'
