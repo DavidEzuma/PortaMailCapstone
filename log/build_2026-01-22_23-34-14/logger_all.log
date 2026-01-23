@@ -1,0 +1,143 @@
+[0.208s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'portamail_navigation']
+[0.208s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=['portamail_navigation'], packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x70536c150e00>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x70536c271820>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x70536c271820>>, mixin_verb=('build',))
+[0.254s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.254s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.254s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.255s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.255s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.255s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.255s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone'
+[0.257s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.257s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.257s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.258s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.259s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.259s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.259s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.259s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.283s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.284s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.287s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.288s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.290s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.291s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.292s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.295s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.295s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.296s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.298s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.298s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.299s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.300s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.300s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.301s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.301s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.302s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.302s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.305s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.305s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.305s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.306s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.306s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.310s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['ignore', 'ignore_ament_install']
+[0.311s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'ignore'
+[0.312s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'ignore_ament_install'
+[0.314s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['colcon_pkg']
+[0.315s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'colcon_pkg'
+[0.316s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['colcon_meta']
+[0.316s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'colcon_meta'
+[0.317s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['ros']
+[0.318s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'ros'
+[0.322s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['cmake', 'python']
+[0.322s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'cmake'
+[0.323s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'python'
+[0.324s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extensions ['python_setup_py']
+[0.324s] Level 1:colcon.colcon_core.package_identification:_identify(src/Maps) by extension 'python_setup_py'
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.329s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'ignore'
+[0.330s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'ignore_ament_install'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['colcon_pkg']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'colcon_pkg'
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['colcon_meta']
+[0.334s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'colcon_meta'
+[0.335s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['ros']
+[0.335s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'ros'
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['cmake', 'python']
+[0.340s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'cmake'
+[0.341s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'python'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extensions ['python_setup_py']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(src/Navigation) by extension 'python_setup_py'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extensions ['ignore', 'ignore_ament_install']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) by extension 'ignore'
+[0.348s] Level 1:colcon.colcon_core.package_identification:_identify(src/build) ignored
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extensions ['ignore', 'ignore_ament_install']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) by extension 'ignore'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/install) ignored
+[0.358s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.359s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) by extension 'ignore'
+[0.360s] Level 1:colcon.colcon_core.package_identification:_identify(src/log) ignored
+[0.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['ignore', 'ignore_ament_install']
+[0.363s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'ignore'
+[0.364s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'ignore_ament_install'
+[0.366s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['colcon_pkg']
+[0.366s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'colcon_pkg'
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['colcon_meta']
+[0.367s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'colcon_meta'
+[0.369s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['ros']
+[0.369s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'ros'
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['cmake', 'python']
+[0.373s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'cmake'
+[0.374s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'python'
+[0.375s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extensions ['python_setup_py']
+[0.376s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation) by extension 'python_setup_py'
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['ignore', 'ignore_ament_install']
+[0.381s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'ignore'
+[0.383s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'ignore_ament_install'
+[0.385s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['colcon_pkg']
+[0.385s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'colcon_pkg'
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['colcon_meta']
+[0.387s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'colcon_meta'
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['ros']
+[0.390s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'ros'
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['cmake', 'python']
+[0.396s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'cmake'
+[0.398s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'python'
+[0.399s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extensions ['python_setup_py']
+[0.399s] Level 1:colcon.colcon_core.package_identification:_identify(src/portamail_navigation/src) by extension 'python_setup_py'
+[0.401s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.401s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.401s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.401s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.401s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.402s] WARNING:colcon.colcon_core.package_selection:ignoring unknown package 'portamail_navigation' in --packages-select
+[0.417s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.418s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.418s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.419s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.420s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.420s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[0.420s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[0.420s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[0.421s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[0.486s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[0.487s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[0.487s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[0.487s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[0.488s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.Notifications was not provided by any .service files
+[0.488s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[0.490s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.490s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/local_setup.ps1'
+[0.495s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/_local_setup_util_ps1.py'
+[0.501s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/setup.ps1'
+[0.506s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/local_setup.sh'
+[0.511s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/_local_setup_util_sh.py'
+[0.516s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/setup.sh'
+[0.521s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/local_setup.bash'
+[0.526s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/setup.bash'
+[0.531s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/local_setup.zsh'
+[0.535s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/setup.zsh'

@@ -1,0 +1,10 @@
+[0.059s] Invoking command in '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation': /usr/bin/cmake /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation -DCMAKE_INSTALL_PREFIX=/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/portamail_navigation
+[0.093s] [33mCMake Warning:
+[0.094s]   Ignoring extra path from command line:
+[0.094s] 
+[0.095s]    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation"
+[0.096s] 
+[0.096s] [0m
+[0.098s] [0mCMake Error: The source directory "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation" does not appear to contain CMakeLists.txt.
+[0.099s] Specify --help for usage, or press the help button on the CMake GUI.[0m
+[0.106s] Invoked command in '/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation' returned '1': /usr/bin/cmake /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation -DCMAKE_INSTALL_PREFIX=/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/portamail_navigation
