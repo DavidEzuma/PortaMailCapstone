@@ -67,6 +67,13 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE DIRECTORY FILES
+    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/launch"
+    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/config"
+    )
+endif()
+
+if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/portamail_navigation")
 endif()
 
