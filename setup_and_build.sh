@@ -43,6 +43,7 @@ deps=(
     "ros-jazzy-nav2-bringup"
     "ros-jazzy-nav2-msgs"
     "ros-jazzy-slam-toolbox"
+    "ros-jazzy-teleop-twist-joy"
     "libyaml-cpp-dev"
     "python3-colcon-common-extensions"
 )
