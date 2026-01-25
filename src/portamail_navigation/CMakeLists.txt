@@ -24,6 +24,14 @@ pkg_check_modules(YAML_CPP REQUIRED yaml-cpp)
 
 # --- Executable ---
 add_executable(coordinator src/navigation_coordinator.cpp)
+add_executable(mock_driver src/mock_driver.cpp)
+ament_target_dependencies(mock_driver
+  rclcpp
+  geometry_msgs
+  nav_msgs
+  tf2
+  tf2_geometry_msgs
+)
 
 # Include directories for ROS packages + YAML
 target_include_directories(coordinator PUBLIC
@@ -48,7 +56,7 @@ ament_target_dependencies(coordinator
 )
 
 # --- Install Rules ---
-install(TARGETS coordinator
+install(TARGETS coordinator mock_driver
   DESTINATION lib/${PROJECT_NAME})
 
 # Install the config/launch folders if you have them (optional but good practice)
