@@ -37,7 +37,7 @@ def generate_launch_description():
                 'axis_angular.yaw': 0, # Left Stick Horizontal
                 'scale_linear.x': 0.89, # Max Speed (approx 2 MPH)
                 'scale_angular.yaw': 1.0,
-                'enable_button': 5, # Right Bumper (Must hold to move)
+                'enable_button': 7, # Right Bumper (Must hold to move)
             }],
             # Remap directly to what the Teensy expects
             remappings=[('/cmd_vel', '/cmd_vel')]
