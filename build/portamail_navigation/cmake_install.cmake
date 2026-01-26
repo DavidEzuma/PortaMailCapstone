@@ -1,8 +1,8 @@
-# Install script for directory: /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation
+# Install script for directory: /home/davidezuma/PortaMailCapstone/src/portamail_navigation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/install/portamail_navigation")
+  set(CMAKE_INSTALL_PREFIX "/home/davidezuma/PortaMailCapstone/install/portamail_navigation")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -49,12 +49,12 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/coordinator"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation" TYPE EXECUTABLE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/coordinator")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation" TYPE EXECUTABLE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/coordinator")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/coordinator" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/coordinator")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/coordinator"
-         OLD_RPATH "/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:"
+         OLD_RPATH "/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/coordinator")
@@ -63,7 +63,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles/coordinator.dir/install-cxx-module-bmi-noconfig.cmake" OPTIONAL)
+  include("/home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles/coordinator.dir/install-cxx-module-bmi-noconfig.cmake" OPTIONAL)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -73,7 +73,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/mock_driver"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation" TYPE EXECUTABLE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/mock_driver")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation" TYPE EXECUTABLE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/mock_driver")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/mock_driver" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/portamail_navigation/mock_driver")
     file(RPATH_CHANGE
@@ -87,22 +87,22 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles/mock_driver.dir/install-cxx-module-bmi-noconfig.cmake" OPTIONAL)
+  include("/home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles/mock_driver.dir/install-cxx-module-bmi-noconfig.cmake" OPTIONAL)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE DIRECTORY FILES
-    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/launch"
-    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/config"
+    "/home/davidezuma/PortaMailCapstone/src/portamail_navigation/launch"
+    "/home/davidezuma/PortaMailCapstone/src/portamail_navigation/config"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/portamail_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/package_run_dependencies" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/package_run_dependencies/portamail_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/portamail_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/parent_prefix_path" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/parent_prefix_path/portamail_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -110,7 +110,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation/environment" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/ament_prefix_path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation/environment" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/ament_prefix_path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -118,42 +118,42 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation/environment" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/path.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation/environment" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/path.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.bash")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.bash")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.sh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.sh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.zsh")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.zsh")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/local_setup.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/package.dsv")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_environment_hooks/package.dsv")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/packages/portamail_navigation")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ament_index/resource_index/packages" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_index/share/ament_index/resource_index/packages/portamail_navigation")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation/cmake" TYPE FILE FILES
-    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_core/portamail_navigationConfig.cmake"
-    "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/ament_cmake_core/portamail_navigationConfig-version.cmake"
+    "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_core/portamail_navigationConfig.cmake"
+    "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/ament_cmake_core/portamail_navigationConfig-version.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/portamail_navigation" TYPE FILE FILES "/home/davidezuma/PortaMailCapstone/src/portamail_navigation/package.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -164,5 +164,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/davidezuma/PortaMailCapstone/build/portamail_navigation/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

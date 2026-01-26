@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation
+CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation
+CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_navigation
 
 # Include any dependencies generated for this target.
 include CMakeFiles/coordinator.dir/depend.make
@@ -70,18 +70,18 @@ include CMakeFiles/coordinator.dir/progress.make
 include CMakeFiles/coordinator.dir/flags.make
 
 CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o: CMakeFiles/coordinator.dir/flags.make
-CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o: /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp
+CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o: /home/davidezuma/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp
 CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o: CMakeFiles/coordinator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o -MF CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o.d -o CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o -c /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o -MF CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o.d -o CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o -c /home/davidezuma/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp
 
 CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp > CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/davidezuma/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp > CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.i
 
 CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp -o CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/davidezuma/PortaMailCapstone/src/portamail_navigation/src/navigation_coordinator.cpp -o CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.s
 
 # Object files for target coordinator
 coordinator_OBJECTS = \
@@ -137,7 +137,7 @@ coordinator: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_generator_py.so
 coordinator: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_typesupport_c.so
 coordinator: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_generator_c.so
 coordinator: /opt/ros/jazzy/lib/librviz_default_plugins.so
-coordinator: /usr/lib/x86_64-linux-gnu/liborocos-kdl.so
+coordinator: /usr/lib/aarch64-linux-gnu/liborocos-kdl.so
 coordinator: /opt/ros/jazzy/lib/librviz_common.so
 coordinator: /opt/ros/jazzy/lib/libtf2_ros.so
 coordinator: /opt/ros/jazzy/lib/librclcpp_action.so
@@ -173,8 +173,8 @@ coordinator: /opt/ros/jazzy/lib/libstd_srvs__rosidl_typesupport_cpp.so
 coordinator: /opt/ros/jazzy/lib/libstd_srvs__rosidl_generator_py.so
 coordinator: /opt/ros/jazzy/lib/libstd_srvs__rosidl_typesupport_c.so
 coordinator: /opt/ros/jazzy/lib/libstd_srvs__rosidl_generator_c.so
-coordinator: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.8.0
-coordinator: /opt/ros/jazzy/lib/x86_64-linux-gnu/libimage_transport.so
+coordinator: /usr/lib/aarch64-linux-gnu/libyaml-cpp.so.0.8.0
+coordinator: /opt/ros/jazzy/lib/aarch64-linux-gnu/libimage_transport.so
 coordinator: /opt/ros/jazzy/lib/liblaser_geometry.so
 coordinator: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_fastrtps_c.so
 coordinator: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_introspection_c.so
@@ -192,30 +192,30 @@ coordinator: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_c.so
 coordinator: /opt/ros/jazzy/lib/libnav_msgs__rosidl_typesupport_c.so
 coordinator: /opt/ros/jazzy/lib/libmap_msgs__rosidl_generator_c.so
 coordinator: /opt/ros/jazzy/lib/libnav_msgs__rosidl_generator_c.so
-coordinator: /opt/ros/jazzy/lib/x86_64-linux-gnu/libpoint_cloud_transport.so
+coordinator: /opt/ros/jazzy/lib/aarch64-linux-gnu/libpoint_cloud_transport.so
 coordinator: /opt/ros/jazzy/lib/libmessage_filters.so
 coordinator: /opt/ros/jazzy/lib/liburdf.so
-coordinator: /opt/ros/jazzy/lib/x86_64-linux-gnu/liburdfdom_model.so.4.0
-coordinator: /usr/lib/x86_64-linux-gnu/libtinyxml2.so.10.0.0
+coordinator: /opt/ros/jazzy/lib/aarch64-linux-gnu/liburdfdom_model.so.4.0
+coordinator: /usr/lib/aarch64-linux-gnu/libtinyxml2.so.10.0.0
 coordinator: /opt/ros/jazzy/lib/librviz_rendering.so
-coordinator: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
-coordinator: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
-coordinator: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
+coordinator: /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.13
+coordinator: /usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.13
+coordinator: /usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.13
 coordinator: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
 coordinator: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
-coordinator: /usr/lib/x86_64-linux-gnu/libfreeimage.so
-coordinator: /usr/lib/x86_64-linux-gnu/libfreetype.so
-coordinator: /usr/lib/x86_64-linux-gnu/libz.so
-coordinator: /usr/lib/x86_64-linux-gnu/libOpenGL.so
-coordinator: /usr/lib/x86_64-linux-gnu/libGLX.so
-coordinator: /usr/lib/x86_64-linux-gnu/libGLU.so
-coordinator: /usr/lib/x86_64-linux-gnu/libSM.so
-coordinator: /usr/lib/x86_64-linux-gnu/libICE.so
-coordinator: /usr/lib/x86_64-linux-gnu/libX11.so
-coordinator: /usr/lib/x86_64-linux-gnu/libXext.so
-coordinator: /usr/lib/x86_64-linux-gnu/libXt.so
-coordinator: /usr/lib/x86_64-linux-gnu/libXrandr.so
-coordinator: /usr/lib/x86_64-linux-gnu/libXaw.so
+coordinator: /usr/lib/aarch64-linux-gnu/libfreeimage.so
+coordinator: /usr/lib/aarch64-linux-gnu/libfreetype.so
+coordinator: /usr/lib/aarch64-linux-gnu/libz.so
+coordinator: /usr/lib/aarch64-linux-gnu/libOpenGL.so
+coordinator: /usr/lib/aarch64-linux-gnu/libGLX.so
+coordinator: /usr/lib/aarch64-linux-gnu/libGLU.so
+coordinator: /usr/lib/aarch64-linux-gnu/libSM.so
+coordinator: /usr/lib/aarch64-linux-gnu/libICE.so
+coordinator: /usr/lib/aarch64-linux-gnu/libX11.so
+coordinator: /usr/lib/aarch64-linux-gnu/libXext.so
+coordinator: /usr/lib/aarch64-linux-gnu/libXt.so
+coordinator: /usr/lib/aarch64-linux-gnu/libXrandr.so
+coordinator: /usr/lib/aarch64-linux-gnu/libXaw.so
 coordinator: /opt/ros/jazzy/lib/libinteractive_markers.so
 coordinator: /opt/ros/jazzy/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_c.so
 coordinator: /opt/ros/jazzy/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_cpp.so
@@ -284,7 +284,7 @@ coordinator: /opt/ros/jazzy/lib/libtracetools.so
 coordinator: /opt/ros/jazzy/lib/librcl_logging_interface.so
 coordinator: /opt/ros/jazzy/lib/libament_index_cpp.so
 coordinator: /opt/ros/jazzy/lib/libclass_loader.so
-coordinator: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.1.0
+coordinator: /usr/lib/aarch64-linux-gnu/libconsole_bridge.so.1.0
 coordinator: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so
 coordinator: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_introspection_c.so
 coordinator: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_cpp.so
@@ -329,7 +329,7 @@ coordinator: /opt/ros/jazzy/lib/librcpputils.so
 coordinator: /opt/ros/jazzy/lib/librosidl_runtime_c.so
 coordinator: /opt/ros/jazzy/lib/librcutils.so
 coordinator: CMakeFiles/coordinator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable coordinator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable coordinator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/coordinator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -341,6 +341,6 @@ CMakeFiles/coordinator.dir/clean:
 .PHONY : CMakeFiles/coordinator.dir/clean
 
 CMakeFiles/coordinator.dir/depend:
-	cd /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles/coordinator.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/davidezuma/PortaMailCapstone/build/portamail_navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/davidezuma/PortaMailCapstone/src/portamail_navigation /home/davidezuma/PortaMailCapstone/src/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles/coordinator.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/coordinator.dir/depend
 

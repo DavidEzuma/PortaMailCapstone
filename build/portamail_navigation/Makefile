@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation
+CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation
+CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_navigation
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles /home/davidezuma/PortaMailCapstone/build/portamail_navigation//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

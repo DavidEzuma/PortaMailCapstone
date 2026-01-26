@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation
+CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_navigation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation
+CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_navigation
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/src/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation /mnt/c/Users/David/OneDrive/Documents/Projects/PortaMailCapstone/build/portamail_navigation/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/davidezuma/PortaMailCapstone/build/portamail_navigation && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/davidezuma/PortaMailCapstone/src/portamail_navigation /home/davidezuma/PortaMailCapstone/src/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation /home/davidezuma/PortaMailCapstone/build/portamail_navigation/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 
