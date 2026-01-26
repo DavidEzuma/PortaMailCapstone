@@ -4,7 +4,7 @@
 set -e
 
 echo "==================================================="
-echo "   PortaMail: Smart Setup & Build (ROS 2 Jazzy)  "
+echo "   PortaMail: Smart Setup & Build (ROS 2 Humble)  "
 echo "==================================================="
 
 # Function to check if an APT package is installed
@@ -13,10 +13,10 @@ is_installed() {
 }
 
 # --- STEP 1: CHECK BASE ROS 2 INSTALLATION ---
-if [ -f "/opt/ros/jazzy/setup.bash" ]; then
-    echo "[1/4] ROS 2 Jazzy found in /opt/ros/jazzy. Skipping base install."
+if [ -f "/opt/ros/humble/setup.bash" ]; then
+    echo "[1/4] ROS 2 Humble found in /opt/ros/humble. Skipping base install."
 else
-    echo "[1/4] ROS 2 Jazzy NOT found. Installing base system..."
+    echo "[1/4] ROS 2 Humble NOT found. Installing base system..."
     
     # Enable Universe repo
     sudo apt install -y software-properties-common
@@ -24,41 +24,26 @@ else
 
     # Add ROS 2 GPG Key
     sudo apt update && sudo apt install -y curl
-    curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key | sudo gpg --dearmor -o /usr/share/keyrings/ros-archive-keyring.gpg --yes
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
     # Add ROS 2 Repository
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
-    # Install ROS 2 Base
+    # Install ROS 2 Desktop
     sudo apt update
-
-    echo "[FIX] Downgrading libzstd to match ROS 2 requirements..."
-    sudo apt install -y --allow-downgrades \
-        libzstd1=1.5.5+dfsg2-2build1 \
-        libzstd-dev=1.5.5+dfsg2-2build1
-
-    # Install Bare Bones (No GUI tools)
-    sudo apt install ros-jazzy-ros-base -y
-
-    # Install only the specific robotics packages we need
-    sudo apt install ros-jazzy-slam-toolbox ros-jazzy-navigation2 ros-jazzy-nav2-bringup -y
+    sudo apt install -y ros-humble-desktop ros-humble-ros-base
 fi
-
-echo "[1.5/4] Resolving package version conflicts..."
-sudo apt update
-sudo apt upgrade -y
-sudo apt --fix-broken install -y
 
 # --- STEP 2: CHECK & INSTALL PROJECT DEPENDENCIES ---
 echo "[2/4] Checking project dependencies..."
 
 # List of required packages
 deps=(
-    "ros-jazzy-navigation2"
-    "ros-jazzy-nav2-bringup"
-    "ros-jazzy-nav2-msgs"
-    "ros-jazzy-slam-toolbox"
-    "ros-jazzy-teleop-twist-joy"
+    "ros-humble-navigation2"
+    "ros-humble-nav2-bringup"
+    "ros-humble-nav2-msgs"
+    "ros-humble-slam-toolbox"
+    "ros-humble-teleop-twist-joy"
     "libyaml-cpp-dev"
     "python3-colcon-common-extensions"
 )
@@ -87,15 +72,15 @@ fi
 echo "[3/4] Configuring environment..."
 
 # Add ROS 2 to bashrc if not already there
-if ! grep -q "source /opt/ros/jazzy/setup.bash" ~/.bashrc; then
-    echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+if ! grep -q "source /opt/ros/humble/setup.bash" ~/.bashrc; then
+    echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
     echo "Added ROS 2 to ~/.bashrc"
 else
     echo "ROS 2 already in ~/.bashrc."
 fi
 
 # Source for this run
-source /opt/ros/jazzy/setup.bash
+source /opt/ros/humble/setup.bash
 
 # --- STEP 4: BUILD ---
 echo "[4/4] Building PortaMail Navigation..."
