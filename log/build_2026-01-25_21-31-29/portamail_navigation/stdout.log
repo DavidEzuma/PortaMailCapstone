@@ -1,0 +1,25 @@
+[100%] Built target mock_driver
+[100%] Built target coordinator
+-- Install configuration: ""
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/coordinator
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/mock_driver
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch/bringup.launch.py
+-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch/joystick.launch.py
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/config
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/config/locations.yaml
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/package_run_dependencies/portamail_navigation
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/parent_prefix_path/portamail_navigation
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/ament_prefix_path.sh
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/path.sh
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/path.dsv
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.bash
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.sh
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.zsh
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.dsv
+-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/package.dsv
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/packages/portamail_navigation
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/cmake/portamail_navigationConfig.cmake
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/cmake/portamail_navigationConfig-version.cmake
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/package.xml

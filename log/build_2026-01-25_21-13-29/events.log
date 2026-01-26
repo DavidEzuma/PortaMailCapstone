@@ -1,0 +1,341 @@
+[0.000000] (-) TimerEvent: {}
+[0.000239] (portamail_navigation) JobQueued: {'identifier': 'portamail_navigation', 'dependencies': OrderedDict()}
+[0.000897] (portamail_navigation) JobStarted: {'identifier': 'portamail_navigation'}
+[0.010002] (portamail_navigation) JobProgress: {'identifier': 'portamail_navigation', 'progress': 'cmake'}
+[0.010648] (portamail_navigation) Command: {'cmd': ['/usr/bin/cmake', '/home/davidezuma/PortaMailCapstone/src/portamail_navigation', '-DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/portamail_navigation'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '192.168.8.194 52840 22', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/7', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '28', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'SSH_CONNECTION': '192.168.8.194 52840 192.168.8.108 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.099863] (-) TimerEvent: {}
+[0.115004] (portamail_navigation) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.199939] (-) TimerEvent: {}
+[0.300320] (-) TimerEvent: {}
+[0.400707] (-) TimerEvent: {}
+[0.501040] (-) TimerEvent: {}
+[0.601362] (-) TimerEvent: {}
+[0.679479] (portamail_navigation) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.701464] (-) TimerEvent: {}
+[0.706970] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.801582] (-) TimerEvent: {}
+[0.888393] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.901653] (-) TimerEvent: {}
+[0.903994] (portamail_navigation) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.904398] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.904997] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.919252] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.001789] (-) TimerEvent: {}
+[1.097734] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.101849] (-) TimerEvent: {}
+[1.113763] (portamail_navigation) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.114239] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.114921] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.120969] (portamail_navigation) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.201959] (-) TimerEvent: {}
+[1.302271] (-) TimerEvent: {}
+[1.349588] (portamail_navigation) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[1.402366] (-) TimerEvent: {}
+[1.502699] (-) TimerEvent: {}
+[1.538456] (portamail_navigation) StdoutLine: {'line': b'-- Found rclcpp: 28.1.13 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[1.602797] (-) TimerEvent: {}
+[1.612237] (portamail_navigation) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[1.639254] (portamail_navigation) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[1.669559] (portamail_navigation) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.702280] (portamail_navigation) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.702858] (-) TimerEvent: {}
+[1.803070] (-) TimerEvent: {}
+[1.830602] (portamail_navigation) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[1.836821] (portamail_navigation) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.903176] (-) TimerEvent: {}
+[1.995001] (portamail_navigation) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[2.003249] (-) TimerEvent: {}
+[2.022410] (portamail_navigation) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[2.058411] (portamail_navigation) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[2.103354] (-) TimerEvent: {}
+[2.173243] (portamail_navigation) StdoutLine: {'line': b'-- Found rclcpp_action: 28.1.13 (/opt/ros/jazzy/share/rclcpp_action/cmake)\n'}
+[2.203440] (-) TimerEvent: {}
+[2.243219] (portamail_navigation) StdoutLine: {'line': b'-- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)\n'}
+[2.265732] (portamail_navigation) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[2.289707] (portamail_navigation) StdoutLine: {'line': b'-- Found nav2_msgs: 1.3.10 (/opt/ros/jazzy/share/nav2_msgs/cmake)\n'}
+[2.303516] (-) TimerEvent: {}
+[2.403756] (-) TimerEvent: {}
+[2.447715] (portamail_navigation) StdoutLine: {'line': b'-- Found slam_toolbox: 2.8.3 (/opt/ros/jazzy/share/slam_toolbox/cmake)\n'}
+[2.503851] (-) TimerEvent: {}
+[2.604139] (-) TimerEvent: {}
+[2.704414] (-) TimerEvent: {}
+[2.749315] (portamail_navigation) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)\n'}
+[2.751164] (portamail_navigation) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[2.751310] (portamail_navigation) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[2.804502] (-) TimerEvent: {}
+[2.904776] (-) TimerEvent: {}
+[2.925986] (portamail_navigation) StdoutLine: {'line': b"-- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'\n"}
+[2.927734] (portamail_navigation) StdoutLine: {'line': b'-- Found OGRE\n'}
+[2.927908] (portamail_navigation) StdoutLine: {'line': b'--   static     : OFF\n'}
+[2.927989] (portamail_navigation) StdoutLine: {'line': b'--   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume\n'}
+[2.928066] (portamail_navigation) StdoutLine: {'line': b'--   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI\n'}
+[2.928141] (portamail_navigation) StdoutLine: {'line': b'--   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media\n'}
+[2.928223] (portamail_navigation) StdoutLine: {'line': b'-- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain\n'}
+[2.928302] (portamail_navigation) StdoutLine: {'line': b'-- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib\n'}
+[2.928393] (portamail_navigation) StdoutLine: {'line': b'-- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI\n'}
+[2.928547] (portamail_navigation) StdoutLine: {'line': b'-- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE\n'}
+[2.928625] (portamail_navigation) StdoutLine: {'line': b'-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so\n'}
+[2.928698] (portamail_navigation) StdoutLine: {'line': b'-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so\n'}
+[2.928791] (portamail_navigation) StdoutLine: {'line': b'-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so\n'}
+[2.928865] (portamail_navigation) StdoutLine: {'line': b'-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so\n'}
+[2.965199] (portamail_navigation) StdoutLine: {'line': b'-- Found ZLIB: /usr/lib/aarch64-linux-gnu/libz.so (found version "1.3")  \n'}
+[2.977740] (portamail_navigation) StdoutLine: {'line': b'-- Found OpenGL: /usr/lib/aarch64-linux-gnu/libOpenGL.so   \n'}
+[3.004851] (-) TimerEvent: {}
+[3.082407] (portamail_navigation) StdoutLine: {'line': b'-- Found X11: /usr/include   \n'}
+[3.082739] (portamail_navigation) StdoutLine: {'line': b'-- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so\n'}
+[3.104949] (-) TimerEvent: {}
+[3.205262] (-) TimerEvent: {}
+[3.244484] (portamail_navigation) StdoutLine: {'line': b'-- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so - found\n'}
+[3.244776] (portamail_navigation) StdoutLine: {'line': b'-- Looking for gethostbyname\n'}
+[3.305369] (-) TimerEvent: {}
+[3.401086] (portamail_navigation) StdoutLine: {'line': b'-- Looking for gethostbyname - found\n'}
+[3.401368] (portamail_navigation) StdoutLine: {'line': b'-- Looking for connect\n'}
+[3.405416] (-) TimerEvent: {}
+[3.505701] (-) TimerEvent: {}
+[3.556879] (portamail_navigation) StdoutLine: {'line': b'-- Looking for connect - found\n'}
+[3.557173] (portamail_navigation) StdoutLine: {'line': b'-- Looking for remove\n'}
+[3.605818] (-) TimerEvent: {}
+[3.706199] (-) TimerEvent: {}
+[3.714509] (portamail_navigation) StdoutLine: {'line': b'-- Looking for remove - found\n'}
+[3.714789] (portamail_navigation) StdoutLine: {'line': b'-- Looking for shmat\n'}
+[3.806314] (-) TimerEvent: {}
+[3.873514] (portamail_navigation) StdoutLine: {'line': b'-- Looking for shmat - found\n'}
+[3.873802] (portamail_navigation) StdoutLine: {'line': b'-- Looking for IceConnectionNumber in ICE\n'}
+[3.906431] (-) TimerEvent: {}
+[4.006775] (-) TimerEvent: {}
+[4.032512] (portamail_navigation) StdoutLine: {'line': b'-- Looking for IceConnectionNumber in ICE - found\n'}
+[4.059088] (portamail_navigation) StdoutLine: {'line': b"-- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'\n"}
+[4.106852] (-) TimerEvent: {}
+[4.207113] (-) TimerEvent: {}
+[4.239416] (portamail_navigation) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") \n'}
+[4.241059] (portamail_navigation) StdoutLine: {'line': b"-- Checking for module 'yaml-cpp'\n"}
+[4.269443] (portamail_navigation) StdoutLine: {'line': b'--   Found yaml-cpp, version 0.8.0\n'}
+[4.307250] (-) TimerEvent: {}
+[4.407610] (-) TimerEvent: {}
+[4.485652] (portamail_navigation) StdoutLine: {'line': b'-- Configuring done (4.5s)\n'}
+[4.507710] (-) TimerEvent: {}
+[4.537162] (portamail_navigation) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[4.550170] (portamail_navigation) StdoutLine: {'line': b'-- Build files have been written to: /home/davidezuma/PortaMailCapstone/build/portamail_navigation\n'}
+[4.576462] (portamail_navigation) CommandEnded: {'returncode': 0}
+[4.577311] (portamail_navigation) JobProgress: {'identifier': 'portamail_navigation', 'progress': 'build'}
+[4.578253] (portamail_navigation) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', '--', '-j4', '-l4'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '192.168.8.194 52840 22', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/7', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '28', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'SSH_CONNECTION': '192.168.8.194 52840 192.168.8.108 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[4.607819] (-) TimerEvent: {}
+[4.683966] (portamail_navigation) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o\x1b[0m\n'}
+[4.684243] (portamail_navigation) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/mock_driver.dir/src/mock_driver.cpp.o\x1b[0m\n'}
+[4.707930] (-) TimerEvent: {}
+[4.808248] (-) TimerEvent: {}
+[4.908603] (-) TimerEvent: {}
+[5.008948] (-) TimerEvent: {}
+[5.109340] (-) TimerEvent: {}
+[5.209691] (-) TimerEvent: {}
+[5.310052] (-) TimerEvent: {}
+[5.410416] (-) TimerEvent: {}
+[5.510760] (-) TimerEvent: {}
+[5.611116] (-) TimerEvent: {}
+[5.711458] (-) TimerEvent: {}
+[5.811811] (-) TimerEvent: {}
+[5.912179] (-) TimerEvent: {}
+[6.012585] (-) TimerEvent: {}
+[6.112992] (-) TimerEvent: {}
+[6.213491] (-) TimerEvent: {}
+[6.313894] (-) TimerEvent: {}
+[6.414243] (-) TimerEvent: {}
+[6.514626] (-) TimerEvent: {}
+[6.615018] (-) TimerEvent: {}
+[6.715442] (-) TimerEvent: {}
+[6.815788] (-) TimerEvent: {}
+[6.916145] (-) TimerEvent: {}
+[7.016541] (-) TimerEvent: {}
+[7.116930] (-) TimerEvent: {}
+[7.217314] (-) TimerEvent: {}
+[7.317713] (-) TimerEvent: {}
+[7.418174] (-) TimerEvent: {}
+[7.518569] (-) TimerEvent: {}
+[7.618936] (-) TimerEvent: {}
+[7.719321] (-) TimerEvent: {}
+[7.819709] (-) TimerEvent: {}
+[7.920069] (-) TimerEvent: {}
+[8.020430] (-) TimerEvent: {}
+[8.120785] (-) TimerEvent: {}
+[8.221136] (-) TimerEvent: {}
+[8.321486] (-) TimerEvent: {}
+[8.421855] (-) TimerEvent: {}
+[8.522236] (-) TimerEvent: {}
+[8.622653] (-) TimerEvent: {}
+[8.723035] (-) TimerEvent: {}
+[8.823394] (-) TimerEvent: {}
+[8.923774] (-) TimerEvent: {}
+[9.024121] (-) TimerEvent: {}
+[9.124476] (-) TimerEvent: {}
+[9.224827] (-) TimerEvent: {}
+[9.325174] (-) TimerEvent: {}
+[9.425537] (-) TimerEvent: {}
+[9.525883] (-) TimerEvent: {}
+[9.626240] (-) TimerEvent: {}
+[9.726608] (-) TimerEvent: {}
+[9.826945] (-) TimerEvent: {}
+[9.927294] (-) TimerEvent: {}
+[10.027646] (-) TimerEvent: {}
+[10.127986] (-) TimerEvent: {}
+[10.228365] (-) TimerEvent: {}
+[10.328784] (-) TimerEvent: {}
+[10.429174] (-) TimerEvent: {}
+[10.529569] (-) TimerEvent: {}
+[10.629944] (-) TimerEvent: {}
+[10.731068] (-) TimerEvent: {}
+[10.831453] (-) TimerEvent: {}
+[10.931825] (-) TimerEvent: {}
+[11.032188] (-) TimerEvent: {}
+[11.132561] (-) TimerEvent: {}
+[11.232918] (-) TimerEvent: {}
+[11.333260] (-) TimerEvent: {}
+[11.433624] (-) TimerEvent: {}
+[11.533980] (-) TimerEvent: {}
+[11.634347] (-) TimerEvent: {}
+[11.734729] (-) TimerEvent: {}
+[11.835089] (-) TimerEvent: {}
+[11.935475] (-) TimerEvent: {}
+[12.035859] (-) TimerEvent: {}
+[12.136217] (-) TimerEvent: {}
+[12.236591] (-) TimerEvent: {}
+[12.336967] (-) TimerEvent: {}
+[12.437327] (-) TimerEvent: {}
+[12.537738] (-) TimerEvent: {}
+[12.638208] (-) TimerEvent: {}
+[12.738588] (-) TimerEvent: {}
+[12.838933] (-) TimerEvent: {}
+[12.939270] (-) TimerEvent: {}
+[13.039644] (-) TimerEvent: {}
+[13.139990] (-) TimerEvent: {}
+[13.240375] (-) TimerEvent: {}
+[13.340853] (-) TimerEvent: {}
+[13.441339] (-) TimerEvent: {}
+[13.541728] (-) TimerEvent: {}
+[13.642060] (-) TimerEvent: {}
+[13.742426] (-) TimerEvent: {}
+[13.842774] (-) TimerEvent: {}
+[13.943113] (-) TimerEvent: {}
+[14.043480] (-) TimerEvent: {}
+[14.143830] (-) TimerEvent: {}
+[14.244219] (-) TimerEvent: {}
+[14.344649] (-) TimerEvent: {}
+[14.445109] (-) TimerEvent: {}
+[14.545467] (-) TimerEvent: {}
+[14.645834] (-) TimerEvent: {}
+[14.746239] (-) TimerEvent: {}
+[14.846620] (-) TimerEvent: {}
+[14.946963] (-) TimerEvent: {}
+[15.047293] (-) TimerEvent: {}
+[15.147637] (-) TimerEvent: {}
+[15.247972] (-) TimerEvent: {}
+[15.348327] (-) TimerEvent: {}
+[15.448679] (-) TimerEvent: {}
+[15.549044] (-) TimerEvent: {}
+[15.649414] (-) TimerEvent: {}
+[15.749761] (-) TimerEvent: {}
+[15.850114] (-) TimerEvent: {}
+[15.950486] (-) TimerEvent: {}
+[16.050835] (-) TimerEvent: {}
+[16.151162] (-) TimerEvent: {}
+[16.251495] (-) TimerEvent: {}
+[16.351818] (-) TimerEvent: {}
+[16.452126] (-) TimerEvent: {}
+[16.552441] (-) TimerEvent: {}
+[16.652747] (-) TimerEvent: {}
+[16.753072] (-) TimerEvent: {}
+[16.853424] (-) TimerEvent: {}
+[16.953757] (-) TimerEvent: {}
+[17.054090] (-) TimerEvent: {}
+[17.154451] (-) TimerEvent: {}
+[17.254826] (-) TimerEvent: {}
+[17.355179] (-) TimerEvent: {}
+[17.455604] (-) TimerEvent: {}
+[17.556025] (-) TimerEvent: {}
+[17.643340] (portamail_navigation) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX executable mock_driver\x1b[0m\n'}
+[17.656162] (-) TimerEvent: {}
+[17.756653] (-) TimerEvent: {}
+[17.857302] (-) TimerEvent: {}
+[17.957885] (-) TimerEvent: {}
+[18.058467] (-) TimerEvent: {}
+[18.158963] (-) TimerEvent: {}
+[18.259453] (-) TimerEvent: {}
+[18.359892] (-) TimerEvent: {}
+[18.460328] (-) TimerEvent: {}
+[18.560661] (-) TimerEvent: {}
+[18.561625] (portamail_navigation) StdoutLine: {'line': b'[ 75%] Built target mock_driver\n'}
+[18.660772] (-) TimerEvent: {}
+[18.761082] (-) TimerEvent: {}
+[18.861397] (-) TimerEvent: {}
+[18.961700] (-) TimerEvent: {}
+[19.062004] (-) TimerEvent: {}
+[19.162292] (-) TimerEvent: {}
+[19.262584] (-) TimerEvent: {}
+[19.362892] (-) TimerEvent: {}
+[19.463205] (-) TimerEvent: {}
+[19.563520] (-) TimerEvent: {}
+[19.663815] (-) TimerEvent: {}
+[19.764138] (-) TimerEvent: {}
+[19.864436] (-) TimerEvent: {}
+[19.964726] (-) TimerEvent: {}
+[20.065015] (-) TimerEvent: {}
+[20.165342] (-) TimerEvent: {}
+[20.265781] (-) TimerEvent: {}
+[20.366107] (-) TimerEvent: {}
+[20.466465] (-) TimerEvent: {}
+[20.566794] (-) TimerEvent: {}
+[20.667125] (-) TimerEvent: {}
+[20.767442] (-) TimerEvent: {}
+[20.867769] (-) TimerEvent: {}
+[20.968151] (-) TimerEvent: {}
+[21.068587] (-) TimerEvent: {}
+[21.168976] (-) TimerEvent: {}
+[21.269306] (-) TimerEvent: {}
+[21.279122] (portamail_navigation) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable coordinator\x1b[0m\n'}
+[21.369458] (-) TimerEvent: {}
+[21.469866] (-) TimerEvent: {}
+[21.570300] (-) TimerEvent: {}
+[21.670841] (-) TimerEvent: {}
+[21.771248] (-) TimerEvent: {}
+[21.871672] (-) TimerEvent: {}
+[21.972089] (-) TimerEvent: {}
+[22.072601] (-) TimerEvent: {}
+[22.173205] (-) TimerEvent: {}
+[22.273832] (-) TimerEvent: {}
+[22.374263] (-) TimerEvent: {}
+[22.474942] (-) TimerEvent: {}
+[22.575645] (-) TimerEvent: {}
+[22.675965] (-) TimerEvent: {}
+[22.776274] (-) TimerEvent: {}
+[22.832995] (portamail_navigation) StdoutLine: {'line': b'[100%] Built target coordinator\n'}
+[22.855155] (portamail_navigation) CommandEnded: {'returncode': 0}
+[22.855935] (portamail_navigation) JobProgress: {'identifier': 'portamail_navigation', 'progress': 'install'}
+[22.874009] (portamail_navigation) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/davidezuma/PortaMailCapstone/build/portamail_navigation'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '192.168.8.194 52840 22', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/7', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '28', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/portamail_navigation', 'SSH_CONNECTION': '192.168.8.194 52840 192.168.8.108 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[22.876342] (-) TimerEvent: {}
+[22.891073] (portamail_navigation) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[22.891354] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/coordinator\n'}
+[22.902080] (portamail_navigation) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/coordinator" to ""\n'}
+[22.902267] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/mock_driver\n'}
+[22.910498] (portamail_navigation) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/portamail_navigation/lib/portamail_navigation/mock_driver" to ""\n'}
+[22.910642] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch\n'}
+[22.910781] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch/bringup.launch.py\n'}
+[22.910934] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/launch/joystick.launch.py\n'}
+[22.911064] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/config\n'}
+[22.911156] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/config/locations.yaml\n'}
+[22.911445] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/package_run_dependencies/portamail_navigation\n'}
+[22.911672] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/parent_prefix_path/portamail_navigation\n'}
+[22.911898] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/ament_prefix_path.sh\n'}
+[22.912065] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/ament_prefix_path.dsv\n'}
+[22.912225] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/path.sh\n'}
+[22.912392] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/environment/path.dsv\n'}
+[22.912556] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.bash\n'}
+[22.912712] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.sh\n'}
+[22.912879] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.zsh\n'}
+[22.913042] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/local_setup.dsv\n'}
+[22.913196] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/package.dsv\n'}
+[22.913408] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/ament_index/resource_index/packages/portamail_navigation\n'}
+[22.913611] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/cmake/portamail_navigationConfig.cmake\n'}
+[22.913746] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/cmake/portamail_navigationConfig-version.cmake\n'}
+[22.913926] (portamail_navigation) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_navigation/share/portamail_navigation/package.xml\n'}
+[22.917229] (portamail_navigation) CommandEnded: {'returncode': 0}
+[22.942828] (portamail_navigation) JobEnded: {'identifier': 'portamail_navigation', 'rc': 0}
+[22.943650] (-) EventReactorShutdown: {}
