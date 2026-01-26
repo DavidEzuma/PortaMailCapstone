@@ -31,6 +31,12 @@ else
 
     # Install ROS 2 Base
     sudo apt update
+
+    echo "[FIX] Downgrading libzstd to match ROS 2 requirements..."
+    sudo apt install -y --allow-downgrades \
+        libzstd1=1.5.5+dfsg2-2build1 \
+        libzstd-dev=1.5.5+dfsg2-2build1
+
     # Install Bare Bones (No GUI tools)
     sudo apt install ros-jazzy-ros-base -y
 
