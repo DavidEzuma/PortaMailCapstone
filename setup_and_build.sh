@@ -31,8 +31,17 @@ else
 
     # Install ROS 2 Desktop
     sudo apt update
-    sudo apt install -y ros-jazzy-desktop ros-jazzy-ros-base
+    # Install Bare Bones (No GUI tools)
+    sudo apt install ros-jazzy-ros-base -y
+
+    # Install only the specific robotics packages we need
+    sudo apt install ros-jazzy-slam-toolbox ros-jazzy-navigation2 ros-jazzy-nav2-bringup -y
 fi
+
+echo "[1.5/4] Resolving package version conflicts..."
+sudo apt update
+sudo apt upgrade -y
+sudo apt --fix-broken install -y
 
 # --- STEP 2: CHECK & INSTALL PROJECT DEPENDENCIES ---
 echo "[2/4] Checking project dependencies..."
