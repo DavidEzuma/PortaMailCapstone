@@ -8,16 +8,15 @@ from launch_ros.substitutions import FindPackageShare
 from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
-    pkg_share = FindPackageShare('portamail_navigation')
+    pkg_share = FindPackageShare('portamail_navigator')
 
-    # --- Arguments ---
-    # Default to using Real Hardware for mapping
+    # Argument to toggle between Simulation (Mock) and Real Hardware
     use_mock_driver_arg = DeclareLaunchArgument(
         'use_mock_driver', default_value='false',
         description='Use Mock Driver instead of Real Hardware')
 
     # --- 1. Hardware Stack ---
-    # If using Real Hardware, launch the hardware.launch.py file
+    # Real Hardware Launch
     hardware_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([pkg_share, 'launch', 'hardware.launch.py'])
@@ -25,21 +24,21 @@ def generate_launch_description():
         condition=UnlessCondition(LaunchConfiguration('use_mock_driver'))
     )
 
-    # If using Mock Driver (Simulation), launch the C++ node + Static TF
+    # Simulation Fallback (Mock Driver + TF)
     mock_driver_node = Node(
         condition=IfCondition(LaunchConfiguration('use_mock_driver')),
-        package='portamail_navigation',
+        package='portamail_navigator',
         executable='mock_driver',
         name='mock_driver',
         output='screen'
     )
     
-    # We still need transforms even in Mock mode
-    mock_tf_lidar = Node(
+    mock_tf = Node(
         condition=IfCondition(LaunchConfiguration('use_mock_driver')),
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        arguments = ['0.1', '0', '0.1', '0', '0', '0', 'base_link', 'laser']
+        package='portamail_navigator',
+        executable='static_tf_broadcaster',
+        name='mock_tf_broadcaster',
+        output='screen'
     )
 
     # --- 2. Joystick Control ---
@@ -51,7 +50,6 @@ def generate_launch_description():
     )
 
     # --- 3. SLAM Toolbox ---
-    # Using 'online_async' mode for live mapping
     slam_node = Node(
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
@@ -70,7 +68,7 @@ def generate_launch_description():
         use_mock_driver_arg,
         hardware_launch,
         mock_driver_node,
-        mock_tf_lidar,
+        mock_tf,
         joystick_launch,
         slam_node
     ])

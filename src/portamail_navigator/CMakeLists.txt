@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(portamail_navigation)
+project(portamail_navigator)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -8,29 +8,27 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# --- Dependencies ---
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
-# --- Executable: Mock Driver (Simulation Tool) ---
+# --- Executable 1: Mock Driver (Simulation) ---
 add_executable(mock_driver src/mock_driver.cpp)
-ament_target_dependencies(mock_driver
-  rclcpp
-  geometry_msgs
-  nav_msgs
-  tf2
-  tf2_geometry_msgs
-)
+ament_target_dependencies(mock_driver rclcpp geometry_msgs nav_msgs tf2 tf2_geometry_msgs)
+
+# --- Executable 2: Static TF Broadcaster ---
+add_executable(static_tf_broadcaster src/static_tf_broadcaster.cpp)
+ament_target_dependencies(static_tf_broadcaster rclcpp geometry_msgs tf2 tf2_ros)
 
 # --- Install Rules ---
-install(TARGETS mock_driver
+install(TARGETS mock_driver static_tf_broadcaster
   DESTINATION lib/${PROJECT_NAME})
 
-# Install Launch, Config, and Firmware folders
+# Install ALL directories needed for launch/config
 install(DIRECTORY launch config firmware
   DESTINATION share/${PROJECT_NAME}
 )

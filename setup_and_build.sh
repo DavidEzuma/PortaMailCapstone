@@ -97,7 +97,7 @@ echo "[4/4] Building PortaMail Stack..."
 rm -rf build/ install/ log/
 
 # Build Coordinator AND Navigation packages
-colcon build --packages-select portamail_coordinator portamail_navigation
+colcon build --packages-select portamail_coordinator portamail_navigator
 
 echo "==================================================="
 echo "   SUCCESS! Build Complete.                      "
