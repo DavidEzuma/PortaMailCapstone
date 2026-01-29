@@ -1,0 +1,43 @@
+### Robot Localization Parameters ###
+ekf_filter_node:
+  ros__parameters:
+    frequency: 30.0
+    two_d_mode: true
+    publish_tf: true
+    
+    # Frame IDs
+    map_frame: map              # Global frame (provided by SLAM/AMCL)
+    odom_frame: odom            # Local smoothed frame (provided by EKF)
+    base_link_frame: base_link  # The robot center
+    world_frame: odom           # EKF provides odom->base_link transform
+
+    # Input 1: Teensy Encoders
+    # The firmware must publish to /wheel/odom
+    odom0: /wheel/odom
+    # Configuration Matrix: [x, y, z, roll, pitch, yaw, vx, vy, vz, vroll, vpitch, vyaw, ax, ay, az]
+    # We trust: Linear Velocity X (Forward speed) and Angular Velocity Z (Turning speed)
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, true,
+                   false, false, false]
+    odom0_differential: false
+    odom0_relative: false
+    odom0_queue_size: 10
+
+    # Input 2: IMU (BNO055)
+    # The IMU driver must publish to /imu/data
+    imu0: /imu/data
+    # We trust: Absolute Yaw (Heading) and Yaw Velocity
+    imu0_config: [false, false, false,
+                  false, false, true,
+                  false, false, false,
+                  false, false, true,
+                  true,  false, false] # Optionally trust linear accel x
+    imu0_differential: false
+    imu0_relative: true # Resets 0 to start heading
+    imu0_queue_size: 10
+    
+    # Advanced Settings
+    use_control: false
+    # process_noise_covariance: [ ... ] # Can tune later if jittery
