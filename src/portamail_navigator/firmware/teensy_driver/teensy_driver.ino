@@ -39,6 +39,11 @@ const float TICKS_PER_REV = 341.2;
 // 2 MPH ~= 0.894 m/s. 
 const float MAX_SPEED_MPS = 0.89; 
 
+// --- PWM TUNING ---
+// Adjust these based on your motor's dead zone
+const int PWM_MIN = 70;   // Minimum PWM to overcome motor dead zone
+const int PWM_MAX = 255;  // Maximum PWM value
+
 // --- ROS 2 VARIABLES ---
 rcl_subscription_t subscriber;
 rcl_publisher_t odom_publisher;
@@ -78,16 +83,20 @@ float clamp(float val, float min_val, float max_val) {
 
 // --- MOTOR CONTROL FUNCTIONS ---
 void setMotor(int pwm_pin, int in1_pin, int in2_pin, float speed) {
-  // Simple proportional control: 
-  float pwm_factor = abs(speed) / MAX_SPEED_MPS; 
-  int pwm_val = pwm_factor * 255;
+  // Map speed to PWM with dead zone compensation
+  int pwm_val = 0;
   
-  if (pwm_val > 255) pwm_val = 255;
+  if (abs(speed) > 0.01) { // Deadzone threshold (1 cm/s)
+    float pwm_factor = abs(speed) / MAX_SPEED_MPS;
+    // Map to PWM range that accounts for motor dead zone
+    pwm_val = PWM_MIN + (pwm_factor * (PWM_MAX - PWM_MIN));
+    if (pwm_val > PWM_MAX) pwm_val = PWM_MAX;
+  }
 
-  if (speed > 0.01) { // Forward with deadzone
+  if (speed > 0.01) { // Forward
     digitalWrite(in1_pin, HIGH);
     digitalWrite(in2_pin, LOW);
-  } else if (speed < -0.01) { // Reverse with deadzone
+  } else if (speed < -0.01) { // Reverse
     digitalWrite(in1_pin, LOW);
     digitalWrite(in2_pin, HIGH);
   } else { // Stop
@@ -95,6 +104,7 @@ void setMotor(int pwm_pin, int in1_pin, int in2_pin, float speed) {
     digitalWrite(in2_pin, LOW);
     pwm_val = 0;
   }
+  
   analogWrite(pwm_pin, pwm_val);
 }
 
@@ -114,7 +124,11 @@ void subscription_callback(const void * msgin) {
   float left_speed = linear - (angular * WHEEL_BASE / 2.0);
   float right_speed = linear + (angular * WHEEL_BASE / 2.0);
 
-  // 3. Drive Motors
+  // 3. Clamp individual wheel speeds
+  left_speed = clamp(left_speed, -MAX_SPEED_MPS, MAX_SPEED_MPS);
+  right_speed = clamp(right_speed, -MAX_SPEED_MPS, MAX_SPEED_MPS);
+
+  // 4. Drive Motors
   setMotor(MOTOR_LEFT_PWM, MOTOR_LEFT_IN1, MOTOR_LEFT_IN2, left_speed);
   setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, right_speed);
 }
@@ -158,7 +172,7 @@ void setup() {
     "cmd_vel");
 
   // 4. Publisher (Send Odometry)
-  // Note: Publishing to /wheel/odom for EKF consumption
+  // Publishing to /wheel/odom for EKF consumption
   rclc_publisher_init_default(
     &odom_publisher,
     &node,
@@ -168,6 +182,9 @@ void setup() {
   // 5. Executor
   rclc_executor_init(&executor, &support.context, 1, &allocator);
   rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA);
+  
+  // 6. Initialize timestamp
+  prev_time = millis();
 }
 
 // --- LOOP ---
@@ -181,12 +198,15 @@ void loop() {
   // 2. Calculate Odometry
   unsigned long current_time = millis();
   if (current_time - prev_time >= 50) { // 20Hz update rate
-    // float dt = (current_time - prev_time) / 1000.0; // Removed unused variable
+    float dt = (current_time - prev_time) / 1000.0;
     
+    // CRITICAL: Atomic read of volatile encoder ticks
+    noInterrupts();
     long current_left_ticks = left_ticks;
     long current_right_ticks = right_ticks;
     left_ticks = 0; 
     right_ticks = 0;
+    interrupts();
 
     // Ticks -> Distance
     float d_left = (current_left_ticks / TICKS_PER_REV) * (2 * PI * WHEEL_RADIUS);
@@ -195,9 +215,14 @@ void loop() {
     float d_center = (d_left + d_right) / 2.0;
     float d_theta = (d_right - d_left) / WHEEL_BASE;
 
+    // Update pose
     theta += d_theta;
     x_pos += d_center * cos(theta);
     y_pos += d_center * sin(theta);
+
+    // Calculate velocities
+    float v_linear = d_center / dt;
+    float v_angular = d_theta / dt;
 
     // Populate Odometry Message
     int64_t time_ns = rmw_uros_epoch_nanos();
@@ -213,8 +238,35 @@ void loop() {
     // Position & Orientation
     odom_msg.pose.pose.position.x = x_pos;
     odom_msg.pose.pose.position.y = y_pos;
+    odom_msg.pose.pose.position.z = 0.0;
+    
+    // Quaternion from yaw (theta)
+    odom_msg.pose.pose.orientation.x = 0.0;
+    odom_msg.pose.pose.orientation.y = 0.0;
     odom_msg.pose.pose.orientation.z = sin(theta / 2.0); 
     odom_msg.pose.pose.orientation.w = cos(theta / 2.0);
+    
+    // Pose Covariance (6x6 matrix, row-major)
+    // Set diagonal elements for x, y, and yaw uncertainty
+    // Tune these values based on your robot's performance
+    for (int i = 0; i < 36; i++) odom_msg.pose.covariance[i] = 0.0;
+    odom_msg.pose.covariance[0] = 0.01;   // x variance (m^2)
+    odom_msg.pose.covariance[7] = 0.01;   // y variance (m^2)
+    odom_msg.pose.covariance[35] = 0.1;   // yaw variance (rad^2)
+
+    // Velocity (Twist)
+    odom_msg.twist.twist.linear.x = v_linear;
+    odom_msg.twist.twist.linear.y = 0.0;
+    odom_msg.twist.twist.linear.z = 0.0;
+    odom_msg.twist.twist.angular.x = 0.0;
+    odom_msg.twist.twist.angular.y = 0.0;
+    odom_msg.twist.twist.angular.z = v_angular;
+    
+    // Twist Covariance (6x6 matrix, row-major)
+    // Set diagonal elements for linear and angular velocity uncertainty
+    for (int i = 0; i < 36; i++) odom_msg.twist.covariance[i] = 0.0;
+    odom_msg.twist.covariance[0] = 0.02;   // vx variance (m^2/s^2)
+    odom_msg.twist.covariance[35] = 0.2;   // vyaw variance (rad^2/s^2)
     
     // Publish
     rcl_ret_t ret = rcl_publish(&odom_publisher, &odom_msg, NULL);
