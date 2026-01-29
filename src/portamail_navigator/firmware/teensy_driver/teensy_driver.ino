@@ -181,7 +181,7 @@ void loop() {
   // 2. Calculate Odometry
   unsigned long current_time = millis();
   if (current_time - prev_time >= 50) { // 20Hz update rate
-    float dt = (current_time - prev_time) / 1000.0;
+    // float dt = (current_time - prev_time) / 1000.0; // Removed unused variable
     
     long current_left_ticks = left_ticks;
     long current_right_ticks = right_ticks;
@@ -217,7 +217,8 @@ void loop() {
     odom_msg.pose.pose.orientation.w = cos(theta / 2.0);
     
     // Publish
-    rcl_publish(&odom_publisher, &odom_msg, NULL);
+    rcl_ret_t ret = rcl_publish(&odom_publisher, &odom_msg, NULL);
+    (void)ret; // Suppress unused result warning
     
     prev_time = current_time;
   }
