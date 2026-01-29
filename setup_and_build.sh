@@ -34,7 +34,7 @@ fi
 # --- STEP 2: INSTALL PROJECT DEPENDENCIES ---
 echo "[2/4] Checking project dependencies..."
 
-# Added: robot-localization, tf2 tools, rplidar, micro-ros
+# Removed: ros-jazzy-micro-ros-agent (Installing via Snap instead)
 deps=(
     "ros-jazzy-navigation2"
     "ros-jazzy-nav2-bringup"
@@ -42,7 +42,6 @@ deps=(
     "ros-jazzy-slam-toolbox"
     "ros-jazzy-robot-localization"
     "ros-jazzy-rplidar-ros"
-    "ros-jazzy-micro-ros-agent"
     "ros-jazzy-teleop-twist-joy"
     "ros-jazzy-tf2-ros"
     "ros-jazzy-tf2-geometry-msgs"
@@ -68,6 +67,17 @@ if [ ${#to_install[@]} -ne 0 ]; then
     sudo apt install -y "${to_install[@]}"
 else
     echo "All dependencies are satisfied. Skipping install."
+fi
+
+# --- STEP 2.5: INSTALL MICRO-ROS AGENT (VIA SNAP) ---
+echo "[2.5/4] Checking Micro-ROS Agent..."
+if snap list | grep -q "micro-ros-agent"; then
+    echo "  - micro-ros-agent is already installed via Snap."
+else
+    echo "  + Installing micro-ros-agent via Snap..."
+    sudo snap install micro-ros-agent
+    # Connect necessary plugs for serial access
+    sudo snap connect micro-ros-agent:serial-port
 fi
 
 # --- STEP 3: CONFIGURE ENVIRONMENT ---
