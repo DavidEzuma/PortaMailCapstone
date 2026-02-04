@@ -1,0 +1,61 @@
+const socket = io();
+
+const dbgMode = document.getElementById("dbgMode");
+const dbgScreen = document.getElementById("dbgScreen");
+const dbgRoom = document.getElementById("dbgRoom");
+const dbgBits = document.getElementById("dbgBits");
+const dbgEvents = document.getElementById("dbgEvents");
+
+function renderState(state) {
+  dbgMode.textContent = state.mode || "-";
+  dbgScreen.textContent = state.screen || "-";
+  dbgRoom.textContent = state.selected_room === null || state.selected_room === undefined
+    ? "-"
+    : String(state.selected_room);
+  dbgBits.textContent = JSON.stringify(state.bits || {}, null, 2);
+}
+
+function renderEvents(events) {
+  dbgEvents.textContent = JSON.stringify(events || [], null, 2);
+}
+
+function bindHomeButtons() {
+  const buttons = document.querySelectorAll("button[data-bit][data-edge]");
+  buttons.forEach((btn) => {
+    const bit = btn.dataset.bit;
+    const edge = btn.dataset.edge;
+
+    const onDown = (e) => {
+      e.preventDefault();
+      socket.emit("press", { bit });
+    };
+
+    const onUp = (e, allowEdge) => {
+      e.preventDefault();
+      if (allowEdge) {
+        socket.emit("release", { bit, edge });
+      } else {
+        socket.emit("release", { bit });
+      }
+    };
+
+    btn.addEventListener("pointerdown", onDown);
+    btn.addEventListener("pointerup", (e) => onUp(e, true));
+    btn.addEventListener("pointercancel", (e) => onUp(e, false));
+    btn.addEventListener("pointerleave", (e) => onUp(e, false));
+  });
+}
+
+socket.on("connect", () => {
+  // no-op for Step 1
+});
+
+socket.on("state", (state) => {
+  renderState(state || {});
+});
+
+socket.on("events", (events) => {
+  renderEvents(events || []);
+});
+
+bindHomeButtons();

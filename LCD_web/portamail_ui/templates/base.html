@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PortaMail LCD Widget</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="lcd">
+      {% block lcd %}{% endblock %}
+    </section>
+    <aside class="debug">
+      {% block debug %}{% endblock %}
+    </aside>
+  </main>
+
+  <script src="{{ url_for('static', filename='vendor/socket.io.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

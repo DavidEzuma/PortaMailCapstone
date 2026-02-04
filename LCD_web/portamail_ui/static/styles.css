@@ -1,0 +1,110 @@
+:root {
+  --bg: #10131a;
+  --panel: #1b2030;
+  --text: #f4f6fb;
+  --muted: #a1a9b8;
+  --accent: #63c0ff;
+  --danger: #f26d6d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  background: radial-gradient(circle at top, #1d2230, #0b0d12 70%);
+  color: var(--text);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 2fr) minmax(260px, 1fr);
+  gap: 24px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.lcd {
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 24px;
+  position: relative;
+}
+
+.screen {
+  position: relative;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.status {
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(140px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.btn {
+  border: none;
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #2a3245;
+  color: var(--text);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  touch-action: none;
+}
+
+.btn.big {
+  min-height: 120px;
+  font-size: 1.35rem;
+}
+
+.btn.power {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: var(--danger);
+}
+
+.debug {
+  background: rgba(14, 16, 22, 0.9);
+  border-radius: 20px;
+  padding: 20px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+}
+
+.debug-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+pre {
+  background: #0c0f15;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  overflow-x: auto;
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
