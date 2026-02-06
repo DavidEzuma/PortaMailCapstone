@@ -22,7 +22,7 @@ ament_target_dependencies(mock_driver rclcpp geometry_msgs nav_msgs tf2 tf2_geom
 
 # --- Executable 2: Static TF Broadcaster ---
 add_executable(robot_state_publisher src/robot_state_publisher.cpp)
-ament_target_dependencies(static_tf_broadcaster rclcpp geometry_msgs tf2 tf2_ros)
+ament_target_dependencies(robot_state_publisher rclcpp geometry_msgs tf2 tf2_ros)
 
 # --- Install Rules ---
 install(TARGETS mock_driver robot_state_publisher
