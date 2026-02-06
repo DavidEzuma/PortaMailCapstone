@@ -119,10 +119,12 @@ source /opt/ros/jazzy/setup.bash
 rm -rf build/ install/ log/
 
 # Build Coordinator AND Navigator packages
+echo "Building 'portamail_navigator' and 'portamail_coordinator'..."
 colcon build --packages-select portamail_coordinator portamail_navigator
 
 echo "==================================================="
 echo "   SUCCESS! Build Complete.                      "
 echo "==================================================="
-echo "1. To connect Teensy: ./run_agent.sh"
-echo "2. To run robot code: source install/setup.bash"
+echo "IMPORTANT: You MUST run this command right now:"
+echo "    source install/setup.bash"
+echo ""
