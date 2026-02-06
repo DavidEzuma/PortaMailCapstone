@@ -7,6 +7,8 @@
 #include "nav_msgs/msg/odometry.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
+#include "tf2_ros/transform_broadcaster.h"
+#include "geometry_msgs/msg/transform_stamped.hpp"
 
 using namespace std::chrono_literals;
 using std::placeholders::_1;
@@ -34,12 +36,15 @@ public:
       "cmd_vel", 10, std::bind(&MockDriver::cmd_vel_callback, this, _1));
 
     publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("odom", 10);
+    
+    // --- TF Broadcaster (CRITICAL FOR FOXGLOVE) ---
+    tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
 
     // Run physics loop at 20Hz (50ms)
     timer_ = this->create_wall_timer(
       50ms, std::bind(&MockDriver::update_physics, this));
 
-    RCLCPP_INFO(this->get_logger(), "Mock C++ Driver Started (Simulating Physics)");
+    RCLCPP_INFO(this->get_logger(), "Mock C++ Driver Started (Simulating Physics + TF)");
   }
 
 private:
@@ -98,12 +103,30 @@ private:
     odom.twist.twist.angular.z = vth_;
 
     publisher_->publish(odom);
+
+    // --- PUBLISH TF TRANSFORM (odom -> base_link) ---
+    geometry_msgs::msg::TransformStamped t;
+    t.header.stamp = current_time;
+    t.header.frame_id = "odom";
+    t.child_frame_id = "base_link";
+
+    t.transform.translation.x = x_;
+    t.transform.translation.y = y_;
+    t.transform.translation.z = 0.0;
+
+    t.transform.rotation.x = q.x();
+    t.transform.rotation.y = q.y();
+    t.transform.rotation.z = q.z();
+    t.transform.rotation.w = q.w();
+
+    tf_broadcaster_->sendTransform(t);
   }
 
   // Member Variables
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
+  std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
   double max_speed_mps_;
   double x_, y_, th_;

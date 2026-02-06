@@ -18,7 +18,13 @@ find_package(tf2_geometry_msgs REQUIRED)
 
 # --- Executable 1: Mock Driver (Simulation) ---
 add_executable(mock_driver src/mock_driver.cpp)
-ament_target_dependencies(mock_driver rclcpp geometry_msgs nav_msgs tf2 tf2_geometry_msgs)
+ament_target_dependencies(mock_driver 
+  rclcpp 
+  geometry_msgs 
+  nav_msgs 
+  tf2 
+  tf2_ros
+  tf2_geometry_msgs)
 
 # --- Install Rules ---
 install(TARGETS mock_driver
