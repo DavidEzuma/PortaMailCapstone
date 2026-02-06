@@ -14,11 +14,11 @@ is_installed() {
 
 # --- STEP 1: CHECK BASE ROS 2 INSTALLATION ---
 if [ -f "/opt/ros/jazzy/setup.bash" ]; then
-    echo "[1/4] ROS 2 Jazzy found. Skipping base install."
+    echo "[1/5] ROS 2 Jazzy found. Skipping base install."
 else
-    echo "[1/4] ROS 2 Jazzy NOT found. Installing base system..."
+    echo "[1/5] ROS 2 Jazzy NOT found. Installing base system..."
     
-    sudo apt install -y software-properties-common
+    sudo apt install -y software-properties-common curl
     sudo add-apt-repository -y universe
 
     sudo apt update && sudo apt install -y curl
@@ -32,10 +32,12 @@ else
 fi
 
 # --- STEP 2: INSTALL PROJECT DEPENDENCIES ---
-echo "[2/4] Checking project dependencies..."
+echo "[2/5] Checking project dependencies..."
 
-# Native ROS packages
+# Hardware Drivers & Navigation Stack
 deps=(
+    "build-essential"
+    "cmake"
     "ros-jazzy-navigation2"
     "ros-jazzy-nav2-bringup"
     "ros-jazzy-nav2-msgs"
@@ -43,8 +45,11 @@ deps=(
     "ros-jazzy-robot-localization"
     "ros-jazzy-rplidar-ros"
     "ros-jazzy-teleop-twist-joy"
+    "ros-jazzy-joy"
     "ros-jazzy-tf2-ros"
     "ros-jazzy-tf2-geometry-msgs"
+    "ros-jazzy-robot-state-publisher"
+    "ros-jazzy-foxglove-bridge"
     "libyaml-cpp-dev"
     "python3-colcon-common-extensions"
 )
@@ -52,9 +57,7 @@ deps=(
 # Build a list of ONLY missing packages
 to_install=()
 for pkg in "${deps[@]}"; do
-    if is_installed "$pkg"; then
-        echo "  - $pkg is already installed."
-    else
+    if ! is_installed "$pkg"; then
         echo "  + $pkg is MISSING. Queuing for install."
         to_install+=("$pkg")
     fi
@@ -70,7 +73,7 @@ else
 fi
 
 # --- STEP 3: SET UP MICRO-ROS AGENT (DOCKER ONLY) ---
-echo "[3/4] Setting up Micro-ROS Agent (Docker)..."
+echo "[3/5] Setting up Micro-ROS Agent (Docker)..."
 
 # 1. Install Docker if missing
 if ! command -v docker &> /dev/null; then
@@ -103,7 +106,7 @@ EOF
 chmod +x ~/PortaMailCapstone/run_agent.sh
 
 # --- STEP 4: BUILD ROS PACKAGES ---
-echo "[4/4] Building PortaMail Stack..."
+echo "[4/5] Building PortaMail Stack..."
 
 if ! grep -q "source /opt/ros/jazzy/setup.bash" ~/.bashrc; then
     echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc

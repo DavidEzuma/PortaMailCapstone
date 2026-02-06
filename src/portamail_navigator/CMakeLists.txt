@@ -33,4 +33,9 @@ install(DIRECTORY launch config firmware
   DESTINATION share/${PROJECT_NAME}
 )
 
+# Install ALL directories needed for urdf presentation
+install(DIRECTORY launch config firmware urdf meshes
+  DESTINATION share/${PROJECT_NAME}
+)
+
 ament_package()

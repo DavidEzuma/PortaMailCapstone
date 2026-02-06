@@ -64,11 +64,25 @@ def generate_launch_description():
         }]
     )
 
+    # --- 4. Foxglove Bridge ---
+    # Allows remote visualization over WebSocket
+    foxglove_bridge = Node(
+        package='foxglove_bridge',
+        executable='foxglove_bridge',
+        name='foxglove_bridge',
+        parameters=[{
+            'port': 8765,
+            'address': '0.0.0.0',
+            'send_buffer_limit': 10000000
+        }]
+    )
+
     return LaunchDescription([
         use_mock_driver_arg,
         hardware_launch,
         mock_driver_node,
-        mock_tf,
+        # mock_tf,  <-- REMOVE this if using URDF via hardware.launch
         joystick_launch,
-        slam_node
+        slam_node,
+        foxglove_bridge # <--- Added here
     ])
