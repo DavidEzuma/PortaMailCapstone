@@ -20,20 +20,11 @@ find_package(tf2_geometry_msgs REQUIRED)
 add_executable(mock_driver src/mock_driver.cpp)
 ament_target_dependencies(mock_driver rclcpp geometry_msgs nav_msgs tf2 tf2_geometry_msgs)
 
-# --- Executable 2: Static TF Broadcaster ---
-add_executable(robot_state_publisher src/robot_state_publisher.cpp)
-ament_target_dependencies(robot_state_publisher rclcpp geometry_msgs tf2 tf2_ros)
-
 # --- Install Rules ---
-install(TARGETS mock_driver robot_state_publisher
+install(TARGETS mock_driver
   DESTINATION lib/${PROJECT_NAME})
 
-# Install ALL directories needed for launch/config
-install(DIRECTORY launch config firmware
-  DESTINATION share/${PROJECT_NAME}
-)
-
-# Install ALL directories needed for urdf presentation
+# Install ALL directories needed for launch/config/urdf
 install(DIRECTORY launch config firmware urdf meshes
   DESTINATION share/${PROJECT_NAME}
 )

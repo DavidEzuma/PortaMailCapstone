@@ -10,21 +10,31 @@ from launch.conditions import IfCondition, UnlessCondition
 def generate_launch_description():
     pkg_share = FindPackageShare('portamail_navigator')
 
-    # Argument to toggle between Simulation (Mock) and Real Hardware
+    # --- Arguments ---
     use_mock_driver_arg = DeclareLaunchArgument(
         'use_mock_driver', default_value='false',
         description='Use Mock Driver instead of Real Hardware')
 
+    use_real_lidar_arg = DeclareLaunchArgument(
+        'use_real_lidar', default_value='true',
+        description='Launch physical RPLIDAR driver')
+
     # --- 1. Hardware Stack ---
-    # Real Hardware Launch
     hardware_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([pkg_share, 'launch', 'hardware.launch.py'])
         ]),
+        launch_arguments={
+            'use_lidar': LaunchConfiguration('use_real_lidar'),
+            'use_teensy': 'false', 
+            'use_imu': 'false'
+        }.items(),
         condition=UnlessCondition(LaunchConfiguration('use_mock_driver'))
     )
 
-    # Simulation Fallback (Mock Driver + TF)
+    # Simulation Fallback (Mock Driver)
+    # Note: We rely on hardware.launch (below) or a separate include to provide URDF if strictly mocking
+    # For hybrid mode, hardware_launch provides the URDF state publisher.
     mock_driver_node = Node(
         condition=IfCondition(LaunchConfiguration('use_mock_driver')),
         package='portamail_navigator',
@@ -33,12 +43,19 @@ def generate_launch_description():
         output='screen'
     )
     
-    mock_tf = Node(
-        condition=IfCondition(LaunchConfiguration('use_mock_driver')),
-        package='portamail_navigator',
-        executable='robot_state_publisher',
-        name='mock_tf_broadcaster',
-        output='screen'
+    # If running PURE mock (no hardware launch), we need to launch state publisher separately.
+    # But usually, we run hardware.launch with use_teensy:=false to get the URDF.
+    # Let's ensure hardware launch runs even in mock mode, just disabling specific sensors.
+    hybrid_hardware_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([pkg_share, 'launch', 'hardware.launch.py'])
+        ]),
+        launch_arguments={
+            'use_lidar': LaunchConfiguration('use_real_lidar'),
+            'use_teensy': 'false',
+            'use_imu': 'false'
+        }.items(),
+        condition=IfCondition(LaunchConfiguration('use_mock_driver'))
     )
 
     # --- 2. Joystick Control ---
@@ -64,8 +81,7 @@ def generate_launch_description():
         }]
     )
 
-    # --- 4. Foxglove Bridge ---
-    # Allows remote visualization over WebSocket
+    # --- 4. Foxglove Bridge (CRITICAL FOR VISUALIZATION) ---
     foxglove_bridge = Node(
         package='foxglove_bridge',
         executable='foxglove_bridge',
@@ -79,10 +95,11 @@ def generate_launch_description():
 
     return LaunchDescription([
         use_mock_driver_arg,
+        use_real_lidar_arg,
         hardware_launch,
+        hybrid_hardware_launch,
         mock_driver_node,
-        # mock_tf,  <-- REMOVE this if using URDF via hardware.launch
         joystick_launch,
         slam_node,
-        foxglove_bridge # <--- Added here
+        foxglove_bridge
     ])
