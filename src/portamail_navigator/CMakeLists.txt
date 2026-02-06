@@ -1,3 +1,4 @@
+# This is the CMakeLists file for the navigator package
 cmake_minimum_required(VERSION 3.8)
 project(portamail_navigator)
 
