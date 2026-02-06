@@ -36,7 +36,7 @@ def generate_launch_description():
     mock_tf = Node(
         condition=IfCondition(LaunchConfiguration('use_mock_driver')),
         package='portamail_navigator',
-        executable='static_tf_broadcaster',
+        executable='robot_state_publisher',
         name='mock_tf_broadcaster',
         output='screen'
     )
