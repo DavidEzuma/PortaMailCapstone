@@ -1,11 +1,12 @@
+<!-- # This is the package.xml file for the navigator package-->
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>portamail_navigator</name>
   <version>0.0.0</version>
-  <description>Navigation and simulation package for PortaMail robot</description>
+  <description>TODO: Package description</description>
   <maintainer email="Davidezuma42@gmail.com">davidezuma</maintainer>
-  <license>Apache-2.0</license>
+  <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
@@ -23,8 +24,6 @@
 
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>foxglove_bridge</exec_depend>
-  <exec_depend>ros_gz_sim</exec_depend>
-  <exec_depend>ros_gz_bridge</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
