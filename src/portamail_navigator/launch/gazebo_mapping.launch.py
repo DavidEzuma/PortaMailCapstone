@@ -21,14 +21,12 @@ def generate_launch_description():
         description='Use simulation time'
     )
     
-    # --- 1. GAZEBO SERVER (HEADLESS - NO GUI) ---
+    # --- 1. GAZEBO HARMONIC SERVER (HEADLESS - NO GUI) ---
+    # ROS 2 Jazzy uses gz sim (Gazebo Harmonic), not gzserver (Classic)
     gazebo_server = ExecuteProcess(
-        cmd=['gzserver', 
-             '-s', 'libgazebo_ros_init.so', 
-             '-s', 'libgazebo_ros_factory.so',
-             '--verbose',
-             world_file],
-        output='screen'
+        cmd=['gz', 'sim', '-r', '-s', world_file],
+        output='screen',
+        shell=False
     )
     
     # --- 2. ROBOT STATE PUBLISHER ---
@@ -45,13 +43,13 @@ def generate_launch_description():
         }]
     )
     
-    # --- 3. SPAWN ROBOT IN GAZEBO ---
+    # --- 3. SPAWN ROBOT IN GAZEBO HARMONIC ---
     spawn_entity = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
+        package='ros_gz_sim',
+        executable='create',
         arguments=[
-            '-entity', 'portamail_robot',
             '-topic', 'robot_description',
+            '-name', 'portamail_robot',
             '-x', '0.0',
             '-y', '0.0',
             '-z', '0.1'
@@ -59,7 +57,22 @@ def generate_launch_description():
         output='screen'
     )
     
-    # --- 4. SLAM TOOLBOX (Online Async Mapping) ---
+    # --- 4. ROS-GAZEBO BRIDGE (Critical for topic communication) ---
+    # Bridge topics between ROS 2 and Gazebo Harmonic
+    gz_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=[
+            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
+            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+        ],
+        output='screen',
+        parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
+    )
+    
+    # --- 5. SLAM TOOLBOX (Online Async Mapping) ---
     slam_params_file = PathJoinSubstitution([pkg_share, 'config', 'slam_params.yaml'])
     
     slam_toolbox = Node(
@@ -73,7 +86,7 @@ def generate_launch_description():
         ]
     )
     
-    # --- 5. JOYSTICK CONTROL (Xbox Controller) ---
+    # --- 6. JOYSTICK CONTROL (Xbox Controller) ---
     # Note: joystick.launch.py is in portamail_coordinator package
     coordinator_share = FindPackageShare('portamail_coordinator')
     joystick_launch = IncludeLaunchDescription(
@@ -83,7 +96,7 @@ def generate_launch_description():
         launch_arguments={'joy_dev': '/dev/input/js0'}.items()
     )
     
-    # --- 6. FOXGLOVE BRIDGE (CRITICAL for headless operation) ---
+    # --- 7. FOXGLOVE BRIDGE (CRITICAL for headless operation) ---
     foxglove_bridge = Node(
         package='foxglove_bridge',
         executable='foxglove_bridge',
@@ -99,9 +112,10 @@ def generate_launch_description():
     
     return LaunchDescription([
         use_sim_time_arg,
-        gazebo_server,  # NOTE: No gzclient (GUI) - headless mode
+        gazebo_server,  # NOTE: No GUI - headless mode
         robot_state_publisher,
         spawn_entity,
+        gz_bridge,  # Bridge ROS 2 <-> Gazebo topics
         slam_toolbox,
         joystick_launch,
         foxglove_bridge

@@ -74,13 +74,15 @@ else
 fi
 
 # --- STEP 3: INSTALL GAZEBO SIMULATION DEPENDENCIES (HEADLESS) ---
-echo "[3/6] Checking Gazebo simulation dependencies (headless server only)..."
+echo "[3/6] Checking Gazebo Harmonic simulation dependencies (headless server only)..."
 
+# ROS 2 Jazzy uses Gazebo Harmonic (gz-sim), not Gazebo Classic
 gazebo_deps=(
-    "ros-jazzy-gazebo-ros-pkgs"
-    "ros-jazzy-gazebo-ros2-control"
+    "ros-jazzy-ros-gz-sim"
+    "ros-jazzy-ros-gz-bridge"
+    "ros-jazzy-ros-gz-interfaces"
     "ros-jazzy-xacro"
-    "gazebo"
+    "gz-harmonic"
 )
 
 gazebo_to_install=()
@@ -92,14 +94,22 @@ for pkg in "${gazebo_deps[@]}"; do
 done
 
 if [ ${#gazebo_to_install[@]} -ne 0 ]; then
-    echo "Installing Gazebo dependencies (server only): ${gazebo_to_install[*]}"
-    sudo apt update
+    echo "Installing Gazebo Harmonic dependencies (server only): ${gazebo_to_install[*]}"
+    
+    # Add Gazebo Harmonic repository if not present
+    if [ ! -f /etc/apt/sources.list.d/gazebo-stable.list ]; then
+        echo "  + Adding Gazebo Harmonic repository..."
+        sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+        sudo apt update
+    fi
+    
     sudo apt install -y "${gazebo_to_install[@]}"
 else
     echo "All Gazebo dependencies are satisfied. Skipping install."
 fi
 
-echo "  NOTE: Gazebo GUI not installed (headless mode - use Foxglove for visualization)"
+echo "  NOTE: Gazebo Harmonic headless mode - use Foxglove for visualization"
 
 # --- STEP 4: SET UP MICRO-ROS AGENT (DOCKER ONLY) ---
 echo "[4/6] Setting up Micro-ROS Agent (Docker)..."
