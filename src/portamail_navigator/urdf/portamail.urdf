@@ -231,30 +231,47 @@
   </joint>
 
   <!-- ============================================ -->
-  <!-- GAZEBO HARMONIC PLUGINS (Only active in gz-sim) -->
+  <!-- GAZEBO PLUGINS (Only active in simulation) -->
   <!-- ============================================ -->
 
-  <!-- Differential Drive Controller for Gazebo Harmonic -->
+  <!-- Differential Drive Controller -->
   <gazebo>
-    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      
+      <!-- Wheel Information -->
       <left_joint>left_wheel_joint</left_joint>
       <right_joint>right_wheel_joint</right_joint>
       <wheel_separation>0.498</wheel_separation>
-      <wheel_radius>0.0325</wheel_radius>
-      <odom_publish_frequency>50</odom_publish_frequency>
-      <topic>cmd_vel</topic>
-      <odom_topic>odom</odom_topic>
-      <frame_id>odom</frame_id>
-      <child_frame_id>base_link</child_frame_id>
+      <wheel_diameter>0.065</wheel_diameter>
+      
+      <!-- Limits -->
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      
+      <!-- Input -->
+      <command_topic>cmd_vel</command_topic>
+      
+      <!-- Output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      
+      <!-- Update Rate -->
+      <update_rate>50</update_rate>
     </plugin>
   </gazebo>
 
-  <!-- RPLIDAR A2 Sensor Plugin for Gazebo Harmonic -->
+  <!-- RPLIDAR A2 Sensor Plugin (Gazebo Only) -->
   <gazebo reference="laser">
-    <sensor name="rplidar_sensor" type="gpu_lidar">
-      <topic>scan</topic>
+    <sensor type="ray" name="rplidar_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
       <update_rate>10</update_rate>
-      <lidar>
+      <ray>
         <scan>
           <horizontal>
             <samples>360</samples>
@@ -273,9 +290,15 @@
           <mean>0.0</mean>
           <stddev>0.01</stddev>
         </noise>
-      </lidar>
-      <always_on>1</always_on>
-      <visualize>false</visualize>
+      </ray>
+      <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/</namespace>
+          <remapping>~/out:=scan</remapping>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>laser</frame_name>
+      </plugin>
     </sensor>
   </gazebo>
 
