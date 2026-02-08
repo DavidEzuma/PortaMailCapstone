@@ -39,6 +39,7 @@ install(DIRECTORY
   urdf 
   meshes
   worlds       # Gazebo world files
+  models       # Gazebo SDF models
   DESTINATION share/${PROJECT_NAME}
 )
 
