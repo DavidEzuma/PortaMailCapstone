@@ -24,9 +24,10 @@ def generate_launch_description():
     # --- 1. GAZEBO HARMONIC SERVER (HEADLESS - NO GUI) ---
     # ROS 2 Jazzy uses gz sim (Gazebo Harmonic), not gzserver (Classic)
     gazebo_server = ExecuteProcess(
-        cmd=['gz', 'sim', '-r', '-s', world_file],
+        cmd=['gz', 'sim', '-r', '-s', '-v', '3', world_file],
         output='screen',
-        shell=False
+        shell=False,
+        additional_env={'GZ_SIM_RESOURCE_PATH': ''}
     )
     
     # --- 2. ROBOT STATE PUBLISHER ---
@@ -59,14 +60,20 @@ def generate_launch_description():
     
     # --- 4. ROS-GAZEBO BRIDGE (Critical for topic communication) ---
     # Bridge topics between ROS 2 and Gazebo Harmonic
+    # Format: /ros_topic@ros_msg_type@gz_msg_type
     gz_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan',
+            '/scan@sensor_msgs/msg/LaserScan@gz.msgs.LaserScan',
             '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
-            '/odom@nav_msgs/msg/Odometry[gz.msgs.Odometry',
-            '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
+            '/odom@nav_msgs/msg/Odometry@gz.msgs.Odometry',
+            '/tf@tf2_msgs/msg/TFMessage@gz.msgs.Pose_V',
+            '/clock@rosgraph_msgs/msg/Clock@gz.msgs.Clock',
+        ],
+        remappings=[
+            ('/scan', '/scan'),
+            ('/cmd_vel', '/cmd_vel'),
         ],
         output='screen',
         parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time')}]
