@@ -5,6 +5,7 @@ set -e
 
 echo "==================================================="
 echo "   PortaMail: Smart Setup & Build (ROS 2 Jazzy)  "
+echo "   HEADLESS MODE - Foxglove Visualization Only   "
 echo "==================================================="
 
 # Function to check if an APT package is installed
@@ -14,9 +15,9 @@ is_installed() {
 
 # --- STEP 1: CHECK BASE ROS 2 INSTALLATION ---
 if [ -f "/opt/ros/jazzy/setup.bash" ]; then
-    echo "[1/5] ROS 2 Jazzy found. Skipping base install."
+    echo "[1/6] ROS 2 Jazzy found. Skipping base install."
 else
-    echo "[1/5] ROS 2 Jazzy NOT found. Installing base system..."
+    echo "[1/6] ROS 2 Jazzy NOT found. Installing base system..."
     
     sudo apt install -y software-properties-common curl
     sudo add-apt-repository -y universe
@@ -32,7 +33,7 @@ else
 fi
 
 # --- STEP 2: INSTALL PROJECT DEPENDENCIES ---
-echo "[2/5] Checking project dependencies..."
+echo "[2/6] Checking project dependencies..."
 
 # Hardware Drivers & Navigation Stack
 deps=(
@@ -72,8 +73,36 @@ else
     echo "All dependencies are satisfied. Skipping install."
 fi
 
-# --- STEP 3: SET UP MICRO-ROS AGENT (DOCKER ONLY) ---
-echo "[3/5] Setting up Micro-ROS Agent (Docker)..."
+# --- STEP 3: INSTALL GAZEBO SIMULATION DEPENDENCIES (HEADLESS) ---
+echo "[3/6] Checking Gazebo simulation dependencies (headless server only)..."
+
+gazebo_deps=(
+    "ros-jazzy-gazebo-ros-pkgs"
+    "ros-jazzy-gazebo-ros2-control"
+    "ros-jazzy-xacro"
+    "gazebo"
+)
+
+gazebo_to_install=()
+for pkg in "${gazebo_deps[@]}"; do
+    if ! is_installed "$pkg"; then
+        echo "  + $pkg is MISSING. Queuing for install."
+        gazebo_to_install+=("$pkg")
+    fi
+done
+
+if [ ${#gazebo_to_install[@]} -ne 0 ]; then
+    echo "Installing Gazebo dependencies (server only): ${gazebo_to_install[*]}"
+    sudo apt update
+    sudo apt install -y "${gazebo_to_install[@]}"
+else
+    echo "All Gazebo dependencies are satisfied. Skipping install."
+fi
+
+echo "  NOTE: Gazebo GUI not installed (headless mode - use Foxglove for visualization)"
+
+# --- STEP 4: SET UP MICRO-ROS AGENT (DOCKER ONLY) ---
+echo "[4/6] Setting up Micro-ROS Agent (Docker)..."
 
 # 1. Install Docker if missing
 if ! command -v docker &> /dev/null; then
@@ -105,8 +134,8 @@ docker run -it --rm --net=host --privileged \
 EOF
 chmod +x ~/PortaMailCapstone/run_agent.sh
 
-# --- STEP 4: BUILD ROS PACKAGES ---
-echo "[4/5] Building PortaMail Stack..."
+# --- STEP 5: BUILD ROS PACKAGES ---
+echo "[5/6] Building PortaMail Stack..."
 
 if ! grep -q "source /opt/ros/jazzy/setup.bash" ~/.bashrc; then
     echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
@@ -122,9 +151,86 @@ rm -rf build/ install/ log/
 echo "Building 'portamail_navigator' and 'portamail_coordinator'..."
 colcon build --packages-select portamail_coordinator portamail_navigator
 
+# --- STEP 6: CREATE HELPER SCRIPTS ---
+echo "[6/6] Creating helper launch scripts (headless mode)..."
+
+# Create simulation launch helper (HEADLESS)
+cat > ~/PortaMailCapstone/launch_simulation.sh << 'EOF'
+#!/bin/bash
+# Launch Gazebo simulation HEADLESS with SLAM mapping
+# Visualize through Foxglove at ws://[PI_IP]:8765
+
+source ~/PortaMailCapstone/install/setup.bash
+
+echo "=========================================="
+echo "  Starting Headless Gazebo Simulation"
+echo "=========================================="
+echo ""
+echo "Foxglove: ws://$(hostname -I | awk '{print $1}'):8765"
+echo ""
+echo "Press Ctrl+C to stop"
+echo ""
+
+ros2 launch portamail_navigator gazebo_mapping.launch.py
+EOF
+chmod +x ~/PortaMailCapstone/launch_simulation.sh
+
+# Create hardware launch helper
+cat > ~/PortaMailCapstone/launch_hardware.sh << 'EOF'
+#!/bin/bash
+# Launch with real hardware
+# Visualize through Foxglove at ws://[PI_IP]:8765
+
+source ~/PortaMailCapstone/install/setup.bash
+
+echo "=========================================="
+echo "  Starting Hardware Stack"
+echo "=========================================="
+echo ""
+echo "Foxglove: ws://$(hostname -I | awk '{print $1}'):8765"
+echo ""
+echo "Press Ctrl+C to stop"
+echo ""
+
+ros2 launch portamail_navigator hardware.launch.py
+EOF
+chmod +x ~/PortaMailCapstone/launch_hardware.sh
+
+# Create SLAM mapping launch helper
+cat > ~/PortaMailCapstone/launch_mapping.sh << 'EOF'
+#!/bin/bash
+# Launch hardware mapping mode with SLAM
+# Visualize through Foxglove at ws://[PI_IP]:8765
+
+source ~/PortaMailCapstone/install/setup.bash
+
+echo "=========================================="
+echo "  Starting SLAM Mapping (Hardware)"
+echo "=========================================="
+echo ""
+echo "Foxglove: ws://$(hostname -I | awk '{print $1}'):8765"
+echo ""
+echo "Drive around to build map, then save with:"
+echo "  ros2 service call /slam_toolbox/save_map slam_toolbox/srv/SaveMap \"{name: {data: 'MAP_NAME'}}\""
+echo ""
+echo "Press Ctrl+C to stop"
+echo ""
+
+ros2 launch portamail_navigator mapping.launch.py
+EOF
+chmod +x ~/PortaMailCapstone/launch_mapping.sh
+
 echo "==================================================="
 echo "   SUCCESS! Build Complete.                      "
 echo "==================================================="
 echo "IMPORTANT: You MUST run this command right now:"
 echo "    source install/setup.bash"
+echo ""
+echo "Available launch helpers:"
+echo "  ./launch_simulation.sh  - Gazebo headless + Foxglove"
+echo "  ./launch_hardware.sh    - Real hardware + Foxglove"
+echo "  ./launch_mapping.sh     - Hardware SLAM mapping"
+echo "  ./run_agent.sh          - micro-ROS agent for Teensy"
+echo ""
+echo "Connect Foxglove to: ws://$(hostname -I | awk '{print $1}'):8765"
 echo ""
