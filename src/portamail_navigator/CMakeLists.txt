@@ -1,3 +1,4 @@
+# This is the CMakeLists file for the navigator package
 cmake_minimum_required(VERSION 3.8)
 project(portamail_navigator)
 
@@ -16,7 +17,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
-# --- Executable: Mock Driver (Simulation Fallback) ---
+# --- Executable 1: Mock Driver (Simulation) ---
 add_executable(mock_driver src/mock_driver.cpp)
 ament_target_dependencies(mock_driver 
   rclcpp 
@@ -26,19 +27,12 @@ ament_target_dependencies(mock_driver
   tf2_ros
   tf2_geometry_msgs)
 
-# --- Install Executables ---
+# --- Install Rules ---
 install(TARGETS mock_driver
   DESTINATION lib/${PROJECT_NAME})
 
-# --- Install ALL Resource Directories ---
-# Note: portamail.urdf now works for both hardware and Gazebo simulation
-install(DIRECTORY 
-  launch 
-  config 
-  firmware 
-  urdf 
-  meshes
-  worlds       # Gazebo world files
+# Install ALL directories needed for launch/config/urdf
+install(DIRECTORY launch config firmware urdf meshes
   DESTINATION share/${PROJECT_NAME}
 )
 
