@@ -242,13 +242,8 @@
       <wheel_separation>0.498</wheel_separation>
       <wheel_radius>0.0325</wheel_radius>
       <odom_publish_frequency>50</odom_publish_frequency>
-      <max_linear_acceleration>1.0</max_linear_acceleration>
-      <max_angular_acceleration>2.0</max_angular_acceleration>
-      <max_linear_velocity>0.89</max_linear_velocity>
-      <max_angular_velocity>1.0</max_angular_velocity>
-      <topic>/cmd_vel</topic>
-      <odom_topic>/odom</odom_topic>
-      <tf_topic>/tf</tf_topic>
+      <topic>cmd_vel</topic>
+      <odom_topic>odom</odom_topic>
       <frame_id>odom</frame_id>
       <child_frame_id>base_link</child_frame_id>
     </plugin>
@@ -257,7 +252,7 @@
   <!-- RPLIDAR A2 Sensor Plugin for Gazebo Harmonic -->
   <gazebo reference="laser">
     <sensor name="rplidar_sensor" type="gpu_lidar">
-      <topic>/scan</topic>
+      <topic>scan</topic>
       <update_rate>10</update_rate>
       <lidar>
         <scan>
@@ -280,20 +275,13 @@
         </noise>
       </lidar>
       <always_on>1</always_on>
-      <visualize>true</visualize>
+      <visualize>false</visualize>
     </sensor>
   </gazebo>
 
   <!-- Gazebo Material Properties -->
   <gazebo reference="base_link">
     <material>Gazebo/Grey</material>
-    <visual>
-      <geometry>
-        <box>
-          <size>0.4 0.3 0.2</size>
-        </box>
-      </geometry>
-    </visual>
   </gazebo>
 
   <gazebo reference="left_wheel">
@@ -304,14 +292,6 @@
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
     <maxVel>1.0</maxVel>
-    <visual>
-      <geometry>
-        <cylinder>
-          <radius>0.0325</radius>
-          <length>0.04</length>
-        </cylinder>
-      </geometry>
-    </visual>
   </gazebo>
 
   <gazebo reference="right_wheel">
@@ -322,14 +302,6 @@
     <kd>100.0</kd>
     <minDepth>0.001</minDepth>
     <maxVel>1.0</maxVel>
-    <visual>
-      <geometry>
-        <cylinder>
-          <radius>0.0325</radius>
-          <length>0.04</length>
-        </cylinder>
-      </geometry>
-    </visual>
   </gazebo>
 
   <gazebo reference="caster_wheel">
@@ -338,13 +310,6 @@
     <mu2>0.0</mu2>
     <kp>1000000.0</kp>
     <kd>100.0</kd>
-    <visual>
-      <geometry>
-        <sphere>
-          <radius>0.02</radius>
-        </sphere>
-      </geometry>
-    </visual>
   </gazebo>
 
   <gazebo reference="laser">
