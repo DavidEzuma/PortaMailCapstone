@@ -2,6 +2,7 @@ import json
 import threading
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 
 BASE_URL = 'http://127.0.0.1:5050'
@@ -10,6 +11,7 @@ POLL_SEC = 1.0
 _seen = []
 _seen_limit = 200
 _stop = False
+_last_ts = None
 
 
 def _event_key(evt):
@@ -42,10 +44,14 @@ def _http_post(path, body):
 
 
 def _poll_events_loop():
-    global _stop
+    global _stop, _last_ts
     while not _stop:
         try:
-            raw = _http_get('/api/events')
+            path = '/api/events'
+            if _last_ts:
+                query = urllib.parse.urlencode({'since_ts': _last_ts})
+                path = f'{path}?{query}'
+            raw = _http_get(path)
             events = json.loads(raw)
             if isinstance(events, list):
                 for evt in events:
@@ -57,6 +63,9 @@ def _poll_events_loop():
                     _seen.append(key)
                     if len(_seen) > _seen_limit:
                         _seen[:] = _seen[-_seen_limit:]
+                    ts = evt.get('ts')
+                    if ts:
+                        _last_ts = ts
                     print(json.dumps(evt))
         except Exception as exc:
             print(f'[sim] events poll error: {exc}')

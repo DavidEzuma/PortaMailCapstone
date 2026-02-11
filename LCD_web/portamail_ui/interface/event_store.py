@@ -13,5 +13,13 @@ def add_event(name, payload=None):
     return evt
 
 
-def read_events():
-    return list(_events)
+def read_events(since_ts=None, limit=None):
+    events = list(_events)
+
+    if since_ts:
+        events = [evt for evt in events if evt.get("ts", "") > since_ts]
+
+    if isinstance(limit, int) and limit > 0:
+        events = events[-limit:]
+
+    return events

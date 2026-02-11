@@ -81,6 +81,8 @@ def handle_edge(edge, payload=None):
         if state["screen"] not in {"DELIVERING_ROOM1", "DELIVERING_ROOM2", "CONFIRM_SELECT", "CONFIRM_ACK"}:
             _set_active_from_queue()
         return True
+    if edge == "power_edge":
+        return True
     if edge == "open_confirm_flow":
         state["screen"] = "CONFIRM_SELECT"
         return True

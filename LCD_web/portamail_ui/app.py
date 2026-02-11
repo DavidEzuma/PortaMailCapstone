@@ -5,6 +5,8 @@
 # python app.py
 # Open http://127.0.0.1:5050
 
+import os
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from interface.api_handlers import register_api
@@ -16,9 +18,15 @@ app.config["SECRET_KEY"] = "portamail-lcd-phase2"
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 
+def is_debug_panel_enabled():
+    # DEBUG STATEMENT: set LCD_SHOW_DEBUG_PANEL=0 to hide the debug panel.
+    raw = os.getenv("LCD_SHOW_DEBUG_PANEL", "0").strip().lower()
+    return raw not in {"0", "false", "no", "off"}
+
+
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", show_debug_panel=is_debug_panel_enabled())
 
 
 def main():

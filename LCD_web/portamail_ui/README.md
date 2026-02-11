@@ -12,6 +12,11 @@ python app.py
 ```
 Open `http://127.0.0.1:5050`.
 
+Optional: hide debug panel:
+```bash
+LCD_SHOW_DEBUG_PANEL=0 python app.py
+```
+
 ## External Send (commands)
 Set mode:
 ```bash
@@ -27,6 +32,8 @@ curl -X POST http://127.0.0.1:5050/api/mode \
 ## External Receive (state + events)
 - `GET /api/state` returns the full snapshot with bits and current screen.
 - `GET /api/events` returns a bounded queue (max 50), ordered oldest-first.
+  - Optional `since_ts=<ISO8601>` returns only newer events.
+  - Optional `limit=<N>` returns only the newest `N` events.
 
 ## Socket.IO Press/Release Contract
 Buttons emit two Socket.IO events:
@@ -53,4 +60,24 @@ Legacy keys (`name`/`payload`) remain unchanged for backward compatibility.
 Run the stdlib-only external simulator:
 ```bash
 python3 tools/external_sim.py
+```
+The simulator now uses incremental event polling (`since_ts`) to reduce duplicate reads.
+
+## Home Screen
+- Includes Room 1 and Room 2 with white-outline destination buttons.
+- Tap one or both room buttons to select (selected turns green outline), then press `Deliver` to start.
+
+## Contract + Regression Checks
+- Locked contract reference: `AS_BUILT_CONTRACT.md`
+- Run automated checks:
+```bash
+make check
+```
+- Run tests only:
+```bash
+make test
+```
+- Run smoke only:
+```bash
+make smoke
 ```

@@ -8,7 +8,7 @@ A) EXTERNAL SEND (external → LCD server)
      {"mode":"ARRIVED"}
      {"mode":"DOCK_IDLE"}
    - Response (success):
-     {"ok": true}
+     {"ok": true, "mode":"ARRIVED|DOCK_IDLE"}
    - Response (error):
      HTTP 400
      {"ok": false, "error": "unknown_mode"}
@@ -35,6 +35,8 @@ B) EXTERNAL RECEIVE (LCD server → external)
        "type": "<event_name>",
        "data": { ... }
      }
+   - `payload` and `data` include current state context for easier sync:
+     mode, screen, active_room, pending_rooms
 
    - Edge event names emitted:
      start_room1
@@ -44,3 +46,6 @@ B) EXTERNAL RECEIVE (LCD server → external)
      select_room2
      delivery_confirmed
      power_edge
+   - Optional query args for efficient polling:
+     since_ts=<ISO8601>   (only events newer than this timestamp)
+     limit=<N>            (only latest N events)

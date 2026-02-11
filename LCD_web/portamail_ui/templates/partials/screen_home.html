@@ -1,8 +1,14 @@
 <section class="screen active" data-screen="HOME" id="screenHome">
   <div class="status">Select destination</div>
   <div class="button-row">
-    <button class="btn big home-start" data-bit="room1_start_pressed" data-edge="start_room1">Room 1</button>
-    <button class="btn big home-start" data-bit="room2_start_pressed" data-edge="start_room2">Room 2</button>
+    <button class="btn big room-btn destination-btn" data-room-target="ROOM1">Room 1</button>
+    <button class="btn big room-btn destination-btn" data-room-target="ROOM2">Room 2</button>
   </div>
+  <div class="selected-row" id="selectedRoomsRow" aria-live="polite">
+    <span class="selected-label">Selected:</span>
+    <span class="selected-chip" data-selected-chip="ROOM1">ROOM1</span>
+    <span class="selected-chip" data-selected-chip="ROOM2">ROOM2</span>
+  </div>
+  <button class="btn deliver-btn" id="deliverStartBtn">Deliver</button>
   <button class="btn power" data-bit="power_pressed" data-edge="power_edge">Power</button>
 </section>

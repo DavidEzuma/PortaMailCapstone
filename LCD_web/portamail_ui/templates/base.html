@@ -8,13 +8,15 @@
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 </head>
 <body>
-  <main class="layout">
+  <main class="layout{% if show_debug_panel %} has-debug{% endif %}">
     <section class="lcd">
       {% block lcd %}{% endblock %}
     </section>
+    {% if show_debug_panel %}
     <aside class="debug">
       {% block debug %}{% endblock %}
     </aside>
+    {% endif %}
   </main>
 
   <script src="{{ url_for('static', filename='vendor/socket.io.min.js') }}"></script>
