@@ -1,0 +1,46 @@
+EXTERNAL INTERFACE CONTRACT (PortaMail LCD)
+
+A) EXTERNAL SEND (external → LCD server)
+
+1) POST /api/mode
+   - Headers: Content-Type: application/json
+   - Body:
+     {"mode":"ARRIVED"}
+     {"mode":"DOCK_IDLE"}
+   - Response (success):
+     {"ok": true}
+   - Response (error):
+     HTTP 400
+     {"ok": false, "error": "unknown_mode"}
+
+Note: External systems should treat the LCD server as the state authority for UI screens.
+
+B) EXTERNAL RECEIVE (LCD server → external)
+
+1) GET /api/state
+   - Keys to read:
+     mode            ("DOCK_IDLE" | "ARRIVED")
+     screen          ("HOME" | "ARRIVED" | "CONFIRM_SELECT" | "CONFIRM_ACK" | "DELIVERING_ROOM1" | "DELIVERING_ROOM2")
+     bits            (object of bit flags)
+     selected_room   ("ROOM1" | "ROOM2" | null)
+     pending_rooms   (array of "ROOM1"/"ROOM2")
+     active_room     ("ROOM1" | "ROOM2" | null)
+
+2) GET /api/events
+   - Event schema includes legacy and canonical keys:
+     {
+       "ts": "<ISO8601>",
+       "name": "<event_name>",
+       "payload": { ... },
+       "type": "<event_name>",
+       "data": { ... }
+     }
+
+   - Edge event names emitted:
+     start_room1
+     start_room2
+     open_confirm_flow
+     select_room1
+     select_room2
+     delivery_confirmed
+     power_edge

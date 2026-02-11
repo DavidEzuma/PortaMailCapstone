@@ -6,20 +6,30 @@ const dbgRoom = document.getElementById("dbgRoom");
 const dbgBits = document.getElementById("dbgBits");
 const dbgEvents = document.getElementById("dbgEvents");
 
+const screens = Array.from(document.querySelectorAll("[data-screen]"));
+const homeStartButtons = Array.from(document.querySelectorAll(".home-start"));
+
 function renderState(state) {
   dbgMode.textContent = state.mode || "-";
   dbgScreen.textContent = state.screen || "-";
-  dbgRoom.textContent = state.selected_room === null || state.selected_room === undefined
-    ? "-"
-    : String(state.selected_room);
+  dbgRoom.textContent = state.selected_room || "-";
   dbgBits.textContent = JSON.stringify(state.bits || {}, null, 2);
+
+  screens.forEach((el) => {
+    el.classList.toggle("active", el.dataset.screen === state.screen);
+  });
+
+  const disableHome = state.screen !== "HOME";
+  homeStartButtons.forEach((btn) => {
+    btn.disabled = disableHome;
+  });
 }
 
 function renderEvents(events) {
   dbgEvents.textContent = JSON.stringify(events || [], null, 2);
 }
 
-function bindHomeButtons() {
+function bindButtons() {
   const buttons = document.querySelectorAll("button[data-bit][data-edge]");
   buttons.forEach((btn) => {
     const bit = btn.dataset.bit;
@@ -46,10 +56,6 @@ function bindHomeButtons() {
   });
 }
 
-socket.on("connect", () => {
-  // no-op for Step 1
-});
-
 socket.on("state", (state) => {
   renderState(state || {});
 });
@@ -58,4 +64,4 @@ socket.on("events", (events) => {
   renderEvents(events || []);
 });
 
-bindHomeButtons();
+bindButtons();
