@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__google-drive__listSharedDrives",
+      "mcp__google-drive__search",
+      "mcp__google-drive__listFolder",
+      "mcp__google-drive__getGoogleDocContent",
+      "mcp__google-drive__readGoogleDoc",
+      "mcp__google-drive__downloadFile",
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(pip3 install:*)",
+      "Bash(/c/Users/David/AppData/Local/Microsoft/WindowsApps/python3:*)"
+    ]
+  }
+}

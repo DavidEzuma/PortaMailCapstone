@@ -256,4 +256,36 @@
     <axis
       xyz="0 0 -1" />
   </joint>
+
+  <!-- ============================================================
+       SENSOR FRAMES
+       All translations are estimates. Measure physical offsets
+       from the base_link origin when the robot is assembled and
+       update these values before running SLAM or Nav2.
+       ============================================================ -->
+
+  <!-- RPLIDAR A2M12: mounted on top arm, forward of base_link -->
+  <link name="laser" />
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="0.1 0.0 0.3" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child  link="laser" />
+  </joint>
+
+  <!-- BNO055 IMU: mounted on Teensy PCB, near centre of chassis -->
+  <link name="imu_link" />
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.05" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child  link="imu_link" />
+  </joint>
+
+  <!-- Ultrasonic ranger: front-facing, front edge of chassis -->
+  <link name="ultrasonic_link" />
+  <joint name="ultrasonic_joint" type="fixed">
+    <origin xyz="0.2 0.0 0.05" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child  link="ultrasonic_link" />
+  </joint>
+
 </robot>

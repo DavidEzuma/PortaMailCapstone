@@ -1,7 +1,9 @@
 #include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BNO055.h>
 #include <micro_ros_arduino.h>
 
-#include <stdio.h>
 #include <rcl/rcl.h>
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
@@ -9,272 +11,350 @@
 
 #include <geometry_msgs/msg/twist.h>
 #include <nav_msgs/msg/odometry.h>
+#include <sensor_msgs/msg/imu.h>
+#include <sensor_msgs/msg/range.h>
 
-// --- HARDWARE PIN CONFIGURATION (Teensy 4.0) ---
-// L298N Connections
-#define MOTOR_LEFT_PWM  2
-#define MOTOR_LEFT_IN1  3
-#define MOTOR_LEFT_IN2  4
+// =============================================================================
+// HARDWARE PIN CONFIGURATION (Teensy 4.0)
+// =============================================================================
 
-#define MOTOR_RIGHT_PWM 5
-#define MOTOR_RIGHT_IN1 6
-#define MOTOR_RIGHT_IN2 7
+// STMicro motor driver (MultiPowerSO-30, 5.5-24V): INA=IN1, INB=IN2, PWM
+#define MOTOR_LEFT_PWM   2
+#define MOTOR_LEFT_IN1   3
+#define MOTOR_LEFT_IN2   4
+#define MOTOR_RIGHT_PWM  5
+#define MOTOR_RIGHT_IN1  6
+#define MOTOR_RIGHT_IN2  7
 
-// FIT0186 Encoder Interrupt Pins
-#define ENC_LEFT_A      8
-#define ENC_LEFT_B      9
-#define ENC_RIGHT_A     10
-#define ENC_RIGHT_B     11
+// FIT0186 quadrature encoder interrupt pins (DigiKey 1738-1106-ND)
+// Rising edge on A, direction from B
+#define ENC_LEFT_A   8
+#define ENC_LEFT_B   9
+#define ENC_RIGHT_A  10
+#define ENC_RIGHT_B  11
 
-#define LED_PIN         13
+#define LED_PIN  13
 
-// --- ROBOT CONSTANTS ---
-// Adjust these after calibration!
-const float WHEEL_RADIUS = 0.0325; // Meters (65mm wheels)
-const float WHEEL_BASE = 0.20;     // Meters (Track width)
-// FIT0186 (Metal Gearmotor) usually has ~341.2 ticks per output rev (check datasheet)
-const float TICKS_PER_REV = 341.2; 
+// BNO055 IMU (DigiKey 1528-1426-ND) via I2C
+// Teensy 4.0 Wire default: SDA=18, SCL=19 — I2C address 0x28
+// (No pin defines needed; Wire.begin() uses pins 18/19 by default)
 
-// --- SAFETY LIMITS ---
-// 2 MPH ~= 0.894 m/s. 
-const float MAX_SPEED_MPS = 0.89; 
+// Ultrasonic ranger (GR-USNRG / HC-SR04-style)
+// IMPORTANT: HC-SR04 Echo outputs 5V. Use a voltage divider or level shifter
+//            before connecting Echo to Teensy 4.0 (3.3V-tolerant GPIO).
+#define ULTRASONIC_TRIG  27  // Trigger: send 10µs HIGH pulse
+#define ULTRASONIC_ECHO  26  // Echo: measure pulse duration for distance
+                             // TODO: confirm ECHO pin against final PCB
 
-// --- PWM TUNING ---
-// Adjust these based on your motor's dead zone
-const int PWM_MIN = 70;   // Minimum PWM to overcome motor dead zone
-const int PWM_MAX = 255;  // Maximum PWM value
+// =============================================================================
+// ROBOT CONSTANTS  (calibrate on physical robot before use)
+// =============================================================================
 
-// --- ROS 2 VARIABLES ---
-rcl_subscription_t subscriber;
-rcl_publisher_t odom_publisher;
-geometry_msgs__msg__Twist msg;
-nav_msgs__msg__Odometry odom_msg;
+// Wheel: 1/10 RC Monster Truck 2.8" (71.1mm diameter) -> radius = 35.56mm
+const float WHEEL_RADIUS = 0.03556f; // meters
+
+// Measured track width (centre-to-centre of drive wheels)
+// *** MEASURE THE ACTUAL TRACK WIDTH AND UPDATE THIS VALUE ***
+const float WHEEL_BASE = 0.20f; // meters
+
+// FIT0186: 8 PPR on motor shaft, 90:1 gear ratio.
+// Theoretical single-edge (rising on A only): 8 x 90 = 720 ticks/output_rev.
+// *** CALIBRATE: drive exactly 1 m, log tick counts, then adjust. ***
+const float TICKS_PER_REV = 720.0f;
+
+const float MAX_SPEED_MPS = 0.89f; // 2 MPH safety limit
+const int   PWM_MIN = 70;          // Minimum PWM to overcome motor dead zone
+const int   PWM_MAX = 255;
+
+// =============================================================================
+// BNO055
+// =============================================================================
+Adafruit_BNO055 bno = Adafruit_BNO055(55, 0x28, &Wire);
+bool imu_ready = false;
+
+// =============================================================================
+// MICRO-ROS HANDLES
+// =============================================================================
+rcl_subscription_t cmd_vel_sub;
+rcl_publisher_t    odom_pub;
+rcl_publisher_t    imu_pub;
+rcl_publisher_t    range_pub;
+
+geometry_msgs__msg__Twist   cmd_msg;
+nav_msgs__msg__Odometry     odom_msg;
+sensor_msgs__msg__Imu       imu_msg;
+sensor_msgs__msg__Range     range_msg;
+
 rclc_executor_t executor;
-rclc_support_t support;
+rclc_support_t  support;
 rcl_allocator_t allocator;
-rcl_node_t node;
+rcl_node_t      node;
 
-// --- STATE VARIABLES ---
-volatile long left_ticks = 0;
+// =============================================================================
+// ODOMETRY STATE
+// =============================================================================
+volatile long left_ticks  = 0;
 volatile long right_ticks = 0;
-unsigned long prev_time = 0;
-unsigned long last_cmd_time = 0;
-float x_pos = 0.0;
-float y_pos = 0.0;
-float theta = 0.0;
+unsigned long prev_odom_time  = 0;
+unsigned long last_cmd_time   = 0;
+float x_pos = 0.0f;
+float y_pos = 0.0f;
+float theta = 0.0f;
 
-// --- INTERRUPT HANDLERS ---
+// Static frame ID strings (must persist for the lifetime of the message)
+static char frame_odom[]        = "odom";
+static char frame_base_link[]   = "base_link";
+static char frame_imu_link[]    = "imu_link";
+static char frame_ultrasonic[]  = "ultrasonic_link";
+
+// =============================================================================
+// ENCODER INTERRUPT HANDLERS
+// =============================================================================
 void doEncoderLeft() {
   if (digitalRead(ENC_LEFT_B) == HIGH) left_ticks++;
-  else left_ticks--;
+  else                                  left_ticks--;
 }
-
 void doEncoderRight() {
   if (digitalRead(ENC_RIGHT_B) == HIGH) right_ticks++;
-  else right_ticks--;
+  else                                   right_ticks--;
 }
 
-// --- HELPER: CLAMP VALUE ---
-float clamp(float val, float min_val, float max_val) {
-  if (val > max_val) return max_val;
-  if (val < min_val) return min_val;
+// =============================================================================
+// HELPERS
+// =============================================================================
+float clamp(float val, float lo, float hi) {
+  if (val > hi) return hi;
+  if (val < lo) return lo;
   return val;
 }
 
-// --- MOTOR CONTROL FUNCTIONS ---
-void setMotor(int pwm_pin, int in1_pin, int in2_pin, float speed) {
-  // Map speed to PWM with dead zone compensation
+void setMotor(int pwm_pin, int in1, int in2, float speed) {
   int pwm_val = 0;
-  
-  if (abs(speed) > 0.01) { // Deadzone threshold (1 cm/s)
-    float pwm_factor = abs(speed) / MAX_SPEED_MPS;
-    // Map to PWM range that accounts for motor dead zone
-    pwm_val = PWM_MIN + (pwm_factor * (PWM_MAX - PWM_MIN));
+  if (fabsf(speed) > 0.01f) {
+    float factor = fabsf(speed) / MAX_SPEED_MPS;
+    pwm_val = PWM_MIN + (int)(factor * (PWM_MAX - PWM_MIN));
     if (pwm_val > PWM_MAX) pwm_val = PWM_MAX;
   }
-
-  if (speed > 0.01) { // Forward
-    digitalWrite(in1_pin, HIGH);
-    digitalWrite(in2_pin, LOW);
-  } else if (speed < -0.01) { // Reverse
-    digitalWrite(in1_pin, LOW);
-    digitalWrite(in2_pin, HIGH);
-  } else { // Stop
-    digitalWrite(in1_pin, LOW);
-    digitalWrite(in2_pin, LOW);
-    pwm_val = 0;
-  }
-  
+  if      (speed >  0.01f) { digitalWrite(in1, HIGH); digitalWrite(in2, LOW);  }
+  else if (speed < -0.01f) { digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); }
+  else                     { digitalWrite(in1, LOW);  digitalWrite(in2, LOW); pwm_val = 0; }
   analogWrite(pwm_pin, pwm_val);
 }
 
-// --- ROS CALLBACK: CMD_VEL ---
-void subscription_callback(const void * msgin) {
-  const geometry_msgs__msg__Twist * msg = (const geometry_msgs__msg__Twist *)msgin;
-
-  // Visual Debug: Blink LED when command received
-  digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+// =============================================================================
+// ROS CALLBACK: /cmd_vel
+// =============================================================================
+void cmd_vel_callback(const void *msgin) {
+  const geometry_msgs__msg__Twist *msg = (const geometry_msgs__msg__Twist *)msgin;
+  digitalWrite(LED_PIN, !digitalRead(LED_PIN)); // blink for debug
   last_cmd_time = millis();
 
-  // 1. Clamp Linear Speed
-  float linear = clamp(msg->linear.x, -MAX_SPEED_MPS, MAX_SPEED_MPS);
+  float linear  = clamp(msg->linear.x,  -MAX_SPEED_MPS, MAX_SPEED_MPS);
   float angular = msg->angular.z;
 
-  // 2. Differential Drive Kinematics
-  float left_speed = linear - (angular * WHEEL_BASE / 2.0);
-  float right_speed = linear + (angular * WHEEL_BASE / 2.0);
+  float left_spd  = linear - (angular * WHEEL_BASE / 2.0f);
+  float right_spd = linear + (angular * WHEEL_BASE / 2.0f);
+  left_spd  = clamp(left_spd,  -MAX_SPEED_MPS, MAX_SPEED_MPS);
+  right_spd = clamp(right_spd, -MAX_SPEED_MPS, MAX_SPEED_MPS);
 
-  // 3. Clamp individual wheel speeds
-  left_speed = clamp(left_speed, -MAX_SPEED_MPS, MAX_SPEED_MPS);
-  right_speed = clamp(right_speed, -MAX_SPEED_MPS, MAX_SPEED_MPS);
-
-  // 4. Drive Motors
-  setMotor(MOTOR_LEFT_PWM, MOTOR_LEFT_IN1, MOTOR_LEFT_IN2, left_speed);
-  setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, right_speed);
+  setMotor(MOTOR_LEFT_PWM,  MOTOR_LEFT_IN1,  MOTOR_LEFT_IN2,  left_spd);
+  setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, right_spd);
 }
 
-// --- SETUP ---
+// =============================================================================
+// SETUP
+// =============================================================================
 void setup() {
-  // 1. Hardware Setup
+  // --- GPIO ---
   pinMode(LED_PIN, OUTPUT);
-  pinMode(MOTOR_LEFT_PWM, OUTPUT);
-  pinMode(MOTOR_LEFT_IN1, OUTPUT);
-  pinMode(MOTOR_LEFT_IN2, OUTPUT);
-  pinMode(MOTOR_RIGHT_PWM, OUTPUT);
-  pinMode(MOTOR_RIGHT_IN1, OUTPUT);
-  pinMode(MOTOR_RIGHT_IN2, OUTPUT);
-
-  pinMode(ENC_LEFT_A, INPUT_PULLUP);
-  pinMode(ENC_LEFT_B, INPUT_PULLUP);
-  pinMode(ENC_RIGHT_A, INPUT_PULLUP);
-  pinMode(ENC_RIGHT_B, INPUT_PULLUP);
-
-  attachInterrupt(digitalPinToInterrupt(ENC_LEFT_A), doEncoderLeft, RISING);
+  pinMode(MOTOR_LEFT_PWM,  OUTPUT); pinMode(MOTOR_LEFT_IN1,  OUTPUT); pinMode(MOTOR_LEFT_IN2,  OUTPUT);
+  pinMode(MOTOR_RIGHT_PWM, OUTPUT); pinMode(MOTOR_RIGHT_IN1, OUTPUT); pinMode(MOTOR_RIGHT_IN2, OUTPUT);
+  pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
+  pinMode(ENC_RIGHT_A, INPUT_PULLUP); pinMode(ENC_RIGHT_B, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(ENC_LEFT_A),  doEncoderLeft,  RISING);
   attachInterrupt(digitalPinToInterrupt(ENC_RIGHT_A), doEncoderRight, RISING);
+  pinMode(ULTRASONIC_TRIG, OUTPUT); digitalWrite(ULTRASONIC_TRIG, LOW);
+  pinMode(ULTRASONIC_ECHO, INPUT);
 
-  // 2. micro-ROS Setup
-  set_microros_transports(); // Serial (USB)
-  
-  delay(2000); 
+  // --- BNO055 (I2C: SDA=18, SCL=19) ---
+  Wire.begin();
+  imu_ready = bno.begin();
+  if (imu_ready) {
+    bno.setExtCrystalUse(true);
+  }
+
+  // --- micro-ROS (USB Serial: Pi USB-A -> Teensy Micro-USB -> /dev/ttyACM0) ---
+  set_microros_transports();
+  delay(2000);
 
   allocator = rcl_get_default_allocator();
   rclc_support_init(&support, 0, NULL, &allocator);
   rclc_node_init_default(&node, "teensy_driver", "", &support);
-
-  // Sync Time
   rmw_uros_sync_session(1000);
 
-  // 3. Subscriber (Receive Commands)
+  // --- Subscriber: /cmd_vel ---
   rclc_subscription_init_default(
-    &subscriber,
-    &node,
-    ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist),
-    "cmd_vel");
+    &cmd_vel_sub, &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(geometry_msgs, msg, Twist), "cmd_vel");
 
-  // 4. Publisher (Send Odometry)
-  // Publishing to /wheel/odom for EKF consumption
+  // --- Publisher: /wheel/odom ---
   rclc_publisher_init_default(
-    &odom_publisher,
-    &node,
-    ROSIDL_GET_MSG_TYPE_SUPPORT(nav_msgs, msg, Odometry),
-    "wheel/odom");
+    &odom_pub, &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(nav_msgs, msg, Odometry), "wheel/odom");
 
-  // 5. Executor
+  // --- Publisher: /imu/data ---
+  rclc_publisher_init_default(
+    &imu_pub, &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Imu), "imu/data");
+
+  // --- Publisher: /ultrasonic/range ---
+  rclc_publisher_init_default(
+    &range_pub, &node,
+    ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Range), "ultrasonic/range");
+
+  // --- Static Range message fields (set once) ---
+  range_msg.radiation_type  = sensor_msgs__msg__Range__ULTRASOUND;
+  range_msg.field_of_view   = 0.26f; // ~15 degrees (typical HC-SR04)
+  range_msg.min_range       = 0.02f; // 2 cm
+  range_msg.max_range       = 4.00f; // 4 m
+  range_msg.header.frame_id.data     = frame_ultrasonic;
+  range_msg.header.frame_id.size     = strlen(frame_ultrasonic);
+  range_msg.header.frame_id.capacity = strlen(frame_ultrasonic) + 1;
+
+  // --- Static IMU message covariances (set once) ---
+  // BNO055 orientation accuracy spec: ±5 deg = 0.087 rad -> variance ~0.0076
+  imu_msg.header.frame_id.data     = frame_imu_link;
+  imu_msg.header.frame_id.size     = strlen(frame_imu_link);
+  imu_msg.header.frame_id.capacity = strlen(frame_imu_link) + 1;
+  for (int i = 0; i < 9; i++) {
+    imu_msg.orientation_covariance[i]         = 0.0;
+    imu_msg.angular_velocity_covariance[i]    = 0.0;
+    imu_msg.linear_acceleration_covariance[i] = 0.0;
+  }
+  imu_msg.orientation_covariance[0]         = 0.0076; // roll
+  imu_msg.orientation_covariance[4]         = 0.0076; // pitch
+  imu_msg.orientation_covariance[8]         = 0.0076; // yaw
+  imu_msg.angular_velocity_covariance[0]    = 0.01;
+  imu_msg.angular_velocity_covariance[4]    = 0.01;
+  imu_msg.angular_velocity_covariance[8]    = 0.01;
+  imu_msg.linear_acceleration_covariance[0] = 0.1;
+  imu_msg.linear_acceleration_covariance[4] = 0.1;
+  imu_msg.linear_acceleration_covariance[8] = 0.1;
+
+  // --- Executor (1 handle: cmd_vel subscriber) ---
   rclc_executor_init(&executor, &support.context, 1, &allocator);
-  rclc_executor_add_subscription(&executor, &subscriber, &msg, &subscription_callback, ON_NEW_DATA);
-  
-  // 6. Initialize timestamp
-  prev_time = millis();
+  rclc_executor_add_subscription(&executor, &cmd_vel_sub, &cmd_msg, &cmd_vel_callback, ON_NEW_DATA);
+
+  prev_odom_time = millis();
 }
 
-// --- LOOP ---
+// =============================================================================
+// LOOP
+// =============================================================================
 void loop() {
-  // 1. Safety Timeout (Stop if no command for 1 second)
-  if (millis() - last_cmd_time > 1000) {
-    setMotor(MOTOR_LEFT_PWM, MOTOR_LEFT_IN1, MOTOR_LEFT_IN2, 0);
+  unsigned long now = millis();
+
+  // --- Safety timeout: stop motors if no cmd_vel for 1 second ---
+  if (now - last_cmd_time > 1000) {
+    setMotor(MOTOR_LEFT_PWM,  MOTOR_LEFT_IN1,  MOTOR_LEFT_IN2,  0);
     setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 0);
   }
 
-  // 2. Calculate Odometry
-  unsigned long current_time = millis();
-  if (current_time - prev_time >= 50) { // 20Hz update rate
-    float dt = (current_time - prev_time) / 1000.0;
-    
-    // CRITICAL: Atomic read of volatile encoder ticks
+  // --- Odometry + IMU at 20 Hz (every 50 ms) ---
+  if (now - prev_odom_time >= 50) {
+    float dt = (now - prev_odom_time) / 1000.0f;
+    prev_odom_time = now;
+
+    // Atomic encoder read
     noInterrupts();
-    long current_left_ticks = left_ticks;
-    long current_right_ticks = right_ticks;
-    left_ticks = 0; 
-    right_ticks = 0;
+    long lticks = left_ticks;  left_ticks  = 0;
+    long rticks = right_ticks; right_ticks = 0;
     interrupts();
 
-    // Ticks -> Distance
-    float d_left = (current_left_ticks / TICKS_PER_REV) * (2 * PI * WHEEL_RADIUS);
-    float d_right = (current_right_ticks / TICKS_PER_REV) * (2 * PI * WHEEL_RADIUS);
+    float d_left   = (lticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
+    float d_right  = (rticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
+    float d_center = (d_left + d_right) / 2.0f;
+    float d_theta  = (d_right - d_left) / WHEEL_BASE;
 
-    float d_center = (d_left + d_right) / 2.0;
-    float d_theta = (d_right - d_left) / WHEEL_BASE;
-
-    // Update pose
     theta += d_theta;
-    x_pos += d_center * cos(theta);
-    y_pos += d_center * sin(theta);
+    x_pos += d_center * cosf(theta);
+    y_pos += d_center * sinf(theta);
 
-    // Calculate velocities
-    float v_linear = d_center / dt;
-    float v_angular = d_theta / dt;
+    float v_linear  = d_center / dt;
+    float v_angular = d_theta  / dt;
 
-    // Populate Odometry Message
     int64_t time_ns = rmw_uros_epoch_nanos();
-    odom_msg.header.stamp.sec = time_ns / 1000000000;
-    odom_msg.header.stamp.nanosec = time_ns % 1000000000;
-    
-    // Frame IDs
-    odom_msg.header.frame_id.data = (char*)"odom";
-    odom_msg.header.frame_id.size = strlen("odom");
-    odom_msg.child_frame_id.data = (char*)"base_link";
-    odom_msg.child_frame_id.size = strlen("base_link");
 
-    // Position & Orientation
-    odom_msg.pose.pose.position.x = x_pos;
-    odom_msg.pose.pose.position.y = y_pos;
-    odom_msg.pose.pose.position.z = 0.0;
-    
-    // Quaternion from yaw (theta)
-    odom_msg.pose.pose.orientation.x = 0.0;
-    odom_msg.pose.pose.orientation.y = 0.0;
-    odom_msg.pose.pose.orientation.z = sin(theta / 2.0); 
-    odom_msg.pose.pose.orientation.w = cos(theta / 2.0);
-    
-    // Pose Covariance (6x6 matrix, row-major)
-    // Set diagonal elements for x, y, and yaw uncertainty
-    // Tune these values based on your robot's performance
-    for (int i = 0; i < 36; i++) odom_msg.pose.covariance[i] = 0.0;
-    odom_msg.pose.covariance[0] = 0.01;   // x variance (m^2)
-    odom_msg.pose.covariance[7] = 0.01;   // y variance (m^2)
-    odom_msg.pose.covariance[35] = 0.1;   // yaw variance (rad^2)
-
-    // Velocity (Twist)
-    odom_msg.twist.twist.linear.x = v_linear;
-    odom_msg.twist.twist.linear.y = 0.0;
-    odom_msg.twist.twist.linear.z = 0.0;
-    odom_msg.twist.twist.angular.x = 0.0;
-    odom_msg.twist.twist.angular.y = 0.0;
-    odom_msg.twist.twist.angular.z = v_angular;
-    
-    // Twist Covariance (6x6 matrix, row-major)
-    // Set diagonal elements for linear and angular velocity uncertainty
+    // Publish /wheel/odom
+    odom_msg.header.stamp.sec      = time_ns / 1000000000LL;
+    odom_msg.header.stamp.nanosec  = time_ns % 1000000000LL;
+    odom_msg.header.frame_id.data     = frame_odom;
+    odom_msg.header.frame_id.size     = strlen(frame_odom);
+    odom_msg.child_frame_id.data      = frame_base_link;
+    odom_msg.child_frame_id.size      = strlen(frame_base_link);
+    odom_msg.pose.pose.position.x     = x_pos;
+    odom_msg.pose.pose.position.y     = y_pos;
+    odom_msg.pose.pose.position.z     = 0.0f;
+    odom_msg.pose.pose.orientation.x  = 0.0f;
+    odom_msg.pose.pose.orientation.y  = 0.0f;
+    odom_msg.pose.pose.orientation.z  = sinf(theta / 2.0f);
+    odom_msg.pose.pose.orientation.w  = cosf(theta / 2.0f);
+    for (int i = 0; i < 36; i++) odom_msg.pose.covariance[i]  = 0.0;
     for (int i = 0; i < 36; i++) odom_msg.twist.covariance[i] = 0.0;
-    odom_msg.twist.covariance[0] = 0.02;   // vx variance (m^2/s^2)
-    odom_msg.twist.covariance[35] = 0.2;   // vyaw variance (rad^2/s^2)
-    
-    // Publish
-    rcl_ret_t ret = rcl_publish(&odom_publisher, &odom_msg, NULL);
-    (void)ret; // Suppress unused result warning
-    
-    prev_time = current_time;
+    odom_msg.pose.covariance[0]   = 0.01;  // x variance (m^2)
+    odom_msg.pose.covariance[7]   = 0.01;  // y variance (m^2)
+    odom_msg.pose.covariance[35]  = 0.10;  // yaw variance (rad^2)
+    odom_msg.twist.twist.linear.x  = v_linear;
+    odom_msg.twist.twist.angular.z = v_angular;
+    odom_msg.twist.covariance[0]  = 0.02;  // vx variance
+    odom_msg.twist.covariance[35] = 0.20;  // vyaw variance
+    rcl_publish(&odom_pub, &odom_msg, NULL);
+
+    // Publish /imu/data (BNO055 via I2C on Teensy)
+    if (imu_ready) {
+      imu::Quaternion quat  = bno.getQuat();
+      imu::Vector<3>  gyro  = bno.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE);     // rad/s
+      imu::Vector<3>  accel = bno.getVector(Adafruit_BNO055::VECTOR_LINEARACCEL);   // m/s^2 (gravity removed)
+
+      imu_msg.header.stamp.sec     = time_ns / 1000000000LL;
+      imu_msg.header.stamp.nanosec = time_ns % 1000000000LL;
+      imu_msg.orientation.x        = quat.x();
+      imu_msg.orientation.y        = quat.y();
+      imu_msg.orientation.z        = quat.z();
+      imu_msg.orientation.w        = quat.w();
+      imu_msg.angular_velocity.x   = gyro.x();
+      imu_msg.angular_velocity.y   = gyro.y();
+      imu_msg.angular_velocity.z   = gyro.z();
+      imu_msg.linear_acceleration.x = accel.x();
+      imu_msg.linear_acceleration.y = accel.y();
+      imu_msg.linear_acceleration.z = accel.z();
+      rcl_publish(&imu_pub, &imu_msg, NULL);
+    }
   }
 
-  // 3. Spin ROS
+  // --- Ultrasonic range at 10 Hz (every 100 ms) ---
+  static unsigned long last_range_time = 0;
+  if (now - last_range_time >= 100) {
+    last_range_time = now;
+
+    // Send 10 µs trigger pulse
+    digitalWrite(ULTRASONIC_TRIG, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(ULTRASONIC_TRIG, LOW);
+
+    // Measure echo: 25 ms timeout covers ~4.3 m max range
+    unsigned long duration_us = pulseIn(ULTRASONIC_ECHO, HIGH, 25000UL);
+    float distance_m = (duration_us == 0)
+      ? range_msg.max_range
+      : clamp(duration_us * 0.000172f, range_msg.min_range, range_msg.max_range);
+
+    int64_t time_ns = rmw_uros_epoch_nanos();
+    range_msg.header.stamp.sec     = time_ns / 1000000000LL;
+    range_msg.header.stamp.nanosec = time_ns % 1000000000LL;
+    range_msg.range = distance_m;
+    rcl_publish(&range_pub, &range_msg, NULL);
+  }
+
+  // --- Spin ROS executor (processes incoming /cmd_vel) ---
   rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
 }

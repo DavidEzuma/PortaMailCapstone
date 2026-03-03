@@ -1,0 +1,25 @@
+### Robot Localization Parameters (Wheel Odometry Only) ###
+### Use this config when BNO055 IMU is not physically connected. ###
+ekf_filter_node:
+  ros__parameters:
+    frequency: 30.0
+    two_d_mode: true
+    publish_tf: true
+
+    # Frame IDs
+    map_frame: map
+    odom_frame: odom
+    base_link_frame: base_link
+    world_frame: odom
+
+    # --- Input: Teensy Encoders only ---
+    # Teensy publishes to /wheel/odom
+    odom0: /wheel/odom
+    # Trust: Linear Velocity X (Forward speed), Yaw Velocity (Turning speed)
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, true,
+                   false, false, false]
+    odom0_differential: false
+    odom0_queue_size: 10
