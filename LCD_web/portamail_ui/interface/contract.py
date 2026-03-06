@@ -1,11 +1,13 @@
-MODES = {"DOCK_IDLE", "ARRIVED"}
+MODES = {"DOCK_IDLE", "ARRIVED", "MAPPING"}
 SCREENS = {
+    "MODE_SELECT",
     "HOME",
     "ARRIVED",
     "CONFIRM_SELECT",
     "CONFIRM_ACK",
     "DELIVERING_ROOM1",
     "DELIVERING_ROOM2",
+    "MAPPING",
 }
 
 BIT_KEYS = {
@@ -16,6 +18,9 @@ BIT_KEYS = {
     "confirm_room1_pressed",
     "confirm_room2_pressed",
     "package_confirmed_pressed",
+    "select_mapping_pressed",
+    "select_navigation_pressed",
+    "save_map_pressed",
 }
 
 EDGE_EVENTS = {
@@ -26,6 +31,9 @@ EDGE_EVENTS = {
     "select_room1",
     "select_room2",
     "delivery_confirmed",
+    "select_mapping",
+    "select_navigation",
+    "save_map",
 }
 
 

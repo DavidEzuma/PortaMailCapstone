@@ -1,0 +1,4 @@
+source;share/portamail_coordinator/local_setup.bash
+source;share/portamail_coordinator/local_setup.dsv
+source;share/portamail_coordinator/local_setup.sh
+source;share/portamail_coordinator/local_setup.zsh

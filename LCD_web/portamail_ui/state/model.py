@@ -2,7 +2,7 @@ from interface.contract import BIT_KEYS
 
 _state = {
     "mode": "DOCK_IDLE",
-    "screen": "HOME",
+    "screen": "MODE_SELECT",
     "selected_room": None,
     "pending_rooms": [],
     "active_room": None,

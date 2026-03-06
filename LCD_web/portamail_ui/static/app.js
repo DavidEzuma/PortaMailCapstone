@@ -12,8 +12,19 @@ const deliverStartBtn = document.getElementById("deliverStartBtn");
 
 const screens = Array.from(document.querySelectorAll("[data-screen]"));
 let introDismissed = false;
-let currentScreen = "HOME";
+let currentScreen = "MODE_SELECT";
 const selectedRooms = new Set();
+
+// Screens that indicate the robot is actively working — auto-dismiss intro if
+// the browser reconnects mid-operation.
+const AUTO_DISMISS_SCREENS = new Set([
+  "DELIVERING_ROOM1",
+  "DELIVERING_ROOM2",
+  "ARRIVED",
+  "CONFIRM_SELECT",
+  "CONFIRM_ACK",
+  "MAPPING",
+]);
 
 function dismissIntro() {
   if (!introOverlay || introDismissed) {
@@ -76,7 +87,10 @@ function startSelectedDeliveries(e) {
 function renderState(state) {
   currentScreen = state.screen || currentScreen;
 
-  if (!introDismissed && currentScreen && currentScreen !== "HOME") {
+  // Auto-dismiss intro only when the robot is mid-operation (e.g., browser
+  // reconnects while a delivery is in progress). MODE_SELECT and HOME require
+  // a manual tap so the user sees the splash screen first.
+  if (!introDismissed && AUTO_DISMISS_SCREENS.has(currentScreen)) {
     dismissIntro();
   }
 

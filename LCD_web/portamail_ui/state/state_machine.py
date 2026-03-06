@@ -30,6 +30,8 @@ def set_mode(mode):
     state["mode"] = mode
     if mode == "ARRIVED":
         state["screen"] = "ARRIVED"
+    elif mode == "MAPPING":
+        state["screen"] = "MAPPING"
     else:
         state["screen"] = "HOME"
         state["selected_room"] = None
@@ -80,6 +82,16 @@ def handle_edge(edge, payload=None):
         enqueue_room("ROOM2")
         if state["screen"] not in {"DELIVERING_ROOM1", "DELIVERING_ROOM2", "CONFIRM_SELECT", "CONFIRM_ACK"}:
             _set_active_from_queue()
+        return True
+    if edge == "select_navigation":
+        state["mode"] = "DOCK_IDLE"
+        state["screen"] = "HOME"
+        return True
+    if edge == "select_mapping":
+        state["mode"] = "MAPPING"
+        state["screen"] = "MAPPING"
+        return True
+    if edge == "save_map":
         return True
     if edge == "power_edge":
         return True

@@ -10,7 +10,10 @@
       "Bash(python3:*)",
       "Bash(pip install:*)",
       "Bash(pip3 install:*)",
-      "Bash(/c/Users/David/AppData/Local/Microsoft/WindowsApps/python3:*)"
+      "Bash(/c/Users/David/AppData/Local/Microsoft/WindowsApps/python3:*)",
+      "Bash(chmod +x:*)",
+      "Bash(mkdir:*)",
+      "Bash(sudo apt:*)"
     ]
   }
 }

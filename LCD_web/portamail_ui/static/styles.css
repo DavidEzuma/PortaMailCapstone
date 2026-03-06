@@ -385,3 +385,56 @@ pre {
     min-height: calc(100vh - 24px);
   }
 }
+
+/* --- Mode Select Screen --- */
+.mode-select-row {
+  gap: 28px;
+}
+
+.mode-btn {
+  min-height: 140px;
+  font-size: 1.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+}
+
+.nav-mode-btn {
+  border-color: var(--accent);
+  transition: box-shadow 120ms ease-in-out;
+}
+
+.nav-mode-btn:active {
+  box-shadow: 0 0 0 4px rgba(99, 192, 255, 0.35);
+}
+
+.map-mode-btn {
+  border-color: var(--tam-gold);
+  transition: box-shadow 120ms ease-in-out;
+}
+
+.map-mode-btn:active {
+  box-shadow: 0 0 0 4px rgba(214, 211, 196, 0.35);
+}
+
+.mode-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* --- Mapping Screen --- */
+.mapping-title {
+  color: var(--tam-gold);
+}
+
+.save-map-btn {
+  width: min(360px, 100%);
+  border: 3px solid var(--tam-gold);
+  background: rgba(214, 211, 196, 0.1);
+  color: var(--tam-gold);
+  min-height: 100px;
+  font-size: 1.35rem;
+}
+
+.save-map-btn:active {
+  background: rgba(214, 211, 196, 0.22);
+}

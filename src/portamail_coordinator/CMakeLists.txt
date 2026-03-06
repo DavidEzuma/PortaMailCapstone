@@ -18,7 +18,7 @@ find_package(nav2_msgs REQUIRED)
 find_package(slam_toolbox REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
-# --- Executable: Coordinator ---
+# --- Executable: Coordinator (C++) ---
 add_executable(coordinator src/navigation_coordinator.cpp)
 
 target_include_directories(coordinator PUBLIC
@@ -26,10 +26,8 @@ target_include_directories(coordinator PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 
-# Link generic system libraries (yaml-cpp)
 target_link_libraries(coordinator yaml-cpp)
 
-# Link ROS 2 packages
 ament_target_dependencies(coordinator
   rclcpp
   rclcpp_action
@@ -42,6 +40,12 @@ ament_target_dependencies(coordinator
 # --- Install Rules ---
 install(TARGETS coordinator
   DESTINATION lib/${PROJECT_NAME})
+
+# Install Python node (lcd_bridge) — strip .py so ros2 run finds it cleanly
+install(PROGRAMS scripts/lcd_bridge.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME lcd_bridge
+)
 
 install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}

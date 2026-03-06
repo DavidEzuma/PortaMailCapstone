@@ -1,0 +1,10 @@
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/uninstall.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/portamail_navigator_uninstall.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/mock_driver.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/test.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/edit_cache.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/rebuild_cache.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/list_install_components.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/install.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/install/local.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/install/strip.dir
