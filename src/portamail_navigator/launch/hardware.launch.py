@@ -44,17 +44,17 @@ def generate_launch_description():
     )
 
     # 2. RPLIDAR A2M12 Driver
-    # Wired directly to Pi GPIO14 (TX) / GPIO15 (RX) = /dev/serial0
-    # NOTE: UART must be enabled in /boot/firmware/config.txt: enable_uart=1
-    # and serial console must be disabled so the port is free for the LiDAR.
+    # Connected via USB CP2102 adapter → /dev/ttyUSB0 (most common enumeration).
+    # If multiple USB serial devices are present, use the stable by-id path instead:
+    #   ls /dev/serial/by-id/   → look for usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_*
     rplidar_node = Node(
         condition=IfCondition(LaunchConfiguration('use_lidar')),
         package='rplidar_ros',
         executable='rplidar_composition',
         output='screen',
         parameters=[{
-            'serial_port': '/dev/serial0',
-            'serial_baudrate': 115200,
+            'serial_port': '/dev/ttyUSB0',
+            'serial_baudrate': 256000,
             'frame_id': 'laser',
             'inverted': False,
             'angle_compensate': True,

@@ -1,5 +1,7 @@
 slam_toolbox:
   ros__parameters:
+    use_sim_time: false
+
     # Plugin params
     solver_plugin: solver_plugins::CeresSolver
     ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
@@ -17,6 +19,8 @@ slam_toolbox:
     mode: mapping
 
     # Rate
+    minimum_time_interval: 0.1
+    transform_publish_period: 0.05
     map_update_interval: 2.0
     
     # Resolution
