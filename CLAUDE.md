@@ -23,7 +23,7 @@ PortaMail is an autonomous indoor mail-delivery robot for hospitals/corporate ca
 ### Sensors
 | Component | Part | Interface |
 |---|---|---|
-| SLAMTEC RPLIDAR A2M12 | Amazon B0G2XZXJQ3 | UART → Pi GPIO14/15 = `/dev/serial0`, 115200 baud |
+| SLAMTEC RPLIDAR A2M12 | Amazon B0G2XZXJQ3 | USB CP2102 adapter → `/dev/ttyUSB0`, **256000 baud** (switched from GPIO UART) |
 | Adafruit BNO055 IMU | DigiKey 1528-1426-ND | I2C → Teensy SDA/SCL (**not yet wired**; Teensy publishes `/imu/data` over micro-ROS) |
 
 ### Drivetrain
@@ -77,7 +77,7 @@ First-time Pi setup (installs ROS 2 Jazzy, dependencies, Docker for micro-ROS ag
 
 ### Simulation (desktop, no hardware)
 ```bash
-# Terminal 1: Navigator with mock driver
+# Terminal 1: Navigator with mock driver + SLAM
 ros2 launch portamail_navigator mapping.launch.py use_mock_driver:=true use_real_lidar:=false
 
 # Terminal 2: Coordinator in mapping mode
@@ -86,43 +86,46 @@ ros2 launch portamail_coordinator bringup.launch.py mode:=mapping
 
 ### Physical Robot (Raspberry Pi)
 ```bash
-# Terminal 1: Micro-ROS agent (bridges Teensy USB serial to ROS 2 topics)
-docker run -it --rm --net=host --privileged -v /dev:/dev \
-    microros/micro-ros-agent:humble serial --dev /dev/ttyACM0 -b 115200
+# Terminal 1: Mapping (hardware stack + SLAM Toolbox + map autosave + Foxglove)
+ros2 launch portamail_navigator mapping.launch.py use_mock_driver:=false use_real_lidar:=true
 
-# Terminal 2: Hardware stack
-# Without IMU (current state — BNO055 not yet wired):
-ros2 launch portamail_navigator hardware.launch.py use_imu:=false
-
-# With IMU (once physically wired):
-ros2 launch portamail_navigator hardware.launch.py use_imu:=true
-
-# Terminal 3: SLAM mapping or autonomous navigation
+# Terminal 2: Coordinator
 ros2 launch portamail_coordinator bringup.launch.py mode:=mapping
 ros2 launch portamail_coordinator bringup.launch.py mode:=navigation
 ```
 
 **Foxglove visualization**: `ws://<robot-ip>:8765` (started automatically by `mapping.launch.py`)
 
+**Map autosave**: maps saved every 30 s to `~/PortaMailCapstone/maps/portamail_map_YYYYMMDD_HHMMSS.{yaml,pgm}`. Override with launch args `map_output_dir`, `autosave_interval_sec`, `autosave_enabled`.
+
+**If multiple USB serial devices are connected** (LiDAR + Teensy), confirm the LiDAR enumerates as `/dev/ttyUSB0`. Use the stable by-id path if needed:
+```bash
+ls /dev/serial/by-id/   # look for usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_*
+```
+
 ## Architecture
 
 ### Package: `portamail_navigator`
 
-Low-level hardware abstraction and sensor stack.
+Low-level hardware abstraction, sensor stack, and SLAM.
 
 - **`firmware/teensy_driver/teensy_driver.ino`** — Micro-ROS sketch for Teensy 4.0. Subscribes to `/cmd_vel`; publishes `/wheel/odom` (20 Hz), `/imu/data` (20 Hz, BNO055 via I2C pins 18/19), and `/ultrasonic/range` (10 Hz). Motor driver controlled via INA/INB+PWM. FIT0186 encoders on interrupt pins. 1-second safety timeout stops motors if no `cmd_vel` arrives. Requires Arduino libraries: `Adafruit BNO055`, `Adafruit Unified Sensor`.
 
 - **`src/mock_driver.cpp`** — Simulated differential-drive node (`mock_teensy_driver`). Subscribes to `cmd_vel`, integrates kinematics at 20 Hz, publishes `odom` + the `odom→base_link` TF. Use on desktop in place of real hardware.
 
+- **`src/map_autosave_node.cpp`** — Periodically calls `/slam_toolbox/save_map` and writes timestamped `.yaml`/`.pgm` map files. Header at `include/portamail_navigator/map_autosave_node.hpp`. Config in `config/map_autosave.yaml`. Parameters: `output_directory`, `filename_prefix` (default `portamail_map`), `autosave_interval_sec` (default 30), `save_on_startup` (default false).
+
 - **`config/ekf.yaml`** — `robot_localization` EKF fusing `/wheel/odom` + `/imu/data` (BNO055). Use when IMU is physically connected.
 
 - **`config/ekf_no_imu.yaml`** — EKF with wheel odometry only. Default until BNO055 is wired.
 
-- **`config/slam.yaml`** — SLAM Toolbox parameters (5 cm resolution, Ceres solver, loop closure enabled).
+- **`config/slam.yaml`** — SLAM Toolbox parameters (5 cm resolution, Ceres solver, loop closure enabled, `use_sim_time: false`, `minimum_time_interval: 0.1`, `transform_publish_period: 0.05`).
 
-- **`launch/hardware.launch.py`** — Brings up robot_state_publisher (from URDF), Micro-ROS agent (Teensy bridge), RPLIDAR A2M12, and EKF. The `use_imu` argument (default `false`) selects which EKF config is loaded. There is **no Pi-side IMU node** — the BNO055 is wired to the Teensy via I2C; the Teensy firmware publishes `/imu/data` over micro-ROS when the IMU is connected.
+- **`config/map_autosave.yaml`** — Default parameters for `map_autosave_node`.
 
-- **`launch/mapping.launch.py`** — Includes `hardware.launch.py`, optionally starts `mock_driver`, Foxglove bridge.
+- **`launch/hardware.launch.py`** — Brings up robot_state_publisher (from URDF), Micro-ROS agent (Teensy bridge), RPLIDAR A2M12 (`/dev/ttyUSB0`, 256000 baud), and EKF. The `use_imu` argument (default `false`) selects which EKF config is loaded. There is **no Pi-side IMU node** — the BNO055 is wired to the Teensy via I2C; the Teensy firmware publishes `/imu/data` over micro-ROS when the IMU is connected.
+
+- **`launch/mapping.launch.py`** — Includes `hardware.launch.py`, optionally starts `mock_driver`, starts **SLAM Toolbox** as a lifecycle node (auto configure→activate with 2 s delay), starts `map_autosave_node`, joystick, and Foxglove bridge.
 
 - **`urdf/portamail.urdf`** — Robot description with full TF tree. Includes `laser`, `imu_link`, and `ultrasonic_link` fixed frames attached to `base_link`. **Sensor frame offsets are estimates and must be measured on the physical robot before SLAM is run.**
 
@@ -130,7 +133,7 @@ Low-level hardware abstraction and sensor stack.
 
 ### Package: `portamail_coordinator`
 
-High-level mission logic.
+High-level mission logic and LCD bridge.
 
 - **`src/navigation_coordinator.cpp`** — Single ROS 2 node (`navigation_coordinator`). Two modes (set by `start_mode` parameter):
   - **MAPPING**: Accepts only `save_map` command → calls `/slam_toolbox/save_map` service.
@@ -139,7 +142,9 @@ High-level mission logic.
 
 - **`config/locations.yaml`** — Named waypoints in `map` frame (x, y, orientation.w). Edit to add delivery destinations. Currently: `mailroom`, `office_101`, `office_102`, `lobby`.
 
-- **`launch/bringup.launch.py`** — Launches coordinator with `mode` argument (`mapping` | `navigation`).
+- **`launch/bringup.launch.py`** — Launches coordinator + `lcd_bridge` node. Arguments: `mode` (`mapping` | `navigation`), `lcd_url` (default `http://127.0.0.1:5050`).
+
+- **`lcd_bridge` node** — Polls the touchscreen LCD Flask server at `lcd_url` (2 Hz). In navigation mode: maps `start_room1`/`start_room2` events → `user_delivery_request`, posts `ARRIVED`/`DOCK_IDLE` status. In mapping mode: forwards `save_map` events to coordinator.
 
 ### Key ROS Topics / Actions
 | Topic / Action | Type | Source → Sink |
@@ -148,12 +153,12 @@ High-level mission logic.
 | `/wheel/odom` | `nav_msgs/Odometry` | Teensy encoders → EKF (micro-ROS USB) |
 | `/imu/data` | `sensor_msgs/Imu` | Teensy BNO055 I2C → EKF (micro-ROS USB) |
 | `/ultrasonic/range` | `sensor_msgs/Range` | Teensy HC-SR04 → Nav2 costmap (micro-ROS USB) |
-| `/scan` | `sensor_msgs/LaserScan` | RPLIDAR A2M12 (`/dev/serial0`) → SLAM Toolbox |
+| `/scan` | `sensor_msgs/LaserScan` | RPLIDAR A2M12 (`/dev/ttyUSB0`) → SLAM Toolbox |
 | `/odom` | `nav_msgs/Odometry` | Mock driver → Nav2 (simulation only) |
-| `user_delivery_request` | `std_msgs/String` | UI → coordinator |
+| `user_delivery_request` | `std_msgs/String` | UI / lcd_bridge → coordinator |
 | `system_status` | `std_msgs/String` | coordinator → UI |
 | `/navigate_to_pose` | Nav2 action | coordinator → Nav2 |
-| `/slam_toolbox/save_map` | service | coordinator → SLAM Toolbox |
+| `/slam_toolbox/save_map` | service | coordinator / map_autosave_node → SLAM Toolbox |
 
 ### TF Frame Tree
 `map` → `odom` → `base_link` → `laser`
@@ -173,14 +178,6 @@ Constants in `firmware/teensy_driver/teensy_driver.ino` that must be calibrated 
 | `PWM_MIN` | `70` | Motor dead zone | Tune per motor |
 
 **EKF sensor selection**: Pass `use_imu:=false` (default) for odometry-only fusion. Once BNO055 is physically wired to the Teensy's I2C pins and the Teensy firmware publishes `/imu/data`, pass `use_imu:=true` to load the full fusion config.
-
-**Pi UART setup**: The RPLIDAR A2M12 is wired to Pi GPIO14 (TX) / GPIO15 (RX). Before first use, enable UART and disable serial console on the Pi:
-```bash
-# In /boot/firmware/config.txt, add:
-enable_uart=1
-# Then disable the serial console in raspi-config or by editing /boot/firmware/cmdline.txt
-# (remove: console=serial0,115200)
-```
 
 ## Physical Calibration Checklist
 
@@ -298,4 +295,4 @@ Current odometry covariances are set in firmware (`odom_msg.pose.covariance[0]=0
 - **Nav latency target**: < 50 ms user input → motor response
 - **Battery runtime**: ≥ 2 hours (test: run until pack drops to 11.0V)
 - **E-stop**: cuts motor power within 0.5 s of activation
-- **Maps saved to**: `/home/ubuntu/PortaMailCapstone/maps/` (configurable via `map_save_path` parameter)
+- **Maps saved to**: `~/PortaMailCapstone/maps/` (auto-saved by `map_autosave_node`; also configurable via `map_save_path` parameter on coordinator)
