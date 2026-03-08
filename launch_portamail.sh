@@ -6,6 +6,13 @@
 # 3. Waits for the user to select Mapping or Navigation mode on the screen.
 # 4. Launches the appropriate ROS 2 stack.
 #
+# Prerequisites:
+#   - GDM auto-login must be enabled so a graphical session is running:
+#       sudo nano /etc/gdm3/custom.conf
+#       # Under [daemon]:
+#       AutomaticLoginEnable=true
+#       AutomaticLogin=davidezuma
+#
 # Usage:
 #   ./launch_portamail.sh
 #   ./launch_portamail.sh --lcd-url http://127.0.0.1:5050
@@ -16,7 +23,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LCD_DIR="${SCRIPT_DIR}/LCD_web/portamail_ui"
 LCD_URL="http://127.0.0.1:5050"
 
-# Parse optional --lcd-url argument
+# Parse optional arguments
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --lcd-url) LCD_URL="$2"; shift 2 ;;
@@ -24,7 +31,9 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Source workspace (prefer built install, fall back to system ROS)
+# ---------------------------------------------------------------------------
+# Source ROS 2 workspace
+# ---------------------------------------------------------------------------
 if [[ -f "${SCRIPT_DIR}/install/setup.bash" ]]; then
     # shellcheck disable=SC1091
     source "${SCRIPT_DIR}/install/setup.bash"
@@ -47,40 +56,92 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 1. Start the LCD Flask server
-# ---------------------------------------------------------------------------
 echo "=========================================="
 echo "  PortaMail Startup"
 echo "=========================================="
 echo ""
+
+# ---------------------------------------------------------------------------
+# 1. Start the LCD Flask server
+# ---------------------------------------------------------------------------
 echo "[startup] Starting LCD server at ${LCD_URL} ..."
 
 cd "${LCD_DIR}"
 
-if [[ ! -d venv ]]; then
-    echo "[startup] Creating Python venv for LCD server ..."
+if [[ ! -f venv/bin/pip ]]; then
+    echo "[startup] Creating Python venv ..."
+    rm -rf venv
     python3 -m venv venv
-    venv/bin/pip install -r requirements.txt -q
 fi
+
+venv/bin/pip install -r requirements.txt -q
 
 venv/bin/python app.py &
 LCD_PID=$!
 cd "${SCRIPT_DIR}"
 
-# Give Flask time to bind before opening the browser
 sleep 2
-
 echo "[startup] LCD server running (PID ${LCD_PID})"
 
 # ---------------------------------------------------------------------------
-# 2. Open Chromium in kiosk mode
+# 2. Detect the graphical session display (wait up to 60 s for auto-login)
+# ---------------------------------------------------------------------------
+UID_NUM=$(id -u)
+CHROMIUM_EXTRA_FLAGS=""
+DISPLAY_FOUND=false
+
+echo "[startup] Waiting for graphical session ..."
+for _i in $(seq 1 60); do
+    # Prefer Wayland — check for any wayland-N socket in the user runtime dir
+    _WSOCK=$(ls "/run/user/${UID_NUM}/wayland-"* 2>/dev/null | head -1 || true)
+    if [[ -S "${_WSOCK:-}" ]]; then
+        export XDG_RUNTIME_DIR="/run/user/${UID_NUM}"
+        export WAYLAND_DISPLAY
+        WAYLAND_DISPLAY=$(basename "${_WSOCK}")
+        if [[ -S "${XDG_RUNTIME_DIR}/bus" ]]; then
+            export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+        fi
+        CHROMIUM_EXTRA_FLAGS="--ozone-platform=wayland"
+        DISPLAY_FOUND=true
+        echo "[startup] Display: Wayland (${WAYLAND_DISPLAY})"
+        break
+    fi
+
+    # Fall back to X11 — check /tmp/.X11-unix/
+    _XSOCK=$(ls /tmp/.X11-unix/X* 2>/dev/null | head -1 || true)
+    if [[ -S "${_XSOCK:-}" ]]; then
+        export DISPLAY=":$(basename "${_XSOCK}" | tr -d 'X')"
+        export XAUTHORITY="${HOME}/.Xauthority"
+        DISPLAY_FOUND=true
+        echo "[startup] Display: X11 (${DISPLAY})"
+        break
+    fi
+
+    sleep 1
+done
+
+if [[ "${DISPLAY_FOUND}" == false ]]; then
+    echo ""
+    echo "[startup] ERROR: No graphical session found after 60 s."
+    echo "  Make sure GDM auto-login is enabled in /etc/gdm3/custom.conf:"
+    echo "    [daemon]"
+    echo "    AutomaticLoginEnable=true"
+    echo "    AutomaticLogin=davidezuma"
+    echo ""
+    echo "  Alternatively, run this script from the GNOME Terminal on the Pi"
+    echo "  (not from SSH)."
+    kill "${LCD_PID}" 2>/dev/null || true
+    exit 1
+fi
+
+# ---------------------------------------------------------------------------
+# 3. Open Chromium in kiosk mode
 # ---------------------------------------------------------------------------
 echo "[startup] Opening kiosk display ..."
 
-# Use the current session's DISPLAY, or default to :0
-DISPLAY="${DISPLAY:-:0}" \
-XAUTHORITY="${XAUTHORITY:-${HOME}/.Xauthority}" \
+# shellcheck disable=SC2086
 "${CHROMIUM}" \
+    ${CHROMIUM_EXTRA_FLAGS} \
     --kiosk \
     --no-sandbox \
     --disable-infobars \
@@ -96,7 +157,7 @@ echo "  Select a mode on the touchscreen to continue."
 echo ""
 
 # ---------------------------------------------------------------------------
-# 3. Wait for mode selection
+# 4. Wait for mode selection
 # ---------------------------------------------------------------------------
 MODE=""
 while [[ -z "${MODE}" ]]; do
@@ -122,7 +183,7 @@ echo "[startup] Mode selected: ${MODE}"
 echo ""
 
 # ---------------------------------------------------------------------------
-# 4. Launch appropriate ROS 2 stack
+# 5. Launch appropriate ROS 2 stack
 # ---------------------------------------------------------------------------
 cleanup() {
     echo ""
@@ -142,7 +203,6 @@ if [[ "${MODE}" == "mapping" ]]; then
         use_real_lidar:=true &
     MAP_PID=$!
 
-    # Give the hardware stack a moment before starting the coordinator
     sleep 3
 
     echo "[startup] Launching: coordinator + LCD bridge (mapping mode)"

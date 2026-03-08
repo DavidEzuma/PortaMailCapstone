@@ -13,7 +13,20 @@
       "Bash(/c/Users/David/AppData/Local/Microsoft/WindowsApps/python3:*)",
       "Bash(chmod +x:*)",
       "Bash(mkdir:*)",
-      "Bash(sudo apt:*)"
+      "Bash(sudo apt:*)",
+      "Read(//tmp/.X11-unix/**)",
+      "Bash(loginctl list-sessions)",
+      "Bash(systemctl status display-manager --no-pager)",
+      "Read(//etc/**)",
+      "Bash(echo \"no lightdm\" ls /etc/gdm*)",
+      "Bash(systemctl list-units:*)",
+      "Bash(dpkg:*)",
+      "Bash(sudo cat:*)",
+      "Bash(nmcli device:*)",
+      "Bash(sudo dmesg:*)",
+      "Bash(dmesg:*)",
+      "Bash(nmcli:*)",
+      "Read(//home/davidezuma/**)"
     ]
   }
 }

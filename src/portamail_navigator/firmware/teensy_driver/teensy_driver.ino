@@ -17,21 +17,42 @@
 // =============================================================================
 // HARDWARE PIN CONFIGURATION (Teensy 4.0)
 // =============================================================================
+//
+// MOTOR DRIVER NOTE:
+//   Breadboard:  L298N dual H-bridge module
+//                  Left motor:  ENA=Pin3(PWM), IN1=Pin4, IN2=Pin5
+//                  Right motor: ENB=Pin6(PWM), IN3=Pin7, IN4=Pin8
+//                  MOTOR_STBY not used — leave Pin 2 unconnected.
+//
+//   Final PCB:   VNH5019A-E (two ICs, one per motor)
+//                  Left motor:  PWM=Pin3, INA=Pin4, INB=Pin5
+//                  Right motor: PWM=Pin6, INA=Pin7, INB=Pin8
+//                  ENA/ENB per driver pulled HIGH via setup() below.
+//                  MOTOR_STBY=Pin2 driven HIGH to enable both drivers.
+//
+// The setMotor() function interface is identical for both drivers.
 
-// STMicro motor driver (MultiPowerSO-30, 5.5-24V): INA=IN1, INB=IN2, PWM
-#define MOTOR_LEFT_PWM   2
-#define MOTOR_LEFT_IN1   3
-#define MOTOR_LEFT_IN2   4
-#define MOTOR_RIGHT_PWM  5
-#define MOTOR_RIGHT_IN1  6
-#define MOTOR_RIGHT_IN2  7
+// Motor driver standby / shared enable (VNH5019A-E only — not used with L298N)
+#define MOTOR_STBY       2
 
-// FIT0186 quadrature encoder interrupt pins (DigiKey 1738-1106-ND)
-// Rising edge on A, direction from B
-#define ENC_LEFT_A   8
-#define ENC_LEFT_B   9
-#define ENC_RIGHT_A  10
-#define ENC_RIGHT_B  11
+// Left motor (Motor A): PWM speed + direction
+#define MOTOR_LEFT_PWM   3   // L298N: ENA  |  VNH5019A-E: PWM
+#define MOTOR_LEFT_IN1   4   // L298N: IN1  |  VNH5019A-E: INA
+#define MOTOR_LEFT_IN2   5   // L298N: IN2  |  VNH5019A-E: INB
+
+// Right motor (Motor B): PWM speed + direction
+#define MOTOR_RIGHT_PWM  6   // L298N: ENB  |  VNH5019A-E: PWM
+#define MOTOR_RIGHT_IN1  7   // L298N: IN3  |  VNH5019A-E: INA
+#define MOTOR_RIGHT_IN2  8   // L298N: IN4  |  VNH5019A-E: INB
+
+// FIT0186 quadrature encoder interrupt pins (built into motor, Hall-effect)
+// IMPORTANT: FIT0186 Hall outputs are 5V. Use a voltage divider or level
+//            shifter on each channel before connecting to Teensy 4.0 (3.3V GPIO).
+// Rising edge on A channel counts ticks; B channel gives direction.
+#define ENC_LEFT_A   9
+#define ENC_LEFT_B   10
+#define ENC_RIGHT_A  11
+#define ENC_RIGHT_B  12
 
 #define LED_PIN  13
 
@@ -167,8 +188,18 @@ void cmd_vel_callback(const void *msgin) {
 void setup() {
   // --- GPIO ---
   pinMode(LED_PIN, OUTPUT);
+
+  // Motor driver outputs
   pinMode(MOTOR_LEFT_PWM,  OUTPUT); pinMode(MOTOR_LEFT_IN1,  OUTPUT); pinMode(MOTOR_LEFT_IN2,  OUTPUT);
   pinMode(MOTOR_RIGHT_PWM, OUTPUT); pinMode(MOTOR_RIGHT_IN1, OUTPUT); pinMode(MOTOR_RIGHT_IN2, OUTPUT);
+
+  // VNH5019A-E: drive MOTOR_STBY HIGH to bring both drivers out of standby.
+  // L298N breadboard: MOTOR_STBY is unconnected — this write is harmless.
+  pinMode(MOTOR_STBY, OUTPUT);
+  digitalWrite(MOTOR_STBY, HIGH);
+
+  // Encoder inputs — FIT0186 Hall outputs are open-drain; pulled up here.
+  // Ensure 5V→3.3V level shifters are in place on the physical wiring.
   pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
   pinMode(ENC_RIGHT_A, INPUT_PULLUP); pinMode(ENC_RIGHT_B, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(ENC_LEFT_A),  doEncoderLeft,  RISING);
