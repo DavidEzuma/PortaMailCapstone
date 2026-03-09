@@ -45,7 +45,8 @@
       "Bash(ls:*)",
       "Bash(ros2 param:*)",
       "Bash(lsof:*)",
-      "Bash(ros2:*)"
+      "Bash(ros2:*)",
+      "Bash(sudo bash:*)"
     ]
   }
 }
