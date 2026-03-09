@@ -43,7 +43,9 @@
       "Read(//usr/share/**)",
       "Bash(sudo apt-get:*)",
       "Bash(ls:*)",
-      "Bash(ros2 param:*)"
+      "Bash(ros2 param:*)",
+      "Bash(lsof:*)",
+      "Bash(ros2:*)"
     ]
   }
 }
