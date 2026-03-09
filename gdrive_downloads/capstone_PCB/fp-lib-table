@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "IRF4905PBF")(type "KiCad")(uri "C:/Users/Sebas/Downloads/IRF4905PBF")(options "")(descr ""))
+  (lib (name "JACK-C-PC-10A-RA_R_")(type "KiCad")(uri "C:/Users/Sebas/Downloads/JACK-C-PC-10A-RA_R_")(options "")(descr ""))
+)
