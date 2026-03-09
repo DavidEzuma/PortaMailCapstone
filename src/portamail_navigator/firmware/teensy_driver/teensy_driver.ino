@@ -16,43 +16,40 @@
 
 // =============================================================================
 // HARDWARE PIN CONFIGURATION (Teensy 4.0)
+// Pin assignments verified against KiCad schematic (capstone_PCB.kicad_sch).
 // =============================================================================
 //
-// MOTOR DRIVER NOTE:
-//   Breadboard:  L298N dual H-bridge module
-//                  Left motor:  ENA=Pin3(PWM), IN1=Pin4, IN2=Pin5
-//                  Right motor: ENB=Pin6(PWM), IN3=Pin7, IN4=Pin8
-//                  MOTOR_STBY not used — leave Pin 2 unconnected.
+// MOTOR DRIVER — VNH5019A-E (U3 = left/MD1, U4 = right/MD2)
+//   The IC's dedicated PWM pin (IC pin 7) is hardwired to VCC on the PCB.
+//   Speed control is achieved by PWM-ing the ENA pin (half-bridge A enable).
+//   ENB (half-bridge B enable) is driven HIGH permanently to keep it active.
+//   setMotor() is called with ENA as the pwm_pin argument.
 //
-//   Final PCB:   VNH5019A-E (two ICs, one per motor)
-//                  Left motor:  PWM=Pin3, INA=Pin4, INB=Pin5
-//                  Right motor: PWM=Pin6, INA=Pin7, INB=Pin8
-//                  ENA/ENB per driver pulled HIGH via setup() below.
-//                  MOTOR_STBY=Pin2 driven HIGH to enable both drivers.
-//
-// The setMotor() function interface is identical for both drivers.
+// BREADBOARD (L298N) — use the same Teensy pins for drop-in compatibility:
+//   Left motor:  ENA(pwm)=Pin8, IN1=Pin6, IN2=Pin7
+//   Right motor: ENB(pwm)=Pin15, IN3=Pin11, IN4=Pin12
+//   Pins 9 and 16 (ENB) are not used with L298N — leave unconnected.
 
-// Motor driver standby / shared enable (VNH5019A-E only — not used with L298N)
-#define MOTOR_STBY       2
+// Left motor (U3 / MD1): direction + ENA speed control
+#define MOTOR_LEFT_INA   6   // Direction input A  → U3 IC pin 4
+#define MOTOR_LEFT_INB   7   // Direction input B  → U3 IC pin 10
+#define MOTOR_LEFT_ENA   8   // Half-bridge A enable / PWM speed → U3 IC pin 5
+#define MOTOR_LEFT_ENB   9   // Half-bridge B enable (driven HIGH) → U3 IC pin 9
 
-// Left motor (Motor A): PWM speed + direction
-#define MOTOR_LEFT_PWM   3   // L298N: ENA  |  VNH5019A-E: PWM
-#define MOTOR_LEFT_IN1   4   // L298N: IN1  |  VNH5019A-E: INA
-#define MOTOR_LEFT_IN2   5   // L298N: IN2  |  VNH5019A-E: INB
+// Right motor (U4 / MD2): direction + ENA speed control
+#define MOTOR_RIGHT_INA  11  // Direction input A  → U4 IC pin 4
+#define MOTOR_RIGHT_INB  12  // Direction input B  → U4 IC pin 10
+#define MOTOR_RIGHT_ENA  15  // Half-bridge A enable / PWM speed → U4 IC pin 5
+#define MOTOR_RIGHT_ENB  16  // Half-bridge B enable (driven HIGH) → U4 IC pin 9
 
-// Right motor (Motor B): PWM speed + direction
-#define MOTOR_RIGHT_PWM  6   // L298N: ENB  |  VNH5019A-E: PWM
-#define MOTOR_RIGHT_IN1  7   // L298N: IN3  |  VNH5019A-E: INA
-#define MOTOR_RIGHT_IN2  8   // L298N: IN4  |  VNH5019A-E: INB
-
-// FIT0186 quadrature encoder interrupt pins (built into motor, Hall-effect)
-// IMPORTANT: FIT0186 Hall outputs are 5V. Use a voltage divider or level
-//            shifter on each channel before connecting to Teensy 4.0 (3.3V GPIO).
-// Rising edge on A channel counts ticks; B channel gives direction.
-#define ENC_LEFT_A   9
-#define ENC_LEFT_B   10
-#define ENC_RIGHT_A  11
-#define ENC_RIGHT_B  12
+// FIT0186 encoder signals via PCB connectors P3 (left) and P4 (right).
+// *** VERIFY physically: which pad is channel A vs B, and which connector
+//     is left vs right motor, before running odometry. ***
+// FIT0186 Hall outputs may be 5V — verify level shifting is on PCB before use.
+#define ENC_LEFT_A   3   // P3 pad 2 → left motor encoder channel A
+#define ENC_LEFT_B   4   // P3 pad 1 → left motor encoder channel B
+#define ENC_RIGHT_A  1   // P4 pad 2 → right motor encoder channel A
+#define ENC_RIGHT_B  2   // P4 pad 1 → right motor encoder channel B
 
 #define LED_PIN  13
 
@@ -178,8 +175,8 @@ void cmd_vel_callback(const void *msgin) {
   left_spd  = clamp(left_spd,  -MAX_SPEED_MPS, MAX_SPEED_MPS);
   right_spd = clamp(right_spd, -MAX_SPEED_MPS, MAX_SPEED_MPS);
 
-  setMotor(MOTOR_LEFT_PWM,  MOTOR_LEFT_IN1,  MOTOR_LEFT_IN2,  left_spd);
-  setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, right_spd);
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  left_spd);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, right_spd);
 }
 
 // =============================================================================
@@ -189,17 +186,21 @@ void setup() {
   // --- GPIO ---
   pinMode(LED_PIN, OUTPUT);
 
-  // Motor driver outputs
-  pinMode(MOTOR_LEFT_PWM,  OUTPUT); pinMode(MOTOR_LEFT_IN1,  OUTPUT); pinMode(MOTOR_LEFT_IN2,  OUTPUT);
-  pinMode(MOTOR_RIGHT_PWM, OUTPUT); pinMode(MOTOR_RIGHT_IN1, OUTPUT); pinMode(MOTOR_RIGHT_IN2, OUTPUT);
+  // Motor direction outputs
+  pinMode(MOTOR_LEFT_INA,  OUTPUT); pinMode(MOTOR_LEFT_INB,  OUTPUT);
+  pinMode(MOTOR_RIGHT_INA, OUTPUT); pinMode(MOTOR_RIGHT_INB, OUTPUT);
 
-  // VNH5019A-E: drive MOTOR_STBY HIGH to bring both drivers out of standby.
-  // L298N breadboard: MOTOR_STBY is unconnected — this write is harmless.
-  pinMode(MOTOR_STBY, OUTPUT);
-  digitalWrite(MOTOR_STBY, HIGH);
+  // ENA: PWM speed control output (IC's dedicated PWM pin is tied to VCC on PCB)
+  pinMode(MOTOR_LEFT_ENA,  OUTPUT);
+  pinMode(MOTOR_RIGHT_ENA, OUTPUT);
 
-  // Encoder inputs — FIT0186 Hall outputs are open-drain; pulled up here.
-  // Ensure 5V→3.3V level shifters are in place on the physical wiring.
+  // ENB: drive HIGH to keep half-bridge B active; PWM pin handles speed via ENA
+  pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
+  pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
+
+  // Encoder inputs via P3 (left) and P4 (right) PCB connectors.
+  // INPUT_PULLUP keeps lines HIGH when encoder is open-drain.
+  // Verify A/B and left/right assignment physically before trusting odometry.
   pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
   pinMode(ENC_RIGHT_A, INPUT_PULLUP); pinMode(ENC_RIGHT_B, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(ENC_LEFT_A),  doEncoderLeft,  RISING);
@@ -287,8 +288,8 @@ void loop() {
 
   // --- Safety timeout: stop motors if no cmd_vel for 1 second ---
   if (now - last_cmd_time > 1000) {
-    setMotor(MOTOR_LEFT_PWM,  MOTOR_LEFT_IN1,  MOTOR_LEFT_IN2,  0);
-    setMotor(MOTOR_RIGHT_PWM, MOTOR_RIGHT_IN1, MOTOR_RIGHT_IN2, 0);
+    setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0);
+    setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0);
   }
 
   // --- Odometry + IMU at 20 Hz (every 50 ms) ---

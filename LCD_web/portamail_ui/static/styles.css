@@ -14,6 +14,7 @@
 
 * {
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 body {
@@ -21,6 +22,8 @@ body {
   font-family: "Avenir Next", "Trebuchet MS", sans-serif;
   background: radial-gradient(circle at top, #1d2230, #0b0d12 70%);
   color: var(--text);
+  overflow: hidden;
+  height: 100vh;
 }
 
 .layout {
@@ -28,7 +31,7 @@ body {
   grid-template-columns: 1fr;
   gap: 24px;
   padding: 24px;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .layout.has-debug {
@@ -40,7 +43,7 @@ body {
   border-radius: 24px;
   padding: 24px;
   position: relative;
-  min-height: calc(100vh - 48px);
+  height: 100%;
   overflow: hidden;
 }
 
@@ -382,7 +385,7 @@ pre {
   }
 
   .lcd {
-    min-height: calc(100vh - 24px);
+    height: 100%;
   }
 }
 

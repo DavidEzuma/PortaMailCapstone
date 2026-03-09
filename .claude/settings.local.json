@@ -26,7 +26,24 @@
       "Bash(sudo dmesg:*)",
       "Bash(dmesg:*)",
       "Bash(nmcli:*)",
-      "Read(//home/davidezuma/**)"
+      "Read(//home/davidezuma/**)",
+      "Bash(grep:*)",
+      "Bash(systemctl status:*)",
+      "Bash(journalctl:*)",
+      "Bash(cat:*)",
+      "Bash(lightdm:*)",
+      "Read(//dev/dri/**)",
+      "Read(//dev/**)",
+      "Read(//boot/firmware/**)",
+      "Bash(drm_info)",
+      "Read(//sys/class/drm/**)",
+      "WebFetch(domain:www.amazon.com)",
+      "Bash(getent group:*)",
+      "Read(//usr/share/xsessions/**)",
+      "Read(//usr/share/**)",
+      "Bash(sudo apt-get:*)",
+      "Bash(ls:*)",
+      "Bash(ros2 param:*)"
     ]
   }
 }
