@@ -10,13 +10,12 @@ const powerConfirmOverlay = document.getElementById("powerConfirmOverlay");
 const powerConfirmYes = document.getElementById("powerConfirmYes");
 const powerConfirmNo = document.getElementById("powerConfirmNo");
 const destinationButtons = Array.from(document.querySelectorAll(".destination-btn"));
-const selectedRoomChips = Array.from(document.querySelectorAll("[data-selected-chip]"));
 const deliverStartBtn = document.getElementById("deliverStartBtn");
 
 const screens = Array.from(document.querySelectorAll("[data-screen]"));
 let introDismissed = false;
 let currentScreen = "MODE_SELECT";
-const selectedRooms = new Set();
+let selectedRoom = null;
 
 // Screens that indicate the robot is actively working — auto-dismiss intro if
 // the browser reconnects mid-operation.
@@ -39,28 +38,18 @@ function dismissIntro() {
 }
 
 function clearDestinationSelection() {
-  selectedRooms.clear();
-  destinationButtons.forEach((btn) => {
-    btn.classList.remove("selected");
-  });
+  selectedRoom = null;
+  destinationButtons.forEach((btn) => btn.classList.remove("selected"));
 }
 
 function updateDestinationControls() {
   const onHomeScreen = currentScreen === "HOME";
   destinationButtons.forEach((btn) => {
-    const room = btn.dataset.roomTarget;
-    btn.classList.toggle("selected", selectedRooms.has(room));
+    btn.classList.toggle("selected", btn.dataset.roomTarget === selectedRoom);
     btn.disabled = !onHomeScreen;
   });
-  selectedRoomChips.forEach((chip) => {
-    const room = chip.dataset.selectedChip;
-    const isSelected = selectedRooms.has(room);
-    chip.classList.toggle("selected", isSelected);
-    chip.classList.toggle("inactive", !isSelected);
-    chip.setAttribute("aria-hidden", String(!isSelected));
-  });
   if (deliverStartBtn) {
-    deliverStartBtn.disabled = !onHomeScreen || selectedRooms.size === 0;
+    deliverStartBtn.disabled = !onHomeScreen || selectedRoom === null;
   }
 }
 
@@ -81,14 +70,13 @@ function emitStartForRoom(room) {
 
 function startSelectedDeliveries(e) {
   e.preventDefault();
-  if (currentScreen !== "HOME" || selectedRooms.size === 0) {
+  if (currentScreen !== "HOME" || selectedRoom === null) {
     return;
   }
-  // Order: ROOM1 first, then ROOM2, then ORIGIN last
-  const orderedRooms = ["ROOM1", "ROOM2", "ORIGIN"].filter((room) => selectedRooms.has(room));
+  const room = selectedRoom;
   clearDestinationSelection();
   updateDestinationControls();
-  orderedRooms.forEach((room) => emitStartForRoom(room));
+  emitStartForRoom(room);
 }
 
 // --- Power confirmation ---
@@ -149,7 +137,7 @@ function renderState(state) {
     el.classList.toggle("active", el.dataset.screen === state.screen);
   });
 
-  if (currentScreen !== "HOME" && selectedRooms.size > 0) {
+  if (currentScreen !== "HOME" && selectedRoom !== null) {
     clearDestinationSelection();
   }
   updateDestinationControls();
@@ -236,11 +224,8 @@ function bindDestinationSelection() {
       if (!room) {
         return;
       }
-      if (selectedRooms.has(room)) {
-        selectedRooms.delete(room);
-      } else {
-        selectedRooms.add(room);
-      }
+      // Radio behaviour: selecting the same room again deselects it
+      selectedRoom = selectedRoom === room ? null : room;
       updateDestinationControls();
     });
 

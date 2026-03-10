@@ -25,6 +25,7 @@ BIT_KEYS = {
     "save_location_room1_pressed",
     "save_location_room2_pressed",
     "save_location_origin_pressed",
+    "save_location_none_pressed",
     "start_origin_pressed",
     "back_pressed",
 }
@@ -45,6 +46,7 @@ EDGE_EVENTS = {
     "save_location_room1",
     "save_location_room2",
     "save_location_origin",
+    "save_location_none",
     "go_back",
 }
 

@@ -1,4 +1,6 @@
 import os
+import subprocess
+import threading
 from datetime import datetime
 from interface.validators import validate_mode, validate_edge_for_screen
 from state.model import get_state
@@ -96,8 +98,10 @@ def handle_edge(edge, payload=None):
     if edge == "save_map_open":
         state["screen"] = "SAVE_MAP_SELECT"
         return True
-    if edge in {"save_location_room1", "save_location_room2", "save_location_origin"}:
+    if edge in {"save_location_room1", "save_location_room2", "save_location_origin", "save_location_none"}:
         # Coordinate saving and map file save are handled by lcd_bridge via TF lookup.
+        # Screen stays at MAPPING; lcd_bridge will POST /api/edge go_back once the
+        # SLAM toolbox confirms the map is written ("Status: Map Saved").
         state["screen"] = "MAPPING"
         return True
     if edge == "go_back":
@@ -112,8 +116,13 @@ def handle_edge(edge, payload=None):
         return True
     if edge == "power_edge":
         print("[power] Shutdown requested via GUI")
-        # Trigger system shutdown
-        os.system("sudo shutdown -h now")
+        # Run shutdown in a background thread so Flask is not blocked
+        # and the socket response is delivered before the OS halts.
+        def _do_shutdown():
+            import time
+            time.sleep(1.5)  # brief pause so UI can update before power-off
+            subprocess.run(["sudo", "shutdown", "-h", "now"], check=False)
+        threading.Thread(target=_do_shutdown, daemon=True).start()
         return True
     if edge == "open_confirm_flow":
         state["screen"] = "CONFIRM_SELECT"

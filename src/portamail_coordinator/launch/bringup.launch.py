@@ -2,7 +2,7 @@ import os
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, EnvironmentVariable
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -28,6 +28,12 @@ def generate_launch_description():
         'lcd_url',
         default_value='http://127.0.0.1:5050',
         description='Base URL of the LCD Flask server'
+    )
+
+    maps_dir_arg = DeclareLaunchArgument(
+        'maps_dir',
+        default_value=PathJoinSubstitution([EnvironmentVariable('HOME'), 'PortaMailCapstone', 'maps']),
+        description='Directory where map files are stored (used for cleanup)'
     )
 
     # --- Coordinator Node (C++) ---
@@ -57,6 +63,7 @@ def generate_launch_description():
             'poll_hz':             2.0,
             'ros_mode':            LaunchConfiguration('mode'),
             'locations_yaml_path': LaunchConfiguration('locations_file'),
+            'maps_dir':            LaunchConfiguration('maps_dir'),
         }]
     )
 
@@ -64,6 +71,7 @@ def generate_launch_description():
         mode_arg,
         loc_arg,
         lcd_url_arg,
+        maps_dir_arg,
         coordinator_node,
         lcd_bridge_node,
     ])

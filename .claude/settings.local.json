@@ -48,7 +48,14 @@
       "Bash(ros2:*)",
       "Bash(sudo bash:*)",
       "Bash(dtc:*)",
-      "Bash(rm /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/prespinlidar.py /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/rplidar_driver_node.py && rmdir /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts)"
+      "Bash(rm /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/prespinlidar.py /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/rplidar_driver_node.py && rmdir /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts)",
+      "Bash(find /home/davidezuma -maxdepth 3 -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.png\" 2>/dev/null | head -20)",
+      "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_coordinator 2>&1 | tail -10)",
+      "Bash(systemctl --user list-units --state=active 2>/dev/null | grep -i portamail || true\nls ~/.config/autostart/ 2>/dev/null || true\nls ~/.config/systemd/user/ 2>/dev/null || true)",
+      "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_coordinator 2>&1 | tail -5)",
+      "Bash(systemctl --user daemon-reload && systemctl --user enable portamail.service && echo \"enabled\")",
+      "Bash(loginctl enable-linger:*)",
+      "Bash(sudo sed:*)"
     ]
   }
 }

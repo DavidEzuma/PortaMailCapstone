@@ -222,13 +222,12 @@ _kill_ros() {
 # 5. Mode-selection + ROS launch loop
 #    Restarts whenever the Back button returns the UI to MODE_SELECT.
 # ---------------------------------------------------------------------------
+SINCE_TS=""   # initialise; updated before each _kill_ros call
+
 while true; do
     echo ""
     echo "  Select a mode on the touchscreen to continue."
     echo ""
-
-    # Record timestamp so we only look at NEW events for mode selection
-    SINCE_TS=$(_get_last_ts)
 
     # Wait for mode selection
     MODE=""
@@ -296,6 +295,9 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
 
         if [[ "${SCREEN}" == "MODE_SELECT" ]]; then
             echo "[startup] Back button detected — stopping ROS stack and restarting mode selection."
+            # Snapshot the event log NOW (before the ~7 s kill window) so any
+            # mode-select tap the user makes during shutdown is not missed.
+            SINCE_TS=$(_get_last_ts)
             _kill_ros
             break
         fi
@@ -308,6 +310,7 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
 
         if [[ "${MAP_ALIVE}" == false && "${COORD_ALIVE}" == false ]]; then
             echo "[startup] All ROS processes exited — returning to mode selection."
+            SINCE_TS=$(_get_last_ts)
             MAP_PID=""
             COORD_PID=""
             break

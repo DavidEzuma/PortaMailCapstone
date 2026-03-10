@@ -10,7 +10,7 @@ def validate_edge_for_screen(edge, screen, mode, selected_room):
         return screen == "MODE_SELECT"
     if edge in {"save_map", "save_map_open"}:
         return mode == "MAPPING"
-    if edge in {"save_location_room1", "save_location_room2", "save_location_origin"}:
+    if edge in {"save_location_room1", "save_location_room2", "save_location_origin", "save_location_none"}:
         return screen == "SAVE_MAP_SELECT"
     if edge == "open_confirm_flow":
         return mode == "ARRIVED" or screen == "ARRIVED"

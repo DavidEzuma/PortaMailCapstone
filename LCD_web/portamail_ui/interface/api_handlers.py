@@ -1,8 +1,8 @@
 from flask import jsonify, request
 from interface.event_store import read_events
 from interface.validators import validate_mode
-from state.model import snapshot_state, set_events
-from state.state_machine import set_mode
+from state.model import snapshot_state, set_events, get_state
+from state.state_machine import set_mode, handle_edge
 
 
 def register_api(app, emit_state):
@@ -37,3 +37,13 @@ def register_api(app, emit_state):
         set_mode(mode)
         emit_state()
         return jsonify({"ok": True, "mode": mode})
+
+    @app.route("/api/edge", methods=["POST"])
+    def api_edge():
+        data = request.get_json(silent=True) or {}
+        edge = data.get("edge")
+        state = get_state()
+        ok = handle_edge(edge, payload=data.get("payload"))
+        if ok:
+            emit_state()
+        return jsonify({"ok": ok})

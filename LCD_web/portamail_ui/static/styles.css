@@ -147,14 +147,16 @@ body {
 }
 
 .deliver-btn {
-  width: min(360px, 100%);
   border: 3px solid var(--green);
   background: rgba(74, 222, 128, 0.12);
   color: #d5ffe8;
+  flex: 1;
+  margin: 0 12px;
 }
 
 .deliver-btn:disabled {
-  border-color: rgba(74, 222, 128, 0.45);
+  border-color: rgba(74, 222, 128, 0.25);
+  color: rgba(213, 255, 232, 0.35);
 }
 
 .btn.confirm {
@@ -481,7 +483,7 @@ pre {
 
 /* --- Save Map Select Screen --- */
 .save-location-row {
-  grid-template-columns: repeat(3, minmax(100px, 1fr));
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
 }
 
 .save-location-btn {
@@ -502,6 +504,16 @@ pre {
 
 .origin-location-btn:active {
   background: rgba(99, 192, 255, 0.18);
+}
+
+.save-location-none-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.save-location-none-btn:active {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* --- Origin destination button (HOME screen) --- */

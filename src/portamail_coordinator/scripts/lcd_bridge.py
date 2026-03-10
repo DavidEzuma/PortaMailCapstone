@@ -17,8 +17,10 @@ Internal delivery state machine:
   RETURNING         – navigating back to mailroom (dock)
 """
 
+import glob
 import json
 import math
+import os
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -68,11 +70,16 @@ class LcdBridge(Node):
         self.declare_parameter("poll_hz",            2.0)
         self.declare_parameter("ros_mode",           "navigation")
         self.declare_parameter("locations_yaml_path", "")
+        self.declare_parameter(
+            "maps_dir",
+            os.path.expanduser("~/PortaMailCapstone/maps"),
+        )
 
         self._lcd_url      = self.get_parameter("lcd_url").get_parameter_value().string_value
         poll_hz            = self.get_parameter("poll_hz").get_parameter_value().double_value
         self._ros_mode     = self.get_parameter("ros_mode").get_parameter_value().string_value
         self._loc_yaml     = self.get_parameter("locations_yaml_path").get_parameter_value().string_value
+        self._maps_dir     = self.get_parameter("maps_dir").get_parameter_value().string_value
 
         self._pub = self.create_publisher(String, "user_delivery_request", 10)
         self.create_subscription(String, "system_status", self._on_status, 10)
@@ -170,6 +177,13 @@ class LcdBridge(Node):
                 self._publish("save_map")
             elif name in _SAVE_LOCATION_MAP:
                 self._save_location_and_map(name)
+            elif name == "save_location_none":
+                # Save the map without recording any TF coordinates
+                self._delete_all_maps()
+                self._publish("save_map")
+            elif name == "go_back":
+                # User left mapping without saving — discard auto-saved maps
+                self._delete_all_maps()
             return
 
         # --- Navigation mode ---
@@ -247,8 +261,29 @@ class LcdBridge(Node):
             if not _YAML_AVAILABLE:
                 self.get_logger().warn("PyYAML not installed — coordinates not saved")
 
-        # --- Trigger SLAM map save ---
+        # --- Delete old maps, then trigger SLAM map save ---
+        self._delete_all_maps()
         self._publish("save_map")
+
+    # ------------------------------------------------------------------
+    # Map file management
+    # ------------------------------------------------------------------
+
+    def _delete_all_maps(self):
+        """Remove all .yaml and .pgm map files from the maps directory."""
+        patterns = [
+            os.path.join(self._maps_dir, "*.yaml"),
+            os.path.join(self._maps_dir, "*.pgm"),
+        ]
+        deleted = 0
+        for pattern in patterns:
+            for path in glob.glob(pattern):
+                try:
+                    os.remove(path)
+                    deleted += 1
+                except OSError as exc:
+                    self.get_logger().warn(f"Could not delete map file {path}: {exc}")
+        self.get_logger().info(f"Deleted {deleted} map file(s) from {self._maps_dir}")
 
     # ------------------------------------------------------------------
     # LCD state helper
@@ -286,7 +321,13 @@ class LcdBridge(Node):
 
         elif self._ros_mode == "mapping":
             if "Status: Map Saved" in text:
-                self.get_logger().info("Map saved successfully")
+                self.get_logger().info("Map saved — returning to mode selection")
+                # Trigger go_back via the LCD REST API so the monitoring script
+                # detects MODE_SELECT and shuts down the ROS stack cleanly.
+                try:
+                    self._http_post("/api/edge", {"edge": "go_back"})
+                except Exception as exc:
+                    self.get_logger().warn(f"Could not POST go_back to LCD: {exc}")
 
     # ------------------------------------------------------------------
     # Helpers
