@@ -1,10 +1,15 @@
-<section class="screen" data-screen="MAPPING" id="screenMapping">
-  <div class="status emphasized mapping-title">Mapping Mode Active</div>
-  <div class="status">Drive the robot with the Xbox controller to map the environment.<br>Hold RB to enable movement.</div>
-  <button class="btn big save-map-btn"
-          data-bit="save_map_pressed"
-          data-edge="save_map">
-    Save Map
-  </button>
-  <button class="btn power" data-bit="power_pressed" data-edge="power_edge">Power</button>
+<section class="screen has-footer" data-screen="MAPPING" id="screenMapping">
+  <div class="screen-body">
+    <div class="status emphasized mapping-title">Mapping Mode Active</div>
+    <div class="status">Drive the robot with the Xbox controller to map the environment.<br>Hold RB to enable movement.</div>
+    <button class="btn big save-map-btn"
+            data-bit="save_map_pressed"
+            data-edge="save_map_open">
+      Save Map
+    </button>
+  </div>
+  <div class="screen-footer">
+    <button class="btn back-btn" data-bit="back_pressed" data-edge="go_back">← Back</button>
+    <button class="btn power" data-bit="power_pressed" data-edge="power_edge">Power</button>
+  </div>
 </section>

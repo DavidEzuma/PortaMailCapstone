@@ -33,7 +33,7 @@ def main():
     ensure_log_dir()
     emit_state, _emit_events = register_socketio(socketio)
     register_api(app, emit_state)
-    socketio.run(app, host="0.0.0.0", port=5050, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5050, debug=False, use_reloader=False)
 
 
 if __name__ == "__main__":

@@ -6,6 +6,9 @@ const dbgRoom = document.getElementById("dbgRoom");
 const dbgBits = document.getElementById("dbgBits");
 const dbgEvents = document.getElementById("dbgEvents");
 const introOverlay = document.getElementById("introOverlay");
+const powerConfirmOverlay = document.getElementById("powerConfirmOverlay");
+const powerConfirmYes = document.getElementById("powerConfirmYes");
+const powerConfirmNo = document.getElementById("powerConfirmNo");
 const destinationButtons = Array.from(document.querySelectorAll(".destination-btn"));
 const selectedRoomChips = Array.from(document.querySelectorAll("[data-selected-chip]"));
 const deliverStartBtn = document.getElementById("deliverStartBtn");
@@ -24,6 +27,7 @@ const AUTO_DISMISS_SCREENS = new Set([
   "CONFIRM_SELECT",
   "CONFIRM_ACK",
   "MAPPING",
+  "SAVE_MAP_SELECT",
 ]);
 
 function dismissIntro() {
@@ -70,6 +74,8 @@ function emitStartForRoom(room) {
     emitTap("room1_start_pressed", "start_room1");
   } else if (room === "ROOM2") {
     emitTap("room2_start_pressed", "start_room2");
+  } else if (room === "ORIGIN") {
+    emitTap("start_origin_pressed", "start_origin");
   }
 }
 
@@ -78,10 +84,42 @@ function startSelectedDeliveries(e) {
   if (currentScreen !== "HOME" || selectedRooms.size === 0) {
     return;
   }
-  const orderedRooms = ["ROOM1", "ROOM2"].filter((room) => selectedRooms.has(room));
+  // Order: ROOM1 first, then ROOM2, then ORIGIN last
+  const orderedRooms = ["ROOM1", "ROOM2", "ORIGIN"].filter((room) => selectedRooms.has(room));
   clearDestinationSelection();
   updateDestinationControls();
   orderedRooms.forEach((room) => emitStartForRoom(room));
+}
+
+// --- Power confirmation ---
+
+function showPowerConfirm() {
+  if (powerConfirmOverlay) {
+    powerConfirmOverlay.classList.remove("hidden");
+  }
+}
+
+function hidePowerConfirm() {
+  if (powerConfirmOverlay) {
+    powerConfirmOverlay.classList.add("hidden");
+  }
+}
+
+function bindPowerConfirm() {
+  if (powerConfirmYes) {
+    powerConfirmYes.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      hidePowerConfirm();
+      // Fire the actual shutdown edge only after confirmation
+      emitTap("power_pressed", "power_edge");
+    });
+  }
+  if (powerConfirmNo) {
+    powerConfirmNo.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      hidePowerConfirm();
+    });
+  }
 }
 
 function renderState(state) {
@@ -128,6 +166,29 @@ function bindButtons() {
   buttons.forEach((btn) => {
     const bit = btn.dataset.bit;
     const edge = btn.dataset.edge;
+
+    // Power buttons are intercepted — show confirmation overlay instead of
+    // firing the edge directly.
+    if (edge === "power_edge") {
+      btn.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        socket.emit("press", { bit });
+      });
+      btn.addEventListener("pointerup", (e) => {
+        e.preventDefault();
+        socket.emit("release", { bit }); // release bit only, no edge
+        showPowerConfirm();
+      });
+      btn.addEventListener("pointercancel", (e) => {
+        e.preventDefault();
+        socket.emit("release", { bit });
+      });
+      btn.addEventListener("pointerleave", (e) => {
+        e.preventDefault();
+        socket.emit("release", { bit });
+      });
+      return;
+    }
 
     const onDown = (e) => {
       e.preventDefault();
@@ -211,5 +272,6 @@ socket.on("events", (events) => {
 
 bindButtons();
 bindIntro();
+bindPowerConfirm();
 bindDestinationSelection();
 updateDestinationControls();

@@ -93,7 +93,27 @@ def handle_edge(edge, payload=None):
         return True
     if edge == "save_map":
         return True
+    if edge == "save_map_open":
+        state["screen"] = "SAVE_MAP_SELECT"
+        return True
+    if edge in {"save_location_room1", "save_location_room2", "save_location_origin"}:
+        # Coordinate saving and map file save are handled by lcd_bridge via TF lookup.
+        state["screen"] = "MAPPING"
+        return True
+    if edge == "go_back":
+        if state["screen"] == "SAVE_MAP_SELECT":
+            state["screen"] = "MAPPING"
+        elif state["screen"] in {"MAPPING", "HOME"}:
+            state["mode"] = "DOCK_IDLE"
+            state["screen"] = "MODE_SELECT"
+        return True
+    if edge == "start_origin":
+        # lcd_bridge handles navigation; no screen change here.
+        return True
     if edge == "power_edge":
+        print("[power] Shutdown requested via GUI")
+        # Trigger system shutdown
+        os.system("sudo shutdown -h now")
         return True
     if edge == "open_confirm_flow":
         state["screen"] = "CONFIRM_SELECT"

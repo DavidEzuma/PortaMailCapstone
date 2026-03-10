@@ -15,6 +15,9 @@
 * {
   box-sizing: border-box;
   cursor: none !important;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 body {
@@ -49,7 +52,7 @@ body {
 
 .screen {
   position: relative;
-  min-height: 100%;
+  height: 100%;
   display: none;
   flex-direction: column;
   gap: 24px;
@@ -93,8 +96,8 @@ body {
 }
 
 .btn.big {
-  min-height: 120px;
-  font-size: 1.35rem;
+  min-height: 80px;
+  font-size: 1.2rem;
 }
 
 .room-btn {
@@ -160,16 +163,36 @@ body {
 }
 
 .btn.power {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
   background: var(--danger);
 }
 
-.bottom-left {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
+/* Screens with a footer row use has-footer to switch from centered to
+   flex-start so the footer can be pushed to the bottom with flex: 1 on body */
+.screen.has-footer {
+  justify-content: flex-start;
+  gap: 0;
+  padding-top: 12px;
+}
+
+.screen-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.screen-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0 4px;
+  flex-shrink: 0;
 }
 
 .btn:disabled {
@@ -424,6 +447,20 @@ pre {
   margin-top: 8px;
 }
 
+/* --- Back Button --- */
+.back-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: var(--muted);
+  font-size: 1rem;
+  padding: 10px 20px;
+  min-height: unset;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* --- Mapping Screen --- */
 .mapping-title {
   color: var(--tam-gold);
@@ -440,4 +477,100 @@ pre {
 
 .save-map-btn:active {
   background: rgba(214, 211, 196, 0.22);
+}
+
+/* --- Save Map Select Screen --- */
+.save-location-row {
+  grid-template-columns: repeat(3, minmax(100px, 1fr));
+}
+
+.save-location-btn {
+  border: 3px solid var(--tam-gold);
+  background: rgba(214, 211, 196, 0.08);
+  color: var(--tam-gold);
+}
+
+.save-location-btn:active {
+  background: rgba(214, 211, 196, 0.22);
+}
+
+.origin-location-btn {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(99, 192, 255, 0.08);
+}
+
+.origin-location-btn:active {
+  background: rgba(99, 192, 255, 0.18);
+}
+
+/* --- Origin destination button (HOME screen) --- */
+.origin-btn {
+  border-color: var(--accent);
+}
+
+/* --- Power Confirmation Overlay --- */
+.power-confirm-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(10, 12, 18, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+}
+
+.power-confirm-overlay.hidden {
+  display: none;
+}
+
+.power-confirm-box {
+  background: var(--panel);
+  border: 2px solid var(--danger);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  text-align: center;
+}
+
+.power-confirm-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--danger);
+}
+
+.power-confirm-body {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.power-confirm-btns {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.power-confirm-yes {
+  position: static;
+  flex: 1;
+}
+
+.power-confirm-no {
+  flex: 1;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  touch-action: none;
 }

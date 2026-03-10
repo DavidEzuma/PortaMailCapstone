@@ -6,6 +6,10 @@ navigation_coordinator node.
 LCD events  →  user_delivery_request topic
 system_status topic  →  POST /api/mode to LCD server
 
+In mapping mode:
+  save_location_room1/room2/origin → looks up map→base_link TF, writes
+  locations.yaml, then publishes "save_map" to trigger SLAM map save.
+
 Internal delivery state machine:
   IDLE              – waiting for a start_room event
   NAVIGATING        – Nav2 goal sent, waiting for "Status: Arrived"
@@ -14,6 +18,7 @@ Internal delivery state machine:
 """
 
 import json
+import math
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -22,42 +27,69 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
+try:
+    import tf2_ros
+    _TF2_AVAILABLE = True
+except ImportError:
+    _TF2_AVAILABLE = False
+
+try:
+    import yaml
+    _YAML_AVAILABLE = True
+except ImportError:
+    _YAML_AVAILABLE = False
+
 # LCD GUI room → locations.yaml key
 _ROOM_TO_LOCATION = {
-    "ROOM1": "office_101",
-    "ROOM2": "office_102",
+    "ROOM1":  "office_101",
+    "ROOM2":  "office_102",
+    "ORIGIN": "mailroom",
+}
+
+# save_location edge → locations.yaml key
+_SAVE_LOCATION_MAP = {
+    "save_location_room1":   "office_101",
+    "save_location_room2":   "office_102",
+    "save_location_origin":  "mailroom",
 }
 
 # Internal bridge states
-_IDLE = "IDLE"
-_NAVIGATING = "NAVIGATING"
+_IDLE            = "IDLE"
+_NAVIGATING      = "NAVIGATING"
 _WAITING_CONFIRM = "WAITING_CONFIRM"
-_RETURNING = "RETURNING"
+_RETURNING       = "RETURNING"
 
 
 class LcdBridge(Node):
     def __init__(self):
         super().__init__("lcd_bridge")
 
-        self.declare_parameter("lcd_url", "http://127.0.0.1:5050")
-        self.declare_parameter("poll_hz", 2.0)
-        # 'navigation' or 'mapping' — matches the coordinator's start_mode
-        self.declare_parameter("ros_mode", "navigation")
+        self.declare_parameter("lcd_url",            "http://127.0.0.1:5050")
+        self.declare_parameter("poll_hz",            2.0)
+        self.declare_parameter("ros_mode",           "navigation")
+        self.declare_parameter("locations_yaml_path", "")
 
-        self._lcd_url = self.get_parameter("lcd_url").get_parameter_value().string_value
-        poll_hz = self.get_parameter("poll_hz").get_parameter_value().double_value
-        self._ros_mode = self.get_parameter("ros_mode").get_parameter_value().string_value
+        self._lcd_url      = self.get_parameter("lcd_url").get_parameter_value().string_value
+        poll_hz            = self.get_parameter("poll_hz").get_parameter_value().double_value
+        self._ros_mode     = self.get_parameter("ros_mode").get_parameter_value().string_value
+        self._loc_yaml     = self.get_parameter("locations_yaml_path").get_parameter_value().string_value
 
         self._pub = self.create_publisher(String, "user_delivery_request", 10)
         self.create_subscription(String, "system_status", self._on_status, 10)
 
         self._bridge_state = _IDLE
-        self._seen: dict[str, bool] = {}  # "ts|name" dedup cache
+        self._seen: dict[str, bool] = {}
         self._last_ts: str | None = None
 
-        # Drain historical events on startup so we don't replay stale actions.
-        self._drain_history()
+        # TF2 for map→base_link lookups (used in mapping mode to save waypoints)
+        if _TF2_AVAILABLE:
+            self._tf_buffer   = tf2_ros.Buffer()
+            self._tf_listener = tf2_ros.TransformListener(self._tf_buffer, self)
+        else:
+            self._tf_buffer = None
+            self.get_logger().warn("tf2_ros not available — save_location will not record TF pose")
 
+        self._drain_history()
         self.create_timer(1.0 / poll_hz, self._poll)
         self.get_logger().info(
             f"LCD bridge ready | url={self._lcd_url} | ros_mode={self._ros_mode}"
@@ -116,7 +148,6 @@ class LcdBridge(Node):
             if key in self._seen:
                 continue
             self._seen[key] = True
-            # Keep dedup cache bounded
             if len(self._seen) > 500:
                 old_keys = list(self._seen)[:200]
                 for k in old_keys:
@@ -133,33 +164,95 @@ class LcdBridge(Node):
             return
         self.get_logger().debug(f"LCD event={name!r}  bridge={self._bridge_state}")
 
-        # --- Mapping mode: only forward save_map ---
+        # --- Mapping mode ---
         if self._ros_mode == "mapping":
             if name == "save_map":
                 self._publish("save_map")
+            elif name in _SAVE_LOCATION_MAP:
+                self._save_location_and_map(name)
             return
 
         # --- Navigation mode ---
-        if name in ("start_room1", "start_room2") and self._bridge_state == _IDLE:
-            # Fetch active_room from LCD state to honour queue ordering
-            active = self._get_lcd_active_room() or (
-                "ROOM1" if name == "start_room1" else "ROOM2"
-            )
-            dest = _ROOM_TO_LOCATION.get(active)
+        if name in ("start_room1", "start_room2", "start_origin") and self._bridge_state == _IDLE:
+            if name == "start_origin":
+                dest = "mailroom"
+            else:
+                active = self._get_lcd_active_room() or (
+                    "ROOM1" if name == "start_room1" else "ROOM2"
+                )
+                dest = _ROOM_TO_LOCATION.get(active)
             if dest:
                 self._navigate_to(dest)
                 self._bridge_state = _NAVIGATING
 
         elif name == "delivery_confirmed" and self._bridge_state == _WAITING_CONFIRM:
-            # Check whether the GUI has queued another room
             active = self._get_lcd_active_room()
             if active and active in _ROOM_TO_LOCATION:
                 self._navigate_to(_ROOM_TO_LOCATION[active])
                 self._bridge_state = _NAVIGATING
             else:
-                # All deliveries done — return to dock
                 self._navigate_to("mailroom")
                 self._bridge_state = _RETURNING
+
+    # ------------------------------------------------------------------
+    # Mapping: save waypoint coordinates + trigger SLAM map save
+    # ------------------------------------------------------------------
+
+    def _save_location_and_map(self, event_name: str):
+        location_key = _SAVE_LOCATION_MAP[event_name]
+
+        # --- TF lookup ---
+        x, y, w = 0.0, 0.0, 1.0   # fallback if TF unavailable
+        if self._tf_buffer is not None:
+            try:
+                t = self._tf_buffer.lookup_transform(
+                    "map", "base_link", rclpy.time.Time()
+                )
+                x = t.transform.translation.x
+                y = t.transform.translation.y
+                q = t.transform.rotation
+                yaw = math.atan2(
+                    2.0 * (q.w * q.z + q.x * q.y),
+                    1.0 - 2.0 * (q.y * q.y + q.z * q.z),
+                )
+                w = math.cos(yaw / 2.0)   # orientation.w of 2-D quaternion
+                self.get_logger().info(
+                    f"TF lookup → {location_key}: x={x:.3f} y={y:.3f} w={w:.4f}"
+                )
+            except Exception as exc:
+                self.get_logger().warn(f"TF lookup failed ({exc}) — saving (0,0) placeholder")
+
+        # --- Write locations.yaml ---
+        if self._loc_yaml and _YAML_AVAILABLE:
+            try:
+                with open(self._loc_yaml, "r") as f:
+                    data = yaml.safe_load(f) or {}
+                if "locations" not in data:
+                    data["locations"] = {}
+                data["locations"][location_key] = {
+                    "x": round(float(x), 4),
+                    "y": round(float(y), 4),
+                    "w": round(float(w), 4),
+                }
+                with open(self._loc_yaml, "w") as f:
+                    yaml.dump(data, f, default_flow_style=False)
+                self.get_logger().info(
+                    f"Saved '{location_key}' to {self._loc_yaml}"
+                )
+            except Exception as exc:
+                self.get_logger().error(f"Failed to write locations.yaml: {exc}")
+        else:
+            if not self._loc_yaml:
+                self.get_logger().warn("locations_yaml_path not set — coordinates not saved")
+            if not _YAML_AVAILABLE:
+                self.get_logger().warn("PyYAML not installed — coordinates not saved")
+
+        # --- Trigger SLAM map save ---
+        self._publish("save_map")
+
+    # ------------------------------------------------------------------
+    # LCD state helper
+    # ------------------------------------------------------------------
 
     def _get_lcd_active_room(self) -> str | None:
         try:
@@ -194,7 +287,6 @@ class LcdBridge(Node):
         elif self._ros_mode == "mapping":
             if "Status: Map Saved" in text:
                 self.get_logger().info("Map saved successfully")
-                # Stay in MAPPING mode — do not post DOCK_IDLE
 
     # ------------------------------------------------------------------
     # Helpers

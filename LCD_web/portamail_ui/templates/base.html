@@ -11,6 +11,18 @@
   <main class="layout{% if show_debug_panel %} has-debug{% endif %}">
     <section class="lcd">
       {% block lcd %}{% endblock %}
+
+      <!-- Power confirmation overlay — shown by JS, never by server state -->
+      <div id="powerConfirmOverlay" class="power-confirm-overlay hidden">
+        <div class="power-confirm-box">
+          <div class="power-confirm-title">Shut Down?</div>
+          <div class="power-confirm-body">The robot will power off. Make sure it is parked safely.</div>
+          <div class="power-confirm-btns">
+            <button id="powerConfirmYes" class="btn power power-confirm-yes">Yes, Shut Down</button>
+            <button id="powerConfirmNo"  class="btn power-confirm-no">Cancel</button>
+          </div>
+        </div>
+      </div>
     </section>
     {% if show_debug_panel %}
     <aside class="debug">

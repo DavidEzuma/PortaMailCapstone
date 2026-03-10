@@ -53,9 +53,10 @@ def generate_launch_description():
         name='lcd_bridge',
         output='screen',
         parameters=[{
-            'lcd_url': LaunchConfiguration('lcd_url'),
-            'poll_hz': 2.0,
-            'ros_mode': LaunchConfiguration('mode'),
+            'lcd_url':             LaunchConfiguration('lcd_url'),
+            'poll_hz':             2.0,
+            'ros_mode':            LaunchConfiguration('mode'),
+            'locations_yaml_path': LaunchConfiguration('locations_file'),
         }]
     )
 
