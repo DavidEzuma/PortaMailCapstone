@@ -1,0 +1,83 @@
+[0.327s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/portamail_navigator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/portamail_navigator
+[0.564s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.124s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.256s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.485s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.545s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.638s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.696s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.915s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.924s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[2.128s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.341s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[2.444s] -- Found nav_msgs: 5.3.6 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[2.518s] -- Found tf2: 0.36.19 (/opt/ros/jazzy/share/tf2/cmake)
+[2.534s] -- Found tf2_ros: 0.36.19 (/opt/ros/jazzy/share/tf2_ros/cmake)
+[2.865s] -- Found tf2_geometry_msgs: 0.36.19 (/opt/ros/jazzy/share/tf2_geometry_msgs/cmake)
+[2.905s] -- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)
+[2.909s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[2.915s] -- Found slam_toolbox: 2.8.3 (/opt/ros/jazzy/share/slam_toolbox/cmake)
+[3.406s] -- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[3.415s] -- Found OGRE
+[3.417s] --   static     : OFF
+[3.417s] --   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[3.417s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[3.417s] --   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media
+[3.418s] -- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[3.418s] -- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib
+[3.418s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[3.418s] -- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE
+[3.418s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[3.419s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[3.419s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[3.422s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[3.737s] -- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+[4.285s] -- Configuring done (3.8s)
+[4.398s] -- Generating done (0.1s)
+[4.416s] -- Build files have been written to: /home/davidezuma/PortaMailCapstone/build/portamail_navigator
+[4.481s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/portamail_navigator -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/portamail_navigator
+[4.481s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/portamail_navigator -- -j4 -l4
+[4.773s] [ 25%] [32m[1mLinking CXX executable mock_driver[0m
+[4.773s] [ 50%] [32m[1mLinking CXX executable map_autosave_node[0m
+[10.272s] [ 75%] Built target map_autosave_node
+[10.889s] [100%] Built target mock_driver
+[10.952s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/portamail_navigator -- -j4 -l4
+[11.062s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/portamail_navigator
+[11.111s] -- Install configuration: ""
+[11.111s] -- Execute custom install script
+[11.112s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/mock_driver
+[11.180s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/map_autosave_node
+[11.241s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/include/portamail_navigator/map_autosave_node.hpp
+[11.299s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/gazebo_classic_mapping.launch.py
+[11.356s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/hardware.launch.py
+[11.448s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/joystick.launch.py
+[11.478s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/mapping.launch.py
+[11.508s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf.yaml
+[11.537s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf_no_imu.yaml
+[11.577s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/map_autosave.yaml
+[11.620s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/slam.yaml
+[11.659s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/locale_stubs.c
+[11.690s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/teensy_driver.ino
+[11.719s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail.urdf
+[11.753s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail_classic.urdf
+[11.780s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/base_link.STL
+[11.809s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_swivel.STL
+[11.840s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_wheel.STL
+[11.868s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/left_wheel.STL
+[11.896s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/right_wheel.STL
+[11.924s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/package_run_dependencies/portamail_navigator
+[11.951s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/parent_prefix_path/portamail_navigator
+[11.987s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.sh
+[12.016s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.dsv
+[12.048s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.sh
+[12.077s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.dsv
+[12.104s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.bash
+[12.133s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.sh
+[12.165s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.zsh
+[12.196s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.dsv
+[12.230s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.dsv
+[12.257s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/packages/portamail_navigator
+[12.286s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig.cmake
+[12.315s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig-version.cmake
+[12.336s] -- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.xml
+[12.372s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/portamail_navigator

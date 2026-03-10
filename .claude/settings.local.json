@@ -47,7 +47,8 @@
       "Bash(lsof:*)",
       "Bash(ros2:*)",
       "Bash(sudo bash:*)",
-      "Bash(dtc:*)"
+      "Bash(dtc:*)",
+      "Bash(rm /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/prespinlidar.py /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts/rplidar_driver_node.py && rmdir /home/davidezuma/PortaMailCapstone/src/portamail_navigator/scripts)"
     ]
   }
 }

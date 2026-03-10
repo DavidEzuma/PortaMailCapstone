@@ -1,0 +1,1 @@
+/home/davidezuma/PortaMailCapstone/src/portamail_navigator/include/portamail_navigator/map_autosave_node.hpp

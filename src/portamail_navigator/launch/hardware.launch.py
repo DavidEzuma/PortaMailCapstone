@@ -7,17 +7,22 @@ from launch_ros.substitutions import FindPackageShare
 from launch.conditions import IfCondition
 from launch_ros.parameter_descriptions import ParameterValue
 
+
+SERIAL_PORT = '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_3b22c239cde94c4e9a178cd7276563d2-if00-port0'
+SERIAL_BAUD = 256000
+
+
 def generate_launch_description():
     pkg_share = FindPackageShare('portamail_navigator')
 
     # Arguments to toggle hardware
-    use_lidar_arg = DeclareLaunchArgument('use_lidar', default_value='true')
+    use_lidar_arg  = DeclareLaunchArgument('use_lidar',  default_value='true')
     use_teensy_arg = DeclareLaunchArgument('use_teensy', default_value='true')
     # use_imu: set to 'true' only when BNO055 is physically wired to the Teensy.
     # The Teensy reads BNO055 via I2C and publishes /imu/data over micro-ROS.
     # This flag only controls which EKF config is loaded (odom+IMU vs odom-only).
     # There is NO separate IMU ROS node on the Pi side.
-    use_imu_arg = DeclareLaunchArgument('use_imu', default_value='false')
+    use_imu_arg    = DeclareLaunchArgument('use_imu',    default_value='false')
 
     # --- URDF / Robot State Publisher ---
     urdf_file = PathJoinSubstitution([pkg_share, 'urdf', 'portamail.urdf'])
@@ -31,9 +36,7 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description}]
     )
 
-    # 1. Micro-ROS Agent (Teensy 4.0 via USB: Pi USB-A -> Teensy Micro-USB -> /dev/ttyACM0)
-    # The Teensy publishes: /wheel/odom, /imu/data (when IMU wired)
-    # The Teensy subscribes to: /cmd_vel
+    # 1. Micro-ROS Agent (Teensy 4.0 via USB → /dev/ttyACM0)
     microros_agent = Node(
         condition=IfCondition(LaunchConfiguration('use_teensy')),
         package='micro_ros_agent',
@@ -44,26 +47,30 @@ def generate_launch_description():
     )
 
     # 2. RPLIDAR A2M12 Driver
-    # Connected via USB CP2102 adapter → /dev/ttyUSB0 (most common enumeration).
-    # If multiple USB serial devices are present, use the stable by-id path instead:
-    #   ls /dev/serial/by-id/   → look for usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_*
+    # scan_mode must be 'Sensitivity' (or 'Dense') — the A2M12 rejects 'Standard'
+    # mode outright. usb_max_current_enable=1 in /boot/firmware/config.txt is also
+    # required to supply enough USB current for the motor.
+    # 2. SLLIDAR A2M12 Driver (sllidar_ros2 — Slamtec's updated ROS 2 SDK v2.1.0)
+    # scan_mode must be 'Sensitivity': the A2M12 rejects 'Standard' mode.
+    # Also requires usb_max_current_enable=1 in /boot/firmware/config.txt to
+    # supply enough USB current for the motor.
     rplidar_node = Node(
         condition=IfCondition(LaunchConfiguration('use_lidar')),
-        package='rplidar_ros',
-        executable='rplidar_composition',
+        package='sllidar_ros2',
+        executable='sllidar_node',
+        name='sllidar_node',
         output='screen',
         parameters=[{
-            'serial_port': '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_3b22c239cde94c4e9a178cd7276563d2-if00-port0',
-            'serial_baudrate': 256000,
-            'frame_id': 'laser',
-            'inverted': False,
+            'serial_port':      SERIAL_PORT,
+            'serial_baudrate':  SERIAL_BAUD,
+            'frame_id':         'laser',
+            'inverted':         False,
             'angle_compensate': True,
+            'scan_mode':        'Sensitivity',
         }]
     )
 
     # 3. Sensor Fusion (EKF)
-    # use_imu=false -> ekf_no_imu.yaml (wheel odometry only, current default)
-    # use_imu=true  -> ekf.yaml (wheel odometry + BNO055 via /imu/data from Teensy)
     def select_ekf_config(context):
         use_imu = LaunchConfiguration('use_imu').perform(context)
         config_file = 'ekf.yaml' if use_imu.lower() == 'true' else 'ekf_no_imu.yaml'

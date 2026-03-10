@@ -533,3 +533,253 @@ events:
       
       
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:682 (check_library_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d74ac/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d74ac.dir/build.make CMakeFiles/cmTC_d74ac.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL'
+        Building C object CMakeFiles/cmTC_d74ac.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -o CMakeFiles/cmTC_d74ac.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL/CheckFunctionExists.c
+        Linking C executable cmTC_d74ac
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d74ac.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_d74ac.dir/CheckFunctionExists.c.o -o cmTC_d74ac  /usr/lib/aarch64-linux-gnu/libX11.so /usr/lib/aarch64-linux-gnu/libXext.so 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-HafccL'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:697 (check_function_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e2eab/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e2eab.dir/build.make CMakeFiles/cmTC_e2eab.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ'
+        Building C object CMakeFiles/cmTC_e2eab.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=gethostbyname -o CMakeFiles/cmTC_e2eab.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ/CheckFunctionExists.c
+        Linking C executable cmTC_e2eab
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e2eab.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_e2eab.dir/CheckFunctionExists.c.o -o cmTC_e2eab 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-QUuqGZ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:711 (check_function_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5e2bb/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5e2bb.dir/build.make CMakeFiles/cmTC_5e2bb.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL'
+        Building C object CMakeFiles/cmTC_5e2bb.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=connect -o CMakeFiles/cmTC_5e2bb.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL/CheckFunctionExists.c
+        Linking C executable cmTC_5e2bb
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5e2bb.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_5e2bb.dir/CheckFunctionExists.c.o -o cmTC_5e2bb 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Ny8MYL'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:720 (check_function_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_21554/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_21554.dir/build.make CMakeFiles/cmTC_21554.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB'
+        Building C object CMakeFiles/cmTC_21554.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=remove -o CMakeFiles/cmTC_21554.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB/CheckFunctionExists.c
+        Linking C executable cmTC_21554
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_21554.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_21554.dir/CheckFunctionExists.c.o -o cmTC_21554 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-Jt7LZB'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:729 (check_function_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_27776/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_27776.dir/build.make CMakeFiles/cmTC_27776.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple'
+        Building C object CMakeFiles/cmTC_27776.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=shmat -o CMakeFiles/cmTC_27776.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple/CheckFunctionExists.c
+        Linking C executable cmTC_27776
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_27776.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_27776.dir/CheckFunctionExists.c.o -o cmTC_27776 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-yZLple'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.28/Modules/CheckLibraryExists.cmake:69 (try_compile)"
+      - "/usr/share/cmake-3.28/Modules/FindX11.cmake:739 (check_library_exists)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendor-extras.cmake:128 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/rviz_ogre_vendorConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/rviz_common/cmake/rviz_commonConfig.cmake:41 (include)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/ament_cmake_export_dependencies-extras.cmake:21 (find_package)"
+      - "/opt/ros/jazzy/share/slam_toolbox/cmake/slam_toolboxConfig.cmake:41 (include)"
+      - "CMakeLists.txt:19 (find_package)"
+    checks:
+      - "Looking for IceConnectionNumber in ICE"
+    directories:
+      source: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6"
+      binary: "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/opt/ros/jazzy/share/tinyxml2_vendor/cmake/Modules;/opt/ros/jazzy/share/eigen3_cmake_module/cmake/Modules;/opt/ros/jazzy/share/fastrtps_cmake_module/cmake/Modules"
+    buildResult:
+      variable: "CMAKE_LIB_ICE_HAS_ICECONNECTIONNUMBER"
+      cached: true
+      stdout: |
+        Change Dir: '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_50f9b/fast
+        gmake[1]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_50f9b.dir/build.make CMakeFiles/cmTC_50f9b.dir/build
+        gmake[2]: Entering directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6'
+        Building C object CMakeFiles/cmTC_50f9b.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber -o CMakeFiles/cmTC_50f9b.dir/CheckFunctionExists.c.o -c /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6/CheckFunctionExists.c
+        Linking C executable cmTC_50f9b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50f9b.dir/link.txt --verbose=1
+        /usr/bin/cc  -DCHECK_FUNCTION_EXISTS=IceConnectionNumber CMakeFiles/cmTC_50f9b.dir/CheckFunctionExists.c.o -o cmTC_50f9b  -lICE 
+        gmake[2]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6'
+        gmake[1]: Leaving directory '/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/CMakeScratch/TryCompile-xmcSf6'
+        
+      exitCode: 0
+...

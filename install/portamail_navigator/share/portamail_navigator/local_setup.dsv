@@ -1,2 +1,1 @@
-source;share/portamail_navigator/environment/ament_prefix_path.sh
-source;share/portamail_navigator/environment/path.sh
+/home/davidezuma/PortaMailCapstone/build/portamail_navigator/ament_cmake_environment_hooks/local_setup.dsv

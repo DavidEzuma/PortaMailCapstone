@@ -210,6 +210,43 @@ mock_driver/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mock_driver.dir/build.make CMakeFiles/mock_driver.dir/build
 .PHONY : mock_driver/fast
 
+#=============================================================================
+# Target rules for targets named map_autosave_node
+
+# Build rule for target.
+map_autosave_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 map_autosave_node
+.PHONY : map_autosave_node
+
+# fast build rule for target.
+map_autosave_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/map_autosave_node.dir/build.make CMakeFiles/map_autosave_node.dir/build
+.PHONY : map_autosave_node/fast
+
+src/map_autosave_node.o: src/map_autosave_node.cpp.o
+.PHONY : src/map_autosave_node.o
+
+# target to build an object file
+src/map_autosave_node.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/map_autosave_node.dir/build.make CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o
+.PHONY : src/map_autosave_node.cpp.o
+
+src/map_autosave_node.i: src/map_autosave_node.cpp.i
+.PHONY : src/map_autosave_node.i
+
+# target to preprocess a source file
+src/map_autosave_node.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/map_autosave_node.dir/build.make CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.i
+.PHONY : src/map_autosave_node.cpp.i
+
+src/map_autosave_node.s: src/map_autosave_node.cpp.s
+.PHONY : src/map_autosave_node.s
+
+# target to generate assembly for a file
+src/map_autosave_node.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/map_autosave_node.dir/build.make CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.s
+.PHONY : src/map_autosave_node.cpp.s
+
 src/mock_driver.o: src/mock_driver.cpp.o
 .PHONY : src/mock_driver.o
 
@@ -249,7 +286,11 @@ help:
 	@echo "... test"
 	@echo "... portamail_navigator_uninstall"
 	@echo "... uninstall"
+	@echo "... map_autosave_node"
 	@echo "... mock_driver"
+	@echo "... src/map_autosave_node.o"
+	@echo "... src/map_autosave_node.i"
+	@echo "... src/map_autosave_node.s"
 	@echo "... src/mock_driver.o"
 	@echo "... src/mock_driver.i"
 	@echo "... src/mock_driver.s"

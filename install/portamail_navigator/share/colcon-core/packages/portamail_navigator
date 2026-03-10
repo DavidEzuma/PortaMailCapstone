@@ -1,1 +1,1 @@
-foxglove_bridge:geometry_msgs:nav2_msgs:nav_msgs:rclcpp:robot_localization:robot_state_publisher:sensor_msgs:tf2:tf2_ros
+foxglove_bridge:geometry_msgs:nav2_msgs:nav_msgs:rclcpp:robot_localization:robot_state_publisher:sensor_msgs:slam_toolbox:sllidar_ros2:tf2:tf2_ros
