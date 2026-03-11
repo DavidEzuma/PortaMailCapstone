@@ -55,7 +55,11 @@
       "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_coordinator 2>&1 | tail -5)",
       "Bash(systemctl --user daemon-reload && systemctl --user enable portamail.service && echo \"enabled\")",
       "Bash(loginctl enable-linger:*)",
-      "Bash(sudo sed:*)"
+      "Bash(sudo sed:*)",
+      "Bash(dpkg -l ros-jazzy-micro-ros-agent 2>/dev/null | tail -1; snap list micro-ros-agent 2>/dev/null | tail -1; which micro-ros-agent 2>/dev/null || true)",
+      "Bash(apt-cache show:*)",
+      "Bash(apt-cache search:*)",
+      "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_navigator 2>&1 | tail -5)"
     ]
   }
 }

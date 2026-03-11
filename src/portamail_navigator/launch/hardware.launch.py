@@ -37,6 +37,9 @@ def generate_launch_description():
     )
 
     # 1. Micro-ROS Agent (Teensy 4.0 via USB → /dev/ttyACM0)
+    # Built from source in ~/microros_ws (no apt/snap for arm64 Jazzy).
+    # launch_portamail.sh sources ~/microros_ws/install/setup.bash so this
+    # package is on the ROS path at launch time.
     microros_agent = Node(
         condition=IfCondition(LaunchConfiguration('use_teensy')),
         package='micro_ros_agent',

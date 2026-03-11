@@ -37,6 +37,10 @@ else
     source /opt/ros/jazzy/setup.bash
 fi
 
+# Source micro-ROS agent workspace (built separately; no arm64 apt/snap for Jazzy)
+# shellcheck disable=SC1091
+[[ -f "${HOME}/microros_ws/install/setup.bash" ]] && source "${HOME}/microros_ws/install/setup.bash"
+
 # ---------------------------------------------------------------------------
 # Locate Chromium binary
 # ---------------------------------------------------------------------------
