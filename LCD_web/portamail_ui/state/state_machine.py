@@ -104,10 +104,26 @@ def handle_edge(edge, payload=None):
         # SLAM toolbox confirms the map is written ("Status: Map Saved").
         state["screen"] = "MAPPING"
         return True
+    if edge == "save_location_open":
+        state["screen"] = "SAVE_LOCATION_SELECT"
+        return True
+    if edge in {"mark_location_room1", "mark_location_room2", "mark_location_origin"}:
+        state["screen"] = "MAPPING"
+        return True
+    if edge == "cancel_save_location":
+        state["screen"] = "MAPPING"
+        return True
+    if edge == "save_map_now":
+        state["screen"] = "PROCESSING"
+        return True
+    if edge == "map_saved":
+        state["mode"] = "DOCK_IDLE"
+        state["screen"] = "MODE_SELECT"
+        return True
     if edge == "go_back":
-        if state["screen"] == "SAVE_MAP_SELECT":
+        if state["screen"] in {"SAVE_MAP_SELECT", "SAVE_LOCATION_SELECT"}:
             state["screen"] = "MAPPING"
-        elif state["screen"] in {"MAPPING", "HOME"}:
+        elif state["screen"] in {"MAPPING", "HOME", "PROCESSING"}:
             state["mode"] = "DOCK_IDLE"
             state["screen"] = "MODE_SELECT"
         return True

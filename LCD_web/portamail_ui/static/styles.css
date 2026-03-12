@@ -586,3 +586,160 @@ pre {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
   touch-action: none;
 }
+
+/* --- Mapping screen: saved location badges --- */
+.saved-badges-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.location-badge {
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  transition: all 180ms ease-in-out;
+}
+
+.location-badge.saved {
+  border-color: var(--green);
+  color: #d7ffe9;
+  background: rgba(74, 222, 128, 0.14);
+}
+
+.location-badge.saved::after {
+  content: " ✓";
+}
+
+/* --- Mapping screen: two-button action column --- */
+.mapping-action-row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(360px, 100%);
+}
+
+.save-location-open-btn {
+  border: 3px solid var(--accent);
+  background: rgba(99, 192, 255, 0.08);
+  color: var(--accent);
+  min-height: 80px;
+}
+
+.save-location-open-btn:active {
+  background: rgba(99, 192, 255, 0.2);
+}
+
+.save-map-now-btn {
+  border: 3px solid var(--tam-gold);
+  background: rgba(214, 211, 196, 0.08);
+  color: var(--tam-gold);
+  min-height: 80px;
+}
+
+.save-map-now-btn:active {
+  background: rgba(214, 211, 196, 0.22);
+}
+
+/* --- Save location select: already-saved indicator --- */
+.location-already-saved {
+  opacity: 0.55;
+}
+
+.location-already-saved::after {
+  content: " ✓";
+  font-size: 0.85em;
+}
+
+/* --- Processing screen --- */
+.processing-ring {
+  width: 72px;
+  height: 72px;
+  border: 6px solid rgba(99, 192, 255, 0.18);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Confirm back overlay --- */
+.confirm-back-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(10, 12, 18, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+}
+
+.confirm-back-overlay.hidden {
+  display: none;
+}
+
+.confirm-back-box {
+  background: var(--panel);
+  border: 2px solid var(--tam-gold);
+  border-radius: 20px;
+  padding: 32px 28px;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+  text-align: center;
+}
+
+.confirm-back-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--tam-gold);
+}
+
+.confirm-back-body {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.confirm-back-btns {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.confirm-back-yes {
+  flex: 1;
+  background: var(--danger);
+  border: none;
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  touch-action: none;
+}
+
+.confirm-back-no {
+  flex: 1;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  touch-action: none;
+}

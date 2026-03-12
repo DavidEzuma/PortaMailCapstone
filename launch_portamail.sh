@@ -65,6 +65,12 @@ echo ""
 # ---------------------------------------------------------------------------
 echo "[startup] Starting LCD server at ${LCD_URL} ..."
 
+# Kill any stale Flask / lcd_bridge processes from a previous session so we
+# start clean (prevents port-5050 conflicts and zombie event senders).
+pkill -f "app.py" 2>/dev/null || true
+pkill -f "lcd_bridge" 2>/dev/null || true
+sleep 1
+
 cd "${LCD_DIR}"
 
 if [[ ! -f venv/bin/pip ]]; then
@@ -128,12 +134,10 @@ fi
 # 3. Disable screen blanking and hide mouse cursor
 # ---------------------------------------------------------------------------
 if [[ "${DISPLAY_FOUND}" == true ]]; then
-    echo "[startup] Disabling screen blanking ..."
-    if command -v xset &>/dev/null && [[ -n "${DISPLAY:-}" ]]; then
-        xset s off
-        xset -dpms
-        xset s noblank
-    fi
+    # Kill any desktop power manager that could re-enable DPMS
+    pkill -f xfce4-power-manager 2>/dev/null || true
+    pkill -f xscreensaver        2>/dev/null || true
+    pkill -f light-locker         2>/dev/null || true
 fi
 
 if command -v unclutter &>/dev/null; then
@@ -158,6 +162,22 @@ echo "[startup] Opening kiosk display ..."
 BROWSER_PID=$!
 
 echo "[startup] Browser running (PID ${BROWSER_PID})"
+
+# Wait for Chromium to load the UI, then turn the display on and lock off blanking
+sleep 2
+if [[ -n "${DISPLAY:-}" ]]; then
+    # Try xrandr first (most reliable on Pi DSI), fall back to DPMS
+    if command -v xrandr &>/dev/null; then
+        xrandr --output DSI-1 --auto 2>/dev/null || true
+    fi
+    if command -v xset &>/dev/null; then
+        xset +dpms
+        xset dpms force on
+        xset -dpms
+        xset s off
+        xset s noblank
+    fi
+fi
 
 # ---------------------------------------------------------------------------
 # Cleanup on Ctrl-C / SIGTERM
@@ -210,8 +230,19 @@ _kill_ros() {
     # Step 3: Give nodes up to 5 s to shut down cleanly
     sleep 5
 
-    # Step 4: Force-kill any survivors
-    pkill -SIGKILL -f sllidar_node 2>/dev/null || true
+    # Step 4: Force-kill any survivors, including orphaned child nodes that
+    # ros2 launch leaves behind when it is SIGKILL'd (they are re-parented to
+    # init and keep running, blocking ports/topics on the next session).
+    pkill -SIGKILL -f sllidar_node           2>/dev/null || true
+    pkill -SIGKILL -f lcd_bridge             2>/dev/null || true
+    pkill -SIGKILL -f sync_slam_toolbox_node 2>/dev/null || true
+    pkill -SIGKILL -f foxglove_bridge        2>/dev/null || true
+    pkill -SIGKILL -f mock_driver            2>/dev/null || true
+    pkill -SIGKILL -f map_autosave_node      2>/dev/null || true
+    pkill -SIGKILL -f navigation_coordinator 2>/dev/null || true
+    pkill -SIGKILL -f robot_state_publisher  2>/dev/null || true
+    pkill -SIGKILL -f joy_node               2>/dev/null || true
+    pkill -SIGKILL -f teleop_node            2>/dev/null || true
     [[ -n "${MAP_PID}"   ]] && kill -SIGKILL "${MAP_PID}"   2>/dev/null || true
     [[ -n "${COORD_PID}" ]] && kill -SIGKILL "${COORD_PID}" 2>/dev/null || true
     [[ -n "${MAP_PID}"   ]] && wait "${MAP_PID}"   2>/dev/null || true
@@ -226,7 +257,9 @@ _kill_ros() {
 # 5. Mode-selection + ROS launch loop
 #    Restarts whenever the Back button returns the UI to MODE_SELECT.
 # ---------------------------------------------------------------------------
-SINCE_TS=""   # initialise; updated before each _kill_ros call
+# Anchor to current event log so stale events from prior Flask sessions
+# are never mistaken for a fresh mode selection.
+SINCE_TS=$(_get_last_ts)
 
 while true; do
     echo ""
@@ -262,6 +295,12 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
     echo "[startup] Mode selected: ${MODE}"
     echo ""
 
+    # Clean up stale Fast-DDS shared memory lock files from any previous session.
+    # If left behind (e.g. after SIGKILL), they cause all nodes to fall back to
+    # UDP transport instead of SHM, which significantly increases message latency.
+    rm -rf /dev/shm/fastrtps_* 2>/dev/null || true
+    echo "[startup] Cleared stale Fast-DDS SHM files."
+
     # Launch appropriate ROS 2 stack
     if [[ "${MODE}" == "mapping" ]]; then
         echo "[startup] Launching: hardware + SLAM Toolbox + joystick (real LiDAR)"
@@ -289,7 +328,11 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
     echo "[startup] All processes running. Press Back on the touchscreen to return to mode select."
     echo ""
 
-    # Monitor: wait for Back button (screen returns to MODE_SELECT) or process exit
+    # Monitor: wait for Back button (screen returns to MODE_SELECT) or process exit.
+    # PREV_SCREEN tracks the last observed screen so we only react to MODE_SELECT
+    # *transitions* (i.e. after we have seen MAPPING/PROCESSING), not a stale
+    # MODE_SELECT that was already present before the ROS stack finished starting.
+    PREV_SCREEN=""
     while true; do
         sleep 2
 
@@ -297,7 +340,7 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
         SCREEN=$(curl -sf "${LCD_URL}/api/state" 2>/dev/null \
             | python3 -c "import sys,json; print(json.load(sys.stdin).get('screen',''))" 2>/dev/null || echo "")
 
-        if [[ "${SCREEN}" == "MODE_SELECT" ]]; then
+        if [[ "${SCREEN}" == "MODE_SELECT" && -n "${PREV_SCREEN}" && "${PREV_SCREEN}" != "MODE_SELECT" ]]; then
             echo "[startup] Back button detected — stopping ROS stack and restarting mode selection."
             # Snapshot the event log NOW (before the ~7 s kill window) so any
             # mode-select tap the user makes during shutdown is not missed.
@@ -305,6 +348,10 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
             _kill_ros
             break
         fi
+
+        # Track last known screen so the MODE_SELECT check above requires a
+        # genuine transition (not a stale initial state).
+        [[ -n "${SCREEN}" ]] && PREV_SCREEN="${SCREEN}"
 
         # Also break if both processes have exited on their own
         MAP_ALIVE=false

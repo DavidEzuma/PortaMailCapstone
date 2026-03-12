@@ -1,32 +1,27 @@
-<section class="screen has-footer" data-screen="SAVE_MAP_SELECT" id="screenSaveMapSelect">
+<section class="screen has-footer" data-screen="SAVE_LOCATION_SELECT" id="screenSaveLocationSelect">
   <div class="screen-body">
-    <div class="status emphasized mapping-title">Save Current Location As…</div>
-    <div class="status">The robot's current position will be saved as the selected waypoint.</div>
+    <div class="status emphasized mapping-title">Save Current Position As…</div>
+    <div class="status">Drive the robot to the location, then tap to record its position.</div>
     <div class="button-row save-location-row">
-      <button class="btn big save-location-btn"
-              data-bit="save_location_room1_pressed"
-              data-edge="save_location_room1">
+      <button class="btn big save-location-btn" id="markRoom1Btn"
+              data-bit="mark_location_room1_pressed"
+              data-edge="mark_location_room1">
         Room 1
       </button>
-      <button class="btn big save-location-btn"
-              data-bit="save_location_room2_pressed"
-              data-edge="save_location_room2">
+      <button class="btn big save-location-btn" id="markRoom2Btn"
+              data-bit="mark_location_room2_pressed"
+              data-edge="mark_location_room2">
         Room 2
       </button>
-      <button class="btn big save-location-btn origin-location-btn"
-              data-bit="save_location_origin_pressed"
-              data-edge="save_location_origin">
+      <button class="btn big save-location-btn origin-location-btn" id="markOriginBtn"
+              data-bit="mark_location_origin_pressed"
+              data-edge="mark_location_origin">
         Origin
-      </button>
-      <button class="btn big save-location-btn save-location-none-btn"
-              data-bit="save_location_none_pressed"
-              data-edge="save_location_none">
-        Don't Save Position
       </button>
     </div>
   </div>
   <div class="screen-footer">
-    <button class="btn back-btn" data-bit="back_pressed" data-edge="go_back">← Back</button>
+    <button class="btn back-btn" data-bit="back_pressed" data-edge="cancel_save_location">← Back</button>
     <div></div>
   </div>
 </section>

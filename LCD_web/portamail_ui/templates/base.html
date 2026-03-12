@@ -23,6 +23,18 @@
           </div>
         </div>
       </div>
+
+      <!-- Confirm back overlay — shown by JS when locations have been saved but map not yet saved -->
+      <div id="confirmBackOverlay" class="confirm-back-overlay hidden">
+        <div class="confirm-back-box">
+          <div class="confirm-back-title">Discard Location Data?</div>
+          <div class="confirm-back-body">You have saved location data for this session. Going back will discard it.</div>
+          <div class="confirm-back-btns">
+            <button id="confirmBackYes" class="btn confirm-back-yes">Go Back</button>
+            <button id="confirmBackNo"  class="btn confirm-back-no">Keep Mapping</button>
+          </div>
+        </div>
+      </div>
     </section>
     {% if show_debug_panel %}
     <aside class="debug">

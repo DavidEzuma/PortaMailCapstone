@@ -1,16 +1,12 @@
 locations:
-  lobby:
-    w: 1.0
-    x: 1.0
-    y: 3.0
   mailroom:
     w: 1.0
     x: 0.0
     y: 0.0
   office_101:
-    w: 1.0
-    x: 2.5
-    y: 1.0
+    w: 0.9885
+    x: 0.3229
+    y: 0.1549
   office_102:
     w: 0.9449
     x: 1.9098

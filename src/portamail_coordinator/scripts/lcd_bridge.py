@@ -55,6 +55,13 @@ _SAVE_LOCATION_MAP = {
     "save_location_origin":  "mailroom",
 }
 
+# New flow: mark location coordinates only (no map save triggered)
+_MARK_LOCATION_MAP = {
+    "mark_location_room1":   "office_101",
+    "mark_location_room2":   "office_102",
+    "mark_location_origin":  "mailroom",
+}
+
 # Internal bridge states
 _IDLE            = "IDLE"
 _NAVIGATING      = "NAVIGATING"
@@ -178,12 +185,16 @@ class LcdBridge(Node):
             elif name in _SAVE_LOCATION_MAP:
                 self._save_location_and_map(name)
             elif name == "save_location_none":
-                # Save the map without recording any TF coordinates
+                self._delete_all_maps()
+                self._publish("save_map")
+            elif name in _MARK_LOCATION_MAP:
+                self._mark_location(name)
+            elif name == "save_map_now":
                 self._delete_all_maps()
                 self._publish("save_map")
             elif name == "go_back":
-                # User left mapping without saving — discard auto-saved maps
                 self._delete_all_maps()
+                self._clear_saved_locations()
             return
 
         # --- Navigation mode ---
@@ -265,6 +276,51 @@ class LcdBridge(Node):
         self._delete_all_maps()
         self._publish("save_map")
 
+    def _mark_location(self, event_name: str):
+        """Save TF coordinates for a location without triggering a map save."""
+        location_key = _MARK_LOCATION_MAP[event_name]
+        x, y, w = 0.0, 0.0, 1.0
+        if self._tf_buffer is not None:
+            try:
+                t = self._tf_buffer.lookup_transform(
+                    "map", "base_link", rclpy.time.Time()
+                )
+                x = t.transform.translation.x
+                y = t.transform.translation.y
+                q = t.transform.rotation
+                yaw = math.atan2(
+                    2.0 * (q.w * q.z + q.x * q.y),
+                    1.0 - 2.0 * (q.y * q.y + q.z * q.z),
+                )
+                w = math.cos(yaw / 2.0)
+                self.get_logger().info(
+                    f"TF lookup → {location_key}: x={x:.3f} y={y:.3f} w={w:.4f}"
+                )
+            except Exception as exc:
+                self.get_logger().warn(f"TF lookup failed ({exc}) — saving (0,0) placeholder")
+
+        if self._loc_yaml and _YAML_AVAILABLE:
+            try:
+                with open(self._loc_yaml, "r") as f:
+                    data = yaml.safe_load(f) or {}
+                if "locations" not in data:
+                    data["locations"] = {}
+                data["locations"][location_key] = {
+                    "x": round(float(x), 4),
+                    "y": round(float(y), 4),
+                    "w": round(float(w), 4),
+                }
+                with open(self._loc_yaml, "w") as f:
+                    yaml.dump(data, f, default_flow_style=False)
+                self.get_logger().info(f"Marked '{location_key}' in {self._loc_yaml}")
+            except Exception as exc:
+                self.get_logger().error(f"Failed to write locations.yaml: {exc}")
+        else:
+            if not self._loc_yaml:
+                self.get_logger().warn("locations_yaml_path not set — coordinates not saved")
+            if not _YAML_AVAILABLE:
+                self.get_logger().warn("PyYAML not installed — coordinates not saved")
+
     # ------------------------------------------------------------------
     # Map file management
     # ------------------------------------------------------------------
@@ -284,6 +340,21 @@ class LcdBridge(Node):
                 except OSError as exc:
                     self.get_logger().warn(f"Could not delete map file {path}: {exc}")
         self.get_logger().info(f"Deleted {deleted} map file(s) from {self._maps_dir}")
+
+    def _clear_saved_locations(self):
+        """Remove location entries from locations.yaml when user discards a mapping session."""
+        if not self._loc_yaml or not _YAML_AVAILABLE:
+            return
+        try:
+            with open(self._loc_yaml, "r") as f:
+                data = yaml.safe_load(f) or {}
+            if "locations" in data and data["locations"]:
+                data["locations"] = {}
+                with open(self._loc_yaml, "w") as f:
+                    yaml.dump(data, f, default_flow_style=False)
+                self.get_logger().info("Cleared saved locations from locations.yaml")
+        except Exception as exc:
+            self.get_logger().warn(f"Failed to clear locations.yaml: {exc}")
 
     # ------------------------------------------------------------------
     # LCD state helper
@@ -321,13 +392,11 @@ class LcdBridge(Node):
 
         elif self._ros_mode == "mapping":
             if "Status: Map Saved" in text:
-                self.get_logger().info("Map saved — returning to mode selection")
-                # Trigger go_back via the LCD REST API so the monitoring script
-                # detects MODE_SELECT and shuts down the ROS stack cleanly.
+                self.get_logger().info("Map saved — signalling UI")
                 try:
-                    self._http_post("/api/edge", {"edge": "go_back"})
+                    self._http_post("/api/edge", {"edge": "map_saved"})
                 except Exception as exc:
-                    self.get_logger().warn(f"Could not POST go_back to LCD: {exc}")
+                    self.get_logger().warn(f"Could not POST map_saved to LCD: {exc}")
 
     # ------------------------------------------------------------------
     # Helpers

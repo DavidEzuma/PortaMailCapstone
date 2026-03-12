@@ -23,6 +23,9 @@ def generate_launch_description():
     # This flag only controls which EKF config is loaded (odom+IMU vs odom-only).
     # There is NO separate IMU ROS node on the Pi side.
     use_imu_arg    = DeclareLaunchArgument('use_imu',    default_value='false')
+    # use_ekf: set to 'false' when mock_driver is active — mock_driver publishes
+    # odom→base_link TF directly and having EKF run in parallel causes TF conflicts.
+    use_ekf_arg    = DeclareLaunchArgument('use_ekf',    default_value='true')
 
     # --- URDF / Robot State Publisher ---
     urdf_file = PathJoinSubstitution([pkg_share, 'urdf', 'portamail.urdf'])
@@ -75,6 +78,8 @@ def generate_launch_description():
 
     # 3. Sensor Fusion (EKF)
     def select_ekf_config(context):
+        if LaunchConfiguration('use_ekf').perform(context).lower() != 'true':
+            return []
         use_imu = LaunchConfiguration('use_imu').perform(context)
         config_file = 'ekf.yaml' if use_imu.lower() == 'true' else 'ekf_no_imu.yaml'
         ekf_config = PathJoinSubstitution([pkg_share, 'config', config_file])
@@ -92,6 +97,7 @@ def generate_launch_description():
         use_lidar_arg,
         use_teensy_arg,
         use_imu_arg,
+        use_ekf_arg,
         robot_state_publisher,
         microros_agent,
         rplidar_node,

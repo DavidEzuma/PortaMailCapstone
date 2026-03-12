@@ -55,7 +55,11 @@ def generate_launch_description():
         launch_arguments={
             'use_lidar': LaunchConfiguration('use_real_lidar'),
             'use_teensy': 'false',
-            'use_imu': 'false'
+            'use_imu': 'false',
+            # Disable EKF when mock_driver is active: mock_driver owns the
+            # odom→base_link TF and running EKF in parallel causes TF conflicts
+            # that make SLAM Toolbox drop scan messages.
+            'use_ekf': 'false',
         }.items()
     )
 
@@ -143,7 +147,7 @@ def generate_launch_description():
         parameters=[{
             'port': 8765,
             'address': '0.0.0.0',
-            'send_buffer_limit': 10000000,
+            'send_buffer_limit': 10000000,  # 10 MB — desktop app doesn't need large buffer
             'publish_all_topics': True
         }],
         output='screen'

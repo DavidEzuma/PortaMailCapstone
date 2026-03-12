@@ -59,7 +59,31 @@
       "Bash(dpkg -l ros-jazzy-micro-ros-agent 2>/dev/null | tail -1; snap list micro-ros-agent 2>/dev/null | tail -1; which micro-ros-agent 2>/dev/null || true)",
       "Bash(apt-cache show:*)",
       "Bash(apt-cache search:*)",
-      "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_navigator 2>&1 | tail -5)"
+      "Bash(source /opt/ros/jazzy/setup.bash && colcon build --packages-select portamail_navigator 2>&1 | tail -5)",
+      "Bash(cat /boot/firmware/cmdline.txt && echo \"===\" && ls /etc/systemd/system/display-off-on-shutdown.service && echo \"===\" && cat /etc/lightdm/lightdm.conf.d/51-blank-on-start.conf && echo \"===\" && systemctl is-enabled display-off-on-shutdown.service)",
+      "Bash(find /etc /usr/share -name \"plymouthd.conf\" 2>/dev/null && echo \"===\" && find /etc -name \"*.plymouth\" 2>/dev/null && echo \"===\" && update-alternatives --display default.plymouth 2>/dev/null | head -10)",
+      "Bash(sudo mkdir:*)",
+      "Bash(find /home/davidezuma -name \"*.png\" -o -name \"*.jpg\" 2>/dev/null | grep -i -E \"load|splash|boot|portamail\" | head -10)",
+      "Bash(find /home/davidezuma -maxdepth 3 -name \"*.png\" -o -name \"*.jpg\" 2>/dev/null | grep -v \".claude\" | head -20)",
+      "Bash(fc-list 2>/dev/null | grep -i \"ubuntu\\\\|dejavu\\\\|liberation\\\\|freesans\\\\|vera\" | head -10)",
+      "Read(//sys/devices/platform/axi/1000120000.pcie/1f00118000.dsi/graphics/fb0/**)",
+      "Bash(cd ~/PortaMailCapstone && colcon build --packages-select portamail_navigator portamail_coordinator 2>&1 | tail -20)",
+      "Bash(curl -s http://127.0.0.1:5050/api/state 2>/dev/null || echo \"Flask not running\")",
+      "Bash(cd ~/PortaMailCapstone && colcon build --packages-select portamail_coordinator 2>&1 | tail -8)",
+      "Bash(curl -s http://127.0.0.1:5050/api/state 2>/dev/null | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('screen:', d.get\\('screen'\\), '| mode:', d.get\\('mode'\\)\\)\")",
+      "Bash(curl -s \"http://127.0.0.1:5050/api/events\" 2>/dev/null | python3 -c \"import sys,json; evts=json.load\\(sys.stdin\\); print\\(f'{len\\(evts\\)} events'\\); [print\\(f'  {e[\\\\\"ts\\\\\"]} {e[\\\\\"name\\\\\"]}'\\) for e in evts[-10:]]\" 2>/dev/null)",
+      "Bash(curl -s \"http://127.0.0.1:5050/api/events\" 2>/dev/null | python3 -m json.tool)",
+      "Bash(curl -s \"http://127.0.0.1:5050/api/state\" | python3 -m json.tool 2>/dev/null)",
+      "Bash(cd ~/PortaMailCapstone && colcon build --packages-select portamail_coordinator 2>&1 | tail -5)",
+      "Bash(curl -s http://127.0.0.1:5050/api/state 2>/dev/null | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('screen:', d['screen']\\)\" 2>/dev/null || echo \"Flask not responding\")",
+      "Bash(curl -s http://127.0.0.1:5050/api/state | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('screen:', d['screen']\\)\")",
+      "Bash(curl -s http://127.0.0.1:5050/api/edge -X POST -H \"Content-Type: application/json\" -d '{\"edge\":\"go_back\"}' | python3 -m json.tool && curl -s http://127.0.0.1:5050/api/state | python3 -c \"import sys,json; print\\(json.load\\(sys.stdin\\)['screen']\\)\")",
+      "Bash(cd ~/PortaMailCapstone/LCD_web/portamail_ui && venv/bin/pip show flask-socketio 2>/dev/null | grep Version; venv/bin/pip show python-socketio 2>/dev/null | grep Version)",
+      "Bash(pkill -f \"lcd_bridge\" 2>/dev/null; pkill -f \"venv/bin/python app.py\" 2>/dev/null; pkill -f \"ros2 launch portamail\" 2>/dev/null; pkill -f \"slam_toolbox\" 2>/dev/null; pkill -f \"sllidar_node\" 2>/dev/null; echo \"Killed zombie processes\"; sleep 2; ps aux | grep -E \"lcd_bridge|app.py\" | grep -v grep | wc -l)",
+      "Bash(pkill -f \"lcd_bridge\" 2>/dev/null || true; pkill -f \"venv/bin/python app.py\" 2>/dev/null || true; pkill -f \"ros2 launch portamail\" 2>/dev/null || true; pkill -f \"sllidar_node\" 2>/dev/null || true; echo \"done\")",
+      "Bash(kill 3105 5047 5443 6243 7807 40690 40266 2>/dev/null; echo \"done\")",
+      "Bash(kill -9 3105 5047 5443 6243 7807 40690 40266 41028 41349 41448 2>/dev/null; sleep 1; ss -tlnp | grep 5050; ps aux | grep -E \"lcd_bridge|app\\\\.py\" | grep -v grep | wc -l)",
+      "Bash(pkill -9 -f sync_slam_toolbox_node 2>/dev/null; pkill -9 -f foxglove_bridge 2>/dev/null; pkill -9 -f mock_driver 2>/dev/null; pkill -9 -f map_autosave_node 2>/dev/null; pkill -9 -f navigation_coordinator 2>/dev/null; pkill -9 -f robot_state_publisher 2>/dev/null; pkill -9 -f joy_node 2>/dev/null; pkill -9 -f teleop_node 2>/dev/null; pkill -9 -f sllidar_node 2>/dev/null; pkill -9 -f lcd_bridge 2>/dev/null; pkill -9 -f \"app.py\" 2>/dev/null; echo \"done\")"
     ]
   }
 }

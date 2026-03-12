@@ -2,5 +2,5 @@ map_autosave_node:
   ros__parameters:
     save_service: /slam_toolbox/save_map
     filename_prefix: portamail_map
-    autosave_interval_sec: 30
+    autosave_interval_sec: 60
     save_on_startup: false

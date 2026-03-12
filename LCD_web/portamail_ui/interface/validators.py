@@ -18,8 +18,18 @@ def validate_edge_for_screen(edge, screen, mode, selected_room):
         return screen == "CONFIRM_SELECT"
     if edge == "delivery_confirmed":
         return screen == "CONFIRM_ACK" and selected_room is not None
+    if edge == "save_location_open":
+        return screen == "MAPPING"
+    if edge in {"mark_location_room1", "mark_location_room2", "mark_location_origin"}:
+        return screen == "SAVE_LOCATION_SELECT"
+    if edge == "cancel_save_location":
+        return screen == "SAVE_LOCATION_SELECT"
+    if edge == "save_map_now":
+        return screen == "MAPPING"
+    if edge == "map_saved":
+        return screen == "PROCESSING"
     if edge == "go_back":
-        return screen in {"SAVE_MAP_SELECT", "MAPPING", "HOME"}
+        return screen in {"SAVE_MAP_SELECT", "SAVE_LOCATION_SELECT", "MAPPING", "HOME", "PROCESSING"}
     if edge == "start_origin":
         return screen == "HOME"
     return True

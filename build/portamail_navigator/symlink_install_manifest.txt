@@ -9,6 +9,8 @@
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf_no_imu.yaml
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/map_autosave.yaml
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/slam.yaml
+/home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/error message.png
+/home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/micro_ros_arduino-2.0.8-jazzy.zip
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/locale_stubs.c
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/teensy_driver.ino
 /home/davidezuma/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail.urdf

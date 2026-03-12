@@ -9,6 +9,8 @@ SCREENS = {
     "DELIVERING_ROOM2",
     "MAPPING",
     "SAVE_MAP_SELECT",
+    "SAVE_LOCATION_SELECT",
+    "PROCESSING",
 }
 
 BIT_KEYS = {
@@ -28,6 +30,11 @@ BIT_KEYS = {
     "save_location_none_pressed",
     "start_origin_pressed",
     "back_pressed",
+    "save_location_btn_pressed",
+    "save_map_now_pressed",
+    "mark_location_room1_pressed",
+    "mark_location_room2_pressed",
+    "mark_location_origin_pressed",
 }
 
 EDGE_EVENTS = {
@@ -48,6 +55,13 @@ EDGE_EVENTS = {
     "save_location_origin",
     "save_location_none",
     "go_back",
+    "save_location_open",
+    "mark_location_room1",
+    "mark_location_room2",
+    "mark_location_origin",
+    "cancel_save_location",
+    "save_map_now",
+    "map_saved",
 }
 
 

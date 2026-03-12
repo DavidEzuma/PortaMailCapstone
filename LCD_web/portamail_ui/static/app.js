@@ -9,6 +9,10 @@ const introOverlay = document.getElementById("introOverlay");
 const powerConfirmOverlay = document.getElementById("powerConfirmOverlay");
 const powerConfirmYes = document.getElementById("powerConfirmYes");
 const powerConfirmNo = document.getElementById("powerConfirmNo");
+const confirmBackOverlay = document.getElementById("confirmBackOverlay");
+const confirmBackYes = document.getElementById("confirmBackYes");
+const confirmBackNo = document.getElementById("confirmBackNo");
+const mappingBackBtn = document.getElementById("mappingBackBtn");
 const destinationButtons = Array.from(document.querySelectorAll(".destination-btn"));
 const deliverStartBtn = document.getElementById("deliverStartBtn");
 
@@ -17,8 +21,12 @@ let introDismissed = false;
 let currentScreen = "MODE_SELECT";
 let selectedRoom = null;
 
-// Screens that indicate the robot is actively working — auto-dismiss intro if
-// the browser reconnects mid-operation.
+// Tracks which locations have been marked this mapping session (client-side only)
+const savedLocations = new Set();
+
+// Timer for processing screen timeout warning
+let processingTimeout = null;
+
 const AUTO_DISMISS_SCREENS = new Set([
   "DELIVERING_ROOM1",
   "DELIVERING_ROOM2",
@@ -27,15 +35,19 @@ const AUTO_DISMISS_SCREENS = new Set([
   "CONFIRM_ACK",
   "MAPPING",
   "SAVE_MAP_SELECT",
+  "SAVE_LOCATION_SELECT",
+  "PROCESSING",
 ]);
 
+// --- Intro ---
+
 function dismissIntro() {
-  if (!introOverlay || introDismissed) {
-    return;
-  }
+  if (!introOverlay || introDismissed) return;
   introDismissed = true;
   introOverlay.classList.add("hidden");
 }
+
+// --- Destination selection (navigation mode) ---
 
 function clearDestinationSelection() {
   selectedRoom = null;
@@ -70,9 +82,7 @@ function emitStartForRoom(room) {
 
 function startSelectedDeliveries(e) {
   e.preventDefault();
-  if (currentScreen !== "HOME" || selectedRoom === null) {
-    return;
-  }
+  if (currentScreen !== "HOME" || selectedRoom === null) return;
   const room = selectedRoom;
   clearDestinationSelection();
   updateDestinationControls();
@@ -82,15 +92,11 @@ function startSelectedDeliveries(e) {
 // --- Power confirmation ---
 
 function showPowerConfirm() {
-  if (powerConfirmOverlay) {
-    powerConfirmOverlay.classList.remove("hidden");
-  }
+  if (powerConfirmOverlay) powerConfirmOverlay.classList.remove("hidden");
 }
 
 function hidePowerConfirm() {
-  if (powerConfirmOverlay) {
-    powerConfirmOverlay.classList.add("hidden");
-  }
+  if (powerConfirmOverlay) powerConfirmOverlay.classList.add("hidden");
 }
 
 function bindPowerConfirm() {
@@ -98,7 +104,6 @@ function bindPowerConfirm() {
     powerConfirmYes.addEventListener("pointerup", (e) => {
       e.preventDefault();
       hidePowerConfirm();
-      // Fire the actual shutdown edge only after confirmation
       emitTap("power_pressed", "power_edge");
     });
   }
@@ -110,37 +115,138 @@ function bindPowerConfirm() {
   }
 }
 
+// --- Confirm back overlay (mapping mode) ---
+
+function showConfirmBack() {
+  if (confirmBackOverlay) confirmBackOverlay.classList.remove("hidden");
+}
+
+function hideConfirmBack() {
+  if (confirmBackOverlay) confirmBackOverlay.classList.add("hidden");
+}
+
+function bindConfirmBack() {
+  if (confirmBackYes) {
+    confirmBackYes.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      hideConfirmBack();
+      savedLocations.clear();
+      updateLocationBadges();
+      emitTap("back_pressed", "go_back");
+    });
+  }
+  if (confirmBackNo) {
+    confirmBackNo.addEventListener("pointerup", (e) => {
+      e.preventDefault();
+      hideConfirmBack();
+    });
+  }
+}
+
+// --- Mapping back button (special: may show confirm overlay) ---
+
+function bindMappingBackBtn() {
+  if (!mappingBackBtn) return;
+  mappingBackBtn.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    socket.emit("press", { bit: "back_pressed" });
+  });
+  mappingBackBtn.addEventListener("pointerup", (e) => {
+    e.preventDefault();
+    socket.emit("release", { bit: "back_pressed" });
+    if (savedLocations.size > 0) {
+      showConfirmBack();
+    } else {
+      emitTap("back_pressed", "go_back");
+    }
+  });
+  mappingBackBtn.addEventListener("pointercancel", (e) => {
+    e.preventDefault();
+    socket.emit("release", { bit: "back_pressed" });
+  });
+  mappingBackBtn.addEventListener("pointerleave", (e) => {
+    e.preventDefault();
+    socket.emit("release", { bit: "back_pressed" });
+  });
+}
+
+// --- Location badges (MAPPING screen) ---
+
+const EDGE_TO_LOCATION = {
+  mark_location_room1: "ROOM1",
+  mark_location_room2: "ROOM2",
+  mark_location_origin: "ORIGIN",
+};
+
+function updateLocationBadges() {
+  document.querySelectorAll(".location-badge[data-location]").forEach((badge) => {
+    badge.classList.toggle("saved", savedLocations.has(badge.dataset.location));
+  });
+  // Visually indicate already-saved locations in SAVE_LOCATION_SELECT
+  const markRoom1 = document.getElementById("markRoom1Btn");
+  const markRoom2 = document.getElementById("markRoom2Btn");
+  const markOrigin = document.getElementById("markOriginBtn");
+  if (markRoom1) markRoom1.classList.toggle("location-already-saved", savedLocations.has("ROOM1"));
+  if (markRoom2) markRoom2.classList.toggle("location-already-saved", savedLocations.has("ROOM2"));
+  if (markOrigin) markOrigin.classList.toggle("location-already-saved", savedLocations.has("ORIGIN"));
+}
+
+// --- Processing screen timeout ---
+
+function startProcessingTimeout() {
+  clearTimeout(processingTimeout);
+  processingTimeout = setTimeout(() => {
+    if (currentScreen === "PROCESSING") {
+      const statusEl = document.querySelector("#screenProcessing .processing-status");
+      if (statusEl) statusEl.textContent = "Taking longer than expected…";
+    }
+  }, 15000);
+}
+
+function clearProcessingTimeout() {
+  clearTimeout(processingTimeout);
+  processingTimeout = null;
+  const statusEl = document.querySelector("#screenProcessing .processing-status");
+  if (statusEl) statusEl.textContent = "Please wait. Do not power off the robot.";
+}
+
+// --- State rendering ---
+
 function renderState(state) {
+  const prevScreen = currentScreen;
   currentScreen = state.screen || currentScreen;
 
-  // Auto-dismiss intro only when the robot is mid-operation (e.g., browser
-  // reconnects while a delivery is in progress). MODE_SELECT and HOME require
-  // a manual tap so the user sees the splash screen first.
   if (!introDismissed && AUTO_DISMISS_SCREENS.has(currentScreen)) {
     dismissIntro();
   }
 
-  if (dbgMode) {
-    dbgMode.textContent = state.mode || "-";
-  }
-  if (dbgScreen) {
-    dbgScreen.textContent = state.screen || "-";
-  }
-  if (dbgRoom) {
-    dbgRoom.textContent = state.selected_room || "-";
-  }
-  if (dbgBits) {
-    dbgBits.textContent = JSON.stringify(state.bits || {}, null, 2);
-  }
+  if (dbgMode) dbgMode.textContent = state.mode || "-";
+  if (dbgScreen) dbgScreen.textContent = state.screen || "-";
+  if (dbgRoom) dbgRoom.textContent = state.selected_room || "-";
+  if (dbgBits) dbgBits.textContent = JSON.stringify(state.bits || {}, null, 2);
 
   screens.forEach((el) => {
     el.classList.toggle("active", el.dataset.screen === state.screen);
   });
 
+  // Clear saved locations when returning to mode select
+  if (currentScreen === "MODE_SELECT" && prevScreen !== "MODE_SELECT") {
+    savedLocations.clear();
+    updateLocationBadges();
+  }
+
+  // Processing screen: start timeout on entry, clear on exit
+  if (currentScreen === "PROCESSING" && prevScreen !== "PROCESSING") {
+    startProcessingTimeout();
+  } else if (currentScreen !== "PROCESSING" && prevScreen === "PROCESSING") {
+    clearProcessingTimeout();
+  }
+
   if (currentScreen !== "HOME" && selectedRoom !== null) {
     clearDestinationSelection();
   }
   updateDestinationControls();
+  updateLocationBadges();
 }
 
 function renderEvents(events) {
@@ -149,14 +255,15 @@ function renderEvents(events) {
   }
 }
 
+// --- Button binding ---
+
 function bindButtons() {
   const buttons = document.querySelectorAll("button[data-bit][data-edge]");
   buttons.forEach((btn) => {
     const bit = btn.dataset.bit;
     const edge = btn.dataset.edge;
 
-    // Power buttons are intercepted — show confirmation overlay instead of
-    // firing the edge directly.
+    // Power buttons: show confirmation overlay
     if (edge === "power_edge") {
       btn.addEventListener("pointerdown", (e) => {
         e.preventDefault();
@@ -164,7 +271,7 @@ function bindButtons() {
       });
       btn.addEventListener("pointerup", (e) => {
         e.preventDefault();
-        socket.emit("release", { bit }); // release bit only, no edge
+        socket.emit("release", { bit });
         showPowerConfirm();
       });
       btn.addEventListener("pointercancel", (e) => {
@@ -186,6 +293,11 @@ function bindButtons() {
     const onUp = (e, allowEdge) => {
       e.preventDefault();
       if (allowEdge) {
+        // Track location marks client-side for badge display
+        if (edge in EDGE_TO_LOCATION) {
+          savedLocations.add(EDGE_TO_LOCATION[edge]);
+          updateLocationBadges();
+        }
         socket.emit("release", { bit, edge });
       } else {
         socket.emit("release", { bit });
@@ -200,9 +312,7 @@ function bindButtons() {
 }
 
 function bindIntro() {
-  if (!introOverlay) {
-    return;
-  }
+  if (!introOverlay) return;
   introOverlay.addEventListener("pointerup", dismissIntro);
   introOverlay.addEventListener("click", dismissIntro);
   introOverlay.addEventListener("keydown", (e) => {
@@ -217,14 +327,9 @@ function bindDestinationSelection() {
   destinationButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
-      if (currentScreen !== "HOME") {
-        return;
-      }
+      if (currentScreen !== "HOME") return;
       const room = btn.dataset.roomTarget;
-      if (!room) {
-        return;
-      }
-      // Radio behaviour: selecting the same room again deselects it
+      if (!room) return;
       selectedRoom = selectedRoom === room ? null : room;
       updateDestinationControls();
     });
@@ -240,9 +345,7 @@ function bindDestinationSelection() {
   if (deliverStartBtn) {
     deliverStartBtn.addEventListener("click", startSelectedDeliveries);
     deliverStartBtn.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        startSelectedDeliveries(e);
-      }
+      if (e.key === "Enter" || e.key === " ") startSelectedDeliveries(e);
     });
   }
 }
@@ -258,5 +361,8 @@ socket.on("events", (events) => {
 bindButtons();
 bindIntro();
 bindPowerConfirm();
+bindConfirmBack();
+bindMappingBackBtn();
 bindDestinationSelection();
 updateDestinationControls();
+updateLocationBadges();

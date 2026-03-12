@@ -1,0 +1,23 @@
+[100%] Built target coordinator
+-- Install configuration: ""
+-- Execute custom install script
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/coordinator
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/bringup.launch.py
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/joystick.launch.py
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/config/locations.yaml
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/package_run_dependencies/portamail_coordinator
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/parent_prefix_path/portamail_coordinator
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.sh
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.dsv
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.bash
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.sh
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.zsh
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.dsv
+-- Symlinking: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.dsv
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/packages/portamail_coordinator
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig.cmake
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig-version.cmake
+-- Up-to-date symlink: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.xml
+-- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/lcd_bridge

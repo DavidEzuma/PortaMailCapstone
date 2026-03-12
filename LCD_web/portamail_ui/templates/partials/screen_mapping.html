@@ -1,15 +1,27 @@
 <section class="screen has-footer" data-screen="MAPPING" id="screenMapping">
   <div class="screen-body">
     <div class="status emphasized mapping-title">Mapping Mode Active</div>
-    <div class="status">Drive the robot with the Xbox controller to map the environment.<br>Hold RB to enable movement.</div>
-    <button class="btn big save-map-btn"
-            data-bit="save_map_pressed"
-            data-edge="save_map_open">
-      Save Map
-    </button>
+    <div class="status">Drive to each location and save its position.</div>
+    <div class="saved-badges-row">
+      <span class="location-badge" id="badgeRoom1" data-location="ROOM1">Room 1</span>
+      <span class="location-badge" id="badgeRoom2" data-location="ROOM2">Room 2</span>
+      <span class="location-badge" id="badgeOrigin" data-location="ORIGIN">Origin</span>
+    </div>
+    <div class="mapping-action-row">
+      <button class="btn big save-location-open-btn"
+              data-bit="save_location_btn_pressed"
+              data-edge="save_location_open">
+        Save Location
+      </button>
+      <button class="btn big save-map-now-btn"
+              data-bit="save_map_now_pressed"
+              data-edge="save_map_now">
+        Save Map &amp; Exit
+      </button>
+    </div>
   </div>
   <div class="screen-footer">
-    <button class="btn back-btn" data-bit="back_pressed" data-edge="go_back">← Back</button>
+    <button class="btn back-btn" id="mappingBackBtn">← Back</button>
     <button class="btn power" data-bit="power_pressed" data-edge="power_edge">Power</button>
   </div>
 </section>
