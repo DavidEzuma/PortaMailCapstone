@@ -25,9 +25,14 @@
 //    https://github.com/micro-ROS/micro_ros_arduino
 //    Pre-built .zip for ESP32 / Jazzy may be available; otherwise build from
 //    source following the micro-ROS Arduino README.
-//  • Board in Arduino IDE: "ESP32 Dev Module" (esp32 by Espressif, ≥2.x).
-//  • Flash @ 921600 baud; micro-ROS serial transport @ 115200 baud (same as
-//    Teensy).
+//  • Board in Arduino IDE: "ESP32 Dev Module" (esp32 by Espressif).
+//  • ESP32 Arduino core v2.x: uses ledcSetup/ledcAttachPin (old API).
+//    ESP32 Arduino core v3.x: uses ledcAttach(pin,freq,bits) + ledcWrite(pin,duty).
+//    This sketch targets core v3.x. If you see ledcSetup errors, update the board.
+//  • micro-ROS transport: set_microros_transports() (same macro as Teensy).
+//    This resolves to the board-default transport. For ESP32 it targets Serial0.
+//    If the library was built for WiFi-only, switch to serial via the build flags.
+//  • Flash @ 921600 baud; micro-ROS runs @ 115200 baud on the same Serial port.
 //  • GPIO12 must be LOW at boot (flash voltage strap) — avoid using it.
 //  • GPIO6-11 are connected to internal flash — never use for GPIO.
 //
@@ -77,11 +82,11 @@
 #define MOTOR_RIGHT_ENA  17   // PWM speed (LEDC ch 1) → ENA
 #define MOTOR_RIGHT_ENB  19   // Half-bridge B enable → ENB  (driven HIGH)
 
-// LEDC channels (0-15 available; using 0 and 1)
-#define LEDC_CH_LEFT   0
-#define LEDC_CH_RIGHT  1
-#define LEDC_FREQ_HZ   5000   // 5 kHz — audible limit for VNH5019
-#define LEDC_BITS      8      // 0-255 range, matches Teensy analogWrite
+// LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
+// ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
+// ledcWrite(pin, duty)        replaces the old ledcWrite(channel, duty).
+#define LEDC_FREQ_HZ   5000   // 5 kHz — within VNH5019 PWM range
+#define LEDC_BITS      8      // 0-255 duty range, matches analogWrite
 
 // FIT0186 Encoders — channel A on interrupt pin, B for direction
 // Physical A/B and left/right assignment must be verified on the actual robot.
@@ -175,8 +180,9 @@ float clamp(float val, float lo, float hi) {
   return val;
 }
 
-// ESP32 LEDC PWM — replaces Teensy analogWrite()
-void setMotor(int ledc_ch, int in1, int in2, float speed) {
+// ESP32 LEDC PWM (core v3.x) — replaces Teensy analogWrite().
+// ena_pin is the actual GPIO number; ledcWrite takes pin, not channel.
+void setMotor(int ena_pin, int in1, int in2, float speed) {
   int pwm_val = 0;
   if (fabsf(speed) > 0.01f) {
     float factor = fabsf(speed) / MAX_SPEED_MPS;
@@ -186,7 +192,7 @@ void setMotor(int ledc_ch, int in1, int in2, float speed) {
   if      (speed >  0.01f) { digitalWrite(in1, HIGH); digitalWrite(in2, LOW);  }
   else if (speed < -0.01f) { digitalWrite(in1, LOW);  digitalWrite(in2, HIGH); }
   else                     { digitalWrite(in1, LOW);  digitalWrite(in2, LOW); pwm_val = 0; }
-  ledcWrite(ledc_ch, pwm_val);
+  ledcWrite(ena_pin, pwm_val);   // v3.x: pin-based, no channel argument
 }
 
 // =============================================================================
@@ -203,8 +209,8 @@ void cmd_vel_callback(const void *msgin) {
   float left_spd  = clamp(linear - (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
   float right_spd = clamp(linear + (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
 
-  setMotor(LEDC_CH_LEFT,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  left_spd);
-  setMotor(LEDC_CH_RIGHT, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, right_spd);
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  left_spd);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, right_spd);
 }
 
 // =============================================================================
@@ -221,13 +227,12 @@ void setup() {
   pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
   pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
 
-  // LEDC PWM channels for ENA speed control
-  ledcSetup(LEDC_CH_LEFT,  LEDC_FREQ_HZ, LEDC_BITS);
-  ledcSetup(LEDC_CH_RIGHT, LEDC_FREQ_HZ, LEDC_BITS);
-  ledcAttachPin(MOTOR_LEFT_ENA,  LEDC_CH_LEFT);
-  ledcAttachPin(MOTOR_RIGHT_ENA, LEDC_CH_RIGHT);
-  ledcWrite(LEDC_CH_LEFT,  0);
-  ledcWrite(LEDC_CH_RIGHT, 0);
+  // LEDC PWM setup (ESP32 Arduino core v3.x pin-based API)
+  // ledcAttach(pin, freq, resolution_bits) — no channel numbers needed.
+  ledcAttach(MOTOR_LEFT_ENA,  LEDC_FREQ_HZ, LEDC_BITS);
+  ledcAttach(MOTOR_RIGHT_ENA, LEDC_FREQ_HZ, LEDC_BITS);
+  ledcWrite(MOTOR_LEFT_ENA,  0);
+  ledcWrite(MOTOR_RIGHT_ENA, 0);
 
   // Encoder inputs
   pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
@@ -244,9 +249,16 @@ void setup() {
   imu_ready = bno.begin();
   if (imu_ready) bno.setExtCrystalUse(true);
 
-  // micro-ROS via USB-UART (Serial / UART0 → CP2102 → /dev/ttyUSBx on Pi)
+  // micro-ROS transport.
+  // set_microros_transports() is the same macro used by the Teensy sketch.
+  // For ESP32 it resolves to Serial (UART0 → CP2102 USB bridge → /dev/ttyUSBx).
+  // If your library build only ships WiFi transport, you will see a compile error
+  // here — in that case rebuild the micro-ROS Arduino library with SERIAL enabled:
+  //   docker run --rm microros/micro_ros_setup:jazzy \
+  //     ros2 run micro_ros_setup create_firmware_ws.sh generate_packages \
+  //     --transport serial ...
   Serial.begin(115200);
-  set_microros_serial_transports(Serial);
+  set_microros_transports();
   delay(2000);
 
   allocator = rcl_get_default_allocator();
@@ -317,8 +329,8 @@ void loop() {
 
   // Safety timeout: stop motors if no /cmd_vel for 1 second
   if (now - last_cmd_time > 1000) {
-    setMotor(LEDC_CH_LEFT,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0);
-    setMotor(LEDC_CH_RIGHT, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0);
+    setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0);
+    setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0);
   }
 
   // Odometry + IMU at 20 Hz (every 50 ms)
