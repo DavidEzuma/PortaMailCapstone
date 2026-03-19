@@ -18,8 +18,16 @@ def generate_launch_description():
     # Arguments to toggle hardware
     use_lidar_arg  = DeclareLaunchArgument('use_lidar',  default_value='true')
     use_teensy_arg = DeclareLaunchArgument('use_teensy', default_value='true')
-    # use_imu: set to 'true' only when BNO055 is physically wired to the Teensy.
-    # The Teensy reads BNO055 via I2C and publishes /imu/data over micro-ROS.
+    # mcu_port: serial device for the micro-ROS MCU.
+    #   Teensy 4.0  → native USB → /dev/ttyACM0   (default)
+    #   ESP32-WROOM → CP2102/CH340 USB-UART → /dev/ttyUSB1
+    #     (LiDAR occupies /dev/ttyUSB0; ESP32 enumerates as /dev/ttyUSB1)
+    #     Use the stable by-id path once known:
+    #       /dev/serial/by-id/usb-<ESP32_chip_id>-if00-port0
+    #   Pass mcu_port:=/dev/ttyUSB1 when launching with the ESP32.
+    mcu_port_arg   = DeclareLaunchArgument('mcu_port',   default_value='/dev/ttyACM0')
+    # use_imu: set to 'true' only when BNO055 is physically wired to the MCU.
+    # The MCU reads BNO055 via I2C and publishes /imu/data over micro-ROS.
     # This flag only controls which EKF config is loaded (odom+IMU vs odom-only).
     # There is NO separate IMU ROS node on the Pi side.
     use_imu_arg    = DeclareLaunchArgument('use_imu',    default_value='false')
@@ -39,16 +47,20 @@ def generate_launch_description():
         parameters=[{'robot_description': robot_description}]
     )
 
-    # 1. Micro-ROS Agent (Teensy 4.0 via USB → /dev/ttyACM0)
+    # 1. Micro-ROS Agent (MCU via USB serial)
     # Built from source in ~/microros_ws (no apt/snap for arm64 Jazzy).
     # launch_portamail.sh sources ~/microros_ws/install/setup.bash so this
     # package is on the ROS path at launch time.
+    #
+    # Teensy 4.0 (default): mcu_port:=/dev/ttyACM0
+    # ESP32-WROOM-32       : mcu_port:=/dev/ttyUSB1
+    #   (verify with: ls /dev/serial/by-id/ after plugging in the ESP32)
     microros_agent = Node(
         condition=IfCondition(LaunchConfiguration('use_teensy')),
         package='micro_ros_agent',
         executable='micro_ros_agent',
-        name='teensy_bridge',
-        arguments=['serial', '--dev', '/dev/ttyACM0', '-b', '115200'],
+        name='mcu_bridge',
+        arguments=['serial', '--dev', LaunchConfiguration('mcu_port'), '-b', '115200'],
         output='screen'
     )
 
@@ -96,6 +108,7 @@ def generate_launch_description():
     return LaunchDescription([
         use_lidar_arg,
         use_teensy_arg,
+        mcu_port_arg,
         use_imu_arg,
         use_ekf_arg,
         robot_state_publisher,

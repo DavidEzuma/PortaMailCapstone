@@ -1,13 +1,1 @@
-locations:
-  mailroom:
-    w: 1.0
-    x: 0.0
-    y: 0.0
-  office_101:
-    w: 0.9885
-    x: 0.3229
-    y: 0.1549
-  office_102:
-    w: 0.9449
-    x: 1.9098
-    y: -1.5406
+locations: {}
