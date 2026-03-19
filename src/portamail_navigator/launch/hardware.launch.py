@@ -25,7 +25,7 @@ def generate_launch_description():
     #     Use the stable by-id path once known:
     #       /dev/serial/by-id/usb-<ESP32_chip_id>-if00-port0
     #   Pass mcu_port:=/dev/ttyUSB1 when launching with the ESP32.
-    mcu_port_arg   = DeclareLaunchArgument('mcu_port',   default_value='/dev/ttyACM0')
+    mcu_port_arg   = DeclareLaunchArgument('mcu_port',   default_value='/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0')
     # use_imu: set to 'true' only when BNO055 is physically wired to the MCU.
     # The MCU reads BNO055 via I2C and publishes /imu/data over micro-ROS.
     # This flag only controls which EKF config is loaded (odom+IMU vs odom-only).

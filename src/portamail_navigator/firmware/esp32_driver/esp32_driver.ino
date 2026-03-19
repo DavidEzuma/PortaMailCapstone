@@ -65,27 +65,29 @@
 //   GPIO 0, 15 : boot strapping — use with caution
 //   GPIO 34-39 : input-only, no internal pull-up/down
 //
-// MOTOR DRIVER — VNH5019A-E  (same IC as on the PortaMail PCB)
-//   IC's dedicated PWM pin is hardwired to VCC; speed via ENA (LEDC PWM).
-//   ENB is driven HIGH permanently.
+// MOTOR DRIVER — L298N
+//   ENA = PWM speed control for left motor  (LEDC output)
+//   ENB = PWM speed control for right motor (LEDC output)
+//   IN1/IN2 = direction for left motor
+//   IN3/IN4 = direction for right motor
+//   NOTE: Remove the ENA/ENB jumpers on the L298N board; connect those
+//         pins to the ESP32 GPIOs below for PWM speed control.
 // =============================================================================
 
-// Left motor (MD1 / U3)
-#define MOTOR_LEFT_INA   13   // Direction A → INA
-#define MOTOR_LEFT_INB   14   // Direction B → INB
-#define MOTOR_LEFT_ENA   16   // PWM speed (LEDC ch 0) → ENA
-#define MOTOR_LEFT_ENB   23   // Half-bridge B enable → ENB  (driven HIGH)
+// Left motor
+#define MOTOR_LEFT_INA   13   // Direction pin IN1
+#define MOTOR_LEFT_INB   14   // Direction pin IN2
+#define MOTOR_LEFT_ENA   16   // PWM speed → ENA (LEDC)
 
-// Right motor (MD2 / U4)
-#define MOTOR_RIGHT_INA  27   // Direction A → INA
-#define MOTOR_RIGHT_INB  26   // Direction B → INB
-#define MOTOR_RIGHT_ENA  17   // PWM speed (LEDC ch 1) → ENA
-#define MOTOR_RIGHT_ENB  19   // Half-bridge B enable → ENB  (driven HIGH)
+// Right motor
+#define MOTOR_RIGHT_INA  27   // Direction pin IN3
+#define MOTOR_RIGHT_INB  26   // Direction pin IN4
+#define MOTOR_RIGHT_ENA  17   // PWM speed → ENB (LEDC)
 
 // LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
 // ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
 // ledcWrite(pin, duty)        replaces the old ledcWrite(channel, duty).
-#define LEDC_FREQ_HZ   5000   // 5 kHz — within VNH5019 PWM range
+#define LEDC_FREQ_HZ   5000   // 5 kHz — within L298N PWM range
 #define LEDC_BITS      8      // 0-255 duty range, matches analogWrite
 
 // FIT0186 Encoders — channel A on interrupt pin, B for direction
@@ -222,10 +224,6 @@ void setup() {
   // Motor direction outputs
   pinMode(MOTOR_LEFT_INA,  OUTPUT); pinMode(MOTOR_LEFT_INB,  OUTPUT);
   pinMode(MOTOR_RIGHT_INA, OUTPUT); pinMode(MOTOR_RIGHT_INB, OUTPUT);
-
-  // ENB: drive HIGH permanently (half-bridge B always active)
-  pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
-  pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
 
   // LEDC PWM setup (ESP32 Arduino core v3.x pin-based API)
   // ledcAttach(pin, freq, resolution_bits) — no channel numbers needed.
