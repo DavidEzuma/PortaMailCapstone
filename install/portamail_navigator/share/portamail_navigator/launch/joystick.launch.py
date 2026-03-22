@@ -22,7 +22,7 @@ def generate_launch_description():
             parameters=[{
                 'dev': LaunchConfiguration('joy_dev'),
                 'deadzone': 0.15,
-                'autorepeat_rate': 50.0,
+                'autorepeat_rate': 10.0,
             }]
         ),
 
