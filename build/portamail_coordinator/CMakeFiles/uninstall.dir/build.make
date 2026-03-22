@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_coordinator
+CMAKE_SOURCE_DIR = /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_coordinator
+CMAKE_BINARY_DIR = /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/davidezuma/PortaMailCapstone/build/portamail_coordinator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/davidezuma/PortaMailCapstone/src/portamail_coordinator /home/davidezuma/PortaMailCapstone/src/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

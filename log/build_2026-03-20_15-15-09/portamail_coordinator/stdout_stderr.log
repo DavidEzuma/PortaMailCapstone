@@ -1,0 +1,77 @@
+-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Found rclcpp_action: 28.1.16 (/opt/ros/jazzy/share/rclcpp_action/cmake)
+-- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)
+-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+-- Found nav2_msgs: 1.3.10 (/opt/ros/jazzy/share/nav2_msgs/cmake)
+-- Found slam_toolbox: 2.8.3 (/opt/ros/jazzy/share/slam_toolbox/cmake)
+-- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)
+-- Found Eigen3: TRUE (found version "3.4.0") 
+-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+-- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+-- Found OGRE
+--   static     : OFF
+--   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+--   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+--   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media
+-- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+-- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib
+-- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+-- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE
+-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+-- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+-- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+-- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+-- Found X11: /usr/include   
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+-- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Looking for IceConnectionNumber in ICE
+-- Looking for IceConnectionNumber in ICE - found
+-- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+-- Configuring done (1.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator
+[ 50%] Building CXX object CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o
+[100%] Linking CXX executable coordinator
+[100%] Built target coordinator
+-- Install configuration: ""
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/coordinator
+-- Set non-toolchain portion of runtime path of "/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/coordinator" to ""
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/lcd_bridge
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/bringup.launch.py
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/joystick.launch.py
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/config
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/config/locations.yaml
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/package_run_dependencies/portamail_coordinator
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/parent_prefix_path/portamail_coordinator
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.sh
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.dsv
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.sh
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.dsv
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.bash
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.sh
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.zsh
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.dsv
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.dsv
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/packages/portamail_coordinator
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig.cmake
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig-version.cmake
+-- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.xml

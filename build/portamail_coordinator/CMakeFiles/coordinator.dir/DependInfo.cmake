@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/davidezuma/PortaMailCapstone/src/portamail_coordinator/src/navigation_coordinator.cpp" "CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o" "gcc" "CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o.d"
+  "/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator/src/navigation_coordinator.cpp" "CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o" "gcc" "CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

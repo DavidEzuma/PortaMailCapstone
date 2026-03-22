@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_navigator
+CMAKE_SOURCE_DIR = /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_navigator
+CMAKE_BINARY_DIR = /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator
 
 # Include any dependencies generated for this target.
 include CMakeFiles/map_autosave_node.dir/depend.make
@@ -70,18 +70,18 @@ include CMakeFiles/map_autosave_node.dir/progress.make
 include CMakeFiles/map_autosave_node.dir/flags.make
 
 CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o: CMakeFiles/map_autosave_node.dir/flags.make
-CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o: /home/davidezuma/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp
+CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o: /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp
 CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o: CMakeFiles/map_autosave_node.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o -MF CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o.d -o CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o -c /home/davidezuma/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o -MF CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o.d -o CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o -c /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp
 
 CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/davidezuma/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp > CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp > CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.i
 
 CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/davidezuma/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp -o CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator/src/map_autosave_node.cpp -o CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.s
 
 # Object files for target map_autosave_node
 map_autosave_node_OBJECTS = \
@@ -122,7 +122,7 @@ map_autosave_node: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_generator_py.so
 map_autosave_node: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_typesupport_c.so
 map_autosave_node: /opt/ros/jazzy/lib/liblifecycle_msgs__rosidl_generator_c.so
 map_autosave_node: /opt/ros/jazzy/lib/librviz_default_plugins.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/liborocos-kdl.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/liborocos-kdl.so
 map_autosave_node: /opt/ros/jazzy/lib/librviz_common.so
 map_autosave_node: /opt/ros/jazzy/lib/libtf2_ros.so
 map_autosave_node: /opt/ros/jazzy/lib/librclcpp_action.so
@@ -158,8 +158,8 @@ map_autosave_node: /opt/ros/jazzy/lib/libstd_srvs__rosidl_typesupport_cpp.so
 map_autosave_node: /opt/ros/jazzy/lib/libstd_srvs__rosidl_generator_py.so
 map_autosave_node: /opt/ros/jazzy/lib/libstd_srvs__rosidl_typesupport_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libstd_srvs__rosidl_generator_c.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libyaml-cpp.so.0.8.0
-map_autosave_node: /opt/ros/jazzy/lib/aarch64-linux-gnu/libimage_transport.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libyaml-cpp.so.0.8.0
+map_autosave_node: /opt/ros/jazzy/lib/x86_64-linux-gnu/libimage_transport.so
 map_autosave_node: /opt/ros/jazzy/lib/liblaser_geometry.so
 map_autosave_node: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_fastrtps_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_introspection_c.so
@@ -177,30 +177,30 @@ map_autosave_node: /opt/ros/jazzy/lib/libmap_msgs__rosidl_typesupport_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libnav_msgs__rosidl_typesupport_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libmap_msgs__rosidl_generator_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libnav_msgs__rosidl_generator_c.so
-map_autosave_node: /opt/ros/jazzy/lib/aarch64-linux-gnu/libpoint_cloud_transport.so
+map_autosave_node: /opt/ros/jazzy/lib/x86_64-linux-gnu/libpoint_cloud_transport.so
 map_autosave_node: /opt/ros/jazzy/lib/libmessage_filters.so
 map_autosave_node: /opt/ros/jazzy/lib/liburdf.so
-map_autosave_node: /opt/ros/jazzy/lib/aarch64-linux-gnu/liburdfdom_model.so.4.0
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libtinyxml2.so.10.0.0
+map_autosave_node: /opt/ros/jazzy/lib/x86_64-linux-gnu/liburdfdom_model.so.4.0
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libtinyxml2.so.10.0.0
 map_autosave_node: /opt/ros/jazzy/lib/librviz_rendering.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libQt5Widgets.so.5.15.13
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libQt5Gui.so.5.15.13
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libQt5Core.so.5.15.13
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
 map_autosave_node: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
 map_autosave_node: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libfreeimage.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libfreetype.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libz.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libOpenGL.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libGLX.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libGLU.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libSM.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libICE.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libX11.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libXext.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libXt.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libXrandr.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libXaw.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libfreeimage.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libfreetype.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libz.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libGLX.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libGLU.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libSM.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libICE.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libX11.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libXext.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libXt.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libXrandr.so
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libXaw.so
 map_autosave_node: /opt/ros/jazzy/lib/libinteractive_markers.so
 map_autosave_node: /opt/ros/jazzy/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libvisualization_msgs__rosidl_typesupport_fastrtps_cpp.so
@@ -269,7 +269,7 @@ map_autosave_node: /opt/ros/jazzy/lib/libtracetools.so
 map_autosave_node: /opt/ros/jazzy/lib/librcl_logging_interface.so
 map_autosave_node: /opt/ros/jazzy/lib/libament_index_cpp.so
 map_autosave_node: /opt/ros/jazzy/lib/libclass_loader.so
-map_autosave_node: /usr/lib/aarch64-linux-gnu/libconsole_bridge.so.1.0
+map_autosave_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.1.0
 map_autosave_node: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_introspection_c.so
 map_autosave_node: /opt/ros/jazzy/lib/libcomposition_interfaces__rosidl_typesupport_fastrtps_cpp.so
@@ -314,7 +314,7 @@ map_autosave_node: /opt/ros/jazzy/lib/librcpputils.so
 map_autosave_node: /opt/ros/jazzy/lib/librosidl_runtime_c.so
 map_autosave_node: /opt/ros/jazzy/lib/librcutils.so
 map_autosave_node: CMakeFiles/map_autosave_node.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable map_autosave_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable map_autosave_node"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/map_autosave_node.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -326,6 +326,6 @@ CMakeFiles/map_autosave_node.dir/clean:
 .PHONY : CMakeFiles/map_autosave_node.dir/clean
 
 CMakeFiles/map_autosave_node.dir/depend:
-	cd /home/davidezuma/PortaMailCapstone/build/portamail_navigator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/davidezuma/PortaMailCapstone/src/portamail_navigator /home/davidezuma/PortaMailCapstone/src/portamail_navigator /home/davidezuma/PortaMailCapstone/build/portamail_navigator /home/davidezuma/PortaMailCapstone/build/portamail_navigator /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeFiles/map_autosave_node.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator/CMakeFiles/map_autosave_node.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/map_autosave_node.dir/depend
 

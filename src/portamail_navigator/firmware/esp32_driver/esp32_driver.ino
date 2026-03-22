@@ -156,6 +156,13 @@ float x_pos = 0.0f;
 float y_pos = 0.0f;
 float theta  = 0.0f;
 
+// Slew rate limiting — max speed change per loop iteration (m/s)
+// Prevents burst messages from causing abrupt full-speed jumps.
+// At 0.05 m/s per ~10ms loop = ~0.5 m/s per second ramp rate.
+const float SLEW_RATE = 0.05f;
+float current_left_spd  = 0.0f;
+float current_right_spd = 0.0f;
+
 static char frame_odom[]       = "odom";
 static char frame_base_link[]  = "base_link";
 static char frame_imu_link[]   = "imu_link";
@@ -200,6 +207,19 @@ void setMotor(int ena_pin, int in1, int in2, float speed) {
 // =============================================================================
 // ROS CALLBACK: /cmd_vel
 // =============================================================================
+void applySlew(float target_left, float target_right) {
+  if (target_left  > current_left_spd  + SLEW_RATE) current_left_spd  += SLEW_RATE;
+  else if (target_left  < current_left_spd  - SLEW_RATE) current_left_spd  -= SLEW_RATE;
+  else current_left_spd  = target_left;
+
+  if (target_right > current_right_spd + SLEW_RATE) current_right_spd += SLEW_RATE;
+  else if (target_right < current_right_spd - SLEW_RATE) current_right_spd -= SLEW_RATE;
+  else current_right_spd = target_right;
+
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  current_left_spd);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, current_right_spd);
+}
+
 void cmd_vel_callback(const void *msgin) {
   const geometry_msgs__msg__Twist *msg = (const geometry_msgs__msg__Twist *)msgin;
   digitalWrite(LED_PIN, !digitalRead(LED_PIN));
@@ -208,11 +228,10 @@ void cmd_vel_callback(const void *msgin) {
   float linear  = clamp(msg->linear.x, -MAX_SPEED_MPS, MAX_SPEED_MPS);
   float angular = msg->angular.z;
 
-  float left_spd  = clamp(linear - (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
-  float right_spd = clamp(linear + (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
+  float target_left  = clamp(linear - (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
+  float target_right = clamp(linear + (angular * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
 
-  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  left_spd);
-  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, right_spd);
+  applySlew(target_left, target_right);
 }
 
 // =============================================================================
@@ -326,9 +345,8 @@ void loop() {
   unsigned long now = millis();
 
   // Safety timeout: stop motors if no /cmd_vel for 1 second
-  if (now - last_cmd_time > 1000) {
-    setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0);
-    setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0);
+  if (now - last_cmd_time > 200) {
+    applySlew(0.0f, 0.0f);
   }
 
   // Odometry + IMU at 20 Hz (every 50 ms)

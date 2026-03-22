@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-d6a634ca97c491d9faac.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "portamail_navigator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "map_autosave_node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-map_autosave_node-b89195fbf7961017e217.json",
+					"name" : "map_autosave_node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mock_driver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mock_driver-dd95ee3ce5a6dad377f4.json",
+					"name" : "mock_driver",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "portamail_navigator_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-portamail_navigator_uninstall-4aa51ebd53db2211e929.json",
+					"name" : "portamail_navigator_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-8c986fe2ee3f8e3e9bd0.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator",
+		"source" : "/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

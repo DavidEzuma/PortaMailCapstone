@@ -1,0 +1,112 @@
+[0.005s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator -DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator
+[0.015s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.175s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[0.203s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[0.211s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[0.221s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.233s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.289s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[0.290s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[0.343s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.401s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[0.428s] -- Found nav_msgs: 5.3.6 (/opt/ros/jazzy/share/nav_msgs/cmake)
+[0.452s] -- Found tf2: 0.36.19 (/opt/ros/jazzy/share/tf2/cmake)
+[0.455s] -- Found tf2_ros: 0.36.19 (/opt/ros/jazzy/share/tf2_ros/cmake)
+[0.552s] -- Found tf2_geometry_msgs: 0.36.19 (/opt/ros/jazzy/share/tf2_geometry_msgs/cmake)
+[0.555s] -- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)
+[0.556s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[0.559s] -- Found slam_toolbox: 2.8.3 (/opt/ros/jazzy/share/slam_toolbox/cmake)
+[0.792s] -- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[0.793s] -- Found OGRE
+[0.793s] --   static     : OFF
+[0.794s] --   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[0.794s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[0.794s] --   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media
+[0.794s] -- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[0.794s] -- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib
+[0.794s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[0.794s] -- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE
+[0.794s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[0.794s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[0.794s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[0.794s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[0.821s] -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")  
+[0.831s] -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so   
+[0.911s] -- Found X11: /usr/include   
+[0.912s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so
+[0.978s] -- Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so;/usr/lib/x86_64-linux-gnu/libXext.so - found
+[0.978s] -- Looking for gethostbyname
+[1.038s] -- Looking for gethostbyname - found
+[1.038s] -- Looking for connect
+[1.098s] -- Looking for connect - found
+[1.098s] -- Looking for remove
+[1.159s] -- Looking for remove - found
+[1.159s] -- Looking for shmat
+[1.219s] -- Looking for shmat - found
+[1.219s] -- Looking for IceConnectionNumber in ICE
+[1.280s] -- Looking for IceConnectionNumber in ICE - found
+[1.296s] -- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+[1.487s] -- Configuring done (1.5s)
+[1.514s] -- Generating done (0.0s)
+[1.521s] -- Build files have been written to: /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator
+[1.529s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator -DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator
+[1.531s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator -- -j12 -l12
+[1.571s] [ 50%] Building CXX object CMakeFiles/mock_driver.dir/src/mock_driver.cpp.o
+[1.571s] [ 50%] Building CXX object CMakeFiles/map_autosave_node.dir/src/map_autosave_node.cpp.o
+[5.086s] [ 75%] Linking CXX executable map_autosave_node
+[5.352s] [ 75%] Built target map_autosave_node
+[9.269s] [100%] Linking CXX executable mock_driver
+[9.547s] [100%] Built target mock_driver
+[9.556s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator -- -j12 -l12
+[9.564s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator
+[9.571s] -- Install configuration: ""
+[9.571s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/mock_driver
+[9.573s] -- Set non-toolchain portion of runtime path of "/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/mock_driver" to ""
+[9.573s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/map_autosave_node
+[9.574s] -- Set non-toolchain portion of runtime path of "/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/map_autosave_node" to ""
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include/portamail_navigator
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include/portamail_navigator/map_autosave_node.hpp
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/gazebo_classic_mapping.launch.py
+[9.574s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/mapping.launch.py
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/hardware.launch.py
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/joystick.launch.py
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf_no_imu.yaml
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/slam.yaml
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/map_autosave.yaml
+[9.575s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf.yaml
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/locale_stubs.c
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/teensy_driver.ino
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/esp32_driver
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/esp32_driver/esp32_driver.ino
+[9.576s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/micro_ros_arduino-2.0.8-jazzy.zip
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/error message.png
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail.urdf
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail_classic.urdf
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_wheel.STL
+[9.588s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/base_link.STL
+[9.594s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/left_wheel.STL
+[9.594s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/right_wheel.STL
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_swivel.STL
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/package_run_dependencies/portamail_navigator
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/parent_prefix_path/portamail_navigator
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.sh
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.dsv
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.sh
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.dsv
+[9.595s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.bash
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.sh
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.zsh
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.dsv
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.dsv
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/packages/portamail_navigator
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig.cmake
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig-version.cmake
+[9.596s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.xml
+[9.597s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator

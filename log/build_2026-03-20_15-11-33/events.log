@@ -1,0 +1,120 @@
+[0.000000] (-) TimerEvent: {}
+[0.000077] (-) JobUnselected: {'identifier': 'lcd_bridge'}
+[0.000103] (portamail_coordinator) JobQueued: {'identifier': 'portamail_coordinator', 'dependencies': OrderedDict()}
+[0.000122] (portamail_navigator) JobQueued: {'identifier': 'portamail_navigator', 'dependencies': OrderedDict()}
+[0.000381] (portamail_coordinator) JobStarted: {'identifier': 'portamail_coordinator'}
+[0.003898] (portamail_navigator) JobStarted: {'identifier': 'portamail_navigator'}
+[0.006785] (portamail_coordinator) JobProgress: {'identifier': 'portamail_coordinator', 'progress': 'cmake'}
+[0.007138] (portamail_coordinator) Command: {'cmd': ['/usr/bin/cmake', '/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator', '-DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator'], 'cwd': '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'david-ezuma', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib', 'HOME': '/home/david-ezuma', 'OLDPWD': '/home/david-ezuma/Documents/PortaMailCapstone', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '4231', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GNOME_KEYRING_CONTROL': '/run/user/1000/keyring', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'david-ezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.SettingsDaemon.MediaKeys.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'david-ezuma', 'TERM': 'xterm-256color', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/opt/ros/jazzy/bin:/home/david-ezuma/.local/bin:/home/david-ezuma/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/david-ezuma-XPS-15-9500:@/tmp/.ICE-unix/4072,unix/david-ezuma-XPS-15-9500:/tmp/.ICE-unix/4072', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/d0a64e60_3a0f_40e3_874a_1ac590838ff4', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.106', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy'}), 'shell': False}
+[0.008152] (portamail_navigator) JobProgress: {'identifier': 'portamail_navigator', 'progress': 'cmake'}
+[0.008489] (portamail_navigator) Command: {'cmd': ['/usr/bin/cmake', '/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator', '-DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator'], 'cwd': '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'david-ezuma', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/lib', 'HOME': '/home/david-ezuma', 'OLDPWD': '/home/david-ezuma/Documents/PortaMailCapstone', 'DESKTOP_SESSION': 'ubuntu', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'SYSTEMD_EXEC_PID': '4231', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GNOME_KEYRING_CONTROL': '/run/user/1000/keyring', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'david-ezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'MEMORY_PRESSURE_WATCH': '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.SettingsDaemon.MediaKeys.service/memory.pressure', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'david-ezuma', 'TERM': 'xterm-256color', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'WINDOWPATH': '2', 'PATH': '/opt/ros/jazzy/bin:/home/david-ezuma/.local/bin:/home/david-ezuma/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin', 'SESSION_MANAGER': 'local/david-ezuma-XPS-15-9500:@/tmp/.ICE-unix/4072,unix/david-ezuma-XPS-15-9500:/tmp/.ICE-unix/4072', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_TERMINAL_SCREEN': '/org/gnome/Terminal/screen/d0a64e60_3a0f_40e3_874a_1ac590838ff4', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':1', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'GNOME_TERMINAL_SERVICE': ':1.106', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'MEMORY_PRESSURE_WRITE': 'c29tZSAyMDAwMDAgMjAwMDAwMAA=', 'VTE_VERSION': '7600', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy'}), 'shell': False}
+[0.099862] (-) TimerEvent: {}
+[0.100142] (portamail_coordinator) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.100348] (portamail_navigator) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.177089] (portamail_navigator) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.177227] (portamail_coordinator) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.190135] (portamail_navigator) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.190272] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.199944] (-) TimerEvent: {}
+[0.251995] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.252188] (portamail_navigator) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.274580] (portamail_coordinator) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.274775] (portamail_navigator) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.274981] (portamail_navigator) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.275080] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.275894] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.276081] (portamail_navigator) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.287240] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.287528] (portamail_navigator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.300033] (-) TimerEvent: {}
+[0.361608] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.361749] (portamail_navigator) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.383499] (portamail_coordinator) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.383795] (portamail_navigator) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.384235] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.384428] (portamail_navigator) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.384947] (portamail_coordinator) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.385470] (portamail_navigator) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.390307] (portamail_navigator) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[0.390564] (portamail_coordinator) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[0.400118] (-) TimerEvent: {}
+[0.495258] (portamail_navigator) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[0.495681] (portamail_coordinator) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[0.500199] (-) TimerEvent: {}
+[0.587566] (portamail_navigator) StdoutLine: {'line': b'-- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[0.587772] (portamail_coordinator) StdoutLine: {'line': b'-- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[0.600273] (-) TimerEvent: {}
+[0.621947] (portamail_navigator) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[0.622054] (portamail_coordinator) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[0.633292] (portamail_navigator) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[0.633369] (portamail_coordinator) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[0.648678] (portamail_navigator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.648758] (portamail_coordinator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.665359] (portamail_navigator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.665523] (portamail_coordinator) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.700348] (-) TimerEvent: {}
+[0.739817] (portamail_navigator) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[0.739949] (portamail_coordinator) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[0.742213] (portamail_coordinator) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.742283] (portamail_navigator) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.797790] (portamail_navigator) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[0.798407] (portamail_coordinator) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[0.800412] (-) TimerEvent: {}
+[0.811576] (portamail_navigator) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[0.811680] (portamail_coordinator) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[0.828990] (portamail_navigator) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.829128] (portamail_coordinator) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.900507] (-) TimerEvent: {}
+[0.900778] (portamail_coordinator) StdoutLine: {'line': b'-- Found rclcpp_action: 28.1.16 (/opt/ros/jazzy/share/rclcpp_action/cmake)\n'}
+[0.900933] (portamail_navigator) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[0.935928] (portamail_navigator) StdoutLine: {'line': b'-- Found nav_msgs: 5.3.6 (/opt/ros/jazzy/share/nav_msgs/cmake)\n'}
+[0.945697] (portamail_coordinator) StdoutLine: {'line': b'-- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)\n'}
+[0.958221] (portamail_coordinator) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[0.963973] (portamail_navigator) StdoutLine: {'line': b'-- Found tf2: 0.36.19 (/opt/ros/jazzy/share/tf2/cmake)\n'}
+[0.968430] (portamail_navigator) StdoutLine: {'line': b'-- Found tf2_ros: 0.36.19 (/opt/ros/jazzy/share/tf2_ros/cmake)\n'}
+[0.976151] (portamail_coordinator) StderrLine: {'line': b'CMake Error at CMakeLists.txt:17 (find_package):\n'}
+[0.976366] (portamail_coordinator) StderrLine: {'line': b'  By not providing "Findnav2_msgs.cmake" in CMAKE_MODULE_PATH this project\n'}
+[0.976486] (portamail_coordinator) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[0.976549] (portamail_coordinator) StderrLine: {'line': b'  "nav2_msgs", but CMake did not find one.\n'}
+[0.976608] (portamail_coordinator) StderrLine: {'line': b'\n'}
+[0.976667] (portamail_coordinator) StderrLine: {'line': b'  Could not find a package configuration file provided by "nav2_msgs" with\n'}
+[0.976724] (portamail_coordinator) StderrLine: {'line': b'  any of the following names:\n'}
+[0.976781] (portamail_coordinator) StderrLine: {'line': b'\n'}
+[0.976837] (portamail_coordinator) StderrLine: {'line': b'    nav2_msgsConfig.cmake\n'}
+[0.976893] (portamail_coordinator) StderrLine: {'line': b'    nav2_msgs-config.cmake\n'}
+[0.976949] (portamail_coordinator) StderrLine: {'line': b'\n'}
+[0.977027] (portamail_coordinator) StderrLine: {'line': b'  Add the installation prefix of "nav2_msgs" to CMAKE_PREFIX_PATH or set\n'}
+[0.977082] (portamail_coordinator) StderrLine: {'line': b'  "nav2_msgs_DIR" to a directory containing one of the above files.  If\n'}
+[0.977136] (portamail_coordinator) StderrLine: {'line': b'  "nav2_msgs" provides a separate development package or SDK, be sure it has\n'}
+[0.977191] (portamail_coordinator) StderrLine: {'line': b'  been installed.\n'}
+[0.977244] (portamail_coordinator) StderrLine: {'line': b'\n'}
+[0.977298] (portamail_coordinator) StderrLine: {'line': b'\n'}
+[0.977364] (portamail_coordinator) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.982808] (portamail_coordinator) CommandEnded: {'returncode': 1}
+[0.996381] (portamail_coordinator) JobEnded: {'identifier': 'portamail_coordinator', 'rc': 1}
+[1.000565] (-) TimerEvent: {}
+[1.083740] (portamail_navigator) StdoutLine: {'line': b'-- Found tf2_geometry_msgs: 0.36.19 (/opt/ros/jazzy/share/tf2_geometry_msgs/cmake)\n'}
+[1.093666] (portamail_navigator) StdoutLine: {'line': b'-- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)\n'}
+[1.095038] (portamail_navigator) StdoutLine: {'line': b'-- Found Eigen3: TRUE (found version "3.4.0") \n'}
+[1.095143] (portamail_navigator) StdoutLine: {'line': b'-- Ensuring Eigen3 include directory is part of orocos-kdl CMake target\n'}
+[1.100629] (-) TimerEvent: {}
+[1.100935] (portamail_navigator) StderrLine: {'line': b'CMake Error at CMakeLists.txt:19 (find_package):\n'}
+[1.101035] (portamail_navigator) StderrLine: {'line': b'  By not providing "Findslam_toolbox.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.101093] (portamail_navigator) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.101153] (portamail_navigator) StderrLine: {'line': b'  "slam_toolbox", but CMake did not find one.\n'}
+[1.101213] (portamail_navigator) StderrLine: {'line': b'\n'}
+[1.101268] (portamail_navigator) StderrLine: {'line': b'  Could not find a package configuration file provided by "slam_toolbox" with\n'}
+[1.101331] (portamail_navigator) StderrLine: {'line': b'  any of the following names:\n'}
+[1.101386] (portamail_navigator) StderrLine: {'line': b'\n'}
+[1.101439] (portamail_navigator) StderrLine: {'line': b'    slam_toolboxConfig.cmake\n'}
+[1.101492] (portamail_navigator) StderrLine: {'line': b'    slam_toolbox-config.cmake\n'}
+[1.101546] (portamail_navigator) StderrLine: {'line': b'\n'}
+[1.101599] (portamail_navigator) StderrLine: {'line': b'  Add the installation prefix of "slam_toolbox" to CMAKE_PREFIX_PATH or set\n'}
+[1.101652] (portamail_navigator) StderrLine: {'line': b'  "slam_toolbox_DIR" to a directory containing one of the above files.  If\n'}
+[1.101705] (portamail_navigator) StderrLine: {'line': b'  "slam_toolbox" provides a separate development package or SDK, be sure it\n'}
+[1.101758] (portamail_navigator) StderrLine: {'line': b'  has been installed.\n'}
+[1.101811] (portamail_navigator) StderrLine: {'line': b'\n'}
+[1.101864] (portamail_navigator) StderrLine: {'line': b'\n'}
+[1.101917] (portamail_navigator) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.107785] (portamail_navigator) JobEnded: {'identifier': 'portamail_navigator', 'rc': 'SIGINT'}
+[1.118800] (-) EventReactorShutdown: {}

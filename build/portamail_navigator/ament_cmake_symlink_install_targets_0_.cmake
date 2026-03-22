@@ -1,1 +1,0 @@
-ament_cmake_symlink_install_targets("TARGET_FILES" "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/mock_driver" "/home/davidezuma/PortaMailCapstone/build/portamail_navigator/map_autosave_node" "TARGETS" "mock_driver" "map_autosave_node" "DESTINATION" "lib/portamail_navigator")

@@ -1,2 +1,0 @@
-[console_scripts]
-lcd_bridge = lcd_bridge.node:main

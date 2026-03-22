@@ -1,9 +1,0 @@
-source;share/lcd_bridge/hook/pythonpath.ps1
-source;share/lcd_bridge/hook/pythonpath.dsv
-source;share/lcd_bridge/hook/pythonpath.sh
-source;share/lcd_bridge/hook/ament_prefix_path.ps1
-source;share/lcd_bridge/hook/ament_prefix_path.dsv
-source;share/lcd_bridge/hook/ament_prefix_path.sh
-source;../../build/lcd_bridge/share/lcd_bridge/hook/pythonpath_develop.ps1
-source;../../build/lcd_bridge/share/lcd_bridge/hook/pythonpath_develop.dsv
-source;../../build/lcd_bridge/share/lcd_bridge/hook/pythonpath_develop.sh

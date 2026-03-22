@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/davidezuma/PortaMailCapstone/src/portamail_coordinator
+CMAKE_SOURCE_DIR = /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/davidezuma/PortaMailCapstone/build/portamail_coordinator
+CMAKE_BINARY_DIR = /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator
 
 # Utility rule file for portamail_coordinator_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/portamail_coordinator_uninstall.dir/compiler_depend.make
 include CMakeFiles/portamail_coordinator_uninstall.dir/progress.make
 
 CMakeFiles/portamail_coordinator_uninstall:
-	/usr/bin/cmake -P /home/davidezuma/PortaMailCapstone/build/portamail_coordinator/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 portamail_coordinator_uninstall: CMakeFiles/portamail_coordinator_uninstall
 portamail_coordinator_uninstall: CMakeFiles/portamail_coordinator_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/portamail_coordinator_uninstall.dir/clean:
 .PHONY : CMakeFiles/portamail_coordinator_uninstall.dir/clean
 
 CMakeFiles/portamail_coordinator_uninstall.dir/depend:
-	cd /home/davidezuma/PortaMailCapstone/build/portamail_coordinator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/davidezuma/PortaMailCapstone/src/portamail_coordinator /home/davidezuma/PortaMailCapstone/src/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator /home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/portamail_coordinator_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/portamail_coordinator_uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/portamail_coordinator_uninstall.dir/depend
 

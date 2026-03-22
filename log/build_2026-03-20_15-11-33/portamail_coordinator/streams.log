@@ -1,0 +1,47 @@
+[0.007s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator': CMAKE_PREFIX_PATH=/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator -DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator
+[0.100s] -- The C compiler identification is GNU 13.3.0
+[0.177s] -- The CXX compiler identification is GNU 13.3.0
+[0.190s] -- Detecting C compiler ABI info
+[0.252s] -- Detecting C compiler ABI info - done
+[0.274s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.275s] -- Detecting C compile features
+[0.276s] -- Detecting C compile features - done
+[0.287s] -- Detecting CXX compiler ABI info
+[0.361s] -- Detecting CXX compiler ABI info - done
+[0.383s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.384s] -- Detecting CXX compile features
+[0.385s] -- Detecting CXX compile features - done
+[0.390s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.496s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.587s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[0.622s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[0.633s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[0.648s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.665s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.740s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[0.742s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[0.798s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[0.811s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[0.829s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.901s] -- Found rclcpp_action: 28.1.16 (/opt/ros/jazzy/share/rclcpp_action/cmake)
+[0.945s] -- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)
+[0.958s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[0.976s] CMake Error at CMakeLists.txt:17 (find_package):
+[0.976s]   By not providing "Findnav2_msgs.cmake" in CMAKE_MODULE_PATH this project
+[0.976s]   has asked CMake to find a package configuration file provided by
+[0.976s]   "nav2_msgs", but CMake did not find one.
+[0.976s] 
+[0.976s]   Could not find a package configuration file provided by "nav2_msgs" with
+[0.976s]   any of the following names:
+[0.976s] 
+[0.976s]     nav2_msgsConfig.cmake
+[0.977s]     nav2_msgs-config.cmake
+[0.977s] 
+[0.977s]   Add the installation prefix of "nav2_msgs" to CMAKE_PREFIX_PATH or set
+[0.977s]   "nav2_msgs_DIR" to a directory containing one of the above files.  If
+[0.977s]   "nav2_msgs" provides a separate development package or SDK, be sure it has
+[0.977s]   been installed.
+[0.977s] 
+[0.977s] 
+[0.977s] -- Configuring incomplete, errors occurred!
+[0.983s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_coordinator' returned '1': CMAKE_PREFIX_PATH=/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_coordinator -DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_coordinator

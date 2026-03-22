@@ -21,7 +21,7 @@ def generate_launch_description():
             name='joy_node',
             parameters=[{
                 'dev': LaunchConfiguration('joy_dev'),
-                'deadzone': 0.05,
+                'deadzone': 0.15,
                 'autorepeat_rate': 50.0,
             }]
         ),
@@ -36,7 +36,7 @@ def generate_launch_description():
                 'axis_angular.yaw': 0, # Left Stick Horizontal
                 'scale_linear.x': 0.89, # Max Speed (approx 2 MPH)
                 'scale_angular.yaw': 1.0,
-                'enable_button': 7, # Right Bumper
+                'enable_button': 5, # Right Bumper (xpadneo mapping)
             }],
             # Remap directly to what the Teensy expects
             remappings=[('/cmd_vel', '/cmd_vel')]
