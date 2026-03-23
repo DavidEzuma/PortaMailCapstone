@@ -1,23 +1,32 @@
 #!/bin/bash
-# Runs the Micro-ROS agent in Docker, exposing the USB device
-# Usage: ./run_agent.sh [device_path] (default: /dev/ttyACM0)
+# Runs the Micro-ROS agent (serial transport, 115200 baud).
+# Usage: ./run_agent.sh [device_path] (default: /dev/ttyUSB1)
+#   ESP32 (CP2102 bridge) → /dev/ttyUSB1 when LiDAR is on /dev/ttyUSB0
+#   Use the stable by-id path if the enumeration order varies:
+#     /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_...-if00-port0
 
-DEVICE=${1:-/dev/ttyACM0}
-
-# Select agent image: Jazzy on amd64 (laptop), Humble workaround on arm64 (Pi —
-# no Jazzy arm64 image exists). micro_ros_arduino library is built for Jazzy;
-# mismatching the agent version causes intermittent XRCE-DDS session drops.
+DEVICE=${1:-/dev/ttyUSB1}
 ARCH=$(uname -m)
-if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
-    AGENT_IMAGE="microros/micro-ros-agent:humble"
-    echo "WARNING: Running humble agent on arm64 (no jazzy arm64 image available)"
-else
-    AGENT_IMAGE="microros/micro-ros-agent:jazzy"
-fi
 
-echo "Starting Micro-ROS Agent ($AGENT_IMAGE) on $DEVICE..."
-# We use --net=host so the agent is visible to the ROS 2 network on the Pi
-docker run -it --rm --net=host --privileged \
-    -v /dev:/dev \
-    $AGENT_IMAGE \
-    serial --dev $DEVICE -b 115200
+if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then
+    # Raspberry Pi 5 (BCM2712, arm64): use native agent built from source.
+    # Docker humble image causes XRCE-DDS version mismatch with Jazzy nodes.
+    # Build once with: micro_ros_setup create_agent_ws.sh && build_agent.sh
+    MICROROS_WS="${HOME}/microros_ws"
+    if [ ! -f "${MICROROS_WS}/install/setup.bash" ]; then
+        echo "ERROR: Native micro-ROS agent not found at ${MICROROS_WS}."
+        echo "Build it with:"
+        echo "  mkdir -p ~/microros_ws/src && cd ~/microros_ws"
+        echo "  git clone -b jazzy https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup"
+        echo "  source /opt/ros/jazzy/setup.bash && colcon build && source install/setup.bash"
+        echo "  ros2 run micro_ros_setup create_agent_ws.sh && ros2 run micro_ros_setup build_agent.sh"
+        exit 1
+    fi
+    echo "Starting native micro-ROS agent (arm64/Jazzy) on $DEVICE..."
+    source "${MICROROS_WS}/install/setup.bash"
+    ros2 run micro_ros_agent micro_ros_agent serial --dev "$DEVICE" -b 115200
+else
+    # amd64 (laptop/desktop): use Docker Jazzy image
+    echo "Starting micro-ROS agent (Docker/Jazzy) on $DEVICE..."
+    docker run -it --rm --net=host --privileged -v /dev:/dev microros/micro-ros-agent:jazzy serial --dev "$DEVICE" -b 115200
+fi

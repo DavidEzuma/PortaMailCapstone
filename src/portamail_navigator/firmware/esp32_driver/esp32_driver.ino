@@ -74,15 +74,17 @@
 //         pins to the ESP32 GPIOs below for PWM speed control.
 // =============================================================================
 
-// Left motor
-#define MOTOR_LEFT_INA   13   // Direction pin IN1
-#define MOTOR_LEFT_INB   14   // Direction pin IN2
-#define MOTOR_LEFT_ENA   17   // PWM speed → ENA (LEDC) — physically on TX2/GPIO17
+// Left motor (U3 / MD1) — GPIO assignments from capstone_PCB.kicad_sch net names
+#define MOTOR_LEFT_INA   13   // INA_MD1 → U3 VNH5019 pin 4  (direction A)
+#define MOTOR_LEFT_INB   14   // INB_MD1 → U3 VNH5019 pin 10 (direction B)
+#define MOTOR_LEFT_ENA   16   // EN_MD1  → U3 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_LEFT_ENB   19   // ENB_MD1 → U3 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
-// Right motor
-#define MOTOR_RIGHT_INA  27   // Direction pin IN3
-#define MOTOR_RIGHT_INB  26   // Direction pin IN4
-#define MOTOR_RIGHT_ENA  16   // PWM speed → ENB (LEDC) — unused in single-motor test
+// Right motor (U4 / MD2) — GPIO assignments from capstone_PCB.kicad_sch net names
+#define MOTOR_RIGHT_INA  27   // INA_MD2 → U4 VNH5019 pin 4  (direction A)
+#define MOTOR_RIGHT_INB  26   // INB_MD2 → U4 VNH5019 pin 10 (direction B)
+#define MOTOR_RIGHT_ENA  17   // EN_MD2  → U4 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_RIGHT_ENB  23   // ENB_MD2 → U4 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
 // LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
 // ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
@@ -148,6 +150,11 @@ rcl_node_t      node;
 // Connection state: ROS entities exist only while agent is reachable.
 // LED blinks slowly when disconnected; toggles on cmd_vel when connected.
 bool agent_connected = false;
+
+// first_connect: true until the very first successful agent connection.
+// Odometry (x_pos, y_pos, theta) resets only on first connect, not on
+// subsequent reconnects — prevents position jump to origin mid-navigation.
+bool first_connect = true;
 
 // =============================================================================
 // ODOMETRY STATE
@@ -336,7 +343,14 @@ void init_ros_entities() {
   latest_cmd_ms   = millis();  // prevent immediate safety stop on fresh connect
   latest_linear   = 0.0f;
   latest_angular  = 0.0f;
-  x_pos = 0.0f; y_pos = 0.0f; theta = 0.0f;
+
+  // Only reset odometry on the very first connection. On reconnects the EKF
+  // and Nav2 retain their state — resetting to zero here would cause a
+  // position jump that corrupts localization mid-navigation.
+  if (first_connect) {
+    x_pos = 0.0f; y_pos = 0.0f; theta = 0.0f;
+    first_connect = false;
+  }
 }
 
 void fini_ros_entities() {
@@ -358,6 +372,11 @@ void setup() {
   // Motor direction outputs
   pinMode(MOTOR_LEFT_INA,  OUTPUT); pinMode(MOTOR_LEFT_INB,  OUTPUT);
   pinMode(MOTOR_RIGHT_INA, OUTPUT); pinMode(MOTOR_RIGHT_INB, OUTPUT);
+
+  // VNH5019 ENB pins: half-bridge B must be kept HIGH to stay active.
+  // These are separate from the PWM ENA pins — not present on L298N.
+  pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
+  pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
 
   // LEDC PWM setup (ESP32 Arduino core v3.x pin-based API)
   ledcAttach(MOTOR_LEFT_ENA,  LEDC_FREQ_HZ, LEDC_BITS);
@@ -472,10 +491,12 @@ void loop() {
   prev_slew_time = now;
 
   // -----------------------------------------------------------------------
-  // ODOMETRY + IMU at 5 Hz (every 200 ms)
-  // Reduced from 20 Hz to keep serial bandwidth within 115200 baud.
+  // ODOMETRY + IMU at 20 Hz (every 50 ms)
+  // One odometry message is ~200 bytes → 4000 bytes/s at 20 Hz, well within
+  // 115200 baud (11520 bytes/s). 20 Hz gives SLAM Toolbox and the EKF the
+  // update rate they need for accurate scan matching.
   // -----------------------------------------------------------------------
-  if (now - prev_odom_time >= 200) {
+  if (now - prev_odom_time >= 50) {
     float dt = (now - prev_odom_time) / 1000.0f;
     prev_odom_time = now;
 
