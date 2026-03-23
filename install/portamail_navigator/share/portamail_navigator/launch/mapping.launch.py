@@ -54,7 +54,7 @@ def generate_launch_description():
         ]),
         launch_arguments={
             'use_lidar': LaunchConfiguration('use_real_lidar'),
-            'use_teensy': 'false',
+            'use_mcu': 'false',
             'use_imu': 'false',
             # Disable EKF when mock_driver is active: mock_driver owns the
             # odom→base_link TF and running EKF in parallel causes TF conflicts

@@ -168,7 +168,7 @@ float y_pos = 0.0f;
 float theta  = 0.0f;
 
 // Slew rate limiting — time-based, applied in loop() not in callback.
-const float SLEW_RATE   = 1.5f;   // m/s per second — tune up/down for feel
+const float SLEW_RATE   = 3.0f;   // m/s per second — tune up/down for feel
 float target_left_spd   = 0.0f;
 float target_right_spd  = 0.0f;
 float current_left_spd  = 0.0f;

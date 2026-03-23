@@ -17,7 +17,7 @@ def generate_launch_description():
 
     # Arguments to toggle hardware
     use_lidar_arg  = DeclareLaunchArgument('use_lidar',  default_value='true')
-    use_teensy_arg = DeclareLaunchArgument('use_teensy', default_value='true')
+    use_mcu_arg = DeclareLaunchArgument('use_mcu', default_value='true')
     # mcu_port: serial device for the micro-ROS MCU.
     #   Teensy 4.0  → native USB → /dev/ttyACM0   (default)
     #   ESP32-WROOM → CP2102/CH340 USB-UART → /dev/ttyUSB1
@@ -56,7 +56,7 @@ def generate_launch_description():
     # ESP32-WROOM-32       : mcu_port:=/dev/ttyUSB1
     #   (verify with: ls /dev/serial/by-id/ after plugging in the ESP32)
     microros_agent = Node(
-        condition=IfCondition(LaunchConfiguration('use_teensy')),
+        condition=IfCondition(LaunchConfiguration('use_mcu')),
         package='micro_ros_agent',
         executable='micro_ros_agent',
         name='mcu_bridge',
@@ -107,7 +107,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         use_lidar_arg,
-        use_teensy_arg,
+        use_mcu_arg,
         mcu_port_arg,
         use_imu_arg,
         use_ekf_arg,

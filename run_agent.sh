@@ -1,11 +1,11 @@
 #!/bin/bash
 # Runs the Micro-ROS agent (serial transport, 115200 baud).
-# Usage: ./run_agent.sh [device_path] (default: /dev/ttyUSB1)
-#   ESP32 (CP2102 bridge) → /dev/ttyUSB1 when LiDAR is on /dev/ttyUSB0
+# Usage: ./run_agent.sh [device_path] (default: /dev/ttyUSB0)
+#   ESP32 (CP2102 bridge) → /dev/ttyUSB0 when LiDAR is not connected
 #   Use the stable by-id path if the enumeration order varies:
 #     /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_...-if00-port0
 
-DEVICE=${1:-/dev/ttyUSB1}
+DEVICE=${1:-/dev/ttyUSB0}
 ARCH=$(uname -m)
 
 if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then

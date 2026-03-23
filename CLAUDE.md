@@ -19,7 +19,7 @@ PortaMail is an autonomous indoor mail-delivery robot for hospitals/corporate ca
 | Component | Part | Notes |
 |---|---|---|
 | Raspberry Pi 5 (8GB) | — | Ubuntu 24.04 + ROS 2 Jazzy |
-| ESP32-DevKitC | PCB U6 | Primary low-level MCU; micro-ROS over USB serial (CP2102 → `/dev/ttyUSB1`) |
+| ESP32-DevKitC | PCB U6 | Primary low-level MCU; micro-ROS over USB serial (CP2102 → `/dev/ttyUSB0` when LiDAR not connected, `/dev/ttyUSB1` when LiDAR is on USB0) |
 | Teensy 4.0 w/ headers | DigiKey 1568-16997-ND | **Legacy/backup only** — not on the custom PCB |
 | 64GB microSDXC | DigiKey 6318-SDCS3/64GB-ND | Boot media for Pi |
 | RPi Camera Module 3 | DigiKey 2648-SC1223-ND | Side-mounted |
@@ -120,7 +120,7 @@ The VNH5019 is **not** an L298N. The control interface differs:
 
 Speed is controlled by PWM on **EN/DIAG** pin. EN/DIAG is bidirectional — it also goes LOW on fault (overcurrent, thermal shutdown). The VNH5019 has built-in thermal shutdown, UVLO, and cross-conduction prevention.
 
-> **FIRMWARE NOTE**: `esp32_driver.ino` is currently written for L298N (ENA/ENB/IN1-IN4 interface). It must be updated to use INA/INB/EN per the VNH5019 interface above before it will work with the custom PCB.
+> **FIRMWARE NOTE**: `esp32_driver.ino` has been updated to use the VNH5019 INA/INB/ENA/ENB interface matching the PCB schematic. ENB pins (GPIO 19 left, GPIO 23 right) are driven HIGH in `setup()` to keep both half-bridges active. The `setMotor()` logic (INA=1/INB=0 forward, INA=0/INB=1 reverse) is correct for both VNH5019 and L298N — the PCB is the primary target, but the same firmware works with a standalone L298N breakout board wired to the same GPIOs (leave ENB pins unconnected on L298N).
 
 ### Connectors
 
@@ -222,12 +222,14 @@ ros2 launch portamail_coordinator bringup.launch.py mode:=navigation
 ```
 
 ### micro-ROS Agent
-`hardware.launch.py` starts the micro-ROS agent automatically via Docker. To run it manually:
+`hardware.launch.py` starts the micro-ROS agent automatically as a native ROS node (`micro_ros_agent` package, built from source in `~/microros_ws`). To run it manually:
 ```bash
-./run_agent.sh              # Teensy: /dev/ttyACM0 (default)
-./run_agent.sh /dev/ttyUSB1 # ESP32: /dev/ttyUSB1 (when LiDAR is on USB0)
+./run_agent.sh              # default: /dev/ttyUSB0 (ESP32 alone, no LiDAR)
+./run_agent.sh /dev/ttyUSB1 # ESP32 when LiDAR is on /dev/ttyUSB0
 ```
-Note: `run_agent.sh` uses the `humble` Docker image (no Jazzy arm64 image exists); this is an intentional workaround.
+`run_agent.sh` auto-detects architecture:
+- **amd64 (laptop)**: uses `microros/micro-ros-agent:jazzy` Docker image — matches `micro_ros_arduino` library version (2.0.8-jazzy). Using the `humble` image causes XRCE-DDS session instability.
+- **arm64 (Pi)**: uses native agent built from source in `~/microros_ws` (no Jazzy arm64 Docker image exists). Build once with the instructions printed by `run_agent.sh` if not present.
 
 **Foxglove visualization**: `ws://<robot-ip>:8765` (started automatically by `mapping.launch.py`)
 
@@ -253,7 +255,7 @@ Low-level hardware abstraction, sensor stack, and SLAM.
 
 - **`firmware/teensy_driver/locale_stubs.c`** — Stub implementations of locale functions missing from the Teensyduino toolchain. Required for micro_ros_arduino to link correctly; see the `platform.local.txt` fix in the Memory file.
 
-- **`firmware/esp32_driver/esp32_driver.ino`** — Drop-in alternative firmware for ESP32-WROOM-32 (if the Teensy is unavailable). Publishes the same ROS topics so the Pi-side stack needs no changes. Key differences from the Teensy driver: uses **L298N** motor driver (ENA/ENB/IN1–IN4), LEDC PWM (`ledcAttach`/`ledcWrite`, ESP32 Arduino core v3.x), `IRAM_ATTR` ISRs, `portDISABLE_INTERRUPTS` for atomic sections, I2C initialized as `Wire.begin(21, 22)`. Appears as `/dev/ttyUSB1` (on-board CP2102 bridge) when LiDAR is on USB0. Flash at 921600 baud; micro-ROS runs at 115200. Avoid GPIO 6–11 (internal flash) and GPIO 12 (boot strap).
+- **`firmware/esp32_driver/esp32_driver.ino`** — Active firmware for ESP32-WROOM-32 (primary MCU on custom PCB). Publishes the same ROS topics as the Teensy driver. Key characteristics: VNH5019 motor driver interface (INA/INB/ENA/ENB per PCB schematic; also works with L298N breakout wired to same GPIOs), LEDC PWM (`ledcAttach`/`ledcWrite`, ESP32 Arduino core v3.x), `IRAM_ATTR` ISRs, `portDISABLE_INTERRUPTS` for atomic encoder snapshots, I2C initialized as `Wire.begin(21, 22)`. Appears as `/dev/ttyUSB0` when no LiDAR connected, `/dev/ttyUSB1` when LiDAR is on USB0. Flash at 921600 baud; micro-ROS runs at 115200. Avoid GPIO 6–11 (internal flash) and GPIO 12 (boot strap). Current tuned values: `SLEW_RATE = 3.0` m/s², odom at 20 Hz, range at 2 Hz, 500 ms safety timeout, BEST_EFFORT + depth=1 QoS on `/cmd_vel` to prevent backlog buildup. Reconnect state machine: pings agent every 1 s, calls `init_ros_entities()`/`fini_ros_entities()` on connect/disconnect without rebooting.
 
 - **`src/mock_driver.cpp`** — Simulated differential-drive node (`mock_teensy_driver`). Subscribes to `cmd_vel`, integrates kinematics at 20 Hz, publishes `odom` + the `odom→base_link` TF. Use on desktop in place of real hardware.
 
@@ -267,7 +269,7 @@ Low-level hardware abstraction, sensor stack, and SLAM.
 
 - **`config/map_autosave.yaml`** — Default parameters for `map_autosave_node`.
 
-- **`launch/hardware.launch.py`** — Brings up robot_state_publisher (from URDF), Micro-ROS agent (Teensy bridge), RPLIDAR A2M12 (`/dev/ttyUSB0`, 256000 baud), and EKF. The `use_imu` argument (default `false`) selects which EKF config is loaded. There is **no Pi-side IMU node** — the BNO055 is wired to the Teensy via I2C; the Teensy firmware publishes `/imu/data` over micro-ROS when the IMU is connected.
+- **`launch/hardware.launch.py`** — Brings up robot_state_publisher (from URDF), micro-ROS agent (native `micro_ros_agent` ROS node, not Docker), RPLIDAR A2M12 (stable by-id path, 256000 baud), and EKF. Arguments: `use_lidar` (default `true`), `use_mcu` (default `true`), `mcu_port` (default: CP2102 by-id path for ESP32), `use_imu` (default `false`), `use_ekf` (default `true`). There is **no Pi-side IMU node** — the BNO055 is wired to the ESP32 via I2C (GPIO 21/22); the ESP32 firmware publishes `/imu/data` over micro-ROS when the IMU is connected.
 
 - **`launch/mapping.launch.py`** — Includes `hardware.launch.py`, optionally starts `mock_driver`, starts **SLAM Toolbox** as a lifecycle node (auto configure→activate with 2 s delay), starts `map_autosave_node`, joystick, and Foxglove bridge.
 
@@ -354,8 +356,19 @@ Constants in `firmware/teensy_driver/teensy_driver.ino` (and mirrored identicall
 | `WHEEL_RADIUS` | `0.03556` m | 2.8" wheels ÷ 2 | Verify on actual tire |
 | `WHEEL_BASE` | `0.20` m | Estimated | **Measure the actual track width** |
 | `TICKS_PER_REV` | `720.0` | 8 PPR × 90:1 gear = 720 (single-edge) | **Calibrate physically**: drive exactly 1 m, count ticks |
-| `MAX_SPEED_MPS` | `0.89` | 2 MPH limit | Matches SMART Goal #11 |
+| `MAX_SPEED_MPS` | `0.89` | 2 MPH firmware cap | Hard cap in firmware; joystick scale separately limits operational speed |
 | `PWM_MIN` | `70` | Motor dead zone | Tune per motor |
+| `SLEW_RATE` | `3.0` m/s² | Tuned for responsiveness | Ramp rate from 0→full speed; increase for snappier feel, decrease to reduce jerk |
+
+### Joystick Tuning (`launch/joystick.launch.py`)
+
+| Parameter | Current Value | Notes |
+|---|---|---|
+| `scale_linear.x` | `0.447` | 1 MPH operational max |
+| `scale_angular.yaw` | `1.0` | Turn rate scale |
+| `deadzone` | `0.05` | 5% stick dead zone — keeps max speed at near-full physical displacement |
+| `autorepeat_rate` | `20` Hz | Held-input refresh rate |
+| `enable_button` | `5` | Right bumper (xpadneo mapping) — must hold to send velocity |
 
 **EKF sensor selection**: Pass `use_imu:=false` (default) for odometry-only fusion. Once BNO055 is physically wired to the Teensy's I2C pins and the Teensy firmware publishes `/imu/data`, pass `use_imu:=true` to load the full fusion config.
 

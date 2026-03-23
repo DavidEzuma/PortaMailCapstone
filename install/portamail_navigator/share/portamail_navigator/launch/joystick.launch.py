@@ -21,8 +21,8 @@ def generate_launch_description():
             name='joy_node',
             parameters=[{
                 'dev': LaunchConfiguration('joy_dev'),
-                'deadzone': 0.15,
-                'autorepeat_rate': 10.0,
+                'deadzone': 0.05,
+                'autorepeat_rate': 20.0,
             }]
         ),
 
@@ -34,7 +34,7 @@ def generate_launch_description():
             parameters=[{
                 'axis_linear.x': 1,  # Left Stick Vertical
                 'axis_angular.yaw': 0, # Left Stick Horizontal
-                'scale_linear.x': 0.89, # Max Speed (approx 2 MPH)
+                'scale_linear.x': 0.447, # Max Speed (approx 1 MPH)
                 'scale_angular.yaw': 1.0,
                 'enable_button': 5, # Right Bumper (xpadneo mapping)
             }],

@@ -13,7 +13,6 @@
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/teensy_driver.ino
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/esp32_driver/esp32_driver.ino
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/micro_ros_arduino-2.0.8-jazzy.zip
-/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/error message.png
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail.urdf
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail_classic.urdf
 /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_wheel.STL
