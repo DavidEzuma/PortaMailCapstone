@@ -354,6 +354,11 @@ void init_ros_entities() {
 }
 
 void fini_ros_entities() {
+  // Stop motors immediately before tearing down ROS to prevent runaway
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0.0f);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0.0f);
+  current_left_spd  = 0.0f;
+  current_right_spd = 0.0f;
   rclc_executor_fini(&executor);
   rcl_publisher_fini(&range_pub, &node);
   rcl_publisher_fini(&imu_pub,   &node);
@@ -423,7 +428,7 @@ void loop() {
   static unsigned long last_ping_ms = 0;
   if (now - last_ping_ms > 1000) {
     last_ping_ms = now;
-    bool ping_ok = (rmw_uros_ping_agent(200, 1) == RMW_RET_OK);
+    bool ping_ok = (rmw_uros_ping_agent(500, 3) == RMW_RET_OK);
 
     if (!agent_connected && ping_ok) {
       // Agent appeared — initialise ROS entities and start running

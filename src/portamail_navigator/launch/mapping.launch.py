@@ -10,7 +10,7 @@ from launch.actions import (
 from launch.conditions import IfCondition
 from launch.events import matches_action
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import EnvironmentVariable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import EnvironmentVariable, LaunchConfiguration, NotSubstitution, PathJoinSubstitution
 from launch_ros.actions import LifecycleNode, Node
 from launch_ros.event_handlers import OnStateTransition
 from launch_ros.events.lifecycle import ChangeState
@@ -54,12 +54,12 @@ def generate_launch_description():
         ]),
         launch_arguments={
             'use_lidar': LaunchConfiguration('use_real_lidar'),
-            'use_mcu': 'false',
+            'use_mcu': NotSubstitution(LaunchConfiguration('use_mock_driver')),
             'use_imu': 'false',
             # Disable EKF when mock_driver is active: mock_driver owns the
             # odom→base_link TF and running EKF in parallel causes TF conflicts
             # that make SLAM Toolbox drop scan messages.
-            'use_ekf': 'false',
+            'use_ekf': NotSubstitution(LaunchConfiguration('use_mock_driver')),
         }.items()
     )
 

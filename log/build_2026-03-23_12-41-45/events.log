@@ -1,0 +1,772 @@
+[0.000000] (-) TimerEvent: {}
+[0.000120] (-) JobUnselected: {'identifier': 'lcd_bridge'}
+[0.000226] (-) JobUnselected: {'identifier': 'portamail_coordinator'}
+[0.000258] (sllidar_ros2) JobQueued: {'identifier': 'sllidar_ros2', 'dependencies': OrderedDict()}
+[0.000281] (portamail_navigator) JobQueued: {'identifier': 'portamail_navigator', 'dependencies': OrderedDict({'sllidar_ros2': '/home/davidezuma/PortaMailCapstone/install/sllidar_ros2'})}
+[0.000713] (sllidar_ros2) JobStarted: {'identifier': 'sllidar_ros2'}
+[0.056791] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'cmake'}
+[0.057778] (sllidar_ros2) Command: {'cmd': ['/usr/bin/cmake', '/home/davidezuma/PortaMailCapstone/src/sllidar_ros2', '-DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/sllidar_ros2'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '100.92.98.83 62572 22', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '3', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'PATH': '/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_RUNTIME_DIR': '/run/user/1000', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'GEMINI_API_KEY': 'AIzaSyAaKUWCOuWV79mc6qI8bqPHqWhXmp67Hk8', 'SSH_CONNECTION': '100.92.98.83 62572 100.68.67.30 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.099749] (-) TimerEvent: {}
+[0.200015] (-) TimerEvent: {}
+[0.300239] (-) TimerEvent: {}
+[0.351114] (sllidar_ros2) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.400366] (-) TimerEvent: {}
+[0.500581] (-) TimerEvent: {}
+[0.600827] (-) TimerEvent: {}
+[0.701077] (-) TimerEvent: {}
+[0.731675] (sllidar_ros2) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.774354] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.801173] (-) TimerEvent: {}
+[0.901377] (-) TimerEvent: {}
+[0.969173] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.984974] (sllidar_ros2) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.986056] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.987027] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.001489] (-) TimerEvent: {}
+[1.003957] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.101617] (-) TimerEvent: {}
+[1.201861] (-) TimerEvent: {}
+[1.218745] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.234572] (sllidar_ros2) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.234968] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.235766] (sllidar_ros2) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.256493] (sllidar_ros2) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[1.301987] (-) TimerEvent: {}
+[1.402210] (-) TimerEvent: {}
+[1.502422] (-) TimerEvent: {}
+[1.535519] (sllidar_ros2) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[1.602514] (-) TimerEvent: {}
+[1.702696] (-) TimerEvent: {}
+[1.796937] (sllidar_ros2) StdoutLine: {'line': b'-- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[1.802779] (-) TimerEvent: {}
+[1.903128] (-) TimerEvent: {}
+[1.928655] (sllidar_ros2) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[1.983462] (sllidar_ros2) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[2.003140] (-) TimerEvent: {}
+[2.035755] (sllidar_ros2) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.084293] (sllidar_ros2) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.103247] (-) TimerEvent: {}
+[2.203445] (-) TimerEvent: {}
+[2.282317] (sllidar_ros2) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[2.293423] (sllidar_ros2) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.303570] (-) TimerEvent: {}
+[2.403843] (-) TimerEvent: {}
+[2.504121] (-) TimerEvent: {}
+[2.526287] (sllidar_ros2) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[2.561707] (sllidar_ros2) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[2.602240] (sllidar_ros2) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[2.604230] (-) TimerEvent: {}
+[2.704443] (-) TimerEvent: {}
+[2.776354] (sllidar_ros2) StdoutLine: {'line': b'-- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)\n'}
+[2.804554] (-) TimerEvent: {}
+[2.904935] (-) TimerEvent: {}
+[2.914282] (sllidar_ros2) StdoutLine: {'line': b'-- Found std_srvs: 5.3.6 (/opt/ros/jazzy/share/std_srvs/cmake)\n'}
+[3.005201] (-) TimerEvent: {}
+[3.105423] (-) TimerEvent: {}
+[3.117879] (sllidar_ros2) StdoutLine: {'line': b'-- Configuring done (2.9s)\n'}
+[3.149999] (sllidar_ros2) StdoutLine: {'line': b'-- Generating done (0.0s)\n'}
+[3.158953] (sllidar_ros2) StdoutLine: {'line': b'-- Build files have been written to: /home/davidezuma/PortaMailCapstone/build/sllidar_ros2\n'}
+[3.180670] (sllidar_ros2) CommandEnded: {'returncode': 0}
+[3.181380] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'build'}
+[3.182263] (sllidar_ros2) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', '--', '-j4', '-l4'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '100.92.98.83 62572 22', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '3', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'PATH': '/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_RUNTIME_DIR': '/run/user/1000', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'GEMINI_API_KEY': 'AIzaSyAaKUWCOuWV79mc6qI8bqPHqWhXmp67Hk8', 'SSH_CONNECTION': '100.92.98.83 62572 100.68.67.30 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[3.205535] (-) TimerEvent: {}
+[3.288257] (sllidar_ros2) StdoutLine: {'line': b'[ 15%] Building CXX object CMakeFiles/sllidar_client.dir/src/sllidar_client.cpp.o\n'}
+[3.288622] (sllidar_ros2) StdoutLine: {'line': b'[ 15%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/net_serial.cpp.o\n'}
+[3.288851] (sllidar_ros2) StdoutLine: {'line': b'[ 20%] Building CXX object CMakeFiles/sllidar_node.dir/src/sllidar_node.cpp.o\n'}
+[3.288958] (sllidar_ros2) StdoutLine: {'line': b'[ 15%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/net_socket.cpp.o\n'}
+[3.309666] (-) TimerEvent: {}
+[3.409928] (-) TimerEvent: {}
+[3.510170] (-) TimerEvent: {}
+[3.613119] (-) TimerEvent: {}
+[3.713431] (-) TimerEvent: {}
+[3.813772] (-) TimerEvent: {}
+[3.914011] (-) TimerEvent: {}
+[4.014300] (-) TimerEvent: {}
+[4.114553] (-) TimerEvent: {}
+[4.214789] (-) TimerEvent: {}
+[4.238131] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function \xe2\x80\x98bool rp::arch::net::raw_serial::open(const char*, uint32_t, uint32_t)\xe2\x80\x99:\n'}
+[4.238510] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:97:74: warning: unused parameter \xe2\x80\x98flags\xe2\x80\x99 [-Wunused-parameter]\n'}
+[4.238662] (sllidar_ros2) StderrLine: {'line': b'   97 | bool raw_serial::open(const char * portname, uint32_t baudrate, uint32_t flags)\n'}
+[4.238761] (sllidar_ros2) StderrLine: {'line': b'      |                                                                 ~~~~~~~~~^~~~~\n'}
+[4.239178] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function \xe2\x80\x98virtual void rp::arch::net::raw_serial::flush(_u32)\xe2\x80\x99:\n'}
+[4.239347] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:281:30: warning: unused parameter \xe2\x80\x98flags\xe2\x80\x99 [-Wunused-parameter]\n'}
+[4.239469] (sllidar_ros2) StderrLine: {'line': b'  281 | void raw_serial::flush( _u32 flags)\n'}
+[4.239576] (sllidar_ros2) StderrLine: {'line': b'      |                         ~~~~~^~~~~\n'}
+[4.239661] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function \xe2\x80\x98virtual int rp::arch::net::raw_serial::waitforsent(_u32, size_t*)\xe2\x80\x99:\n'}
+[4.239762] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:286:34: warning: unused parameter \xe2\x80\x98timeout\xe2\x80\x99 [-Wunused-parameter]\n'}
+[4.239865] (sllidar_ros2) StderrLine: {'line': b'  286 | int raw_serial::waitforsent(_u32 timeout, size_t * returned_size)\n'}
+[4.240003] (sllidar_ros2) StderrLine: {'line': b'      |                             ~~~~~^~~~~~~\n'}
+[4.240139] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function \xe2\x80\x98virtual int rp::arch::net::raw_serial::waitforrecv(_u32, size_t*)\xe2\x80\x99:\n'}
+[4.240227] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:292:34: warning: unused parameter \xe2\x80\x98timeout\xe2\x80\x99 [-Wunused-parameter]\n'}
+[4.240340] (sllidar_ros2) StderrLine: {'line': b'  292 | int raw_serial::waitforrecv(_u32 timeout, size_t * returned_size)\n'}
+[4.240456] (sllidar_ros2) StderrLine: {'line': b'      |                             ~~~~~^~~~~~~\n'}
+[4.243698] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function \xe2\x80\x98virtual void rp::arch::net::raw_serial::cancelOperation()\xe2\x80\x99:\n'}
+[4.244022] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:427:5: warning: value computed is not used [-Wunused-value]\n'}
+[4.244208] (sllidar_ros2) StderrLine: {'line': b'  427 |     (int)::write(_selfpipe[1], "x", 1);\n'}
+[4.244337] (sllidar_ros2) StderrLine: {'line': b'      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[4.314952] (-) TimerEvent: {}
+[4.336181] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[4.338568] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[4.338737] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[4.338837] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp:10:\n'}
+[4.338967] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[4.339163] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[4.339296] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[4.339406] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[4.339499] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[4.339607] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[4.339711] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[4.339815] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[4.415181] (-) TimerEvent: {}
+[4.415684] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/arch_linux.h:42,\n'}
+[4.415953] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:41:\n'}
+[4.416141] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp: In member function \xe2\x80\x98virtual u_result rp::arch::net::DGramSocketImpl::sendTo(const rp::net::SocketAddress*, const void*, size_t)\xe2\x80\x99:\n'}
+[4.416288] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp:733:24: warning: comparison of integer expressions of different signedness: \xe2\x80\x98int\xe2\x80\x99 and \xe2\x80\x98size_t\xe2\x80\x99 {aka \xe2\x80\x98long unsigned int\xe2\x80\x99} [-Wsign-compare]\n'}
+[4.416400] (sllidar_ros2) StderrLine: {'line': b'  733 |             assert(ans == len);\n'}
+[4.416521] (sllidar_ros2) StderrLine: {'line': b'      |                    ~~~~^~~~~~\n'}
+[4.516174] (-) TimerEvent: {}
+[4.609145] (sllidar_ros2) StdoutLine: {'line': b'[ 25%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/timer.cpp.o\n'}
+[4.618182] (-) TimerEvent: {}
+[4.718501] (-) TimerEvent: {}
+[4.818833] (-) TimerEvent: {}
+[4.875193] (sllidar_ros2) StdoutLine: {'line': b'[ 30%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/dataunpacker.cpp.o\n'}
+[4.918970] (-) TimerEvent: {}
+[5.019236] (-) TimerEvent: {}
+[5.119497] (-) TimerEvent: {}
+[5.219766] (-) TimerEvent: {}
+[5.320033] (-) TimerEvent: {}
+[5.420309] (-) TimerEvent: {}
+[5.522167] (-) TimerEvent: {}
+[5.616499] (sllidar_ros2) StdoutLine: {'line': b'[ 35%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_capsules.cpp.o\n'}
+[5.622556] (-) TimerEvent: {}
+[5.722810] (-) TimerEvent: {}
+[5.823090] (-) TimerEvent: {}
+[5.923325] (-) TimerEvent: {}
+[6.023588] (-) TimerEvent: {}
+[6.126155] (-) TimerEvent: {}
+[6.144152] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[6.144477] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[6.144615] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[6.144766] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunnpacker_commondef.h:41,\n'}
+[6.144896] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.cpp:39:\n'}
+[6.145002] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[6.145142] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[6.145245] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[6.148208] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[6.148641] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[6.148822] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[6.148935] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[6.149068] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[6.226285] (-) TimerEvent: {}
+[6.326594] (-) TimerEvent: {}
+[6.429146] (-) TimerEvent: {}
+[6.461338] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.cpp:40:\n'}
+[6.461739] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)\xe2\x80\x99:\n'}
+[6.461948] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:52: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.462128] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.462324] (sllidar_ros2) StderrLine: {'line': b'      |                                                ~~~~^~~~~~~\n'}
+[6.462460] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:66: warning: unused parameter \xe2\x80\x98customCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.462596] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.462715] (sllidar_ros2) StderrLine: {'line': b'      |                                                             ~~~~~^~~~~~~~~~\n'}
+[6.462851] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:90: warning: unused parameter \xe2\x80\x98data\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.462949] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.463069] (sllidar_ros2) StderrLine: {'line': b'      |                                                                              ~~~~~~~~~~~~^~~~\n'}
+[6.463201] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:103: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.463297] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.463419] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                ~~~~~~~^~~~\n'}
+[6.463518] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)\xe2\x80\x99:\n'}
+[6.463615] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:42: warning: unused parameter \xe2\x80\x98errMsg\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.463706] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.463795] (sllidar_ros2) StderrLine: {'line': b'      |                                      ~~~~^~~~~~\n'}
+[6.465143] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:54: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.465439] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.465543] (sllidar_ros2) StderrLine: {'line': b'      |                                                  ~~~~^~~~~~~\n'}
+[6.465638] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:75: warning: unused parameter \xe2\x80\x98payload\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.465739] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.465872] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~^~~~~~~\n'}
+[6.465990] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:91: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.466121] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.466222] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                    ~~~~~~~^~~~\n'}
+[6.531181] (-) TimerEvent: {}
+[6.579497] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[6.579786] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[6.579903] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[6.580020] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,\n'}
+[6.580201] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:39:\n'}
+[6.580351] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[6.580471] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[6.580580] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[6.580869] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[6.581141] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[6.581289] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[6.581413] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[6.581571] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[6.634171] (-) TimerEvent: {}
+[6.734429] (-) TimerEvent: {}
+[6.802768] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:40:\n'}
+[6.803140] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)\xe2\x80\x99:\n'}
+[6.803293] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.803402] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.803512] (sllidar_ros2) StderrLine: {'line': b'      |                                                ~~~~^~~~~~~\n'}
+[6.805459] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter \xe2\x80\x98customCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.805802] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.805938] (sllidar_ros2) StderrLine: {'line': b'      |                                                             ~~~~~^~~~~~~~~~\n'}
+[6.806086] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter \xe2\x80\x98data\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.806237] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.806337] (sllidar_ros2) StderrLine: {'line': b'      |                                                                              ~~~~~~~~~~~~^~~~\n'}
+[6.806434] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.806520] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[6.806614] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                ~~~~~~~^~~~\n'}
+[6.806715] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)\xe2\x80\x99:\n'}
+[6.806873] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter \xe2\x80\x98errMsg\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.807017] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.807162] (sllidar_ros2) StderrLine: {'line': b'      |                                      ~~~~^~~~~~\n'}
+[6.807285] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.807387] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.807477] (sllidar_ros2) StderrLine: {'line': b'      |                                                  ~~~~^~~~~~~\n'}
+[6.807566] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter \xe2\x80\x98payload\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.807654] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.807741] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~^~~~~~~\n'}
+[6.807828] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[6.807926] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[6.808019] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                    ~~~~~~~^~~~\n'}
+[6.830917] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp: In member function \xe2\x80\x98void sl::internal::unpacker::UnpackerHandler_DenseCapsuleNode::_onScanNodeDenseCapsuleData(rplidar_response_dense_capsule_measurement_nodes_t&, sl::internal::LIDARSampleDataUnpackerInner*)\xe2\x80\x99:\n'}
+[6.831248] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:763:30: warning: type qualifiers ignored on cast result type [-Wignored-qualifiers]\n'}
+[6.831381] (sllidar_ros2) StderrLine: {'line': b'  763 |             const int dist = static_cast<const int>(_cached_previous_dense_capsuledata.cabins[pos].distance);\n'}
+[6.831515] (sllidar_ros2) StderrLine: {'line': b'      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[6.834563] (-) TimerEvent: {}
+[6.939177] (-) TimerEvent: {}
+[7.042221] (-) TimerEvent: {}
+[7.142501] (-) TimerEvent: {}
+[7.233101] (sllidar_ros2) StdoutLine: {'line': b'[ 40%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp.o\n'}
+[7.242622] (-) TimerEvent: {}
+[7.300267] (sllidar_ros2) StdoutLine: {'line': b'[ 45%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp.o\n'}
+[7.342799] (-) TimerEvent: {}
+[7.443151] (-) TimerEvent: {}
+[7.543424] (-) TimerEvent: {}
+[7.643701] (-) TimerEvent: {}
+[7.744878] (-) TimerEvent: {}
+[7.845175] (-) TimerEvent: {}
+[7.945435] (-) TimerEvent: {}
+[8.045673] (-) TimerEvent: {}
+[8.151156] (-) TimerEvent: {}
+[8.254189] (-) TimerEvent: {}
+[8.322870] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[8.323172] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[8.323318] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[8.323420] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,\n'}
+[8.323513] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp:39:\n'}
+[8.323623] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[8.323718] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[8.323810] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[8.324841] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[8.325146] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[8.325268] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[8.325376] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[8.325469] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[8.357151] (-) TimerEvent: {}
+[8.457398] (-) TimerEvent: {}
+[8.552361] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[8.552645] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[8.552787] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[8.552898] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,\n'}
+[8.552993] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp:39:\n'}
+[8.553135] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[8.553241] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[8.556225] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[8.556797] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[8.556927] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[8.557038] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[8.560476] (-) TimerEvent: {}
+[8.560513] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[8.560625] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[8.560723] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp:40:\n'}
+[8.560822] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)\xe2\x80\x99:\n'}
+[8.560920] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.561008] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.563284] (sllidar_ros2) StderrLine: {'line': b'      |                                                ~~~~^~~~~~~\n'}
+[8.563445] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter \xe2\x80\x98customCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.563560] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.563663] (sllidar_ros2) StderrLine: {'line': b'      |                                                             ~~~~~^~~~~~~~~~\n'}
+[8.563761] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter \xe2\x80\x98data\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.563863] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.564005] (sllidar_ros2) StderrLine: {'line': b'      |                                                                              ~~~~~~~~~~~~^~~~\n'}
+[8.564170] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.564285] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.564389] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                ~~~~~~~^~~~\n'}
+[8.564497] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)\xe2\x80\x99:\n'}
+[8.564604] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter \xe2\x80\x98errMsg\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.564716] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.564844] (sllidar_ros2) StderrLine: {'line': b'      |                                      ~~~~^~~~~~\n'}
+[8.564939] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.565038] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.568485] (sllidar_ros2) StderrLine: {'line': b'      |                                                  ~~~~^~~~~~~\n'}
+[8.568634] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter \xe2\x80\x98payload\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.568750] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.568850] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~^~~~~~~\n'}
+[8.568948] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.569069] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.569235] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                    ~~~~~~~^~~~\n'}
+[8.660636] (-) TimerEvent: {}
+[8.760910] (-) TimerEvent: {}
+[8.861150] (-) TimerEvent: {}
+[8.898332] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp:40:\n'}
+[8.898682] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)\xe2\x80\x99:\n'}
+[8.898815] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.898959] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.899126] (sllidar_ros2) StderrLine: {'line': b'      |                                                ~~~~^~~~~~~\n'}
+[8.899596] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter \xe2\x80\x98customCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.899781] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.899921] (sllidar_ros2) StderrLine: {'line': b'      |                                                             ~~~~~^~~~~~~~~~\n'}
+[8.900351] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter \xe2\x80\x98data\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.900591] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.900723] (sllidar_ros2) StderrLine: {'line': b'      |                                                                              ~~~~~~~~~~~~^~~~\n'}
+[8.901093] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.901297] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[8.901410] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                ~~~~~~~^~~~\n'}
+[8.901920] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)\xe2\x80\x99:\n'}
+[8.902220] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter \xe2\x80\x98errMsg\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.902362] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.902483] (sllidar_ros2) StderrLine: {'line': b'      |                                      ~~~~^~~~~~\n'}
+[8.903370] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.903635] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.905388] (sllidar_ros2) StderrLine: {'line': b'      |                                                  ~~~~^~~~~~~\n'}
+[8.905552] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter \xe2\x80\x98payload\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.905659] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.905799] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~^~~~~~~\n'}
+[8.905927] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[8.906041] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[8.906237] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                    ~~~~~~~^~~~\n'}
+[8.909154] (sllidar_ros2) StdoutLine: {'line': b'[ 50%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/hal/thread.cpp.o\n'}
+[8.961272] (-) TimerEvent: {}
+[9.061523] (-) TimerEvent: {}
+[9.161772] (-) TimerEvent: {}
+[9.175931] (sllidar_ros2) StdoutLine: {'line': b'[ 55%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/rplidar_driver.cpp.o\n'}
+[9.264190] (-) TimerEvent: {}
+[9.364434] (-) TimerEvent: {}
+[9.464691] (-) TimerEvent: {}
+[9.567197] (-) TimerEvent: {}
+[9.667449] (-) TimerEvent: {}
+[9.767710] (-) TimerEvent: {}
+[9.868006] (-) TimerEvent: {}
+[9.953151] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,\n'}
+[9.953502] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,\n'}
+[9.953633] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar.h:36,\n'}
+[9.953772] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/src/sllidar_node.cpp:38:\n'}
+[9.953871] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[9.953961] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[9.954125] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[9.954279] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[9.954383] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[9.954482] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[9.969251] (-) TimerEvent: {}
+[10.069520] (-) TimerEvent: {}
+[10.169795] (-) TimerEvent: {}
+[10.182558] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[10.182915] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[10.183149] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,\n'}
+[10.183300] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/hal/thread.cpp:35:\n'}
+[10.183425] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[10.183583] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[10.183700] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[10.187141] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[10.187500] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[10.187665] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[10.187785] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[10.187882] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[10.187974] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[10.188192] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[10.188325] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,\n'}
+[10.188430] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:33:\n'}
+[10.188569] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[10.188670] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[10.191369] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[10.191546] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[10.191656] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[10.191754] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[10.191863] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[10.191974] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[10.251381] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/hal/thread.cpp:43:\n'}
+[10.251697] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp: In static member function \xe2\x80\x98static rp::hal::Thread rp::hal::Thread::create(thread_proc_t, void*)\xe2\x80\x99:\n'}
+[10.251875] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp:52:57: warning: cast between incompatible function types from \xe2\x80\x98thread_proc_t\xe2\x80\x99 {aka \xe2\x80\x98long unsigned int (*)(void*)\xe2\x80\x99} to \xe2\x80\x98void* (*)(void*)\xe2\x80\x99 [-Wcast-function-type]\n'}
+[10.251990] (sllidar_ros2) StderrLine: {'line': b'   52 |     pthread_create((pthread_t *)&newborn._handle, NULL, (void * (*)(void *))proc, data);\n'}
+[10.252162] (sllidar_ros2) StderrLine: {'line': b'      |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[10.252282] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp: In member function \xe2\x80\x98u_result rp::hal::Thread::join(long unsigned int)\xe2\x80\x99:\n'}
+[10.252411] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp:176:37: warning: unused parameter \xe2\x80\x98timeout\xe2\x80\x99 [-Wunused-parameter]\n'}
+[10.252571] (sllidar_ros2) StderrLine: {'line': b'  176 | u_result Thread::join(unsigned long timeout)\n'}
+[10.252729] (sllidar_ros2) StderrLine: {'line': b'      |                       ~~~~~~~~~~~~~~^~~~~~~\n'}
+[10.271162] (-) TimerEvent: {}
+[10.313848] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function \xe2\x80\x98u_result rp::standalone::rplidar::RPlidarDriver::connect(const char*, _u32, _u32)\xe2\x80\x99:\n'}
+[10.314250] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:67:77: warning: unused parameter \xe2\x80\x98flag\xe2\x80\x99 [-Wunused-parameter]\n'}
+[10.314644] (sllidar_ros2) StderrLine: {'line': b'   67 |     u_result RPlidarDriver::connect(const char *path, _u32 portOrBaud, _u32 flag)\n'}
+[10.317360] (sllidar_ros2) StderrLine: {'line': b'      |                                                                        ~~~~~^~~~\n'}
+[10.317507] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function \xe2\x80\x98u_result rp::standalone::rplidar::RPlidarDriver::reset(_u32)\xe2\x80\x99:\n'}
+[10.317600] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:101:40: warning: unused parameter \xe2\x80\x98timeout\xe2\x80\x99 [-Wunused-parameter]\n'}
+[10.317693] (sllidar_ros2) StderrLine: {'line': b'  101 |     u_result RPlidarDriver::reset(_u32 timeout)\n'}
+[10.317780] (sllidar_ros2) StderrLine: {'line': b'      |                                   ~~~~~^~~~~~~\n'}
+[10.318109] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function \xe2\x80\x98u_result rp::standalone::rplidar::RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t*, size_t&)\xe2\x80\x99:\n'}
+[10.318357] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:180:91: warning: unused parameter \xe2\x80\x98nodebuffer\xe2\x80\x99 [-Wunused-parameter]\n'}
+[10.318517] (sllidar_ros2) StderrLine: {'line': b'  180 |     u_result RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t * nodebuffer, size_t & count)\n'}
+[10.318620] (sllidar_ros2) StderrLine: {'line': b'      |                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~\n'}
+[10.318722] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:180:112: warning: unused parameter \xe2\x80\x98count\xe2\x80\x99 [-Wunused-parameter]\n'}
+[10.318845] (sllidar_ros2) StderrLine: {'line': b'  180 |     u_result RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t * nodebuffer, size_t & count)\n'}
+[10.318960] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                       ~~~~~~~~~^~~~~\n'}
+[10.373181] (-) TimerEvent: {}
+[10.452764] (sllidar_ros2) StdoutLine: {'line': b'[ 60%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_async_transceiver.cpp.o\n'}
+[10.473328] (-) TimerEvent: {}
+[10.573593] (-) TimerEvent: {}
+[10.661670] (sllidar_ros2) StdoutLine: {'line': b'[ 65%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_crc.cpp.o\n'}
+[10.677175] (-) TimerEvent: {}
+[10.714755] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,\n'}
+[10.716702] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_crc.h:36,\n'}
+[10.716860] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_crc.cpp:33:\n'}
+[10.716955] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[10.717078] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[10.717203] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[10.717297] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[10.717395] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[10.717489] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[10.777298] (-) TimerEvent: {}
+[10.782977] (sllidar_ros2) StdoutLine: {'line': b'[ 70%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_lidar_driver.cpp.o\n'}
+[10.879206] (-) TimerEvent: {}
+[10.979549] (-) TimerEvent: {}
+[11.079801] (-) TimerEvent: {}
+[11.180120] (-) TimerEvent: {}
+[11.280385] (-) TimerEvent: {}
+[11.382385] (-) TimerEvent: {}
+[11.485142] (-) TimerEvent: {}
+[11.585411] (-) TimerEvent: {}
+[11.685672] (-) TimerEvent: {}
+[11.776150] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[11.776522] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[11.776665] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,\n'}
+[11.776783] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:33:\n'}
+[11.776892] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[11.776997] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[11.777157] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[11.777257] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[11.777347] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[11.777455] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[11.777550] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[11.777634] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[11.789160] (-) TimerEvent: {}
+[11.810238] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[11.810548] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[11.810720] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,\n'}
+[11.810836] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.cpp:35:\n'}
+[11.810946] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[11.811072] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[11.811207] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[11.814410] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[11.814773] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[11.814981] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[11.816523] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[11.816720] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[11.890162] (-) TimerEvent: {}
+[11.994151] (-) TimerEvent: {}
+[12.054151] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:50:\n'}
+[12.054463] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)\xe2\x80\x99:\n'}
+[12.054625] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:52: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.054740] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[12.054844] (sllidar_ros2) StderrLine: {'line': b'      |                                                ~~~~^~~~~~~\n'}
+[12.055268] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:66: warning: unused parameter \xe2\x80\x98customCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.055477] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[12.055590] (sllidar_ros2) StderrLine: {'line': b'      |                                                             ~~~~~^~~~~~~~~~\n'}
+[12.055945] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:90: warning: unused parameter \xe2\x80\x98data\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.056180] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[12.056339] (sllidar_ros2) StderrLine: {'line': b'      |                                                                              ~~~~~~~~~~~~^~~~\n'}
+[12.058482] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:103: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.058853] (sllidar_ros2) StderrLine: {'line': b'   54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}\n'}
+[12.058982] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                                ~~~~~~~^~~~\n'}
+[12.059132] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function \xe2\x80\x98virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)\xe2\x80\x99:\n'}
+[12.059245] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:42: warning: unused parameter \xe2\x80\x98errMsg\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.059344] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[12.059469] (sllidar_ros2) StderrLine: {'line': b'      |                                      ~~~~^~~~~~\n'}
+[12.059564] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:54: warning: unused parameter \xe2\x80\x98ansType\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.059653] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[12.059733] (sllidar_ros2) StderrLine: {'line': b'      |                                                  ~~~~^~~~~~~\n'}
+[12.059813] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:75: warning: unused parameter \xe2\x80\x98payload\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.059893] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[12.059975] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~^~~~~~~\n'}
+[12.060108] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:91: warning: unused parameter \xe2\x80\x98size\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.060230] (sllidar_ros2) StderrLine: {'line': b'   56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}\n'}
+[12.060321] (sllidar_ros2) StderrLine: {'line': b'      |                                                                                    ~~~~~~~^~~~\n'}
+[12.063170] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.cpp:44:\n'}
+[12.063529] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function \xe2\x80\x98virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)\xe2\x80\x99:\n'}
+[12.063698] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter \xe2\x80\x98errCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.063859] (sllidar_ros2) StderrLine: {'line': b'   90 |         virtual void   onChannelError(u_result errCode) {}\n'}
+[12.063978] (sllidar_ros2) StderrLine: {'line': b'      |                                       ~~~~~~~~~^~~~~~~\n'}
+[12.081066] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:51:\n'}
+[12.081417] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function \xe2\x80\x98virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)\xe2\x80\x99:\n'}
+[12.081587] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter \xe2\x80\x98errCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.081738] (sllidar_ros2) StderrLine: {'line': b'   90 |         virtual void   onChannelError(u_result errCode) {}\n'}
+[12.081884] (sllidar_ros2) StderrLine: {'line': b'      |                                       ~~~~~~~~~^~~~~~~\n'}
+[12.095358] (-) TimerEvent: {}
+[12.130231] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98virtual sl_result sl::SlamtecLidarDriver::reset(sl_u32)\xe2\x80\x99:\n'}
+[12.130615] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:511:32: warning: unused parameter \xe2\x80\x98timeoutInMs\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.130761] (sllidar_ros2) StderrLine: {'line': b'  511 |         sl_result reset(sl_u32 timeoutInMs = DEFAULT_TIMEOUT)\n'}
+[12.130905] (sllidar_ros2) StderrLine: {'line': b'      |                         ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[12.137695] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98virtual sl_result sl::SlamtecLidarDriver::startScan(bool, bool, sl_u32, sl::LidarScanMode*)\xe2\x80\x99:\n'}
+[12.138002] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:586:69: warning: unused parameter \xe2\x80\x98options\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.138188] (sllidar_ros2) StderrLine: {'line': b'  586 |         sl_result startScan(bool force, bool useTypicalScan, sl_u32 options = 0, LidarScanMode* outUsedScanMode = nullptr)\n'}
+[12.138318] (sllidar_ros2) StderrLine: {'line': b'      |                                                              ~~~~~~~^~~~~~~~~~~\n'}
+[12.143518] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98virtual sl_result sl::SlamtecLidarDriver::stop(sl_u32)\xe2\x80\x99:\n'}
+[12.143872] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:763:31: warning: unused parameter \xe2\x80\x98timeout\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.144004] (sllidar_ros2) StderrLine: {'line': b'  763 |         sl_result stop(sl_u32 timeout = DEFAULT_TIMEOUT)\n'}
+[12.144160] (sllidar_ros2) StderrLine: {'line': b'      |                        ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[12.150134] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98virtual sl_result sl::SlamtecLidarDriver::getFrequency(const sl::LidarScanMode&, const sl_lidar_response_measurement_node_hq_t*, size_t, float&)\xe2\x80\x99:\n'}
+[12.150445] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:880:110: warning: unused parameter \xe2\x80\x98nodes\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.150581] (sllidar_ros2) StderrLine: {'line': b'  880 |         sl_result getFrequency(const LidarScanMode& scanMode, const sl_lidar_response_measurement_node_hq_t* nodes, size_t count, float& frequency)\n'}
+[12.150704] (sllidar_ros2) StderrLine: {'line': b'      |                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~\n'}
+[12.153283] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98virtual sl_result sl::SlamtecLidarDriver::getMotorInfo(sl::LidarMotorInfo&, sl_u32)\xe2\x80\x99:\n'}
+[12.153579] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1023:66: warning: unused parameter \xe2\x80\x98timeoutInMs\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.153686] (sllidar_ros2) StderrLine: {'line': b' 1023 |         sl_result getMotorInfo(LidarMotorInfo &motorInfo, sl_u32 timeoutInMs)\n'}
+[12.153778] (sllidar_ros2) StderrLine: {'line': b'      |                                                           ~~~~~~~^~~~~~~~~~~\n'}
+[12.159311] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function \xe2\x80\x98u_result sl::SlamtecLidarDriver::getScanModeCount(sl_u16&, sl_u32)\xe2\x80\x99:\n'}
+[12.159719] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1199:61: warning: unused parameter \xe2\x80\x98timeoutInMs\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.159843] (sllidar_ros2) StderrLine: {'line': b' 1199 |         u_result getScanModeCount(sl_u16& modeCount, sl_u32 timeoutInMs = DEFAULT_TIMEOUT)\n'}
+[12.159958] (sllidar_ros2) StderrLine: {'line': b'      |                                                      ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'}
+[12.198152] (-) TimerEvent: {}
+[12.242550] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In instantiation of \xe2\x80\x98void sl::RawSampleNodeHolder<T>::pushNode(_u64, const T*) [with T = sl_lidar_response_measurement_node_hq_t; _u64 = long unsigned int]\xe2\x80\x99:\n'}
+[12.242831] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1648:42:   required from here\n'}
+[12.242938] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:202:28: warning: unused parameter \xe2\x80\x98timestamp_uS\xe2\x80\x99 [-Wunused-parameter]\n'}
+[12.243034] (sllidar_ros2) StderrLine: {'line': b'  202 |         void pushNode(_u64 timestamp_uS, const T* node)\n'}
+[12.243181] (sllidar_ros2) StderrLine: {'line': b'      |                       ~~~~~^~~~~~~~~~~~\n'}
+[12.298276] (-) TimerEvent: {}
+[12.394446] (sllidar_ros2) StdoutLine: {'line': b'[ 75%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_lidarprotocol_codec.cpp.o\n'}
+[12.398412] (-) TimerEvent: {}
+[12.464883] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: At global scope:\n'}
+[12.465200] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:83:17: warning: \xe2\x80\x98void sl::convert(const sl_lidar_response_measurement_node_hq_t&, sl_lidar_response_measurement_node_t&)\xe2\x80\x99 defined but not used [-Wunused-function]\n'}
+[12.465337] (sllidar_ros2) StderrLine: {'line': b'   83 |     static void convert(const sl_lidar_response_measurement_node_hq_t& from, sl_lidar_response_measurement_node_t& to)\n'}
+[12.465425] (sllidar_ros2) StderrLine: {'line': b'      |                 ^~~~~~~\n'}
+[12.468409] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:75:17: warning: \xe2\x80\x98void sl::convert(const sl_lidar_response_measurement_node_t&, sl_lidar_response_measurement_node_hq_t&)\xe2\x80\x99 defined but not used [-Wunused-function]\n'}
+[12.468698] (sllidar_ros2) StderrLine: {'line': b'   75 |     static void convert(const sl_lidar_response_measurement_node_t& from, sl_lidar_response_measurement_node_hq_t& to)\n'}
+[12.468813] (sllidar_ros2) StderrLine: {'line': b'      |                 ^~~~~~~\n'}
+[12.468899] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:70:17: warning: \xe2\x80\x98void sl::printDeprecationWarn(const char*, const char*)\xe2\x80\x99 defined but not used [-Wunused-function]\n'}
+[12.468983] (sllidar_ros2) StderrLine: {'line': b'   70 |     static void printDeprecationWarn(const char* fn, const char* replacement)\n'}
+[12.469129] (sllidar_ros2) StderrLine: {'line': b'      |                 ^~~~~~~~~~~~~~~~~~~~\n'}
+[12.498545] (-) TimerEvent: {}
+[12.598789] (-) TimerEvent: {}
+[12.699013] (-) TimerEvent: {}
+[12.801325] (-) TimerEvent: {}
+[12.901610] (-) TimerEvent: {}
+[13.001920] (-) TimerEvent: {}
+[13.102147] (-) TimerEvent: {}
+[13.202422] (-) TimerEvent: {}
+[13.302677] (-) TimerEvent: {}
+[13.402970] (-) TimerEvent: {}
+[13.505001] (-) TimerEvent: {}
+[13.528217] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,\n'}
+[13.530142] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,\n'}
+[13.530487] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,\n'}
+[13.530651] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.cpp:35:\n'}
+[13.530754] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[13.530906] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[13.531006] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[13.532468] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,\n'}
+[13.532620] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:\n'}
+[13.532729] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[13.532840] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[13.532943] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[13.559524] (sllidar_ros2) StdoutLine: {'line': b'[ 80%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_serial_channel.cpp.o\n'}
+[13.605159] (-) TimerEvent: {}
+[13.707160] (-) TimerEvent: {}
+[13.797807] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.cpp:49:\n'}
+[13.798153] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function \xe2\x80\x98virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)\xe2\x80\x99:\n'}
+[13.798330] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter \xe2\x80\x98errCode\xe2\x80\x99 [-Wunused-parameter]\n'}
+[13.798462] (sllidar_ros2) StderrLine: {'line': b'   90 |         virtual void   onChannelError(u_result errCode) {}\n'}
+[13.798582] (sllidar_ros2) StderrLine: {'line': b'      |                                       ~~~~~~~~~^~~~~~~\n'}
+[13.807286] (-) TimerEvent: {}
+[13.910803] (-) TimerEvent: {}
+[14.012170] (-) TimerEvent: {}
+[14.112453] (-) TimerEvent: {}
+[14.152801] (sllidar_ros2) StdoutLine: {'line': b'[ 85%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_tcp_channel.cpp.o\n'}
+[14.198132] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,\n'}
+[14.198470] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,\n'}
+[14.198596] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_serial_channel.cpp:33:\n'}
+[14.198701] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[14.198812] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[14.198913] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[14.199010] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[14.199176] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[14.199287] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[14.216208] (-) TimerEvent: {}
+[14.316559] (-) TimerEvent: {}
+[14.351803] (sllidar_ros2) StdoutLine: {'line': b'[ 90%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_udp_channel.cpp.o\n'}
+[14.416708] (-) TimerEvent: {}
+[14.517009] (-) TimerEvent: {}
+[14.617412] (-) TimerEvent: {}
+[14.717696] (-) TimerEvent: {}
+[14.746301] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,\n'}
+[14.746643] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,\n'}
+[14.746772] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp:33:\n'}
+[14.746878] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[14.747000] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[14.747181] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[14.750165] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[14.750600] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[14.750771] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[14.757121] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp: In member function \xe2\x80\x98void sl::TcpChannel::setStatus(_u32)\xe2\x80\x99:\n'}
+[14.757440] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp:109:29: warning: unused parameter \xe2\x80\x98flag\xe2\x80\x99 [-Wunused-parameter]\n'}
+[14.757550] (sllidar_ros2) StderrLine: {'line': b'  109 |         void setStatus(_u32 flag){}\n'}
+[14.757646] (sllidar_ros2) StderrLine: {'line': b'      |                        ~~~~~^~~~\n'}
+[14.817876] (-) TimerEvent: {}
+[14.920141] (-) TimerEvent: {}
+[14.921548] (sllidar_ros2) StderrLine: {'line': b'In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,\n'}
+[14.921800] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,\n'}
+[14.921898] (sllidar_ros2) StderrLine: {'line': b'                 from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp:33:\n'}
+[14.922002] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array \xe2\x80\x98data\xe2\x80\x99 [-Wpedantic]\n'}
+[14.922112] (sllidar_ros2) StderrLine: {'line': b'   66 |     sl_u8 data[0];\n'}
+[14.922197] (sllidar_ros2) StderrLine: {'line': b'      |                ^\n'}
+[14.922415] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array \xe2\x80\x98payload\xe2\x80\x99 [-Wpedantic]\n'}
+[14.922519] (sllidar_ros2) StderrLine: {'line': b'  324 |     sl_u8  payload[0];\n'}
+[14.922596] (sllidar_ros2) StderrLine: {'line': b'      |                    ^\n'}
+[14.929452] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp: In member function \xe2\x80\x98void sl::UdpChannel::setStatus(_u32)\xe2\x80\x99:\n'}
+[14.929741] (sllidar_ros2) StderrLine: {'line': b'/home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp:112:29: warning: unused parameter \xe2\x80\x98flag\xe2\x80\x99 [-Wunused-parameter]\n'}
+[14.929866] (sllidar_ros2) StderrLine: {'line': b'  112 |         void setStatus(_u32 flag){}\n'}
+[14.929961] (sllidar_ros2) StderrLine: {'line': b'      |                        ~~~~~^~~~\n'}
+[15.022149] (-) TimerEvent: {}
+[15.122387] (-) TimerEvent: {}
+[15.222608] (-) TimerEvent: {}
+[15.322873] (-) TimerEvent: {}
+[15.423142] (-) TimerEvent: {}
+[15.523373] (-) TimerEvent: {}
+[15.623591] (-) TimerEvent: {}
+[15.723828] (-) TimerEvent: {}
+[15.824068] (-) TimerEvent: {}
+[15.924297] (-) TimerEvent: {}
+[16.024531] (-) TimerEvent: {}
+[16.124744] (-) TimerEvent: {}
+[16.224965] (-) TimerEvent: {}
+[16.325250] (-) TimerEvent: {}
+[16.426430] (-) TimerEvent: {}
+[16.527124] (-) TimerEvent: {}
+[16.627387] (-) TimerEvent: {}
+[16.727669] (-) TimerEvent: {}
+[16.827885] (-) TimerEvent: {}
+[16.928097] (-) TimerEvent: {}
+[17.029198] (-) TimerEvent: {}
+[17.129425] (-) TimerEvent: {}
+[17.229658] (-) TimerEvent: {}
+[17.329923] (-) TimerEvent: {}
+[17.430245] (-) TimerEvent: {}
+[17.463081] (sllidar_ros2) StdoutLine: {'line': b'[ 95%] Linking CXX executable sllidar_node\n'}
+[17.530367] (-) TimerEvent: {}
+[17.631436] (-) TimerEvent: {}
+[17.731838] (-) TimerEvent: {}
+[17.832205] (-) TimerEvent: {}
+[17.932490] (-) TimerEvent: {}
+[18.032765] (-) TimerEvent: {}
+[18.133093] (-) TimerEvent: {}
+[18.233399] (-) TimerEvent: {}
+[18.333637] (-) TimerEvent: {}
+[18.393770] (sllidar_ros2) StdoutLine: {'line': b'[ 95%] Built target sllidar_node\n'}
+[18.433754] (-) TimerEvent: {}
+[18.533949] (-) TimerEvent: {}
+[18.634155] (-) TimerEvent: {}
+[18.734349] (-) TimerEvent: {}
+[18.834556] (-) TimerEvent: {}
+[18.934754] (-) TimerEvent: {}
+[19.034989] (-) TimerEvent: {}
+[19.135246] (-) TimerEvent: {}
+[19.235467] (-) TimerEvent: {}
+[19.335667] (-) TimerEvent: {}
+[19.435867] (-) TimerEvent: {}
+[19.536086] (-) TimerEvent: {}
+[19.636292] (-) TimerEvent: {}
+[19.736500] (-) TimerEvent: {}
+[19.836701] (-) TimerEvent: {}
+[19.936971] (-) TimerEvent: {}
+[20.037292] (-) TimerEvent: {}
+[20.137511] (-) TimerEvent: {}
+[20.237701] (-) TimerEvent: {}
+[20.337900] (-) TimerEvent: {}
+[20.438118] (-) TimerEvent: {}
+[20.538372] (-) TimerEvent: {}
+[20.638606] (-) TimerEvent: {}
+[20.738838] (-) TimerEvent: {}
+[20.839100] (-) TimerEvent: {}
+[20.939426] (-) TimerEvent: {}
+[21.039662] (-) TimerEvent: {}
+[21.139949] (-) TimerEvent: {}
+[21.240201] (-) TimerEvent: {}
+[21.340420] (-) TimerEvent: {}
+[21.440652] (-) TimerEvent: {}
+[21.540897] (-) TimerEvent: {}
+[21.572287] (sllidar_ros2) StdoutLine: {'line': b'[100%] Linking CXX executable sllidar_client\n'}
+[21.641023] (-) TimerEvent: {}
+[21.741313] (-) TimerEvent: {}
+[21.841628] (-) TimerEvent: {}
+[21.941940] (-) TimerEvent: {}
+[22.042276] (-) TimerEvent: {}
+[22.142553] (-) TimerEvent: {}
+[22.242785] (-) TimerEvent: {}
+[22.343001] (-) TimerEvent: {}
+[22.350344] (sllidar_ros2) StdoutLine: {'line': b'[100%] Built target sllidar_client\n'}
+[22.374293] (sllidar_ros2) CommandEnded: {'returncode': 0}
+[22.374997] (sllidar_ros2) JobProgress: {'identifier': 'sllidar_ros2', 'progress': 'install'}
+[22.394096] (sllidar_ros2) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '100.92.98.83 62572 22', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '3', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'PATH': '/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_RUNTIME_DIR': '/run/user/1000', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2', 'GEMINI_API_KEY': 'AIzaSyAaKUWCOuWV79mc6qI8bqPHqWhXmp67Hk8', 'SSH_CONNECTION': '100.92.98.83 62572 100.68.67.30 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[22.410669] (sllidar_ros2) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[22.410962] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch\n'}
+[22.411075] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_t1_launch.py\n'}
+[22.411854] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m7_launch.py\n'}
+[22.412310] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2e_launch.py\n'}
+[22.412749] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2e_launch.py\n'}
+[22.413172] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m12_launch.py\n'}
+[22.413601] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_t1_launch.py\n'}
+[22.414041] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m8_launch.py\n'}
+[22.414632] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2_launch.py\n'}
+[22.415221] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_tcp_launch.py\n'}
+[22.415703] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_c1_launch.py\n'}
+[22.416206] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a3_launch.py\n'}
+[22.416685] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_launch.py\n'}
+[22.417170] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_launch.py\n'}
+[22.417597] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a3_launch.py\n'}
+[22.418017] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_tcp_launch.py\n'}
+[22.418459] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m7_launch.py\n'}
+[22.418877] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a1_launch.py\n'}
+[22.419314] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_c1_launch.py\n'}
+[22.419749] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2_launch.py\n'}
+[22.420170] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m8_launch.py\n'}
+[22.420755] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m12_launch .py\n'}
+[22.421323] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s3_launch.py\n'}
+[22.421739] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a1_launch.py\n'}
+[22.422168] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s3_launch.py\n'}
+[22.422634] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/rviz\n'}
+[22.422776] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/rviz/sllidar_ros2.rviz\n'}
+[22.423458] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node\n'}
+[22.428279] (sllidar_ros2) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node" to ""\n'}
+[22.428497] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client\n'}
+[22.437332] (sllidar_ros2) StdoutLine: {'line': b'-- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client" to ""\n'}
+[22.437795] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/package_run_dependencies/sllidar_ros2\n'}
+[22.438228] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/parent_prefix_path/sllidar_ros2\n'}
+[22.438442] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.sh\n'}
+[22.438586] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.dsv\n'}
+[22.438718] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/path.sh\n'}
+[22.438870] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/path.dsv\n'}
+[22.439055] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.bash\n'}
+[22.439209] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.sh\n'}
+[22.439371] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.zsh\n'}
+[22.439518] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.dsv\n'}
+[22.439666] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/package.dsv\n'}
+[22.439886] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/packages/sllidar_ros2\n'}
+[22.440087] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[22.440250] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[22.440421] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config.cmake\n'}
+[22.440555] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config-version.cmake\n'}
+[22.440705] (sllidar_ros2) StdoutLine: {'line': b'-- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/package.xml\n'}
+[22.443087] (-) TimerEvent: {}
+[22.443428] (sllidar_ros2) CommandEnded: {'returncode': 0}
+[22.469838] (sllidar_ros2) JobEnded: {'identifier': 'sllidar_ros2', 'rc': 0}
+[22.471472] (portamail_navigator) JobStarted: {'identifier': 'portamail_navigator'}
+[22.480361] (portamail_navigator) JobProgress: {'identifier': 'portamail_navigator', 'progress': 'cmake'}
+[22.483753] (portamail_navigator) JobProgress: {'identifier': 'portamail_navigator', 'progress': 'build'}
+[22.484517] (portamail_navigator) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/davidezuma/PortaMailCapstone/build/portamail_navigator', '--', '-j4', '-l4'], 'cwd': '/home/davidezuma/PortaMailCapstone/build/portamail_navigator', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'davidezuma', 'SSH_CLIENT': '100.92.98.83 62572 22', 'CLAUDE_CODE_ENTRYPOINT': 'cli', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'GIT_EDITOR': 'true', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/davidezuma', 'OLDPWD': '/home/davidezuma', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'davidezuma', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '3', 'OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE': 'delta', 'PATH': '/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/home/davidezuma/.local/bin:/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'COREPACK_ENABLE_AUTO_PIN': '0', 'XDG_RUNTIME_DIR': '/run/user/1000', 'NoDefaultCurrentDirectoryInExePath': '1', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/home/davidezuma/PortaMailCapstone/install/sllidar_ros2:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'CLAUDECODE': '1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/davidezuma/PortaMailCapstone/build/portamail_navigator', 'GEMINI_API_KEY': 'AIzaSyAaKUWCOuWV79mc6qI8bqPHqWhXmp67Hk8', 'SSH_CONNECTION': '100.92.98.83 62572 100.68.67.30 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/davidezuma/PortaMailCapstone/install/sllidar_ros2:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[22.502797] (portamail_navigator) StderrLine: {'line': b'CMake Error: The current CMakeCache.txt directory /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeCache.txt is different than the directory /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt\n'}
+[22.528994] (portamail_navigator) StderrLine: {'line': b'CMake Error: The source directory "/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator" does not exist.\n'}
+[22.529270] (portamail_navigator) StderrLine: {'line': b'Specify --help for usage, or press the help button on the CMake GUI.\n'}
+[22.531548] (portamail_navigator) StderrLine: {'line': b'gmake: *** [Makefile:308: cmake_check_build_system] Error 1\n'}
+[22.534670] (portamail_navigator) CommandEnded: {'returncode': 2}
+[22.543400] (-) TimerEvent: {}
+[22.547049] (portamail_navigator) JobEnded: {'identifier': 'portamail_navigator', 'rc': 2}
+[22.557611] (-) EventReactorShutdown: {}

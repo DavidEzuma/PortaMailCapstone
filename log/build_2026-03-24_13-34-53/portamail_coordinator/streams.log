@@ -1,0 +1,98 @@
+[0.027s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/portamail_coordinator -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/portamail_coordinator
+[0.582s] -- The C compiler identification is GNU 13.3.0
+[1.002s] -- The CXX compiler identification is GNU 13.3.0
+[1.047s] -- Detecting C compiler ABI info
+[1.247s] -- Detecting C compiler ABI info - done
+[1.263s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.264s] -- Detecting C compile features
+[1.266s] -- Detecting C compile features - done
+[1.285s] -- Detecting CXX compiler ABI info
+[1.522s] -- Detecting CXX compiler ABI info - done
+[1.537s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.538s] -- Detecting CXX compile features
+[1.538s] -- Detecting CXX compile features - done
+[1.563s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.898s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.212s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[2.369s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[2.418s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.480s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.561s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.880s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.894s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[3.171s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[3.211s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[3.250s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[3.461s] -- Found rclcpp_action: 28.1.16 (/opt/ros/jazzy/share/rclcpp_action/cmake)
+[3.586s] -- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)
+[3.621s] -- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)
+[3.680s] -- Found nav2_msgs: 1.3.10 (/opt/ros/jazzy/share/nav2_msgs/cmake)
+[3.979s] -- Found slam_toolbox: 2.8.3 (/opt/ros/jazzy/share/slam_toolbox/cmake)
+[4.493s] -- Found eigen3_cmake_module: 0.3.0 (/opt/ros/jazzy/share/eigen3_cmake_module/cmake)
+[4.498s] -- Found Eigen3: TRUE (found version "3.4.0") 
+[4.499s] -- Ensuring Eigen3 include directory is part of orocos-kdl CMake target
+[4.899s] -- Setting OGRE_DIR to: '/opt/ros/jazzy/share/rviz_ogre_vendor/cmake/../../../opt/rviz_ogre_vendor/lib/OGRE/cmake'
+[4.905s] -- Found OGRE
+[4.905s] --   static     : OFF
+[4.905s] --   components : MeshLodGenerator;Overlay;Paging;Property;RTShaderSystem;Terrain;Volume
+[4.905s] --   plugins    : Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[4.905s] --   media      : /opt/ros/jazzy/opt/rviz_ogre_vendor/share/OGRE/Media
+[4.905s] -- OGRE_LIBRARIES: OgreMeshLodGenerator;OgreOverlay;OgrePaging;OgreProperty;OgreRTShaderSystem;OgreTerrain;OgreVolume;OgreMain
+[4.905s] -- OGRE_LIBRARY_DIRS: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib
+[4.905s] -- OGRE_PLUGINS: Plugin_BSPSceneManager;Plugin_OctreeSceneManager;Plugin_PCZSceneManager;Plugin_ParticleFX;RenderSystem_GL;RenderSystem_GL3Plus;Codec_STBI
+[4.905s] -- OGRE_PLUGIN_DIR: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/OGRE
+[4.906s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[4.906s] -- rviz_ogre_vendor::OgreOverlay for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreOverlay.so
+[4.907s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_RELEASE: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[4.907s] -- rviz_ogre_vendor::OgreMain for IMPORTED_LOCATION_DEBUG: /opt/ros/jazzy/opt/rviz_ogre_vendor/lib/libOgreMain.so
+[4.972s] -- Found ZLIB: /usr/lib/aarch64-linux-gnu/libz.so (found version "1.3")  
+[5.005s] -- Found OpenGL: /usr/lib/aarch64-linux-gnu/libOpenGL.so   
+[5.191s] -- Found X11: /usr/include   
+[5.193s] -- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so
+[5.387s] -- Looking for XOpenDisplay in /usr/lib/aarch64-linux-gnu/libX11.so;/usr/lib/aarch64-linux-gnu/libXext.so - found
+[5.387s] -- Looking for gethostbyname
+[5.578s] -- Looking for gethostbyname - found
+[5.578s] -- Looking for connect
+[5.779s] -- Looking for connect - found
+[5.779s] -- Looking for remove
+[5.977s] -- Looking for remove - found
+[5.977s] -- Looking for shmat
+[6.180s] -- Looking for shmat - found
+[6.181s] -- Looking for IceConnectionNumber in ICE
+[6.373s] -- Looking for IceConnectionNumber in ICE - found
+[6.415s] -- Setting yaml-cpp_DIR to: '/opt/ros/jazzy/share/yaml_cpp_vendor/cmake/../../../opt/yaml_cpp_vendor/share/cmake/yaml-cpp'
+[6.935s] -- Configuring done (6.7s)
+[7.013s] -- Generating done (0.1s)
+[7.026s] -- Build files have been written to: /home/davidezuma/PortaMailCapstone/build/portamail_coordinator
+[7.066s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/portamail_coordinator -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/portamail_coordinator
+[7.068s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/portamail_coordinator -- -j4 -l4
+[7.203s] [ 50%] Building CXX object CMakeFiles/coordinator.dir/src/navigation_coordinator.cpp.o
+[28.272s] [100%] Linking CXX executable coordinator
+[32.393s] [100%] Built target coordinator
+[32.419s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/portamail_coordinator -- -j4 -l4
+[32.440s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/portamail_coordinator
+[32.459s] -- Install configuration: ""
+[32.459s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/coordinator
+[32.468s] -- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/coordinator" to ""
+[32.468s] -- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/lib/portamail_coordinator/lcd_bridge
+[32.468s] -- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch
+[32.468s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/bringup.launch.py
+[32.469s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/launch/joystick.launch.py
+[32.469s] -- Up-to-date: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/config
+[32.470s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/config/locations.yaml
+[32.470s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/package_run_dependencies/portamail_coordinator
+[32.470s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/parent_prefix_path/portamail_coordinator
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.sh
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/ament_prefix_path.dsv
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.sh
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/environment/path.dsv
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.bash
+[32.471s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.sh
+[32.472s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.zsh
+[32.472s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/local_setup.dsv
+[32.472s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.dsv
+[32.472s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/ament_index/resource_index/packages/portamail_coordinator
+[32.473s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig.cmake
+[32.473s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/cmake/portamail_coordinatorConfig-version.cmake
+[32.473s] -- Installing: /home/davidezuma/PortaMailCapstone/install/portamail_coordinator/share/portamail_coordinator/package.xml
+[32.476s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/portamail_coordinator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/portamail_coordinator

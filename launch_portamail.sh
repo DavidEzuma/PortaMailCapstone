@@ -233,6 +233,7 @@ _kill_ros() {
     # Step 4: Force-kill any survivors, including orphaned child nodes that
     # ros2 launch leaves behind when it is SIGKILL'd (they are re-parented to
     # init and keep running, blocking ports/topics on the next session).
+    pkill -SIGKILL -f micro_ros_agent        2>/dev/null || true
     pkill -SIGKILL -f sllidar_node           2>/dev/null || true
     pkill -SIGKILL -f lcd_bridge             2>/dev/null || true
     pkill -SIGKILL -f sync_slam_toolbox_node 2>/dev/null || true
@@ -243,6 +244,8 @@ _kill_ros() {
     pkill -SIGKILL -f robot_state_publisher  2>/dev/null || true
     pkill -SIGKILL -f joy_node               2>/dev/null || true
     pkill -SIGKILL -f teleop_node            2>/dev/null || true
+    pkill -SIGKILL -f ekf_node               2>/dev/null || true
+    sleep 2
     [[ -n "${MAP_PID}"   ]] && kill -SIGKILL "${MAP_PID}"   2>/dev/null || true
     [[ -n "${COORD_PID}" ]] && kill -SIGKILL "${COORD_PID}" 2>/dev/null || true
     [[ -n "${MAP_PID}"   ]] && wait "${MAP_PID}"   2>/dev/null || true
@@ -305,7 +308,7 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
     if [[ "${MODE}" == "mapping" ]]; then
         echo "[startup] Launching: hardware + SLAM Toolbox + joystick (real LiDAR)"
         ros2 launch portamail_navigator mapping.launch.py \
-            use_mock_driver:=true \
+            use_mock_driver:=false \
             use_real_lidar:=true &
         MAP_PID=$!
 
