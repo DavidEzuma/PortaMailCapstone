@@ -425,20 +425,27 @@ void loop() {
   // rmw_uros_ping_agent() operates at transport level — works before and
   // after rclc_support_init(), so it's safe to call in both states.
   // -----------------------------------------------------------------------
-  static unsigned long last_ping_ms = 0;
+  static unsigned long last_ping_ms    = 0;
+  static unsigned long disconnected_ms = 0;
   if (now - last_ping_ms > 1000) {
     last_ping_ms = now;
     bool ping_ok = (rmw_uros_ping_agent(500, 3) == RMW_RET_OK);
 
     if (!agent_connected && ping_ok) {
       // Agent appeared — initialise ROS entities and start running
+      disconnected_ms = 0;
       init_ros_entities();
       agent_connected = true;
     } else if (agent_connected && !ping_ok) {
       // Agent disappeared — tear down entities and halt motors
       fini_ros_entities();
       agent_connected = false;
+      disconnected_ms = now;
       stopMotors();
+    } else if (!agent_connected && disconnected_ms > 0 && (now - disconnected_ms) > 5000) {
+      // Disconnected for >5 s — serial transport likely stale after agent
+      // restart. Hard-reset to guarantee a clean reconnect.
+      ESP.restart();
     }
   }
 
