@@ -168,7 +168,7 @@ float y_pos = 0.0f;
 float theta  = 0.0f;
 
 // Slew rate limiting — time-based, applied in loop() not in callback.
-const float SLEW_RATE   = 3.0f;   // m/s per second — tune up/down for feel
+const float SLEW_RATE   = 10.0f;  // m/s per second — tune up/down for feel
 float target_left_spd   = 0.0f;
 float target_right_spd  = 0.0f;
 float current_left_spd  = 0.0f;
@@ -236,6 +236,14 @@ void stopMotors() {
 // Called from loop() at a fixed time step — ramps current toward target.
 void updateSlew(float dt) {
   float max_step = SLEW_RATE * dt;
+
+  // Snap to zero immediately on direction reversal — no lag through neutral
+  if ((target_left_spd > 0.0f && current_left_spd < 0.0f) ||
+      (target_left_spd < 0.0f && current_left_spd > 0.0f))
+    current_left_spd = 0.0f;
+  if ((target_right_spd > 0.0f && current_right_spd < 0.0f) ||
+      (target_right_spd < 0.0f && current_right_spd > 0.0f))
+    current_right_spd = 0.0f;
 
   if      (target_left_spd > current_left_spd + max_step) current_left_spd += max_step;
   else if (target_left_spd < current_left_spd - max_step) current_left_spd -= max_step;
@@ -354,12 +362,10 @@ void init_ros_entities() {
 }
 
 void fini_ros_entities() {
-  // Stop motors immediately before tearing down ROS to prevent runaway
-  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0.0f);
-  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0.0f);
-  current_left_spd  = 0.0f;
-  current_right_spd = 0.0f;
   rclc_executor_fini(&executor);
+  // Flush serial so the new agent session starts with a clean buffer
+  Serial.flush();
+  while (Serial.available()) Serial.read();
   rcl_publisher_fini(&range_pub, &node);
   rcl_publisher_fini(&imu_pub,   &node);
   rcl_publisher_fini(&odom_pub,  &node);
@@ -437,15 +443,28 @@ void loop() {
       init_ros_entities();
       agent_connected = true;
     } else if (agent_connected && !ping_ok) {
-      // Agent disappeared — tear down entities and halt motors
+      // Agent disappeared — tear down entities; slew will ramp motors to zero
       fini_ros_entities();
       agent_connected = false;
       disconnected_ms = now;
-      stopMotors();
+      target_left_spd  = 0.0f;
+      target_right_spd = 0.0f;
     } else if (!agent_connected && disconnected_ms > 0 && (now - disconnected_ms) > 5000) {
-      // Disconnected for >5 s — serial transport likely stale after agent
-      // restart. Hard-reset to guarantee a clean reconnect.
-      ESP.restart();
+      // Disconnected for >5 s — flush serial buffers to clear stale XRCE-DDS
+      // frames left over from the old agent session, then reset the timestamp
+      // so this only fires once per disconnect event.
+      Serial.flush();
+      while (Serial.available()) Serial.read();
+      disconnected_ms = now;  // re-arm: flush again every 5 s until reconnect
+    }
+  }
+
+  // Slew runs even when disconnected to ramp motors smoothly to zero
+  {
+    float slew_dt = (now - prev_slew_time) / 1000.0f;
+    if (slew_dt > 0.0f) {
+      prev_slew_time = now;
+      updateSlew(slew_dt);
     }
   }
 
@@ -479,7 +498,9 @@ void loop() {
   last_cmd_time = latest_cmd_ms;
   bool safety_active = (now - last_cmd_time > 500);
   if (safety_active) {
-    stopMotors();
+    // Ramp to zero via slew — no hard stop
+    target_left_spd  = 0.0f;
+    target_right_spd = 0.0f;
     digitalWrite(LED_PIN, HIGH);
   } else {
     // Translate the latest linear/angular into per-wheel targets
@@ -490,17 +511,6 @@ void loop() {
     digitalWrite(LED_PIN, (now / 100) % 2 ? HIGH : LOW);  // fast blink = active
   }
 
-  // -----------------------------------------------------------------------
-  // TIME-BASED SLEW — ramps current speed toward target every loop iteration
-  // -----------------------------------------------------------------------
-  if (!safety_active) {
-    float slew_dt = (now - prev_slew_time) / 1000.0f;
-    if (slew_dt > 0.0f) {
-      prev_slew_time = now;
-      updateSlew(slew_dt);
-    }
-  }
-  prev_slew_time = now;
 
   // -----------------------------------------------------------------------
   // ODOMETRY + IMU at 20 Hz (every 50 ms)
