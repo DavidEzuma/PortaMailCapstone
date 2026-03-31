@@ -7,20 +7,33 @@ LCD events  →  user_delivery_request topic
 system_status topic  →  POST /api/mode to LCD server
 
 In mapping mode:
-  save_location_room1/room2/origin → looks up map→base_link TF, writes
-  locations.yaml, then publishes "save_map" to trigger SLAM map save.
+  save_location_room1/room2/origin → TF lookup → writes locations.yaml
+  save_map_now / go_back → map file management
 
-Internal delivery state machine:
-  IDLE              – waiting for a start_room event
-  NAVIGATING        – Nav2 goal sent, waiting for "Status: Arrived"
-  WAITING_CONFIRM   – robot at destination, waiting for delivery_confirmed event
-  RETURNING         – navigating back to mailroom (dock)
+In navigation mode:
+  start_room1 / start_room2 → builds delivery queue, starts navigation
+  delivery_confirmed        → advance queue or return to mailroom
+  system_status JSON        → drive LCD state (ARRIVED / DOCK_IDLE)
+
+Delivery state machine:
+  IDLE             – waiting for a start_room event
+  NAVIGATING       – Nav2 goal sent, waiting for ARRIVED status
+  WAITING_CONFIRM  – robot at destination, waiting for delivery_confirmed
+  RETURNING        – navigating back to mailroom (no confirm needed)
+
+Delivery queue: ordered list of location keys, e.g. ["office_101", "mailroom"].
+The mailroom stop is always last and skips the WAITING_CONFIRM step (robot just
+docks without needing human confirmation).
+
+Persistence: state is written atomically to ~/.portamail_delivery_state.json on
+every transition so a crash mid-delivery can be recovered on restart.
 """
 
 import glob
 import json
 import math
 import os
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -41,77 +54,95 @@ try:
 except ImportError:
     _YAML_AVAILABLE = False
 
-# LCD GUI room → locations.yaml key
+# ---------------------------------------------------------------------------
+# Constants
+# ---------------------------------------------------------------------------
+
 _ROOM_TO_LOCATION = {
     "ROOM1":  "office_101",
     "ROOM2":  "office_102",
     "ORIGIN": "mailroom",
 }
 
-# save_location edge → locations.yaml key
 _SAVE_LOCATION_MAP = {
-    "save_location_room1":   "office_101",
-    "save_location_room2":   "office_102",
-    "save_location_origin":  "mailroom",
+    "save_location_room1":  "office_101",
+    "save_location_room2":  "office_102",
+    "save_location_origin": "mailroom",
 }
 
-# New flow: mark location coordinates only (no map save triggered)
 _MARK_LOCATION_MAP = {
-    "mark_location_room1":   "office_101",
-    "mark_location_room2":   "office_102",
-    "mark_location_origin":  "mailroom",
+    "mark_location_room1":  "office_101",
+    "mark_location_room2":  "office_102",
+    "mark_location_origin": "mailroom",
 }
 
-# Internal bridge states
 _IDLE            = "IDLE"
 _NAVIGATING      = "NAVIGATING"
 _WAITING_CONFIRM = "WAITING_CONFIRM"
 _RETURNING       = "RETURNING"
+
+_STATE_FILE = os.path.expanduser("~/.portamail_delivery_state.json")
+_STATE_SCHEMA_VERSION = 1
+
+# ---------------------------------------------------------------------------
 
 
 class LcdBridge(Node):
     def __init__(self):
         super().__init__("lcd_bridge")
 
-        self.declare_parameter("lcd_url",            "http://127.0.0.1:5050")
-        self.declare_parameter("poll_hz",            2.0)
-        self.declare_parameter("ros_mode",           "navigation")
+        self.declare_parameter("lcd_url",             "http://127.0.0.1:5050")
+        self.declare_parameter("poll_hz",             2.0)
+        self.declare_parameter("ros_mode",            "navigation")
         self.declare_parameter("locations_yaml_path", "")
         self.declare_parameter(
             "maps_dir",
             os.path.expanduser("~/PortaMailCapstone/maps"),
         )
 
-        self._lcd_url      = self.get_parameter("lcd_url").get_parameter_value().string_value
-        poll_hz            = self.get_parameter("poll_hz").get_parameter_value().double_value
-        self._ros_mode     = self.get_parameter("ros_mode").get_parameter_value().string_value
-        self._loc_yaml     = self.get_parameter("locations_yaml_path").get_parameter_value().string_value
-        self._maps_dir     = self.get_parameter("maps_dir").get_parameter_value().string_value
+        self._lcd_url  = self.get_parameter("lcd_url").get_parameter_value().string_value
+        poll_hz        = self.get_parameter("poll_hz").get_parameter_value().double_value
+        self._ros_mode = self.get_parameter("ros_mode").get_parameter_value().string_value
+        self._loc_yaml = self.get_parameter("locations_yaml_path").get_parameter_value().string_value
+        self._maps_dir = self.get_parameter("maps_dir").get_parameter_value().string_value
 
         self._pub = self.create_publisher(String, "user_delivery_request", 10)
         self.create_subscription(String, "system_status", self._on_status, 10)
 
-        self._bridge_state = _IDLE
-        self._seen: dict[str, bool] = {}
-        self._last_ts: str | None = None
+        # Delivery state
+        self._bridge_state:    str       = _IDLE
+        self._delivery_queue:  list[str] = []
+        self._current_dest:    str | None = None
 
-        # TF2 for map→base_link lookups (used in mapping mode to save waypoints)
+        # LCD event dedup
+        self._seen:    dict[str, bool] = {}
+        self._last_ts: str | None      = None
+
+        # TF2 (used in mapping mode to look up robot pose)
         if _TF2_AVAILABLE:
             self._tf_buffer   = tf2_ros.Buffer()
             self._tf_listener = tf2_ros.TransformListener(self._tf_buffer, self)
         else:
             self._tf_buffer = None
-            self.get_logger().warn("tf2_ros not available — save_location will not record TF pose")
+            self.get_logger().warn(
+                "tf2_ros not available — save_location will not record TF pose"
+            )
 
         self._drain_history()
+
+        # Recovery: if a delivery was in progress when we last crashed, restore
+        # it and re-issue the goal after Nav2 has had time to start up.
+        self._recovery_timer = None
+        self._load_persisted_state()
+
         self.create_timer(1.0 / poll_hz, self._poll)
         self.get_logger().info(
             f"LCD bridge ready | url={self._lcd_url} | ros_mode={self._ros_mode}"
         )
 
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # HTTP helpers
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _http_get(self, path: str):
         url = f"{self._lcd_url}{path}"
@@ -120,16 +151,16 @@ class LcdBridge(Node):
 
     def _http_post(self, path: str, body: dict):
         data = json.dumps(body).encode()
-        req = urllib.request.Request(
+        req  = urllib.request.Request(
             f"{self._lcd_url}{path}", data=data, method="POST"
         )
         req.add_header("Content-Type", "application/json")
         with urllib.request.urlopen(req, timeout=3) as resp:
             return json.loads(resp.read())
 
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # Startup: drain history so old events are not replayed
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _drain_history(self):
         try:
@@ -143,9 +174,9 @@ class LcdBridge(Node):
         except Exception as exc:
             self.get_logger().warn(f"Could not drain LCD history: {exc}")
 
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # Polling timer
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _poll(self):
         try:
@@ -163,15 +194,14 @@ class LcdBridge(Node):
                 continue
             self._seen[key] = True
             if len(self._seen) > 500:
-                old_keys = list(self._seen)[:200]
-                for k in old_keys:
+                for k in list(self._seen)[:200]:
                     del self._seen[k]
             self._last_ts = evt.get("ts") or self._last_ts
             self._handle_event(evt.get("name"))
 
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # Event dispatch
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _handle_event(self, name: str | None):
         if not name:
@@ -198,157 +228,305 @@ class LcdBridge(Node):
             return
 
         # --- Navigation mode ---
-        if name in ("start_room1", "start_room2", "start_origin") and self._bridge_state == _IDLE:
-            if name == "start_origin":
-                dest = "mailroom"
-            else:
-                active = self._get_lcd_active_room() or (
-                    "ROOM1" if name == "start_room1" else "ROOM2"
-                )
-                dest = _ROOM_TO_LOCATION.get(active)
-            if dest:
-                self._navigate_to(dest)
-                self._bridge_state = _NAVIGATING
+        if name == "start_room1" and self._bridge_state == _IDLE:
+            self._start_delivery(["office_101", "mailroom"])
+
+        elif name == "start_room2" and self._bridge_state == _IDLE:
+            self._start_delivery(["office_102", "mailroom"])
+
+        elif name == "start_origin" and self._bridge_state == _IDLE:
+            self._start_delivery(["mailroom"])
+
+        elif name == "start_room2" and self._bridge_state == _NAVIGATING:
+            # Late addition: insert room2 before the mailroom return leg
+            if "office_102" not in self._delivery_queue:
+                try:
+                    idx = self._delivery_queue.index("mailroom")
+                    self._delivery_queue.insert(idx, "office_102")
+                    self._persist_state()
+                    self.get_logger().info(
+                        f"Queued office_102 mid-route. Queue: {self._delivery_queue}"
+                    )
+                except ValueError:
+                    self._delivery_queue.append("office_102")
+                    self._persist_state()
 
         elif name == "delivery_confirmed" and self._bridge_state == _WAITING_CONFIRM:
-            active = self._get_lcd_active_room()
-            if active and active in _ROOM_TO_LOCATION:
-                self._navigate_to(_ROOM_TO_LOCATION[active])
-                self._bridge_state = _NAVIGATING
-            else:
-                self._navigate_to("mailroom")
-                self._bridge_state = _RETURNING
+            self._advance_queue()
 
-    # ------------------------------------------------------------------
-    # Mapping: save waypoint coordinates + trigger SLAM map save
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
+    # Delivery queue helpers
+    # -----------------------------------------------------------------------
+
+    def _start_delivery(self, queue: list[str]):
+        self._delivery_queue = queue.copy()
+        dest = self._delivery_queue.pop(0)
+        self._current_dest  = dest
+        self._bridge_state  = _NAVIGATING
+        self._persist_state()
+        self._navigate_to(dest)
+
+    def _advance_queue(self):
+        if self._delivery_queue:
+            dest = self._delivery_queue.pop(0)
+            self._current_dest = dest
+            if dest == "mailroom":
+                # Return leg — no confirm needed
+                self._bridge_state = _RETURNING
+            else:
+                self._bridge_state = _NAVIGATING
+            self._persist_state()
+            self._navigate_to(dest)
+        else:
+            # Queue exhausted — go home
+            self._current_dest = "mailroom"
+            self._bridge_state = _RETURNING
+            self._persist_state()
+            self._navigate_to("mailroom")
+
+    # -----------------------------------------------------------------------
+    # system_status subscriber — parses JSON from navigation_coordinator
+    # -----------------------------------------------------------------------
+
+    def _on_status(self, msg: String):
+        text = msg.data
+        self.get_logger().debug(f"system_status={text!r}  bridge={self._bridge_state}")
+
+        # Parse JSON envelope; fall back gracefully for legacy builds during
+        # the transition period where coordinator may still emit plain strings.
+        try:
+            parsed = json.loads(text)
+            msg_type = parsed.get("type", "")
+            code     = parsed.get("code", "")
+            detail   = parsed.get("detail", "")
+        except (json.JSONDecodeError, AttributeError):
+            # Legacy fallback
+            if "Arrived" in text or "Arrived" in text:
+                msg_type, code, detail = "status", "ARRIVED", ""
+            elif "Map Saved" in text:
+                msg_type, code, detail = "status", "MAP_SAVED", ""
+            elif "Error" in text:
+                msg_type, code, detail = "error", "NAV_FAILED", text
+            else:
+                return
+
+        if self._ros_mode == "navigation":
+            if msg_type == "status" and code == "ARRIVED":
+                if self._bridge_state == _NAVIGATING:
+                    if self._current_dest == "mailroom":
+                        # Should not happen (RETURNING handles mailroom arrival)
+                        # but guard for robustness
+                        self._post_lcd_mode("DOCK_IDLE")
+                        self._bridge_state = _IDLE
+                        self._clear_persisted_state()
+                    else:
+                        self._post_lcd_mode("ARRIVED")
+                        self._bridge_state = _WAITING_CONFIRM
+                        self._persist_state()
+                elif self._bridge_state == _RETURNING:
+                    self._post_lcd_mode("DOCK_IDLE")
+                    self._bridge_state = _IDLE
+                    self._current_dest = None
+                    self._delivery_queue = []
+                    self._clear_persisted_state()
+
+            elif msg_type == "error" and self._bridge_state in (_NAVIGATING, _RETURNING):
+                self.get_logger().warn(
+                    f"Nav error ({code}: {detail}) — returning to mailroom"
+                )
+                self._post_lcd_mode("DOCK_IDLE")
+                self._delivery_queue = []
+                self._current_dest   = "mailroom"
+                self._bridge_state   = _RETURNING
+                self._persist_state()
+                self._navigate_to("mailroom")
+
+        elif self._ros_mode == "mapping":
+            if msg_type == "status" and code == "MAP_SAVED":
+                self.get_logger().info("Map saved — signalling UI")
+                try:
+                    self._http_post("/api/edge", {"edge": "map_saved"})
+                except Exception as exc:
+                    self.get_logger().warn(f"Could not POST map_saved to LCD: {exc}")
+
+    # -----------------------------------------------------------------------
+    # Persistence
+    # -----------------------------------------------------------------------
+
+    def _persist_state(self):
+        """Atomically write delivery state to disk."""
+        state = {
+            "schema_version": _STATE_SCHEMA_VERSION,
+            "bridge_state":   self._bridge_state,
+            "current_dest":   self._current_dest,
+            "delivery_queue": self._delivery_queue,
+        }
+        tmp_path = _STATE_FILE + ".tmp"
+        try:
+            with open(tmp_path, "w") as f:
+                json.dump(state, f)
+            os.replace(tmp_path, _STATE_FILE)
+        except Exception as exc:
+            self.get_logger().warn(f"Could not persist delivery state: {exc}")
+
+    def _clear_persisted_state(self):
+        try:
+            if os.path.exists(_STATE_FILE):
+                os.remove(_STATE_FILE)
+        except Exception as exc:
+            self.get_logger().warn(f"Could not clear persisted state: {exc}")
+
+    def _load_persisted_state(self):
+        """On startup, restore an interrupted delivery if one was in progress."""
+        if self._ros_mode != "navigation":
+            return
+        if not os.path.exists(_STATE_FILE):
+            return
+        try:
+            with open(_STATE_FILE, "r") as f:
+                state = json.load(f)
+            if state.get("schema_version") != _STATE_SCHEMA_VERSION:
+                self.get_logger().warn(
+                    "Persisted state schema mismatch — discarding."
+                )
+                self._clear_persisted_state()
+                return
+            bridge_state = state.get("bridge_state", _IDLE)
+            if bridge_state == _IDLE:
+                self._clear_persisted_state()
+                return
+            self._bridge_state   = bridge_state
+            self._current_dest   = state.get("current_dest")
+            self._delivery_queue = state.get("delivery_queue", [])
+            self.get_logger().warn(
+                f"Recovering delivery: state={self._bridge_state} "
+                f"dest={self._current_dest} queue={self._delivery_queue}"
+            )
+            if bridge_state == _NAVIGATING:
+                # Re-issue the nav goal after Nav2 has had time to start (10 s).
+                self._recovery_timer = self.create_timer(10.0, self._recovery_nav)
+            elif bridge_state == _WAITING_CONFIRM:
+                # Robot presumably already at destination — re-post ARRIVED.
+                self._recovery_timer = self.create_timer(3.0, self._recovery_confirm)
+            elif bridge_state == _RETURNING:
+                self._recovery_timer = self.create_timer(10.0, self._recovery_nav)
+        except Exception as exc:
+            self.get_logger().warn(
+                f"Could not load persisted state ({exc}) — starting IDLE."
+            )
+            self._clear_persisted_state()
+
+    def _recovery_nav(self):
+        """One-shot timer: re-send the in-progress navigation goal."""
+        if self._recovery_timer:
+            self._recovery_timer.cancel()
+            self._recovery_timer = None
+        if self._current_dest:
+            self.get_logger().info(
+                f"Recovery: re-navigating to {self._current_dest!r}"
+            )
+            self._navigate_to(self._current_dest)
+
+    def _recovery_confirm(self):
+        """One-shot timer: re-post ARRIVED for a WAITING_CONFIRM recovery."""
+        if self._recovery_timer:
+            self._recovery_timer.cancel()
+            self._recovery_timer = None
+        self.get_logger().info("Recovery: re-posting ARRIVED to LCD")
+        self._post_lcd_mode("ARRIVED")
+
+    # -----------------------------------------------------------------------
+    # Mapping: save waypoint + trigger SLAM save
+    # -----------------------------------------------------------------------
 
     def _save_location_and_map(self, event_name: str):
         location_key = _SAVE_LOCATION_MAP[event_name]
-
-        # --- TF lookup ---
-        x, y, w = 0.0, 0.0, 1.0   # fallback if TF unavailable
-        if self._tf_buffer is not None:
-            try:
-                t = self._tf_buffer.lookup_transform(
-                    "map", "base_link", rclpy.time.Time()
-                )
-                x = t.transform.translation.x
-                y = t.transform.translation.y
-                q = t.transform.rotation
-                yaw = math.atan2(
-                    2.0 * (q.w * q.z + q.x * q.y),
-                    1.0 - 2.0 * (q.y * q.y + q.z * q.z),
-                )
-                w = math.cos(yaw / 2.0)   # orientation.w of 2-D quaternion
-                self.get_logger().info(
-                    f"TF lookup → {location_key}: x={x:.3f} y={y:.3f} w={w:.4f}"
-                )
-            except Exception as exc:
-                self.get_logger().warn(f"TF lookup failed ({exc}) — saving (0,0) placeholder")
-
-        # --- Write locations.yaml ---
-        if self._loc_yaml and _YAML_AVAILABLE:
-            try:
-                with open(self._loc_yaml, "r") as f:
-                    data = yaml.safe_load(f) or {}
-                if "locations" not in data:
-                    data["locations"] = {}
-                data["locations"][location_key] = {
-                    "x": round(float(x), 4),
-                    "y": round(float(y), 4),
-                    "w": round(float(w), 4),
-                }
-                with open(self._loc_yaml, "w") as f:
-                    yaml.dump(data, f, default_flow_style=False)
-                self.get_logger().info(
-                    f"Saved '{location_key}' to {self._loc_yaml}"
-                )
-            except Exception as exc:
-                self.get_logger().error(f"Failed to write locations.yaml: {exc}")
-        else:
-            if not self._loc_yaml:
-                self.get_logger().warn("locations_yaml_path not set — coordinates not saved")
-            if not _YAML_AVAILABLE:
-                self.get_logger().warn("PyYAML not installed — coordinates not saved")
-
-        # --- Delete old maps, then trigger SLAM map save ---
+        x, y, w = self._lookup_tf(location_key)
+        self._write_location(location_key, x, y, w)
         self._delete_all_maps()
         self._publish("save_map")
 
     def _mark_location(self, event_name: str):
-        """Save TF coordinates for a location without triggering a map save."""
         location_key = _MARK_LOCATION_MAP[event_name]
-        x, y, w = 0.0, 0.0, 1.0
-        if self._tf_buffer is not None:
-            try:
-                t = self._tf_buffer.lookup_transform(
-                    "map", "base_link", rclpy.time.Time()
-                )
-                x = t.transform.translation.x
-                y = t.transform.translation.y
-                q = t.transform.rotation
-                yaw = math.atan2(
-                    2.0 * (q.w * q.z + q.x * q.y),
-                    1.0 - 2.0 * (q.y * q.y + q.z * q.z),
-                )
-                w = math.cos(yaw / 2.0)
-                self.get_logger().info(
-                    f"TF lookup → {location_key}: x={x:.3f} y={y:.3f} w={w:.4f}"
-                )
-            except Exception as exc:
-                self.get_logger().warn(f"TF lookup failed ({exc}) — saving (0,0) placeholder")
+        x, y, w = self._lookup_tf(location_key)
+        self._write_location(location_key, x, y, w)
 
-        if self._loc_yaml and _YAML_AVAILABLE:
+    def _lookup_tf(self, label: str) -> tuple[float, float, float]:
+        x, y, w = 0.0, 0.0, 1.0
+        if self._tf_buffer is None:
+            return x, y, w
+        try:
+            t = self._tf_buffer.lookup_transform("map", "base_link", rclpy.time.Time())
+            x = t.transform.translation.x
+            y = t.transform.translation.y
+            q = t.transform.rotation
+            yaw = math.atan2(
+                2.0 * (q.w * q.z + q.x * q.y),
+                1.0 - 2.0 * (q.y * q.y + q.z * q.z),
+            )
+            w = math.cos(yaw / 2.0)
+            self.get_logger().info(
+                f"TF lookup → {label}: x={x:.3f} y={y:.3f} w={w:.4f}"
+            )
+        except Exception as exc:
+            self.get_logger().warn(
+                f"TF lookup failed ({exc}) — saving (0,0) placeholder for {label!r}"
+            )
+        return x, y, w
+
+    def _write_location(self, key: str, x: float, y: float, w: float):
+        if not self._loc_yaml:
+            self.get_logger().warn("locations_yaml_path not set — coordinates not saved")
+            return
+        if not _YAML_AVAILABLE:
+            self.get_logger().warn("PyYAML not installed — coordinates not saved")
+            return
+        try:
+            # Ensure directory exists (e.g. ~/PortaMailCapstone/config/)
+            os.makedirs(os.path.dirname(self._loc_yaml), exist_ok=True)
             try:
                 with open(self._loc_yaml, "r") as f:
                     data = yaml.safe_load(f) or {}
-                if "locations" not in data:
-                    data["locations"] = {}
-                data["locations"][location_key] = {
-                    "x": round(float(x), 4),
-                    "y": round(float(y), 4),
-                    "w": round(float(w), 4),
-                }
-                with open(self._loc_yaml, "w") as f:
-                    yaml.dump(data, f, default_flow_style=False)
-                self.get_logger().info(f"Marked '{location_key}' in {self._loc_yaml}")
-            except Exception as exc:
-                self.get_logger().error(f"Failed to write locations.yaml: {exc}")
-        else:
-            if not self._loc_yaml:
-                self.get_logger().warn("locations_yaml_path not set — coordinates not saved")
-            if not _YAML_AVAILABLE:
-                self.get_logger().warn("PyYAML not installed — coordinates not saved")
+            except FileNotFoundError:
+                data = {}
+            if "locations" not in data:
+                data["locations"] = {}
+            data["locations"][key] = {
+                "x": round(float(x), 4),
+                "y": round(float(y), 4),
+                "w": round(float(w), 4),
+            }
+            with open(self._loc_yaml, "w") as f:
+                yaml.dump(data, f, default_flow_style=False)
+            self.get_logger().info(f"Saved '{key}' to {self._loc_yaml}")
+        except Exception as exc:
+            self.get_logger().error(f"Failed to write locations.yaml: {exc}")
 
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # Map file management
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _delete_all_maps(self):
-        """Remove all .yaml and .pgm map files from the maps directory."""
-        patterns = [
+        deleted = 0
+        for pattern in [
             os.path.join(self._maps_dir, "*.yaml"),
             os.path.join(self._maps_dir, "*.pgm"),
-        ]
-        deleted = 0
-        for pattern in patterns:
+        ]:
             for path in glob.glob(pattern):
                 try:
                     os.remove(path)
                     deleted += 1
                 except OSError as exc:
-                    self.get_logger().warn(f"Could not delete map file {path}: {exc}")
+                    self.get_logger().warn(f"Could not delete {path}: {exc}")
         self.get_logger().info(f"Deleted {deleted} map file(s) from {self._maps_dir}")
 
     def _clear_saved_locations(self):
-        """Remove location entries from locations.yaml when user discards a mapping session."""
         if not self._loc_yaml or not _YAML_AVAILABLE:
             return
         try:
             with open(self._loc_yaml, "r") as f:
                 data = yaml.safe_load(f) or {}
-            if "locations" in data and data["locations"]:
+            if data.get("locations"):
                 data["locations"] = {}
                 with open(self._loc_yaml, "w") as f:
                     yaml.dump(data, f, default_flow_style=False)
@@ -356,57 +534,15 @@ class LcdBridge(Node):
         except Exception as exc:
             self.get_logger().warn(f"Failed to clear locations.yaml: {exc}")
 
-    # ------------------------------------------------------------------
-    # LCD state helper
-    # ------------------------------------------------------------------
-
-    def _get_lcd_active_room(self) -> str | None:
-        try:
-            st = self._http_get("/api/state")
-            return st.get("active_room")
-        except Exception as exc:
-            self.get_logger().warn(f"LCD state fetch error: {exc}")
-            return None
-
-    # ------------------------------------------------------------------
-    # system_status subscriber
-    # ------------------------------------------------------------------
-
-    def _on_status(self, msg: String):
-        text = msg.data
-        self.get_logger().debug(f"system_status={text!r}  bridge={self._bridge_state}")
-
-        if self._ros_mode == "navigation":
-            if "Status: Arrived" in text:
-                if self._bridge_state == _NAVIGATING:
-                    self._post_lcd_mode("ARRIVED")
-                    self._bridge_state = _WAITING_CONFIRM
-                elif self._bridge_state == _RETURNING:
-                    self._post_lcd_mode("DOCK_IDLE")
-                    self._bridge_state = _IDLE
-            elif "Error:" in text and self._bridge_state == _NAVIGATING:
-                self.get_logger().warn("Nav failed — returning to dock")
-                self._post_lcd_mode("DOCK_IDLE")
-                self._navigate_to("mailroom")
-                self._bridge_state = _RETURNING
-
-        elif self._ros_mode == "mapping":
-            if "Status: Map Saved" in text:
-                self.get_logger().info("Map saved — signalling UI")
-                try:
-                    self._http_post("/api/edge", {"edge": "map_saved"})
-                except Exception as exc:
-                    self.get_logger().warn(f"Could not POST map_saved to LCD: {exc}")
-
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
     # Helpers
-    # ------------------------------------------------------------------
+    # -----------------------------------------------------------------------
 
     def _navigate_to(self, location: str):
         self._publish(location)
 
     def _publish(self, cmd: str):
-        msg = String()
+        msg      = String()
         msg.data = cmd
         self._pub.publish(msg)
         self.get_logger().info(f"-> user_delivery_request: {cmd!r}")

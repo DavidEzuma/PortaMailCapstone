@@ -89,7 +89,7 @@
 // LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
 // ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
 // ledcWrite(pin, duty)        replaces the old ledcWrite(channel, duty).
-#define LEDC_FREQ_HZ   5000   // 5 kHz — within L298N PWM range
+#define LEDC_FREQ_HZ   10000  // 10 kHz — smoother at low duty cycles; within L298N range
 #define LEDC_BITS      8      // 0-255 duty range, matches analogWrite
 
 // FIT0186 Encoders — channel A on interrupt pin, B for direction
@@ -119,9 +119,13 @@
 const float WHEEL_RADIUS  = 0.03556f;  // meters  (2.8" RC tires)
 const float WHEEL_BASE    = 0.20f;     // meters  (*** MEASURE TRACK WIDTH ***)
 const float TICKS_PER_REV = 720.0f;   // 8 PPR × 90:1  (*** CALIBRATE 1-m run ***)
-const float MAX_SPEED_MPS = 0.89f;    // 2 MPH safety cap
-const int   PWM_MIN       = 70;        // minimum PWM to overcome stiction
-const int   PWM_MAX       = 255;
+const float MAX_SPEED_MPS  = 0.89f;   // 2 MPH safety cap
+// PWM dead-zone: minimum duty to overcome static friction.
+// Left and right motors may differ — calibrate each separately by finding
+// the lowest PWM that produces consistent wheel motion, then add 5.
+const int   PWM_MIN_LEFT   = 70;      // *** CALIBRATE per motor ***
+const int   PWM_MIN_RIGHT  = 70;      // *** CALIBRATE per motor ***
+const int   PWM_MAX        = 255;
 
 // =============================================================================
 // BNO055
@@ -168,7 +172,7 @@ float y_pos = 0.0f;
 float theta  = 0.0f;
 
 // Slew rate limiting — time-based, applied in loop() not in callback.
-const float SLEW_RATE   = 3.0f;   // m/s per second — tune up/down for feel
+const float SLEW_RATE   = 10.0f;  // m/s per second — tune up/down for feel
 float target_left_spd   = 0.0f;
 float target_right_spd  = 0.0f;
 float current_left_spd  = 0.0f;
@@ -211,11 +215,12 @@ float clamp(float val, float lo, float hi) {
 
 // ESP32 LEDC PWM (core v3.x) — replaces Teensy analogWrite().
 // ena_pin is the actual GPIO number; ledcWrite takes pin, not channel.
-void setMotor(int ena_pin, int in1, int in2, float speed) {
+// pwm_min is motor-specific to compensate for individual stiction differences.
+void setMotor(int ena_pin, int in1, int in2, float speed, int pwm_min) {
   int pwm_val = 0;
   if (fabsf(speed) > 0.01f) {
     float factor = fabsf(speed) / MAX_SPEED_MPS;
-    pwm_val = PWM_MIN + (int)(factor * (PWM_MAX - PWM_MIN));
+    pwm_val = pwm_min + (int)(factor * (PWM_MAX - pwm_min));
     if (pwm_val > PWM_MAX) pwm_val = PWM_MAX;
   }
   if      (speed >  0.01f) { digitalWrite(in1, HIGH); digitalWrite(in2, LOW);  }
@@ -229,13 +234,21 @@ void stopMotors() {
   target_right_spd  = 0.0f;
   current_left_spd  = 0.0f;
   current_right_spd = 0.0f;
-  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0.0f);
-  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0.0f);
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  0.0f, PWM_MIN_LEFT);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, 0.0f, PWM_MIN_RIGHT);
 }
 
 // Called from loop() at a fixed time step — ramps current toward target.
 void updateSlew(float dt) {
   float max_step = SLEW_RATE * dt;
+
+  // Snap to zero immediately on direction reversal — no lag through neutral
+  if ((target_left_spd > 0.0f && current_left_spd < 0.0f) ||
+      (target_left_spd < 0.0f && current_left_spd > 0.0f))
+    current_left_spd = 0.0f;
+  if ((target_right_spd > 0.0f && current_right_spd < 0.0f) ||
+      (target_right_spd < 0.0f && current_right_spd > 0.0f))
+    current_right_spd = 0.0f;
 
   if      (target_left_spd > current_left_spd + max_step) current_left_spd += max_step;
   else if (target_left_spd < current_left_spd - max_step) current_left_spd -= max_step;
@@ -245,8 +258,8 @@ void updateSlew(float dt) {
   else if (target_right_spd < current_right_spd - max_step) current_right_spd -= max_step;
   else     current_right_spd = target_right_spd;
 
-  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  current_left_spd);
-  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, current_right_spd);
+  setMotor(MOTOR_LEFT_ENA,  MOTOR_LEFT_INA,  MOTOR_LEFT_INB,  current_left_spd,  PWM_MIN_LEFT);
+  setMotor(MOTOR_RIGHT_ENA, MOTOR_RIGHT_INA, MOTOR_RIGHT_INB, current_right_spd, PWM_MIN_RIGHT);
 }
 
 // =============================================================================
@@ -355,6 +368,9 @@ void init_ros_entities() {
 
 void fini_ros_entities() {
   rclc_executor_fini(&executor);
+  // Flush serial so the new agent session starts with a clean buffer
+  Serial.flush();
+  while (Serial.available()) Serial.read();
   rcl_publisher_fini(&range_pub, &node);
   rcl_publisher_fini(&imu_pub,   &node);
   rcl_publisher_fini(&odom_pub,  &node);
@@ -420,20 +436,42 @@ void loop() {
   // rmw_uros_ping_agent() operates at transport level — works before and
   // after rclc_support_init(), so it's safe to call in both states.
   // -----------------------------------------------------------------------
-  static unsigned long last_ping_ms = 0;
+  static unsigned long last_ping_ms    = 0;
+  static unsigned long disconnected_ms = 0;
   if (now - last_ping_ms > 1000) {
     last_ping_ms = now;
-    bool ping_ok = (rmw_uros_ping_agent(200, 1) == RMW_RET_OK);
+    // 1 s timeout, 1 attempt — gives the agent a full second to respond.
+    // Previous 500ms×3 could false-trigger during SLAM loop closure (Pi CPU spike).
+    bool ping_ok = (rmw_uros_ping_agent(1000, 1) == RMW_RET_OK);
 
     if (!agent_connected && ping_ok) {
       // Agent appeared — initialise ROS entities and start running
+      disconnected_ms = 0;
       init_ros_entities();
       agent_connected = true;
     } else if (agent_connected && !ping_ok) {
-      // Agent disappeared — tear down entities and halt motors
+      // Agent disappeared — tear down entities; slew will ramp motors to zero
       fini_ros_entities();
       agent_connected = false;
-      stopMotors();
+      disconnected_ms = now;
+      target_left_spd  = 0.0f;
+      target_right_spd = 0.0f;
+    } else if (!agent_connected && disconnected_ms > 0 && (now - disconnected_ms) > 5000) {
+      // Disconnected for >5 s — flush serial buffers to clear stale XRCE-DDS
+      // frames left over from the old agent session, then reset the timestamp
+      // so this only fires once per disconnect event.
+      Serial.flush();
+      while (Serial.available()) Serial.read();
+      disconnected_ms = now;  // re-arm: flush again every 5 s until reconnect
+    }
+  }
+
+  // Slew runs even when disconnected to ramp motors smoothly to zero
+  {
+    float slew_dt = (now - prev_slew_time) / 1000.0f;
+    if (slew_dt > 0.0f) {
+      prev_slew_time = now;
+      updateSlew(slew_dt);
     }
   }
 
@@ -467,28 +505,30 @@ void loop() {
   last_cmd_time = latest_cmd_ms;
   bool safety_active = (now - last_cmd_time > 500);
   if (safety_active) {
-    stopMotors();
+    // Ramp to zero via slew — no hard stop
+    target_left_spd  = 0.0f;
+    target_right_spd = 0.0f;
     digitalWrite(LED_PIN, HIGH);
   } else {
-    // Translate the latest linear/angular into per-wheel targets
-    float lin = clamp(latest_linear,  -MAX_SPEED_MPS, MAX_SPEED_MPS);
-    float ang = latest_angular;
-    target_left_spd  = clamp(lin - (ang * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
-    target_right_spd = clamp(lin + (ang * WHEEL_BASE / 2.0f), -MAX_SPEED_MPS, MAX_SPEED_MPS);
+    // Translate the latest linear/angular into per-wheel targets.
+    // Normalize before clamping so that a large angular command at near-max
+    // linear speed doesn't silently reduce turning rate on one side only.
+    float lin     = clamp(latest_linear, -MAX_SPEED_MPS, MAX_SPEED_MPS);
+    float ang     = latest_angular;
+    float left_raw  = lin - (ang * WHEEL_BASE / 2.0f);
+    float right_raw = lin + (ang * WHEEL_BASE / 2.0f);
+    float max_raw   = fmaxf(fabsf(left_raw), fabsf(right_raw));
+    if (max_raw > MAX_SPEED_MPS) {
+      float scale    = MAX_SPEED_MPS / max_raw;
+      target_left_spd  = left_raw  * scale;
+      target_right_spd = right_raw * scale;
+    } else {
+      target_left_spd  = left_raw;
+      target_right_spd = right_raw;
+    }
     digitalWrite(LED_PIN, (now / 100) % 2 ? HIGH : LOW);  // fast blink = active
   }
 
-  // -----------------------------------------------------------------------
-  // TIME-BASED SLEW — ramps current speed toward target every loop iteration
-  // -----------------------------------------------------------------------
-  if (!safety_active) {
-    float slew_dt = (now - prev_slew_time) / 1000.0f;
-    if (slew_dt > 0.0f) {
-      prev_slew_time = now;
-      updateSlew(slew_dt);
-    }
-  }
-  prev_slew_time = now;
 
   // -----------------------------------------------------------------------
   // ODOMETRY + IMU at 20 Hz (every 50 ms)
@@ -506,8 +546,9 @@ void loop() {
     long rticks = right_ticks; right_ticks = 0;
     portENABLE_INTERRUPTS();
 
-    float d_left   = (lticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
-    float d_right  = (rticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
+    // Cast to float first — integer division would lose sub-mm precision on small tick counts
+    float d_left   = ((float)lticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
+    float d_right  = ((float)rticks / TICKS_PER_REV) * (2.0f * PI * WHEEL_RADIUS);
     float d_center = (d_left + d_right) / 2.0f;
     float d_theta  = (d_right - d_left) / WHEEL_BASE;
 
@@ -534,13 +575,15 @@ void loop() {
     odom_msg.pose.pose.orientation.z = sinf(theta / 2.0f);
     odom_msg.pose.pose.orientation.w = cosf(theta / 2.0f);
     for (int i = 0; i < 36; i++) { odom_msg.pose.covariance[i] = 0.0; odom_msg.twist.covariance[i] = 0.0; }
-    odom_msg.pose.covariance[0]   = 0.01;
-    odom_msg.pose.covariance[7]   = 0.01;
-    odom_msg.pose.covariance[35]  = 0.10;
+    // Covariances set conservatively — ±5% wheel-slip error on typical floor.
+    // These feed the EKF; values too tight cause SLAM map jerks on loop closure.
+    odom_msg.pose.covariance[0]   = 0.05;   // X position σ ≈ 0.22 m
+    odom_msg.pose.covariance[7]   = 0.05;   // Y position σ ≈ 0.22 m
+    odom_msg.pose.covariance[35]  = 0.25;   // Yaw σ ≈ 0.5 rad
     odom_msg.twist.twist.linear.x  = v_linear;
     odom_msg.twist.twist.angular.z = v_angular;
-    odom_msg.twist.covariance[0]  = 0.02;
-    odom_msg.twist.covariance[35] = 0.20;
+    odom_msg.twist.covariance[0]  = 0.05;   // Linear velocity σ ≈ 0.22 m/s
+    odom_msg.twist.covariance[35] = 0.50;   // Angular velocity σ ≈ 0.71 rad/s
     rcl_publish(&odom_pub, &odom_msg, NULL);
 
     if (imu_ready) {

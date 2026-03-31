@@ -196,6 +196,50 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 # ---------------------------------------------------------------------------
+# Helper: hardware-reset the ESP32 via CP2102 RTS line.
+# The ESP32 DevKit auto-reset circuit ties RTS → EN through an RC network
+# (same circuit used by the Arduino IDE flasher). Toggling RTS LOW for 100 ms
+# pulses EN LOW → resets the chip. This is safe to call at any baud rate.
+#
+# Must be called AFTER micro_ros_agent is killed (so the serial port is free).
+# A brief delay after reset gives the ESP32 time to boot before the next agent
+# instance tries to connect.
+# ---------------------------------------------------------------------------
+_reset_esp32() {
+    local port=""
+    # Prefer stable by-id path; fall back to /dev/ttyUSB1 then USB0
+    for candidate in \
+        "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0" \
+        "/dev/ttyUSB1" \
+        "/dev/ttyUSB0"; do
+        if [[ -c "${candidate}" ]]; then
+            port="${candidate}"
+            break
+        fi
+    done
+
+    if [[ -z "${port}" ]]; then
+        echo "[startup] ESP32 reset: no serial device found — skipping"
+        return
+    fi
+
+    echo "[startup] Resetting ESP32 via RTS on ${port} ..."
+    python3 - <<PYEOF
+import serial, time, sys
+try:
+    s = serial.Serial('${port}', 115200, timeout=1)
+    s.setRTS(True)          # Assert RTS → EN goes LOW through RC circuit → reset
+    time.sleep(0.15)
+    s.setRTS(False)         # Deassert → EN returns HIGH → ESP32 boots
+    s.close()
+    print('[startup] ESP32 reset complete')
+except Exception as e:
+    print(f'[startup] ESP32 reset failed: {e}', file=sys.stderr)
+PYEOF
+    sleep 1   # Give ESP32 ~1 s to boot and reach Serial.begin() before agent starts
+}
+
+# ---------------------------------------------------------------------------
 # Helper: get the last event timestamp from the LCD API
 # ---------------------------------------------------------------------------
 _get_last_ts() {
@@ -245,6 +289,16 @@ _kill_ros() {
     pkill -SIGKILL -f joy_node               2>/dev/null || true
     pkill -SIGKILL -f teleop_node            2>/dev/null || true
     pkill -SIGKILL -f ekf_node               2>/dev/null || true
+    # Nav2 nodes (navigation mode)
+    pkill -SIGKILL -f amcl                   2>/dev/null || true
+    pkill -SIGKILL -f map_server             2>/dev/null || true
+    pkill -SIGKILL -f controller_server      2>/dev/null || true
+    pkill -SIGKILL -f planner_server         2>/dev/null || true
+    pkill -SIGKILL -f bt_navigator           2>/dev/null || true
+    pkill -SIGKILL -f behavior_server        2>/dev/null || true
+    pkill -SIGKILL -f velocity_smoother      2>/dev/null || true
+    pkill -SIGKILL -f smoother_server        2>/dev/null || true
+    pkill -SIGKILL -f lifecycle_manager      2>/dev/null || true
     sleep 2
     [[ -n "${MAP_PID}"   ]] && kill -SIGKILL "${MAP_PID}"   2>/dev/null || true
     [[ -n "${COORD_PID}" ]] && kill -SIGKILL "${COORD_PID}" 2>/dev/null || true
@@ -254,6 +308,9 @@ _kill_ros() {
     COORD_PID=""
     set -e
     echo "[startup] ROS stack stopped."
+    # Reset ESP32 now that micro_ros_agent has released the serial port.
+    # The next mode's hardware stack will connect to a freshly booted MCU.
+    _reset_esp32
 }
 
 # ---------------------------------------------------------------------------
@@ -291,7 +348,7 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
 " 2>/dev/null; then
             MODE="navigation"
         else
-            sleep 1
+            sleep 0.5
         fi
     done
 
@@ -321,9 +378,8 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
         COORD_PID=$!
 
     else
-        echo "[startup] Launching: coordinator + LCD bridge (navigation mode)"
-        ros2 launch portamail_coordinator bringup.launch.py \
-            mode:=navigation \
+        echo "[startup] Launching: navigation stack (hardware + AMCL + Nav2 + coordinator)"
+        ros2 launch portamail_navigator navigation.launch.py \
             lcd_url:="${LCD_URL}" &
         COORD_PID=$!
     fi
@@ -337,7 +393,7 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
     # MODE_SELECT that was already present before the ROS stack finished starting.
     PREV_SCREEN=""
     while true; do
-        sleep 2
+        sleep 1
 
         # Check if UI went back to mode selection
         SCREEN=$(curl -sf "${LCD_URL}/api/state" 2>/dev/null \

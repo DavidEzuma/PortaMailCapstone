@@ -5,7 +5,7 @@ set(portamail_navigator_BUILD_DEPENDS "rclcpp" "nav2_msgs" "geometry_msgs" "sens
 set(portamail_navigator_BUILDTOOL_DEPENDS "ament_cmake")
 set(portamail_navigator_BUILD_EXPORT_DEPENDS "rclcpp" "nav2_msgs" "geometry_msgs" "sensor_msgs" "nav_msgs" "tf2" "tf2_ros" "robot_localization" "slam_toolbox")
 set(portamail_navigator_BUILDTOOL_EXPORT_DEPENDS )
-set(portamail_navigator_EXEC_DEPENDS "robot_state_publisher" "foxglove_bridge" "sllidar_ros2" "rclcpp" "nav2_msgs" "geometry_msgs" "sensor_msgs" "nav_msgs" "tf2" "tf2_ros" "robot_localization" "slam_toolbox")
+set(portamail_navigator_EXEC_DEPENDS "robot_state_publisher" "foxglove_bridge" "sllidar_ros2" "nav2_amcl" "nav2_map_server" "nav2_lifecycle_manager" "nav2_controller" "nav2_planner" "nav2_bt_navigator" "nav2_behaviors" "nav2_smoother" "nav2_velocity_smoother" "nav2_regulated_pure_pursuit_controller" "nav2_navfn_planner" "rclcpp" "nav2_msgs" "geometry_msgs" "sensor_msgs" "nav_msgs" "tf2" "tf2_ros" "robot_localization" "slam_toolbox")
 set(portamail_navigator_TEST_DEPENDS "ament_lint_auto" "ament_lint_common")
 set(portamail_navigator_GROUP_DEPENDS )
 set(portamail_navigator_MEMBER_OF_GROUPS )

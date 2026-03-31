@@ -30,12 +30,20 @@ def generate_launch_description():
         'use_real_lidar', default_value='false',
         description='Launch physical RPLIDAR driver')
 
+    enable_foxglove_arg = DeclareLaunchArgument(
+        'enable_foxglove', default_value='false',
+        description='Enable Foxglove bridge for remote visualization (adds CPU load)')
+
+    slam_configure_delay_arg = DeclareLaunchArgument(
+        'slam_configure_delay_sec', default_value='0.5',
+        description='Delay (s) before sending SLAM Toolbox CONFIGURE — increase if TF not ready')
+
     autosave_enabled_arg = DeclareLaunchArgument(
         'autosave_enabled', default_value='true',
         description='Enable periodic map auto-save')
 
     autosave_interval_sec_arg = DeclareLaunchArgument(
-        'autosave_interval_sec', default_value='30',
+        'autosave_interval_sec', default_value='120',
         description='Map auto-save period in seconds (0 = disabled)')
 
     map_output_dir_arg = DeclareLaunchArgument(
@@ -84,9 +92,10 @@ def generate_launch_description():
         parameters=[slam_config],
     )
 
-    # Trigger configure 2 s after launch to let TF settle
+    # Trigger configure after slam_configure_delay_sec (default 0.5 s) to let TF settle.
+    # Increase via launch arg if you see TF lookup errors during SLAM startup.
     configure_slam_toolbox = TimerAction(
-        period=2.0,
+        period=LaunchConfiguration('slam_configure_delay_sec'),
         actions=[
             EmitEvent(
                 event=ChangeState(
@@ -140,14 +149,16 @@ def generate_launch_description():
     )
 
     # --- 6. Foxglove Bridge (ws://<robot-ip>:8765) ---
+    # Disabled by default — adds ~5-10% CPU load. Enable with enable_foxglove:=true.
     foxglove_bridge = Node(
+        condition=IfCondition(LaunchConfiguration('enable_foxglove')),
         package='foxglove_bridge',
         executable='foxglove_bridge',
         name='foxglove_bridge',
         parameters=[{
             'port': 8765,
             'address': '0.0.0.0',
-            'send_buffer_limit': 10000000,  # 10 MB — desktop app doesn't need large buffer
+            'send_buffer_limit': 10000000,
             'publish_all_topics': True
         }],
         output='screen'
@@ -156,6 +167,8 @@ def generate_launch_description():
     return LaunchDescription([
         use_mock_driver_arg,
         use_real_lidar_arg,
+        enable_foxglove_arg,
+        slam_configure_delay_arg,
         autosave_enabled_arg,
         autosave_interval_sec_arg,
         map_output_dir_arg,

@@ -18,8 +18,9 @@ slam_toolbox:
     use_map_saver: true
     mode: mapping
 
-    # Rate
-    minimum_time_interval: 0.1
+    # Rate — both set to match odom publish rate (20 Hz = 50 ms)
+    # Keeping them equal prevents TF freshness leading odom in scan registration
+    minimum_time_interval: 0.05
     transform_publish_period: 0.05
     map_update_interval: 2.0
     
@@ -37,12 +38,13 @@ slam_toolbox:
     link_match_minimum_response_fine: 0.1
     link_scan_maximum_distance: 1.5
     
-    # Loop closure
+    # Loop closure — tightened for structured indoor corridors.
+    # Loose variance (3.0) allowed false closures in repetitive geometry (identical doorways).
     do_loop_closing: true
     loop_search_maximum_distance: 3.0
     loop_match_minimum_chain_size: 10
-    loop_match_maximum_variance_coarse: 3.0
-    loop_match_minimum_response_coarse: 0.35
+    loop_match_maximum_variance_coarse: 1.5   # Tighter: reject poor coarse matches
+    loop_match_minimum_response_coarse: 0.50  # Raised: require stronger match quality
     loop_match_minimum_response_fine: 0.45
 
     # Correlation

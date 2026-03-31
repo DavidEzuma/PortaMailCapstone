@@ -8,8 +8,9 @@ from launch.conditions import IfCondition
 from launch_ros.parameter_descriptions import ParameterValue
 
 
-SERIAL_PORT = '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_3b22c239cde94c4e9a178cd7276563d2-if00-port0'
-SERIAL_BAUD = 256000
+LIDAR_PORT  = '/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_3b22c239cde94c4e9a178cd7276563d2-if00-port0'
+LIDAR_BAUD  = 256000   # RPLIDAR A2M12 — NOT the micro-ROS agent baud
+# micro-ROS agent uses 115200 baud (set in the Node arguments below and in firmware Serial.begin())
 
 
 def generate_launch_description():
@@ -79,8 +80,8 @@ def generate_launch_description():
         name='sllidar_node',
         output='screen',
         parameters=[{
-            'serial_port':      SERIAL_PORT,
-            'serial_baudrate':  SERIAL_BAUD,
+            'serial_port':      LIDAR_PORT,
+            'serial_baudrate':  LIDAR_BAUD,
             'frame_id':         'laser',
             'inverted':         False,
             'angle_compensate': True,
