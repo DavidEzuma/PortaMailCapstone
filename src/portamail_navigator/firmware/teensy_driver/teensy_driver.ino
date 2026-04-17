@@ -68,12 +68,11 @@
 // ROBOT CONSTANTS  (calibrate on physical robot before use)
 // =============================================================================
 
-// Wheel: 1/10 RC Monster Truck 2.8" (71.1mm diameter) -> radius = 35.56mm
-const float WHEEL_RADIUS = 0.03556f; // meters
+// Wheel: 127.46mm diameter measured → radius = 63.73mm
+const float WHEEL_RADIUS = 0.06373f; // meters
 
-// Measured track width (centre-to-centre of drive wheels)
-// *** MEASURE THE ACTUAL TRACK WIDTH AND UPDATE THIS VALUE ***
-const float WHEEL_BASE = 0.20f; // meters
+// Track width centre-to-centre: inner walls 381mm + wheel width 66.27mm
+const float WHEEL_BASE = 0.44727f; // meters
 
 // FIT0186: 8 PPR on motor shaft, 90:1 gear ratio.
 // Theoretical single-edge (rising on A only): 8 x 90 = 720 ticks/output_rev.

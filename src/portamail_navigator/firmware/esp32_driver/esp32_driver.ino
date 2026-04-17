@@ -116,10 +116,10 @@
 // =============================================================================
 // ROBOT CONSTANTS  (same as Teensy — calibrate on physical robot)
 // =============================================================================
-const float WHEEL_RADIUS  = 0.03556f;  // meters  (2.8" RC tires)
-const float WHEEL_BASE    = 0.20f;     // meters  (*** MEASURE TRACK WIDTH ***)
+const float WHEEL_RADIUS  = 0.06373f;  // meters  (127.46 mm dia measured tires)
+const float WHEEL_BASE    = 0.44727f;  // meters  (inner walls 381 mm + wheel width 66.27 mm)
 const float TICKS_PER_REV = 720.0f;   // 8 PPR × 90:1  (*** CALIBRATE 1-m run ***)
-const float MAX_SPEED_MPS  = 0.89f;   // 2 MPH safety cap
+const float MAX_SPEED_MPS  = 4.4704f; // 10 MPH cap
 // PWM dead-zone: minimum duty to overcome static friction.
 // Left and right motors may differ — calibrate each separately by finding
 // the lowest PWM that produces consistent wheel motion, then add 5.

@@ -32,4 +32,8 @@ def validate_edge_for_screen(edge, screen, mode, selected_room):
         return screen in {"SAVE_MAP_SELECT", "SAVE_LOCATION_SELECT", "MAPPING", "HOME", "PROCESSING"}
     if edge == "start_origin":
         return screen == "HOME"
+    if edge == "nav_error":
+        return True  # posted by lcd_bridge from any delivery screen
+    if edge == "nav_error_dismiss":
+        return screen == "NAV_ERROR"
     return True

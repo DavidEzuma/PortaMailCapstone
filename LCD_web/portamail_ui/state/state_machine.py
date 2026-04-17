@@ -163,4 +163,17 @@ def handle_edge(edge, payload=None):
             state["screen"] = "HOME"
         return True
 
+    if edge == "nav_error":
+        # payload may carry {"message": "..."} for human-readable detail
+        msg = (payload or {}).get("message", "Navigation failed. Robot is returning to base.")
+        state["nav_error_message"] = msg
+        state["screen"] = "NAV_ERROR"
+        return True
+
+    if edge == "nav_error_dismiss":
+        state["nav_error_message"] = ""
+        state["mode"] = "DOCK_IDLE"
+        state["screen"] = "HOME"
+        return True
+
     return False

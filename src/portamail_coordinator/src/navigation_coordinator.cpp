@@ -32,7 +32,6 @@ public:
     NavigationCoordinator() : Node("navigation_coordinator") {
         this->declare_parameter("start_mode",      "navigation");
         this->declare_parameter("locations_file",  "");
-        // map_save_path: now uses HOME env var default; overridden by launch file.
         const char* home = std::getenv("HOME");
         std::string default_map_path = home
             ? std::string(home) + "/PortaMailCapstone/maps"
@@ -74,6 +73,9 @@ private:
     rclcpp_action::Client<NavigateToPose>::SharedPtr       nav_action_client_;
     rclcpp::Client<slam_toolbox::srv::SaveMap>::SharedPtr  save_map_client_;
 
+    // Stored so we can cancel an in-flight goal when a new request arrives.
+    GoalHandleNav::SharedPtr current_goal_handle_;
+
     // -----------------------------------------------------------------------
     // Status publishing — always JSON so lcd_bridge can parse reliably.
     // {"type":"status","code":"ARRIVED","detail":""}
@@ -94,7 +96,8 @@ private:
     }
 
     // -----------------------------------------------------------------------
-    // Load locations.yaml
+    // Load locations.yaml — called at startup and before each navigation
+    // so that waypoints saved during mapping are always current.
     // -----------------------------------------------------------------------
     void load_locations() {
         std::string file_path = get_parameter("locations_file").as_string();
@@ -105,6 +108,7 @@ private:
         try {
             YAML::Node config = YAML::LoadFile(file_path);
             if (config["locations"]) {
+                locations_.clear();
                 for (auto it = config["locations"].begin();
                      it != config["locations"].end(); ++it) {
                     std::string name = it->first.as<std::string>();
@@ -148,8 +152,19 @@ private:
             return;
         }
 
+        // Reload locations so any waypoints saved during the last mapping
+        // session are visible without restarting the coordinator.
+        load_locations();
+
         auto it = locations_.find(command);
         if (it != locations_.end()) {
+            // Cancel any active goal before accepting the new destination.
+            if (current_nav_state_ == NavigationState::NAVIGATING && current_goal_handle_) {
+                RCLCPP_WARN(get_logger(),
+                    "New destination received while navigating — canceling current goal.");
+                current_goal_handle_->async_cancel_goal();
+                current_goal_handle_.reset();
+            }
             start_navigation(it->second);
         } else {
             RCLCPP_ERROR(get_logger(), "Unknown location: '%s'", command.c_str());
@@ -172,7 +187,6 @@ private:
         std::string base_path = get_parameter("map_save_path").as_string();
         auto request = std::make_shared<slam_toolbox::srv::SaveMap::Request>();
         // SLAM Toolbox appends .pgm and .yaml automatically.
-        // Use a fixed name so lcd_bridge's map file deletion stays predictable.
         request->name.data = base_path + "/portamail_map";
 
         save_map_client_->async_send_request(request,
@@ -211,13 +225,32 @@ private:
                     RCLCPP_ERROR(get_logger(), "Goal rejected by Nav2.");
                     publish_error("GOAL_REJECTED");
                     current_nav_state_ = NavigationState::FAILED;
+                    current_goal_handle_.reset();
                 } else {
                     RCLCPP_INFO(get_logger(), "Goal accepted by Nav2.");
+                    current_goal_handle_ = goal_handle;
+                }
+            };
+
+        opts.feedback_callback =
+            [this](GoalHandleNav::SharedPtr /*goal_handle*/,
+                   const std::shared_ptr<const NavigateToPose::Feedback> feedback) {
+                if (!feedback) return;
+                float dist = feedback->distance_remaining;
+                RCLCPP_DEBUG(get_logger(), "Distance remaining: %.2f m", dist);
+                // Publish coarse progress buckets so the LCD can show a
+                // rough indicator without flooding the status topic.
+                static float last_reported = -1.0f;
+                if (last_reported < 0.0f || std::abs(dist - last_reported) >= 0.5f) {
+                    last_reported = dist;
+                    publish_status("NAVIGATING",
+                        std::to_string(static_cast<int>(dist)) + "m");
                 }
             };
 
         opts.result_callback =
             [this](const GoalHandleNav::WrappedResult& result) {
+                current_goal_handle_.reset();
                 if (result.code == rclcpp_action::ResultCode::SUCCEEDED) {
                     RCLCPP_INFO(get_logger(), "Navigation succeeded.");
                     publish_status("ARRIVED");

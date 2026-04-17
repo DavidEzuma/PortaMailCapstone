@@ -6,6 +6,7 @@ _state = {
     "selected_room": None,
     "pending_rooms": [],
     "active_room": None,
+    "nav_error_message": "",
     "bits": {key: 0 for key in BIT_KEYS},
     "events": [],
 }
@@ -22,6 +23,7 @@ def snapshot_state():
         "selected_room": _state["selected_room"],
         "pending_rooms": list(_state["pending_rooms"]),
         "active_room": _state["active_room"],
+        "nav_error_message": _state["nav_error_message"],
         "bits": dict(_state["bits"]),
         "events": list(_state["events"]),
     }

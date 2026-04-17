@@ -11,6 +11,7 @@ SCREENS = {
     "SAVE_MAP_SELECT",
     "SAVE_LOCATION_SELECT",
     "PROCESSING",
+    "NAV_ERROR",
 }
 
 BIT_KEYS = {
@@ -62,6 +63,8 @@ EDGE_EVENTS = {
     "cancel_save_location",
     "save_map_now",
     "map_saved",
+    "nav_error",
+    "nav_error_dismiss",
 }
 
 

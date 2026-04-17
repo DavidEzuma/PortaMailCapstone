@@ -27,6 +27,9 @@ const savedLocations = new Set();
 // Timer for processing screen timeout warning
 let processingTimeout = null;
 
+// Timer to auto-dismiss the nav error screen after 10 s
+let navErrorDismissTimeout = null;
+
 const AUTO_DISMISS_SCREENS = new Set([
   "DELIVERING_ROOM1",
   "DELIVERING_ROOM2",
@@ -37,6 +40,7 @@ const AUTO_DISMISS_SCREENS = new Set([
   "SAVE_MAP_SELECT",
   "SAVE_LOCATION_SELECT",
   "PROCESSING",
+  "NAV_ERROR",
 ]);
 
 // --- Intro ---
@@ -240,6 +244,21 @@ function renderState(state) {
     startProcessingTimeout();
   } else if (currentScreen !== "PROCESSING" && prevScreen === "PROCESSING") {
     clearProcessingTimeout();
+  }
+
+  // Nav error screen: populate message and auto-dismiss after 10 s
+  if (currentScreen === "NAV_ERROR" && prevScreen !== "NAV_ERROR") {
+    const msgEl = document.getElementById("navErrorMessage");
+    if (msgEl && state.nav_error_message) {
+      msgEl.textContent = state.nav_error_message;
+    }
+    clearTimeout(navErrorDismissTimeout);
+    navErrorDismissTimeout = setTimeout(() => {
+      socket.emit("release", { bit: "back_pressed", edge: "nav_error_dismiss" });
+    }, 10000);
+  } else if (currentScreen !== "NAV_ERROR" && prevScreen === "NAV_ERROR") {
+    clearTimeout(navErrorDismissTimeout);
+    navErrorDismissTimeout = null;
   }
 
   if (currentScreen !== "HOME" && selectedRoom !== null) {

@@ -743,3 +743,49 @@ pre {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
   touch-action: none;
 }
+
+/* --- Nav Error screen --- */
+.nav-error-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+}
+
+.nav-error-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  color: #f0a030;
+}
+
+.nav-error-title {
+  color: #f0a030;
+}
+
+.nav-error-message {
+  font-size: 1rem;
+  text-align: center;
+  color: var(--text);
+  opacity: 0.9;
+  max-width: 80%;
+}
+
+.nav-error-sub {
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0.55;
+}
+
+.nav-error-dismiss-btn {
+  flex: 1;
+  background: rgba(240, 160, 48, 0.18);
+  border: 2px solid rgba(240, 160, 48, 0.5);
+  color: #f0a030;
+  border-radius: 20px;
+  padding: 20px 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  touch-action: none;
+}

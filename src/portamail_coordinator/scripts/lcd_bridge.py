@@ -334,7 +334,14 @@ class LcdBridge(Node):
                 self.get_logger().warn(
                     f"Nav error ({code}: {detail}) — returning to mailroom"
                 )
-                self._post_lcd_mode("DOCK_IDLE")
+                # Show the error screen on the LCD before queuing the return trip.
+                human_msg = self._nav_error_human_message(code, detail)
+                try:
+                    self._http_post("/api/edge", {"edge": "nav_error",
+                                                  "payload": {"message": human_msg}})
+                except Exception as exc:
+                    self.get_logger().warn(f"Could not POST nav_error to LCD: {exc}")
+                    self._post_lcd_mode("DOCK_IDLE")  # fallback
                 self._delivery_queue = []
                 self._current_dest   = "mailroom"
                 self._bridge_state   = _RETURNING
@@ -546,6 +553,15 @@ class LcdBridge(Node):
         msg.data = cmd
         self._pub.publish(msg)
         self.get_logger().info(f"-> user_delivery_request: {cmd!r}")
+
+    def _nav_error_human_message(self, code: str, detail: str) -> str:
+        messages = {
+            "GOAL_REJECTED":    "Nav2 rejected the destination. Path may be blocked.",
+            "NAV2_OFFLINE":     "Navigation system is offline. Please restart.",
+            "UNKNOWN_LOCATION": "Destination not found. Please re-run mapping.",
+            "NAV_FAILED":       f"Could not reach destination ({detail or 'obstacle or timeout'}).",
+        }
+        return messages.get(code, f"Navigation error: {code}. Returning to base.")
 
     def _post_lcd_mode(self, mode: str):
         try:
