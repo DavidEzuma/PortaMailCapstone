@@ -209,7 +209,7 @@ _reset_esp32() {
     local port=""
     # Prefer stable by-id path; fall back to /dev/ttyUSB1 then USB0
     for candidate in \
-        "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0" \
+        "/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_56db11f39d70f011a6a68c301045c30f-if00-port0" \
         "/dev/ttyUSB1" \
         "/dev/ttyUSB0"; do
         if [[ -c "${candidate}" ]]; then
@@ -227,16 +227,33 @@ _reset_esp32() {
     python3 - <<PYEOF
 import serial, time, sys
 try:
-    s = serial.Serial('${port}', 115200, timeout=1)
-    s.setRTS(True)          # Assert RTS → EN goes LOW through RC circuit → reset
+    # Open with dtr=False BEFORE asserting RTS.
+    # serial.Serial(port, baud) asserts BOTH DTR and RTS on open, which is the
+    # Arduino bootloader entry sequence (DTR→IO0 low + RTS→EN low = bootloader mode).
+    # We only want a plain reset: keep DTR=False (IO0 stays HIGH → normal boot),
+    # pulse RTS only (EN goes LOW then HIGH → reset, boots to application).
+    s = serial.Serial()
+    s.port = '${port}'
+    s.baudrate = 115200
+    s.dtr = False   # IO0 stays HIGH (normal boot, not bootloader)
+    s.open()
+    time.sleep(0.05)
+    s.rts = True            # EN goes LOW → reset begins
     time.sleep(0.15)
-    s.setRTS(False)         # Deassert → EN returns HIGH → ESP32 boots
+    s.rts = False           # EN returns HIGH → ESP32 boots into application
+    time.sleep(0.05)
+    # Explicitly deassert BOTH lines before close().
+    # Linux HUPCL can lower DTR+RTS simultaneously on close, which is exactly
+    # the Arduino bootloader-entry sequence (IO0 LOW + EN LOW).  Asserting
+    # them False here first prevents HUPCL from re-triggering bootloader mode.
+    s.dtr = False
+    s.rts = False
     s.close()
     print('[startup] ESP32 reset complete')
 except Exception as e:
     print(f'[startup] ESP32 reset failed: {e}', file=sys.stderr)
 PYEOF
-    sleep 1   # Give ESP32 ~1 s to boot and reach Serial.begin() before agent starts
+    sleep 3   # ESP32 setup() has delay(2000); allow full boot before agent starts
 }
 
 # ---------------------------------------------------------------------------
@@ -263,8 +280,12 @@ _kill_ros() {
     # handler before anything else. ros2 launch does NOT forward SIGINT to
     # children when the launch process itself is signalled from outside the
     # terminal foreground process group.
+    # 4-second window: the A2M12 motor takes up to ~3 s to spin down after
+    # stopMotor() is called. If we SIGKILL too early, the motor keeps spinning
+    # and the next sllidar_node launch gets SL_RESULT_OPERATION_TIMEOUT (~2 s
+    # into init) because scan data is still streaming when getDeviceInfo() fires.
     pkill -SIGINT -f sllidar_node 2>/dev/null || true
-    sleep 2
+    sleep 4
 
     # Step 2: Signal the ros2 launch processes directly. ros2 launch will
     # propagate SIGINT to its remaining children (SLAM, EKF, foxglove, etc.).
@@ -306,6 +327,9 @@ _kill_ros() {
     [[ -n "${COORD_PID}" ]] && wait "${COORD_PID}" 2>/dev/null || true
     MAP_PID=""
     COORD_PID=""
+    # Clear Fast-DDS shared memory so the next session uses SHM transport
+    # rather than falling back to UDP (which increases inter-node latency).
+    rm -rf /dev/shm/fastrtps_* 2>/dev/null || true
     set -e
     echo "[startup] ROS stack stopped."
     # Reset ESP32 now that micro_ros_agent has released the serial port.
@@ -314,12 +338,54 @@ _kill_ros() {
 }
 
 # ---------------------------------------------------------------------------
+# 5. Pre-flight: kill any leftover ROS nodes from a previous session.
+#    Without this, a crashed or Ctrl-C'd previous run leaves ghost processes
+#    running. The new launch then stacks on top → every node appears twice,
+#    the micro-ROS agent cannot open the already-held serial port, and motors
+#    never receive cmd_vel.
+# ---------------------------------------------------------------------------
+echo "[startup] Clearing any leftover ROS processes from previous session ..."
+set +e
+pkill -SIGINT -f sllidar_node           2>/dev/null || true
+sleep 4   # give the A2M12 motor time to stop before SIGKILL (prevents next launch timeout)
+pkill -SIGKILL -f micro_ros_agent        2>/dev/null || true
+pkill -SIGKILL -f sllidar_node           2>/dev/null || true
+pkill -SIGKILL -f lcd_bridge             2>/dev/null || true
+pkill -SIGKILL -f sync_slam_toolbox_node 2>/dev/null || true
+pkill -SIGKILL -f foxglove_bridge        2>/dev/null || true
+pkill -SIGKILL -f mock_driver            2>/dev/null || true
+pkill -SIGKILL -f map_autosave_node      2>/dev/null || true
+pkill -SIGKILL -f navigation_coordinator 2>/dev/null || true
+pkill -SIGKILL -f robot_state_publisher  2>/dev/null || true
+pkill -SIGKILL -f joy_node               2>/dev/null || true
+pkill -SIGKILL -f teleop_node            2>/dev/null || true
+pkill -SIGKILL -f ekf_node               2>/dev/null || true
+pkill -SIGKILL -f amcl                   2>/dev/null || true
+pkill -SIGKILL -f map_server             2>/dev/null || true
+pkill -SIGKILL -f controller_server      2>/dev/null || true
+pkill -SIGKILL -f planner_server         2>/dev/null || true
+pkill -SIGKILL -f bt_navigator           2>/dev/null || true
+pkill -SIGKILL -f behavior_server        2>/dev/null || true
+pkill -SIGKILL -f velocity_smoother      2>/dev/null || true
+pkill -SIGKILL -f smoother_server        2>/dev/null || true
+pkill -SIGKILL -f lifecycle_manager      2>/dev/null || true
+pkill -SIGKILL -f "ros2 launch"          2>/dev/null || true
+rm -rf /dev/shm/fastrtps_* 2>/dev/null || true
+sleep 1
+set -e
+echo "[startup] Pre-flight cleanup done."
+
+# ---------------------------------------------------------------------------
 # 5. Mode-selection + ROS launch loop
 #    Restarts whenever the Back button returns the UI to MODE_SELECT.
 # ---------------------------------------------------------------------------
 # Anchor to current event log so stale events from prior Flask sessions
 # are never mistaken for a fresh mode selection.
 SINCE_TS=$(_get_last_ts)
+
+# Reset ESP32 on startup so the very first mapping/navigation session always
+# connects to a freshly booted MCU (same reset that fires on every mode exit).
+_reset_esp32
 
 while true; do
     echo ""
@@ -354,12 +420,6 @@ exit(0 if any(e.get('name') == 'select_navigation' for e in evts) else 1)
 
     echo "[startup] Mode selected: ${MODE}"
     echo ""
-
-    # Clean up stale Fast-DDS shared memory lock files from any previous session.
-    # If left behind (e.g. after SIGKILL), they cause all nodes to fall back to
-    # UDP transport instead of SHM, which significantly increases message latency.
-    rm -rf /dev/shm/fastrtps_* 2>/dev/null || true
-    echo "[startup] Cleared stale Fast-DDS SHM files."
 
     # Launch appropriate ROS 2 stack
     if [[ "${MODE}" == "mapping" ]]; then
