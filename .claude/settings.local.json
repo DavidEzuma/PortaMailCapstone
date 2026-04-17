@@ -83,7 +83,9 @@
       "Bash(pkill -f \"lcd_bridge\" 2>/dev/null || true; pkill -f \"venv/bin/python app.py\" 2>/dev/null || true; pkill -f \"ros2 launch portamail\" 2>/dev/null || true; pkill -f \"sllidar_node\" 2>/dev/null || true; echo \"done\")",
       "Bash(kill 3105 5047 5443 6243 7807 40690 40266 2>/dev/null; echo \"done\")",
       "Bash(kill -9 3105 5047 5443 6243 7807 40690 40266 41028 41349 41448 2>/dev/null; sleep 1; ss -tlnp | grep 5050; ps aux | grep -E \"lcd_bridge|app\\\\.py\" | grep -v grep | wc -l)",
-      "Bash(pkill -9 -f sync_slam_toolbox_node 2>/dev/null; pkill -9 -f foxglove_bridge 2>/dev/null; pkill -9 -f mock_driver 2>/dev/null; pkill -9 -f map_autosave_node 2>/dev/null; pkill -9 -f navigation_coordinator 2>/dev/null; pkill -9 -f robot_state_publisher 2>/dev/null; pkill -9 -f joy_node 2>/dev/null; pkill -9 -f teleop_node 2>/dev/null; pkill -9 -f sllidar_node 2>/dev/null; pkill -9 -f lcd_bridge 2>/dev/null; pkill -9 -f \"app.py\" 2>/dev/null; echo \"done\")"
+      "Bash(pkill -9 -f sync_slam_toolbox_node 2>/dev/null; pkill -9 -f foxglove_bridge 2>/dev/null; pkill -9 -f mock_driver 2>/dev/null; pkill -9 -f map_autosave_node 2>/dev/null; pkill -9 -f navigation_coordinator 2>/dev/null; pkill -9 -f robot_state_publisher 2>/dev/null; pkill -9 -f joy_node 2>/dev/null; pkill -9 -f teleop_node 2>/dev/null; pkill -9 -f sllidar_node 2>/dev/null; pkill -9 -f lcd_bridge 2>/dev/null; pkill -9 -f \"app.py\" 2>/dev/null; echo \"done\")",
+      "Bash(echo \"07e0c085-e071-4b70-bd3c-9842b0ae6fd3.jsonl\")",
+      "Bash(echo \"f7647421-0f05-4c04-91cc-09934042240b.jsonl\")"
     ]
   }
 }

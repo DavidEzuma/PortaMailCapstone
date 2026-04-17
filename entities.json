@@ -2,9 +2,10 @@
   "people": [],
   "projects": [
     "Flask",
-    "Mapping",
     "Power",
+    "Mapping",
+    "Full",
     "Chromium",
-    "Full"
+    "Contract"
   ]
 }
