@@ -74,17 +74,17 @@
 //         pins to the ESP32 GPIOs below for PWM speed control.
 // =============================================================================
 
-// Left motor (U3 / MD1) — GPIO assignments from capstone_PCB.kicad_sch net names
-#define MOTOR_LEFT_INA   13   // INA_MD1 → U3 VNH5019 pin 4  (direction A)
-#define MOTOR_LEFT_INB   14   // INB_MD1 → U3 VNH5019 pin 10 (direction B)
-#define MOTOR_LEFT_ENA   16   // EN_MD1  → U3 VNH5019 pin 5  (half-bridge A enable / PWM speed)
-#define MOTOR_LEFT_ENB   19   // ENB_MD1 → U3 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
+// Left motor (U3 / MD1) — verified from capstone_PCB.kicad_pcb net assignments
+#define MOTOR_LEFT_INA    5   // Net-(U3-INA)        → U3 VNH5019 pin 4  (direction A)
+#define MOTOR_LEFT_INB   25   // Net-(U3-INB)        → U3 VNH5019 pin 10 (direction B)
+#define MOTOR_LEFT_ENA   26   // Net-(U3-ENA/DIAGA)  → U3 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_LEFT_ENB   27   // Net-(U3-ENB/DIAGB)  → U3 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
-// Right motor (U4 / MD2) — GPIO assignments from capstone_PCB.kicad_sch net names
-#define MOTOR_RIGHT_INA  27   // INA_MD2 → U4 VNH5019 pin 4  (direction A)
-#define MOTOR_RIGHT_INB  26   // INB_MD2 → U4 VNH5019 pin 10 (direction B)
-#define MOTOR_RIGHT_ENA  17   // EN_MD2  → U4 VNH5019 pin 5  (half-bridge A enable / PWM speed)
-#define MOTOR_RIGHT_ENB  23   // ENB_MD2 → U4 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
+// Right motor (U4 / MD2) — verified from capstone_PCB.kicad_pcb net assignments
+#define MOTOR_RIGHT_INA  33   // Net-(U4-INA)        → U4 VNH5019 pin 4  (direction A)
+#define MOTOR_RIGHT_INB  13   // Net-(U4-INB)        → U4 VNH5019 pin 10 (direction B)
+#define MOTOR_RIGHT_ENA  14   // Net-(U4-ENA/DIAGA)  → U4 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_RIGHT_ENB   4   // Net-(U4-ENB/DIAGB)  → U4 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
 // LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
 // ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
@@ -92,12 +92,14 @@
 #define LEDC_FREQ_HZ   10000  // 10 kHz — smoother at low duty cycles; within L298N range
 #define LEDC_BITS      8      // 0-255 duty range, matches analogWrite
 
-// FIT0186 Encoders — channel A on interrupt pin, B for direction
-// Physical A/B and left/right assignment must be verified on the actual robot.
-#define ENC_LEFT_A   32   // Interrupt (RISING) for tick count
-#define ENC_LEFT_B   33   // Direction sense
-#define ENC_RIGHT_A  25   // Interrupt (RISING) for tick count
-#define ENC_RIGHT_B   4   // Direction sense
+// FIT0186 Encoders — routed through PCB connectors P3 (GPIO18/19) and P4 (GPIO16/17).
+// Which connector is left vs right, and which pin within each is A vs B, MUST be
+// verified physically. Swap ENC_LEFT_A/B or ENC_RIGHT_A/B if odometry runs backwards.
+// GPIO32/33/25/4 are motor driver pins — do NOT use for encoders.
+#define ENC_LEFT_A   19   // P3 pin1 — interrupt (RISING) for tick count (verify left/right)
+#define ENC_LEFT_B   18   // P3 pin2 — direction sense
+#define ENC_RIGHT_A  17   // P4 pin1 — interrupt (RISING) for tick count (verify left/right)
+#define ENC_RIGHT_B  16   // P4 pin2 — direction sense
 
 // BNO055 IMU — I2C address 0x28
 // ESP32 default I2C: SDA=GPIO21, SCL=GPIO22
@@ -108,8 +110,11 @@
 // WARNING: HC-SR04 Echo outputs 5 V. The ESP32 is 3.3 V only.
 //          Use a resistor voltage divider (e.g. 1 kΩ / 2 kΩ) or
 //          a level shifter on the ECHO line — identical caveat as Teensy.
-#define ULTRASONIC_TRIG   5   // OUTPUT — 10 µs HIGH pulse
-#define ULTRASONIC_ECHO  18   // INPUT  — measure echo pulse width
+// WARNING: GPIO5 is INA_MD1 (left motor) — NOT the ultrasonic TRIG.
+// GPIO18 is encoder P3 pin2 — may conflict with ECHO.
+// Verify physical HC-SR04 wiring before using ultrasonic.
+#define ULTRASONIC_TRIG  -1   // TODO: verify correct GPIO from physical board
+#define ULTRASONIC_ECHO  -1   // TODO: verify correct GPIO from physical board
 
 #define LED_PIN  2   // Built-in LED on most ESP32 dev boards
 
@@ -385,20 +390,22 @@ void fini_ros_entities() {
 void setup() {
   pinMode(LED_PIN, OUTPUT);
 
-  // Motor direction outputs
-  pinMode(MOTOR_LEFT_INA,  OUTPUT); pinMode(MOTOR_LEFT_INB,  OUTPUT);
-  pinMode(MOTOR_RIGHT_INA, OUTPUT); pinMode(MOTOR_RIGHT_INB, OUTPUT);
+  // Motor direction outputs — drive LOW first to prevent spurious drive at boot.
+  // GPIO5 (MOTOR_LEFT_INA) is a strapping pin that boots HIGH; explicit LOW required.
+  pinMode(MOTOR_LEFT_INA,  OUTPUT); digitalWrite(MOTOR_LEFT_INA,  LOW);
+  pinMode(MOTOR_LEFT_INB,  OUTPUT); digitalWrite(MOTOR_LEFT_INB,  LOW);
+  pinMode(MOTOR_RIGHT_INA, OUTPUT); digitalWrite(MOTOR_RIGHT_INA, LOW);
+  pinMode(MOTOR_RIGHT_INB, OUTPUT); digitalWrite(MOTOR_RIGHT_INB, LOW);
 
-  // VNH5019 ENB pins: half-bridge B must be kept HIGH to stay active.
-  // These are separate from the PWM ENA pins — not present on L298N.
-  pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
-  pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
-
-  // LEDC PWM setup (ESP32 Arduino core v3.x pin-based API)
+  // LEDC PWM setup BEFORE enabling ENB — keeps ENA at 0 before half-bridges go live.
   ledcAttach(MOTOR_LEFT_ENA,  LEDC_FREQ_HZ, LEDC_BITS);
   ledcAttach(MOTOR_RIGHT_ENA, LEDC_FREQ_HZ, LEDC_BITS);
   ledcWrite(MOTOR_LEFT_ENA,  0);
   ledcWrite(MOTOR_RIGHT_ENA, 0);
+
+  // VNH5019 ENB pins: half-bridge B enable — set HIGH only after ENA is already 0.
+  pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
+  pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
 
   // Encoder inputs
   pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
@@ -406,9 +413,9 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(ENC_LEFT_A),  doEncoderLeft,  RISING);
   attachInterrupt(digitalPinToInterrupt(ENC_RIGHT_A), doEncoderRight, RISING);
 
-  // Ultrasonic
-  pinMode(ULTRASONIC_TRIG, OUTPUT); digitalWrite(ULTRASONIC_TRIG, LOW);
-  pinMode(ULTRASONIC_ECHO, INPUT);
+  // Ultrasonic — skip if pins unconfirmed (set to -1)
+  if (ULTRASONIC_TRIG >= 0) { pinMode(ULTRASONIC_TRIG, OUTPUT); digitalWrite(ULTRASONIC_TRIG, LOW); }
+  if (ULTRASONIC_ECHO >= 0) { pinMode(ULTRASONIC_ECHO, INPUT); }
 
   // BNO055 — explicit SDA/SCL for ESP32
   Wire.begin(I2C_SDA, I2C_SCL);
@@ -612,7 +619,7 @@ void loop() {
   // pulseIn timeout capped at 5 ms (~0.86 m max) to limit loop blocking.
   // -----------------------------------------------------------------------
   static unsigned long last_range_time = 0;
-  if (now - last_range_time >= 500) {
+  if ((ULTRASONIC_TRIG >= 0) && (ULTRASONIC_ECHO >= 0) && (now - last_range_time >= 500)) {
     last_range_time = now;
     digitalWrite(ULTRASONIC_TRIG, HIGH);
     delayMicroseconds(10);

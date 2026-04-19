@@ -29,7 +29,7 @@ PortaMail is an autonomous indoor mail-delivery robot for hospitals/corporate ca
 |---|---|---|
 | SLAMTEC RPLIDAR A2M12 | Amazon B0G2XZXJQ3 | USB CP2102 adapter → `/dev/ttyUSB0`, **256000 baud** |
 | Adafruit BNO055 IMU | DigiKey 1528-1426-ND | I2C → ESP32 GPIO 21 (SDA) / GPIO 22 (SCL); PCB U2; I2C addr 0x28 |
-| HC-SR04 Ultrasonic | PCB J4 | TRIG → ESP32 GPIO 5; ECHO → ESP32 GPIO 18 (**5V output — voltage divider required**) |
+| HC-SR04 Ultrasonic | PCB connector TBD | TRIG/ECHO GPIOs unconfirmed — GPIO 5 is INA_MD1 (not TRIG); verify physical board (**ECHO is 5V output — voltage divider required**) |
 
 ### Drivetrain
 | Component | Part | Notes |
@@ -85,27 +85,51 @@ Source: `capstone_PCB/capstone_PCB.kicad_sch` (authoritative). Do not re-analyze
 | +5V | 4.8–5.2V | U5 DFR1202 |
 | +3.3V | 3.25–3.35V | ESP32 internal LDO |
 
-### ESP32 GPIO Assignments (from schematic net names)
+### ESP32 GPIO Assignments (verified from `capstone_PCB.kicad_pcb` net assignments)
 
-| GPIO | Net | Connected To |
+> **Source**: These were extracted from the PCB netlist (`capstone_PCB.kicad_pcb`), not the schematic text. The previous table (from schematic net-name comments) was wrong. Trust this table.
+
+#### Motor Drivers (PCB-verified)
+
+| GPIO | Net (PCB) | Connected To |
 |---|---|---|
-| 4 | ENC_R_B | Right encoder Hall B (J2) |
-| 5 | TRIG | HC-SR04 trigger (J4 pin 3) |
-| 13 | INA_MD1 | U3 VNH5019 INA — left motor direction A |
-| 14 | INB_MD1 | U3 VNH5019 INB — left motor direction B |
-| 16 | EN_MD1 | U3 VNH5019 EN/DIAG — left motor PWM speed |
-| 17 | EN_MD2 | U4 VNH5019 EN/DIAG — right motor PWM speed |
-| 18 | ECHO | HC-SR04 echo (J4 pin 4) — **5V output, voltage divider required** |
-| 19 | ENB_MD1 | U3 VNH5019 ENB — left motor (see VNH5019 note) |
-| 21 | SDA_IMU | BNO055 SDA — R6 5.1kΩ pull-up to +5V |
-| 22 | SCL_IMU | BNO055 SCL — R7 5.1kΩ pull-up to +5V |
-| 23 | ENB_MD2 | U4 VNH5019 ENB — right motor |
-| 25 | ENC_R_A | Right encoder Hall A (J2, interrupt) |
-| 26 | INB_MD2 | U4 VNH5019 INB — right motor direction B |
-| 27 | INA_MD2 | U4 VNH5019 INA — right motor direction A |
-| 32 | ENC_L_A | Left encoder Hall A (J1, interrupt) |
-| 33 | ENC_L_B | Left encoder Hall B (J1) |
-| 2 | LED | Status LED → R5 100Ω series |
+| 5  | Net-(U3-INA)       | U3 VNH5019 INA — left motor direction A |
+| 25 | Net-(U3-INB)       | U3 VNH5019 INB — left motor direction B |
+| 26 | Net-(U3-ENA/DIAGA) | U3 VNH5019 ENA — left motor PWM speed |
+| 27 | Net-(U3-ENB/DIAGB) | U3 VNH5019 ENB — left motor half-bridge B enable (drive HIGH) |
+| 33 | Net-(U4-INA)       | U4 VNH5019 INA — right motor direction A |
+| 13 | Net-(U4-INB)       | U4 VNH5019 INB — right motor direction B |
+| 14 | Net-(U4-ENA/DIAGA) | U4 VNH5019 ENA — right motor PWM speed |
+| 4  | Net-(U4-ENB/DIAGB) | U4 VNH5019 ENB — right motor half-bridge B enable (drive HIGH) |
+
+#### IMU (PCB-verified)
+
+| GPIO | Net (PCB) | Connected To |
+|---|---|---|
+| 21 | Net-(U2-SDA) | BNO055 SDA — R6 5.1kΩ pull-up to +5V |
+| 22 | Net-(U2-SCL) | BNO055 SCL — R7 5.1kΩ pull-up to +5V |
+
+#### Encoders (PCB connectors P3/P4 — left/right assignment TBD)
+
+Encoder signals route through 2-pin TE 282837-2 connectors P3 and P4. Which connector is left vs right, and which pin within each connector is A vs B, must be verified physically.
+
+| GPIO | Connector | Notes |
+|---|---|---|
+| 19 | P3 pin 1 | Encoder channel — interrupt capable |
+| 18 | P3 pin 2 | Encoder channel |
+| 17 | P4 pin 1 | Encoder channel — interrupt capable |
+| 16 | P4 pin 2 | Encoder channel |
+
+#### Ultrasonic / Other
+
+| GPIO | Connected To | Notes |
+|---|---|---|
+| 2  | LED → R5 100Ω | Status LED |
+| 32 | VCC (5V rail) | Connected to 5V power plane — **not usable as GPIO** |
+| 23 | VCC (5V rail) | Connected to 5V power plane — **not usable as GPIO** |
+| 5  | INA_MD1 | **NOT TRIG** — previous CLAUDE.md was wrong |
+
+> **HC-SR04 TRIG/ECHO**: GPIO5 is INA_MD1 (left motor), not TRIG. Ultrasonic pin assignments are not traced in the PCB file and must be verified on the physical board. GPIO16–19 are encoder connectors (P3/P4), so TRIG/ECHO are on different pins if connected at all.
 
 ### VNH5019ATR-E Motor Driver Interface (U3 = left, U4 = right)
 
@@ -120,16 +144,16 @@ The VNH5019 is **not** an L298N. The control interface differs:
 
 Speed is controlled by PWM on **EN/DIAG** pin. EN/DIAG is bidirectional — it also goes LOW on fault (overcurrent, thermal shutdown). The VNH5019 has built-in thermal shutdown, UVLO, and cross-conduction prevention.
 
-> **FIRMWARE NOTE**: `esp32_driver.ino` has been updated to use the VNH5019 INA/INB/ENA/ENB interface matching the PCB schematic. ENB pins (GPIO 19 left, GPIO 23 right) are driven HIGH in `setup()` to keep both half-bridges active. The `setMotor()` logic (INA=1/INB=0 forward, INA=0/INB=1 reverse) is correct for both VNH5019 and L298N — the PCB is the primary target, but the same firmware works with a standalone L298N breakout board wired to the same GPIOs (leave ENB pins unconnected on L298N).
+> **FIRMWARE NOTE**: `esp32_driver.ino` uses the VNH5019 INA/INB/ENA/ENB interface. ENB pins (GPIO 27 left, GPIO 4 right) are driven HIGH in `setup()` to keep both half-bridges active. The `setMotor()` logic (INA=1/INB=0 forward, INA=0/INB=1 reverse) is correct for the VNH5019.
 
 ### Connectors
 
 | Ref | Type | Pinout |
 |---|---|---|
-| J1 | 4-pin terminal | Left encoder: A, B, +5V, GND |
-| J2 | 4-pin terminal | Right encoder: A, B, +5V, GND |
+| J1 | 4-pin terminal | Encoder signals: Pin1=A, Pin2=+5V, Pin3=B, Pin4=+5V (no GND pin — which motor TBD) |
+| J2 | 4-pin terminal | Left motor power + encoder power: Pin1=OUTA/motor+, Pin2=OUTB/motor−, Pin3=GND, Pin4=+5V |
 | J3 | Barrel jack | +12V in (center), GND (barrel) |
-| J4 | 4-pin terminal | Ultrasonic: GND, +5V, TRIG, ECHO |
+| J4 | 2-pin terminal | Right motor power: Pin1=OUTA/motor+, Pin2=OUTB/motor− (confirmed from PCB netlist) |
 | J5, J6 | JST XH 3-pin | Fan: +12V, GND, PWM |
 | J7 | USB-C | Data / optional 5V power |
 
