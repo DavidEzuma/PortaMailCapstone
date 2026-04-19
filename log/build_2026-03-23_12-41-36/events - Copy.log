@@ -1,8 +1,0 @@
-[0.000000] (-) TimerEvent: {}
-[0.000088] (-) JobUnselected: {'identifier': 'lcd_bridge'}
-[0.000122] (-) JobUnselected: {'identifier': 'portamail_coordinator'}
-[0.000143] (-) JobUnselected: {'identifier': 'sllidar_ros2'}
-[0.000163] (portamail_navigator) JobQueued: {'identifier': 'portamail_navigator', 'dependencies': OrderedDict({'sllidar_ros2': '/home/davidezuma/PortaMailCapstone/install/sllidar_ros2'})}
-[0.000620] (portamail_navigator) JobStarted: {'identifier': 'portamail_navigator'}
-[0.068119] (portamail_navigator) JobEnded: {'identifier': 'portamail_navigator', 'rc': 1}
-[0.078867] (-) EventReactorShutdown: {}

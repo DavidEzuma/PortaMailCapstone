@@ -1,4 +1,0 @@
-CMake Error: The current CMakeCache.txt directory /home/davidezuma/PortaMailCapstone/build/portamail_navigator/CMakeCache.txt is different than the directory /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator where CMakeCache.txt was created. This may result in binaries being created in the wrong place. If you are not sure, reedit the CMakeCache.txt
-CMake Error: The source directory "/home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator" does not exist.
-Specify --help for usage, or press the help button on the CMake GUI.
-gmake: *** [Makefile:308: cmake_check_build_system] Error 1
