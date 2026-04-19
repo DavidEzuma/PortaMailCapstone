@@ -1,0 +1,149 @@
+[0.000000] (-) TimerEvent: {}
+[0.000462] (portamail_navigation) JobQueued: {'identifier': 'portamail_navigation', 'dependencies': OrderedDict()}
+[0.000680] (portamail_navigation) JobStarted: {'identifier': 'portamail_navigation'}
+[0.018202] (portamail_navigation) JobProgress: {'identifier': 'portamail_navigation', 'progress': 'cmake'}
+[0.057109] (portamail_navigation) Command: {'cmd': ['/usr/bin/cmake', '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation', '-DCMAKE_INSTALL_PREFIX=/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/install/portamail_navigation'], 'cwd': '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/build/portamail_navigation', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'david', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/david', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'WSL_DISTRO_NAME': 'Ubuntu-24.04', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'david', 'NAME': '23-CB1-CZXZT44', 'WSL_INTEROP': '/run/WSL/335_interop', 'PULSE_SERVER': 'unix:/mnt/wslg/PulseServer', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/MicrosoftCorporationII.WindowsSubsystemForLinux_2.6.3.0_x64__8wekyb3d8bbwe:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Strawberry/c/bin:/mnt/c/Strawberry/perl/site/bin:/mnt/c/Strawberry/perl/bin:/mnt/c/Program Files/Tailscale/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Users/k1411090/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/k1411090/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/k1411090/AppData/Local/Programs/Python/Python313/Scripts:/mnt/c/Users/k1411090/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/mnt/c/Users/k1411090/AppData/Local/GitHubDesktop/bin:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000/', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/mnt/c/Users/k1411090/Documents/Projects/PortaMailCapstone/src/portamail_navigation/build/portamail_navigation', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'WSL2_GUI_APPS_ENABLED': '1', 'HOSTTYPE': 'x86_64', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy', 'WSLENV': ''}), 'shell': False}
+[0.098568] (-) TimerEvent: {}
+[0.199109] (-) TimerEvent: {}
+[0.283857] (portamail_navigation) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.299209] (-) TimerEvent: {}
+[0.399616] (-) TimerEvent: {}
+[0.500029] (-) TimerEvent: {}
+[0.600490] (-) TimerEvent: {}
+[0.701316] (-) TimerEvent: {}
+[0.761569] (portamail_navigation) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.801403] (-) TimerEvent: {}
+[0.901743] (-) TimerEvent: {}
+[1.002353] (-) TimerEvent: {}
+[1.102778] (-) TimerEvent: {}
+[1.209048] (-) TimerEvent: {}
+[1.238599] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.309169] (-) TimerEvent: {}
+[1.409760] (-) TimerEvent: {}
+[1.510690] (-) TimerEvent: {}
+[1.614357] (-) TimerEvent: {}
+[1.716144] (-) TimerEvent: {}
+[1.819396] (-) TimerEvent: {}
+[1.921477] (-) TimerEvent: {}
+[2.021956] (-) TimerEvent: {}
+[2.122707] (-) TimerEvent: {}
+[2.223528] (-) TimerEvent: {}
+[2.324439] (-) TimerEvent: {}
+[2.425525] (-) TimerEvent: {}
+[2.526458] (-) TimerEvent: {}
+[2.627605] (-) TimerEvent: {}
+[2.728681] (-) TimerEvent: {}
+[2.803781] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[2.828821] (-) TimerEvent: {}
+[2.895474] (portamail_navigation) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[2.897895] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[2.900641] (portamail_navigation) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[2.928977] (-) TimerEvent: {}
+[3.029855] (-) TimerEvent: {}
+[3.131082] (-) TimerEvent: {}
+[3.189116] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[3.231317] (-) TimerEvent: {}
+[3.332361] (-) TimerEvent: {}
+[3.433022] (-) TimerEvent: {}
+[3.533706] (-) TimerEvent: {}
+[3.639288] (-) TimerEvent: {}
+[3.740659] (-) TimerEvent: {}
+[3.841882] (-) TimerEvent: {}
+[3.942876] (-) TimerEvent: {}
+[4.043456] (-) TimerEvent: {}
+[4.145422] (-) TimerEvent: {}
+[4.246712] (-) TimerEvent: {}
+[4.347896] (-) TimerEvent: {}
+[4.448611] (-) TimerEvent: {}
+[4.532136] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[4.548702] (-) TimerEvent: {}
+[4.567156] (portamail_navigation) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[4.567813] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[4.568537] (portamail_navigation) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[4.628862] (portamail_navigation) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)\n'}
+[4.648820] (-) TimerEvent: {}
+[4.749113] (-) TimerEvent: {}
+[4.772894] (portamail_navigation) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter \n'}
+[4.849355] (-) TimerEvent: {}
+[4.951084] (-) TimerEvent: {}
+[5.051561] (-) TimerEvent: {}
+[5.151990] (-) TimerEvent: {}
+[5.252502] (-) TimerEvent: {}
+[5.353052] (-) TimerEvent: {}
+[5.372009] (portamail_navigation) StdoutLine: {'line': b'-- Found rclcpp: 28.1.13 (/opt/ros/jazzy/share/rclcpp/cmake)\n'}
+[5.453171] (-) TimerEvent: {}
+[5.553624] (-) TimerEvent: {}
+[5.655053] (-) TimerEvent: {}
+[5.749371] (portamail_navigation) StdoutLine: {'line': b'-- Found rosidl_generator_c: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)\n'}
+[5.755138] (-) TimerEvent: {}
+[5.825089] (portamail_navigation) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 4.6.6 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)\n'}
+[5.855269] (-) TimerEvent: {}
+[5.956279] (-) TimerEvent: {}
+[6.058162] (-) TimerEvent: {}
+[6.114385] (portamail_navigation) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[6.158368] (-) TimerEvent: {}
+[6.259992] (-) TimerEvent: {}
+[6.361441] (-) TimerEvent: {}
+[6.413576] (portamail_navigation) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[6.461603] (-) TimerEvent: {}
+[6.562971] (-) TimerEvent: {}
+[6.663472] (-) TimerEvent: {}
+[6.731721] (portamail_navigation) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)\n'}
+[6.761325] (portamail_navigation) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)\n'}
+[6.776102] (-) TimerEvent: {}
+[6.877032] (-) TimerEvent: {}
+[6.977907] (-) TimerEvent: {}
+[7.031709] (portamail_navigation) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")  \n'}
+[7.077994] (-) TimerEvent: {}
+[7.178482] (-) TimerEvent: {}
+[7.185877] (portamail_navigation) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") \n'}
+[7.278633] (-) TimerEvent: {}
+[7.281385] (portamail_navigation) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[7.378790] (-) TimerEvent: {}
+[7.497573] (-) TimerEvent: {}
+[7.569602] (portamail_navigation) StdoutLine: {'line': b'-- Found rclcpp_action: 28.1.13 (/opt/ros/jazzy/share/rclcpp_action/cmake)\n'}
+[7.597732] (-) TimerEvent: {}
+[7.674820] (portamail_navigation) StdoutLine: {'line': b'-- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)\n'}
+[7.697822] (-) TimerEvent: {}
+[7.702754] (portamail_navigation) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.6 (/opt/ros/jazzy/share/geometry_msgs/cmake)\n'}
+[7.798018] (-) TimerEvent: {}
+[7.901736] (-) TimerEvent: {}
+[8.002938] (-) TimerEvent: {}
+[8.103545] (-) TimerEvent: {}
+[8.204461] (-) TimerEvent: {}
+[8.305741] (-) TimerEvent: {}
+[8.406756] (-) TimerEvent: {}
+[8.508026] (-) TimerEvent: {}
+[8.609335] (-) TimerEvent: {}
+[8.710176] (-) TimerEvent: {}
+[8.811174] (-) TimerEvent: {}
+[8.912098] (-) TimerEvent: {}
+[9.013210] (-) TimerEvent: {}
+[9.114173] (-) TimerEvent: {}
+[9.215198] (-) TimerEvent: {}
+[9.316253] (-) TimerEvent: {}
+[9.417131] (-) TimerEvent: {}
+[9.517854] (-) TimerEvent: {}
+[9.527157] (portamail_navigation) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:18 (find_package):\n'}
+[9.528803] (portamail_navigation) StderrLine: {'line': b'  By not providing "Findnav2_msgs.cmake" in CMAKE_MODULE_PATH this project\n'}
+[9.530162] (portamail_navigation) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[9.531284] (portamail_navigation) StderrLine: {'line': b'  "nav2_msgs", but CMake did not find one.\n'}
+[9.532622] (portamail_navigation) StderrLine: {'line': b'\n'}
+[9.533802] (portamail_navigation) StderrLine: {'line': b'  Could not find a package configuration file provided by "nav2_msgs" with\n'}
+[9.535002] (portamail_navigation) StderrLine: {'line': b'  any of the following names:\n'}
+[9.540171] (portamail_navigation) StderrLine: {'line': b'\n'}
+[9.541392] (portamail_navigation) StderrLine: {'line': b'    nav2_msgsConfig.cmake\n'}
+[9.542703] (portamail_navigation) StderrLine: {'line': b'    nav2_msgs-config.cmake\n'}
+[9.550012] (portamail_navigation) StderrLine: {'line': b'\n'}
+[9.552052] (portamail_navigation) StderrLine: {'line': b'  Add the installation prefix of "nav2_msgs" to CMAKE_PREFIX_PATH or set\n'}
+[9.553646] (portamail_navigation) StderrLine: {'line': b'  "nav2_msgs_DIR" to a directory containing one of the above files.  If\n'}
+[9.555177] (portamail_navigation) StderrLine: {'line': b'  "nav2_msgs" provides a separate development package or SDK, be sure it has\n'}
+[9.556786] (portamail_navigation) StderrLine: {'line': b'  been installed.\n'}
+[9.558412] (portamail_navigation) StderrLine: {'line': b'\n'}
+[9.559936] (portamail_navigation) StderrLine: {'line': b'\x1b[0m\n'}
+[9.561033] (portamail_navigation) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[9.564486] (portamail_navigation) CommandEnded: {'returncode': 1}
+[9.617945] (-) TimerEvent: {}
+[9.677963] (portamail_navigation) JobEnded: {'identifier': 'portamail_navigation', 'rc': 1}
+[9.718485] (-) TimerEvent: {}
+[9.719170] (-) EventReactorShutdown: {}

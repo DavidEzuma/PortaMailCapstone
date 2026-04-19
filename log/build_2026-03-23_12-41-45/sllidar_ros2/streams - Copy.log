@@ -1,0 +1,527 @@
+[0.058s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/sllidar_ros2 -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/sllidar_ros2
+[0.351s] -- The C compiler identification is GNU 13.3.0
+[0.731s] -- The CXX compiler identification is GNU 13.3.0
+[0.774s] -- Detecting C compiler ABI info
+[0.969s] -- Detecting C compiler ABI info - done
+[0.984s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.985s] -- Detecting C compile features
+[0.986s] -- Detecting C compile features - done
+[1.003s] -- Detecting CXX compiler ABI info
+[1.218s] -- Detecting CXX compiler ABI info - done
+[1.234s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.234s] -- Detecting CXX compile features
+[1.235s] -- Detecting CXX compile features - done
+[1.256s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.535s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[1.797s] -- Found rclcpp: 28.1.16 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.928s] -- Found rosidl_generator_c: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.983s] -- Found rosidl_generator_cpp: 4.6.7 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[2.035s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.084s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.282s] -- Found rmw_implementation_cmake: 7.3.3 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[2.293s] -- Found rmw_fastrtps_cpp: 8.4.3 (/opt/ros/jazzy/share/rmw_fastrtps_cpp/cmake)
+[2.526s] -- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.13")  
+[2.561s] -- Found FastRTPS: /opt/ros/jazzy/include (Required is at least version "2.13") 
+[2.602s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.776s] -- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[2.914s] -- Found std_srvs: 5.3.6 (/opt/ros/jazzy/share/std_srvs/cmake)
+[3.117s] -- Configuring done (2.9s)
+[3.150s] -- Generating done (0.0s)
+[3.158s] -- Build files have been written to: /home/davidezuma/PortaMailCapstone/build/sllidar_ros2
+[3.180s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /home/davidezuma/PortaMailCapstone/src/sllidar_ros2 -DCMAKE_INSTALL_PREFIX=/home/davidezuma/PortaMailCapstone/install/sllidar_ros2
+[3.182s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/sllidar_ros2 -- -j4 -l4
+[3.288s] [ 15%] Building CXX object CMakeFiles/sllidar_client.dir/src/sllidar_client.cpp.o
+[3.288s] [ 15%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/net_serial.cpp.o
+[3.288s] [ 20%] Building CXX object CMakeFiles/sllidar_node.dir/src/sllidar_node.cpp.o
+[3.288s] [ 15%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/net_socket.cpp.o
+[4.238s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function ‘bool rp::arch::net::raw_serial::open(const char*, uint32_t, uint32_t)’:
+[4.238s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:97:74: warning: unused parameter ‘flags’ [-Wunused-parameter]
+[4.238s]    97 | bool raw_serial::open(const char * portname, uint32_t baudrate, uint32_t flags)
+[4.238s]       |                                                                 ~~~~~~~~~^~~~~
+[4.239s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function ‘virtual void rp::arch::net::raw_serial::flush(_u32)’:
+[4.239s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:281:30: warning: unused parameter ‘flags’ [-Wunused-parameter]
+[4.239s]   281 | void raw_serial::flush( _u32 flags)
+[4.239s]       |                         ~~~~~^~~~~
+[4.239s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function ‘virtual int rp::arch::net::raw_serial::waitforsent(_u32, size_t*)’:
+[4.239s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:286:34: warning: unused parameter ‘timeout’ [-Wunused-parameter]
+[4.239s]   286 | int raw_serial::waitforsent(_u32 timeout, size_t * returned_size)
+[4.239s]       |                             ~~~~~^~~~~~~
+[4.239s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function ‘virtual int rp::arch::net::raw_serial::waitforrecv(_u32, size_t*)’:
+[4.240s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:292:34: warning: unused parameter ‘timeout’ [-Wunused-parameter]
+[4.240s]   292 | int raw_serial::waitforrecv(_u32 timeout, size_t * returned_size)
+[4.240s]       |                             ~~~~~^~~~~~~
+[4.243s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp: In member function ‘virtual void rp::arch::net::raw_serial::cancelOperation()’:
+[4.243s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_serial.cpp:427:5: warning: value computed is not used [-Wunused-value]
+[4.244s]   427 |     (int)::write(_selfpipe[1], "x", 1);
+[4.244s]       |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[4.338s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[4.338s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[4.338s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[4.338s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp:10:
+[4.338s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[4.339s]    66 |     sl_u8 data[0];
+[4.339s]       |                ^
+[4.339s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[4.339s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[4.339s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[4.339s]   324 |     sl_u8  payload[0];
+[4.342s]       |                    ^
+[4.415s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/arch_linux.h:42,
+[4.415s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:41:
+[4.416s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp: In member function ‘virtual u_result rp::arch::net::DGramSocketImpl::sendTo(const rp::net::SocketAddress*, const void*, size_t)’:
+[4.416s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/arch/linux/net_socket.cpp:733:24: warning: comparison of integer expressions of different signedness: ‘int’ and ‘size_t’ {aka ‘long unsigned int’} [-Wsign-compare]
+[4.416s]   733 |             assert(ans == len);
+[4.416s]       |                    ~~~~^~~~~~
+[4.609s] [ 25%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/arch/linux/timer.cpp.o
+[4.875s] [ 30%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/dataunpacker.cpp.o
+[5.616s] [ 35%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_capsules.cpp.o
+[6.144s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[6.144s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[6.144s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[6.144s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunnpacker_commondef.h:41,
+[6.144s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.cpp:39:
+[6.144s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[6.145s]    66 |     sl_u8 data[0];
+[6.145s]       |                ^
+[6.148s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[6.148s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[6.148s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[6.148s]   324 |     sl_u8  payload[0];
+[6.148s]       |                    ^
+[6.461s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.cpp:40:
+[6.461s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)’:
+[6.461s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:52: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[6.462s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.462s]       |                                                ~~~~^~~~~~~
+[6.462s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:66: warning: unused parameter ‘customCode’ [-Wunused-parameter]
+[6.462s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.462s]       |                                                             ~~~~~^~~~~~~~~~
+[6.462s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:90: warning: unused parameter ‘data’ [-Wunused-parameter]
+[6.462s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.462s]       |                                                                              ~~~~~~~~~~~~^~~~
+[6.463s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:103: warning: unused parameter ‘size’ [-Wunused-parameter]
+[6.463s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.463s]       |                                                                                                ~~~~~~~^~~~
+[6.463s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)’:
+[6.463s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:42: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+[6.463s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.463s]       |                                      ~~~~^~~~~~
+[6.465s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:54: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[6.465s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.465s]       |                                                  ~~~~^~~~~~~
+[6.465s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:75: warning: unused parameter ‘payload’ [-Wunused-parameter]
+[6.465s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.465s]       |                                                               ~~~~~~~~~~~~^~~~~~~
+[6.465s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:91: warning: unused parameter ‘size’ [-Wunused-parameter]
+[6.465s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.466s]       |                                                                                    ~~~~~~~^~~~
+[6.579s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[6.579s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[6.579s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[6.579s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,
+[6.580s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:39:
+[6.580s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[6.580s]    66 |     sl_u8 data[0];
+[6.580s]       |                ^
+[6.580s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[6.581s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[6.581s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[6.581s]   324 |     sl_u8  payload[0];
+[6.581s]       |                    ^
+[6.802s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:40:
+[6.803s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)’:
+[6.803s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[6.803s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.803s]       |                                                ~~~~^~~~~~~
+[6.805s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter ‘customCode’ [-Wunused-parameter]
+[6.805s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.805s]       |                                                             ~~~~~^~~~~~~~~~
+[6.805s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter ‘data’ [-Wunused-parameter]
+[6.806s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.806s]       |                                                                              ~~~~~~~~~~~~^~~~
+[6.806s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter ‘size’ [-Wunused-parameter]
+[6.806s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[6.806s]       |                                                                                                ~~~~~~~^~~~
+[6.806s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)’:
+[6.806s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+[6.806s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.807s]       |                                      ~~~~^~~~~~
+[6.807s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[6.807s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.807s]       |                                                  ~~~~^~~~~~~
+[6.807s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter ‘payload’ [-Wunused-parameter]
+[6.807s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.807s]       |                                                               ~~~~~~~~~~~~^~~~~~~
+[6.807s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter ‘size’ [-Wunused-parameter]
+[6.807s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[6.811s]       |                                                                                    ~~~~~~~^~~~
+[6.830s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp: In member function ‘void sl::internal::unpacker::UnpackerHandler_DenseCapsuleNode::_onScanNodeDenseCapsuleData(rplidar_response_dense_capsule_measurement_nodes_t&, sl::internal::LIDARSampleDataUnpackerInner*)’:
+[6.831s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_capsules.cpp:763:30: warning: type qualifiers ignored on cast result type [-Wignored-qualifiers]
+[6.831s]   763 |             const int dist = static_cast<const int>(_cached_previous_dense_capsuledata.cabins[pos].distance);
+[6.831s]       |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[7.233s] [ 40%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp.o
+[7.300s] [ 45%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp.o
+[8.322s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[8.323s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[8.323s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[8.323s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,
+[8.323s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp:39:
+[8.323s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[8.323s]    66 |     sl_u8 data[0];
+[8.323s]       |                ^
+[8.324s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[8.325s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[8.325s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[8.325s]   324 |     sl_u8  payload[0];
+[8.325s]       |                    ^
+[8.552s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[8.552s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[8.552s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[8.552s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunnpacker_commondef.h:41,
+[8.552s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp:39:
+[8.552s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[8.553s]    66 |     sl_u8 data[0];
+[8.556s]       |                ^
+[8.556s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[8.556s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[8.560s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[8.560s]   324 |     sl_u8  payload[0];
+[8.560s]       |                    ^
+[8.560s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp:40:
+[8.560s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)’:
+[8.560s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[8.562s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.563s]       |                                                ~~~~^~~~~~~
+[8.563s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter ‘customCode’ [-Wunused-parameter]
+[8.563s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.563s]       |                                                             ~~~~~^~~~~~~~~~
+[8.563s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter ‘data’ [-Wunused-parameter]
+[8.563s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.563s]       |                                                                              ~~~~~~~~~~~~^~~~
+[8.564s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter ‘size’ [-Wunused-parameter]
+[8.564s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.564s]       |                                                                                                ~~~~~~~^~~~
+[8.564s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)’:
+[8.564s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+[8.564s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.564s]       |                                      ~~~~^~~~~~
+[8.564s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[8.568s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.568s]       |                                                  ~~~~^~~~~~~
+[8.568s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter ‘payload’ [-Wunused-parameter]
+[8.568s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.568s]       |                                                               ~~~~~~~~~~~~^~~~~~~
+[8.568s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter ‘size’ [-Wunused-parameter]
+[8.568s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.569s]       |                                                                                    ~~~~~~~^~~~
+[8.898s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp:40:
+[8.898s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)’:
+[8.898s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:52: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[8.898s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.899s]       |                                                ~~~~^~~~~~~
+[8.899s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:66: warning: unused parameter ‘customCode’ [-Wunused-parameter]
+[8.899s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.899s]       |                                                             ~~~~~^~~~~~~~~~
+[8.900s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:90: warning: unused parameter ‘data’ [-Wunused-parameter]
+[8.900s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.900s]       |                                                                              ~~~~~~~~~~~~^~~~
+[8.901s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:54:103: warning: unused parameter ‘size’ [-Wunused-parameter]
+[8.901s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[8.901s]       |                                                                                                ~~~~~~~^~~~
+[8.901s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)’:
+[8.902s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:42: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+[8.902s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.902s]       |                                      ~~~~^~~~~~
+[8.903s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:54: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[8.905s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.905s]       |                                                  ~~~~^~~~~~~
+[8.905s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:75: warning: unused parameter ‘payload’ [-Wunused-parameter]
+[8.905s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.905s]       |                                                               ~~~~~~~~~~~~^~~~~~~
+[8.905s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/unpacker/../dataunpacker.h:56:91: warning: unused parameter ‘size’ [-Wunused-parameter]
+[8.905s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[8.906s]       |                                                                                    ~~~~~~~^~~~
+[8.909s] [ 50%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/hal/thread.cpp.o
+[9.176s] [ 55%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/rplidar_driver.cpp.o
+[9.953s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,
+[9.953s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,
+[9.953s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar.h:36,
+[9.953s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/src/sllidar_node.cpp:38:
+[9.953s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[9.953s]    66 |     sl_u8 data[0];
+[9.954s]       |                ^
+[9.954s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[9.954s]   324 |     sl_u8  payload[0];
+[9.954s]       |                    ^
+[10.182s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[10.182s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[10.183s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/sdkcommon.h:49,
+[10.183s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/hal/thread.cpp:35:
+[10.183s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[10.183s]    66 |     sl_u8 data[0];
+[10.183s]       |                ^
+[10.187s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[10.187s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[10.187s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[10.187s]   324 |     sl_u8  payload[0];
+[10.187s]       |                    ^
+[10.187s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[10.188s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[10.188s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,
+[10.188s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:33:
+[10.188s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[10.191s]    66 |     sl_u8 data[0];
+[10.191s]       |                ^
+[10.191s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[10.191s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[10.191s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[10.191s]   324 |     sl_u8  payload[0];
+[10.191s]       |                    ^
+[10.251s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/hal/thread.cpp:43:
+[10.251s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp: In static member function ‘static rp::hal::Thread rp::hal::Thread::create(thread_proc_t, void*)’:
+[10.251s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp:52:57: warning: cast between incompatible function types from ‘thread_proc_t’ {aka ‘long unsigned int (*)(void*)’} to ‘void* (*)(void*)’ [-Wcast-function-type]
+[10.251s]    52 |     pthread_create((pthread_t *)&newborn._handle, NULL, (void * (*)(void *))proc, data);
+[10.252s]       |                                                         ^~~~~~~~~~~~~~~~~~~~~~~~
+[10.252s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp: In member function ‘u_result rp::hal::Thread::join(long unsigned int)’:
+[10.252s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/src/arch/linux/thread.hpp:176:37: warning: unused parameter ‘timeout’ [-Wunused-parameter]
+[10.252s]   176 | u_result Thread::join(unsigned long timeout)
+[10.252s]       |                       ~~~~~~~~~~~~~~^~~~~~~
+[10.313s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function ‘u_result rp::standalone::rplidar::RPlidarDriver::connect(const char*, _u32, _u32)’:
+[10.314s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:67:77: warning: unused parameter ‘flag’ [-Wunused-parameter]
+[10.317s]    67 |     u_result RPlidarDriver::connect(const char *path, _u32 portOrBaud, _u32 flag)
+[10.317s]       |                                                                        ~~~~~^~~~
+[10.317s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function ‘u_result rp::standalone::rplidar::RPlidarDriver::reset(_u32)’:
+[10.317s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:101:40: warning: unused parameter ‘timeout’ [-Wunused-parameter]
+[10.317s]   101 |     u_result RPlidarDriver::reset(_u32 timeout)
+[10.317s]       |                                   ~~~~~^~~~~~~
+[10.318s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp: In member function ‘u_result rp::standalone::rplidar::RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t*, size_t&)’:
+[10.318s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:180:91: warning: unused parameter ‘nodebuffer’ [-Wunused-parameter]
+[10.318s]   180 |     u_result RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t * nodebuffer, size_t & count)
+[10.318s]       |                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~
+[10.318s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/rplidar_driver.cpp:180:112: warning: unused parameter ‘count’ [-Wunused-parameter]
+[10.318s]   180 |     u_result RPlidarDriver::getScanDataWithInterval(rplidar_response_measurement_node_t * nodebuffer, size_t & count)
+[10.318s]       |                                                                                                       ~~~~~~~~~^~~~~
+[10.452s] [ 60%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_async_transceiver.cpp.o
+[10.661s] [ 65%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_crc.cpp.o
+[10.716s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,
+[10.716s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_crc.h:36,
+[10.716s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_crc.cpp:33:
+[10.716s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[10.716s]    66 |     sl_u8 data[0];
+[10.717s]       |                ^
+[10.717s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[10.717s]   324 |     sl_u8  payload[0];
+[10.717s]       |                    ^
+[10.782s] [ 70%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_lidar_driver.cpp.o
+[11.776s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[11.776s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[11.776s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,
+[11.776s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:33:
+[11.776s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[11.776s]    66 |     sl_u8 data[0];
+[11.777s]       |                ^
+[11.777s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[11.777s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[11.777s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[11.777s]   324 |     sl_u8  payload[0];
+[11.777s]       |                    ^
+[11.810s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[11.810s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[11.810s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,
+[11.810s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.cpp:35:
+[11.810s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[11.810s]    66 |     sl_u8 data[0];
+[11.811s]       |                ^
+[11.814s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[11.814s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[11.816s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[11.816s]   324 |     sl_u8  payload[0];
+[11.816s]       |                    ^
+[12.054s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:50:
+[12.054s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onCustomSampleDataDecoded(_u8, _u32, const void*, size_t)’:
+[12.054s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:52: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[12.054s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[12.054s]       |                                                ~~~~^~~~~~~
+[12.055s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:66: warning: unused parameter ‘customCode’ [-Wunused-parameter]
+[12.055s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[12.055s]       |                                                             ~~~~~^~~~~~~~~~
+[12.055s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:90: warning: unused parameter ‘data’ [-Wunused-parameter]
+[12.056s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[12.056s]       |                                                                              ~~~~~~~~~~~~^~~~
+[12.058s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:54:103: warning: unused parameter ‘size’ [-Wunused-parameter]
+[12.058s]    54 |         virtual void onCustomSampleDataDecoded(_u8 ansType, _u32 customCode, const void* data, size_t size) {}
+[12.058s]       |                                                                                                ~~~~~~~^~~~
+[12.059s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h: In member function ‘virtual void sl::internal::LIDARSampleDataListener::onDecodingError(int, _u8, const void*, size_t)’:
+[12.059s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:42: warning: unused parameter ‘errMsg’ [-Wunused-parameter]
+[12.059s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[12.059s]       |                                      ~~~~^~~~~~
+[12.059s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:54: warning: unused parameter ‘ansType’ [-Wunused-parameter]
+[12.059s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[12.059s]       |                                                  ~~~~^~~~~~~
+[12.059s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:75: warning: unused parameter ‘payload’ [-Wunused-parameter]
+[12.059s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[12.059s]       |                                                               ~~~~~~~~~~~~^~~~~~~
+[12.059s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/dataunpacker/dataunpacker.h:56:91: warning: unused parameter ‘size’ [-Wunused-parameter]
+[12.060s]    56 |         virtual void onDecodingError(int errMsg, _u8 ansType, const void* payload, size_t size) {}
+[12.060s]       |                                                                                    ~~~~~~~^~~~
+[12.063s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.cpp:44:
+[12.063s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function ‘virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)’:
+[12.063s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter ‘errCode’ [-Wunused-parameter]
+[12.063s]    90 |         virtual void   onChannelError(u_result errCode) {}
+[12.063s]       |                                       ~~~~~~~~~^~~~~~~
+[12.081s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:51:
+[12.081s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function ‘virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)’:
+[12.081s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter ‘errCode’ [-Wunused-parameter]
+[12.081s]    90 |         virtual void   onChannelError(u_result errCode) {}
+[12.081s]       |                                       ~~~~~~~~~^~~~~~~
+[12.130s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘virtual sl_result sl::SlamtecLidarDriver::reset(sl_u32)’:
+[12.130s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:511:32: warning: unused parameter ‘timeoutInMs’ [-Wunused-parameter]
+[12.130s]   511 |         sl_result reset(sl_u32 timeoutInMs = DEFAULT_TIMEOUT)
+[12.130s]       |                         ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[12.137s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘virtual sl_result sl::SlamtecLidarDriver::startScan(bool, bool, sl_u32, sl::LidarScanMode*)’:
+[12.137s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:586:69: warning: unused parameter ‘options’ [-Wunused-parameter]
+[12.138s]   586 |         sl_result startScan(bool force, bool useTypicalScan, sl_u32 options = 0, LidarScanMode* outUsedScanMode = nullptr)
+[12.138s]       |                                                              ~~~~~~~^~~~~~~~~~~
+[12.143s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘virtual sl_result sl::SlamtecLidarDriver::stop(sl_u32)’:
+[12.143s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:763:31: warning: unused parameter ‘timeout’ [-Wunused-parameter]
+[12.143s]   763 |         sl_result stop(sl_u32 timeout = DEFAULT_TIMEOUT)
+[12.144s]       |                        ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~
+[12.150s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘virtual sl_result sl::SlamtecLidarDriver::getFrequency(const sl::LidarScanMode&, const sl_lidar_response_measurement_node_hq_t*, size_t, float&)’:
+[12.150s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:880:110: warning: unused parameter ‘nodes’ [-Wunused-parameter]
+[12.150s]   880 |         sl_result getFrequency(const LidarScanMode& scanMode, const sl_lidar_response_measurement_node_hq_t* nodes, size_t count, float& frequency)
+[12.150s]       |                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~
+[12.153s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘virtual sl_result sl::SlamtecLidarDriver::getMotorInfo(sl::LidarMotorInfo&, sl_u32)’:
+[12.153s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1023:66: warning: unused parameter ‘timeoutInMs’ [-Wunused-parameter]
+[12.153s]  1023 |         sl_result getMotorInfo(LidarMotorInfo &motorInfo, sl_u32 timeoutInMs)
+[12.153s]       |                                                           ~~~~~~~^~~~~~~~~~~
+[12.159s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In member function ‘u_result sl::SlamtecLidarDriver::getScanModeCount(sl_u16&, sl_u32)’:
+[12.159s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1199:61: warning: unused parameter ‘timeoutInMs’ [-Wunused-parameter]
+[12.159s]  1199 |         u_result getScanModeCount(sl_u16& modeCount, sl_u32 timeoutInMs = DEFAULT_TIMEOUT)
+[12.159s]       |                                                      ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[12.242s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: In instantiation of ‘void sl::RawSampleNodeHolder<T>::pushNode(_u64, const T*) [with T = sl_lidar_response_measurement_node_hq_t; _u64 = long unsigned int]’:
+[12.242s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:1648:42:   required from here
+[12.242s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:202:28: warning: unused parameter ‘timestamp_uS’ [-Wunused-parameter]
+[12.242s]   202 |         void pushNode(_u64 timestamp_uS, const T* node)
+[12.243s]       |                       ~~~~~^~~~~~~~~~~~
+[12.394s] [ 75%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_lidarprotocol_codec.cpp.o
+[12.464s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp: At global scope:
+[12.465s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:83:17: warning: ‘void sl::convert(const sl_lidar_response_measurement_node_hq_t&, sl_lidar_response_measurement_node_t&)’ defined but not used [-Wunused-function]
+[12.465s]    83 |     static void convert(const sl_lidar_response_measurement_node_hq_t& from, sl_lidar_response_measurement_node_t& to)
+[12.465s]       |                 ^~~~~~~
+[12.468s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:75:17: warning: ‘void sl::convert(const sl_lidar_response_measurement_node_t&, sl_lidar_response_measurement_node_hq_t&)’ defined but not used [-Wunused-function]
+[12.468s]    75 |     static void convert(const sl_lidar_response_measurement_node_t& from, sl_lidar_response_measurement_node_hq_t& to)
+[12.468s]       |                 ^~~~~~~
+[12.468s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidar_driver.cpp:70:17: warning: ‘void sl::printDeprecationWarn(const char*, const char*)’ defined but not used [-Wunused-function]
+[12.468s]    70 |     static void printDeprecationWarn(const char* fn, const char* replacement)
+[12.469s]       |                 ^~~~~~~~~~~~~~~~~~~~
+[13.528s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_protocol.h:36,
+[13.530s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:39,
+[13.530s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sdkcommon.h:49,
+[13.530s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.cpp:35:
+[13.530s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[13.530s]    66 |     sl_u8 data[0];
+[13.532s]       |                ^
+[13.532s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar_cmd.h:36,
+[13.532s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/rplidar.h:40:
+[13.532s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[13.532s]   324 |     sl_u8  payload[0];
+[13.532s]       |                    ^
+[13.559s] [ 80%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_serial_channel.cpp.o
+[13.797s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_lidarprotocol_codec.cpp:49:
+[13.798s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h: In member function ‘virtual void sl::internal::IAsyncProtocolCodec::onChannelError(u_result)’:
+[13.798s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_async_transceiver.h:90:48: warning: unused parameter ‘errCode’ [-Wunused-parameter]
+[13.798s]    90 |         virtual void   onChannelError(u_result errCode) {}
+[13.798s]       |                                       ~~~~~~~~~^~~~~~~
+[14.152s] [ 85%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_tcp_channel.cpp.o
+[14.198s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,
+[14.198s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,
+[14.198s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_serial_channel.cpp:33:
+[14.198s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[14.198s]    66 |     sl_u8 data[0];
+[14.198s]       |                ^
+[14.198s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[14.199s]   324 |     sl_u8  payload[0];
+[14.199s]       |                    ^
+[14.351s] [ 90%] Building CXX object CMakeFiles/sllidar_node.dir/sdk/src/sl_udp_channel.cpp.o
+[14.746s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,
+[14.746s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,
+[14.746s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp:33:
+[14.746s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[14.746s]    66 |     sl_u8 data[0];
+[14.747s]       |                ^
+[14.750s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[14.750s]   324 |     sl_u8  payload[0];
+[14.750s]       |                    ^
+[14.757s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp: In member function ‘void sl::TcpChannel::setStatus(_u32)’:
+[14.757s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_tcp_channel.cpp:109:29: warning: unused parameter ‘flag’ [-Wunused-parameter]
+[14.757s]   109 |         void setStatus(_u32 flag){}
+[14.757s]       |                        ~~~~~^~~~
+[14.921s] In file included from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:41,
+[14.921s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_driver.h:54,
+[14.921s]                  from /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp:33:
+[14.921s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_protocol.h:66:16: warning: ISO C++ forbids zero-size array ‘data’ [-Wpedantic]
+[14.921s]    66 |     sl_u8 data[0];
+[14.922s]       |                ^
+[14.922s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/./sdk/include/sl_lidar_cmd.h:324:20: warning: ISO C++ forbids zero-size array ‘payload’ [-Wpedantic]
+[14.922s]   324 |     sl_u8  payload[0];
+[14.922s]       |                    ^
+[14.929s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp: In member function ‘void sl::UdpChannel::setStatus(_u32)’:
+[14.929s] /home/davidezuma/PortaMailCapstone/src/sllidar_ros2/sdk/src/sl_udp_channel.cpp:112:29: warning: unused parameter ‘flag’ [-Wunused-parameter]
+[14.929s]   112 |         void setStatus(_u32 flag){}
+[14.929s]       |                        ~~~~~^~~~
+[17.463s] [ 95%] Linking CXX executable sllidar_node
+[18.393s] [ 95%] Built target sllidar_node
+[21.572s] [100%] Linking CXX executable sllidar_client
+[22.350s] [100%] Built target sllidar_client
+[22.374s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /home/davidezuma/PortaMailCapstone/build/sllidar_ros2 -- -j4 -l4
+[22.394s] Invoking command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/sllidar_ros2
+[22.410s] -- Install configuration: ""
+[22.410s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch
+[22.410s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_t1_launch.py
+[22.411s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m7_launch.py
+[22.412s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2e_launch.py
+[22.412s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2e_launch.py
+[22.413s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m12_launch.py
+[22.413s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_t1_launch.py
+[22.413s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a2m8_launch.py
+[22.414s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s2_launch.py
+[22.415s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_tcp_launch.py
+[22.415s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_c1_launch.py
+[22.416s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a3_launch.py
+[22.416s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s1_launch.py
+[22.417s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_launch.py
+[22.417s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a3_launch.py
+[22.417s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s1_tcp_launch.py
+[22.418s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m7_launch.py
+[22.418s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_a1_launch.py
+[22.419s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_c1_launch.py
+[22.419s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s2_launch.py
+[22.420s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m8_launch.py
+[22.420s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a2m12_launch .py
+[22.421s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/view_sllidar_s3_launch.py
+[22.421s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_a1_launch.py
+[22.422s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/launch/sllidar_s3_launch.py
+[22.422s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/rviz
+[22.422s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/rviz/sllidar_ros2.rviz
+[22.423s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node
+[22.428s] -- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node" to ""
+[22.428s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client
+[22.437s] -- Set non-toolchain portion of runtime path of "/home/davidezuma/PortaMailCapstone/install/sllidar_ros2/lib/sllidar_ros2/sllidar_client" to ""
+[22.437s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/package_run_dependencies/sllidar_ros2
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/parent_prefix_path/sllidar_ros2
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.sh
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/ament_prefix_path.dsv
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/path.sh
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/environment/path.dsv
+[22.438s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.bash
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.sh
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.zsh
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/local_setup.dsv
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/package.dsv
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/ament_index/resource_index/packages/sllidar_ros2
+[22.439s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_dependencies-extras.cmake
+[22.440s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/ament_cmake_export_include_directories-extras.cmake
+[22.440s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config.cmake
+[22.440s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/cmake/sllidar_ros2Config-version.cmake
+[22.440s] -- Installing: /home/davidezuma/PortaMailCapstone/install/sllidar_ros2/share/sllidar_ros2/package.xml
+[22.443s] Invoked command in '/home/davidezuma/PortaMailCapstone/build/sllidar_ros2' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /home/davidezuma/PortaMailCapstone/build/sllidar_ros2

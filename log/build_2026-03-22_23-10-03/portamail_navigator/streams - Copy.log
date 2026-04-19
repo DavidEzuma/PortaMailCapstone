@@ -1,0 +1,53 @@
+[0.008s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator -- -j12 -l12
+[0.052s] [100%] Built target mock_driver
+[0.052s] [100%] Built target map_autosave_node
+[0.060s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator -- -j12 -l12
+[0.066s] Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator
+[0.072s] -- Install configuration: ""
+[0.072s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/mock_driver
+[0.072s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/lib/portamail_navigator/map_autosave_node
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include/portamail_navigator
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/include/portamail_navigator/map_autosave_node.hpp
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/gazebo_classic_mapping.launch.py
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/mapping.launch.py
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/hardware.launch.py
+[0.073s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/launch/joystick.launch.py
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf_no_imu.yaml
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/slam.yaml
+[0.073s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/map_autosave.yaml
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/config/ekf.yaml
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/locale_stubs.c
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/teensy_driver/teensy_driver.ino
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/esp32_driver
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/esp32_driver/esp32_driver.ino
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/firmware/micro_ros_arduino-2.0.8-jazzy.zip
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail.urdf
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/urdf/portamail_classic.urdf
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_wheel.STL
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/base_link.STL
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/left_wheel.STL
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/right_wheel.STL
+[0.074s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/meshes/caster_swivel.STL
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/package_run_dependencies/portamail_navigator
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/parent_prefix_path/portamail_navigator
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.sh
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/ament_prefix_path.dsv
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.sh
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/environment/path.dsv
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.bash
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.sh
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.zsh
+[0.075s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/local_setup.dsv
+[0.075s] -- Installing: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.dsv
+[0.076s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/ament_index/resource_index/packages/portamail_navigator
+[0.076s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig.cmake
+[0.076s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/cmake/portamail_navigatorConfig-version.cmake
+[0.076s] -- Up-to-date: /home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator/share/portamail_navigator/package.xml
+[0.076s] Invoked command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator

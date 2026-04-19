@@ -1,0 +1,1 @@
+Invoking command in '/home/david-ezuma/Documents/PortaMailCapstone/build/portamail_navigator': CMAKE_PREFIX_PATH=/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/david-ezuma/Documents/PortaMailCapstone/src/portamail_navigator -DCMAKE_INSTALL_PREFIX=/home/david-ezuma/Documents/PortaMailCapstone/install/portamail_navigator

@@ -1,0 +1,10 @@
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/uninstall.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/portamail_coordinator_uninstall.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/coordinator.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/test.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/edit_cache.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/rebuild_cache.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/list_install_components.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/install.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/install/local.dir
+/home/davidezuma/PortaMailCapstone/build/portamail_coordinator/CMakeFiles/install/strip.dir

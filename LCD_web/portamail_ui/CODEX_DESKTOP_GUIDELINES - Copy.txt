@@ -1,0 +1,65 @@
+PortaMail LCD System: Codex Desktop Guidelines
+
+Purpose
+- Build and harden this LCD system as a deterministic HMI and state authority for mail_robot.
+- Be creative in implementation quality, robustness, and validation strategy, but stay inside system boundaries.
+
+System End Goal (must preserve)
+- Reliably translate touchscreen interactions into validated edge events.
+- Maintain delivery state, including queue behavior and confirm flow.
+- Expose stable endpoints: GET /api/state, GET /api/events, POST /api/mode.
+- Log confirmed deliveries in a consistent format.
+
+Hard Boundaries (non-negotiable)
+- Only work inside: LCD_web/portamail_ui/
+- Do NOT implement navigation, motor control, SLAM, ROS logic, or robot mission logic.
+- Do NOT change API/event contract shapes without explicit instruction.
+- Do NOT rename existing endpoint paths, bit keys, or edge event names without explicit instruction.
+- If contract-compatible extensions are added, old fields must remain valid.
+
+Base Functional Outline (must hold)
+- Two-room setup:
+  - Room 1 button
+  - Room 2 button
+- Confirm path:
+  - Confirm Package
+  - Room select
+  - Package Confirmed
+- Power button
+- Queue + delivery screens remain deterministic.
+
+Creativity Permission
+- You are encouraged to propose and implement improvements that make the LCD system more functional and reliable for this setup.
+- Improvements are allowed only if they:
+  1) stay within boundaries,
+  2) are validated by tests/smoke checks,
+  3) preserve backward compatibility unless explicitly approved.
+
+Engineering Priorities
+1) Determinism: same input sequence -> same state/events.
+2) Contract stability: no drift in /api/state, /api/events, /api/mode behavior.
+3) Validation rigor: tests first or test-with-change, with clear pass/fail evidence.
+4) Observability: event/state history useful for debugging.
+5) Minimality: avoid unnecessary complexity.
+
+Required Validation Focus
+- Button edge semantics (release-driven events, press bits).
+- Queue handling correctness (ROOM1/ROOM2 priority/ordering as implemented).
+- Confirm flow correctness and logging correctness.
+- API schema stability and invalid-input handling.
+- Realtime behavior consistency with Socket.IO updates.
+
+Suggested Work Pattern
+1) Audit current behavior vs as-built contract.
+2) Lock contract docs to exact implementation.
+3) Add/expand tests for contract + state machine + edge behavior.
+4) Fix defects found by tests.
+5) Add smoke checks for quick regression detection.
+6) Report remaining risks and optional improvements.
+
+Deliverable Format Required
+- Files changed (exact list).
+- Behavior changes (if any) and why.
+- Test evidence summary.
+- Remaining risks.
+- Optional next improvements (contract-safe only).
