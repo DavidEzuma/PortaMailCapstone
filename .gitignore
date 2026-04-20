@@ -1,0 +1,24 @@
+# MemPalace AI tooling — machine-local, not source code
+entities.json
+mempalace.yaml
+
+# ROS 2 build artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Maps (auto-generated at runtime)
+maps/*.pgm
+maps/*.yaml
+
+# Editor / OS
+.vscode/
+*.swp
+*~
+.DS_Store

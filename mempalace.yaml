@@ -1,35 +1,45 @@
 wing: portamailcapstone
 rooms:
-- name: bin
-  description: Files from bin/
-  keywords:
-  - bin
-  - bin
-- name: capstone_pcb
-  description: Files from capstone_PCB/
-  keywords:
-  - capstone_pcb
-  - capstone_pcb
 - name: configuration
   description: Files from config/
   keywords:
   - configuration
   - config
-- name: documentation
-  description: Files from docs/
+- name: log
+  description: Files from log/
   keywords:
-  - documentation
-  - docs
+  - log
+  - log
 - name: downloads
   description: Files from downloads/
   keywords:
   - downloads
   - downloads
+- name: documentation
+  description: Files from docs/
+  keywords:
+  - documentation
+  - docs
+- name: capstone_pcb
+  description: Files from capstone_PCB/
+  keywords:
+  - capstone_pcb
+  - capstone_pcb
 - name: external_controller
   description: Files from external_controller/
   keywords:
   - external_controller
   - external_controller
+- name: scripts
+  description: Files from scripts/
+  keywords:
+  - scripts
+  - scripts
+- name: maps
+  description: Files from maps/
+  keywords:
+  - maps
+  - maps
 - name: install
   description: Files from install/
   keywords:
@@ -40,21 +50,16 @@ rooms:
   keywords:
   - lcd_web
   - lcd_web
-- name: log
-  description: Files from log/
-  keywords:
-  - log
-  - log
-- name: scripts
-  description: Files from scripts/
-  keywords:
-  - scripts
-  - scripts
 - name: src
   description: Files from src/
   keywords:
   - src
   - src
+- name: bin
+  description: Files from bin/
+  keywords:
+  - bin
+  - bin
 - name: general
   description: Files that don't fit other rooms
   keywords: []

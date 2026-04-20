@@ -74,17 +74,20 @@
 //         pins to the ESP32 GPIOs below for PWM speed control.
 // =============================================================================
 
-// Left motor (U3 / MD1) — verified from capstone_PCB.kicad_pcb net assignments
-#define MOTOR_LEFT_INA    5   // Net-(U3-INA)        → U3 VNH5019 pin 4  (direction A)
-#define MOTOR_LEFT_INB   25   // Net-(U3-INB)        → U3 VNH5019 pin 10 (direction B)
-#define MOTOR_LEFT_ENA   26   // Net-(U3-ENA/DIAGA)  → U3 VNH5019 pin 5  (half-bridge A enable / PWM speed)
-#define MOTOR_LEFT_ENB   27   // Net-(U3-ENB/DIAGB)  → U3 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
+// Left motor (U4 / MD2) — physically verified; U4 is the left wheel
+#define MOTOR_LEFT_INA   33   // Net-(U4-INA)        → U4 VNH5019 pin 4  (direction A)
+#define MOTOR_LEFT_INB   13   // Net-(U4-INB)        → U4 VNH5019 pin 10 (direction B)
+#define MOTOR_LEFT_ENA   14   // Net-(U4-ENA/DIAGA)  → U4 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_LEFT_ENB    4   // Net-(U4-ENB/DIAGB)  → U4 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
-// Right motor (U4 / MD2) — verified from capstone_PCB.kicad_pcb net assignments
-#define MOTOR_RIGHT_INA  33   // Net-(U4-INA)        → U4 VNH5019 pin 4  (direction A)
-#define MOTOR_RIGHT_INB  13   // Net-(U4-INB)        → U4 VNH5019 pin 10 (direction B)
-#define MOTOR_RIGHT_ENA  14   // Net-(U4-ENA/DIAGA)  → U4 VNH5019 pin 5  (half-bridge A enable / PWM speed)
-#define MOTOR_RIGHT_ENB   4   // Net-(U4-ENB/DIAGB)  → U4 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
+// Right motor (U3 / MD1) — physically verified; U3 is the right wheel
+// NOTE: GPIO5 (MOTOR_RIGHT_INA) is an ESP32 strapping pin that boots HIGH.
+//       This causes a brief forward twitch on reset before setup() runs.
+//       A symmetric boot pulse is applied to the left motor in setup() to match.
+#define MOTOR_RIGHT_INA   5   // Net-(U3-INA)        → U3 VNH5019 pin 4  (direction A)
+#define MOTOR_RIGHT_INB  25   // Net-(U3-INB)        → U3 VNH5019 pin 10 (direction B)
+#define MOTOR_RIGHT_ENA  26   // Net-(U3-ENA/DIAGA)  → U3 VNH5019 pin 5  (half-bridge A enable / PWM speed)
+#define MOTOR_RIGHT_ENB  27   // Net-(U3-ENB/DIAGB)  → U3 VNH5019 pin 9  (half-bridge B enable — drive HIGH)
 
 // LEDC PWM parameters (ESP32 Arduino core v3.x pin-based API)
 // ledcAttach(pin, freq, bits) replaces the old ledcSetup + ledcAttachPin.
@@ -391,7 +394,7 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
 
   // Motor direction outputs — drive LOW first to prevent spurious drive at boot.
-  // GPIO5 (MOTOR_LEFT_INA) is a strapping pin that boots HIGH; explicit LOW required.
+  // GPIO5 (MOTOR_RIGHT_INA) is a strapping pin that boots HIGH; explicit LOW required.
   pinMode(MOTOR_LEFT_INA,  OUTPUT); digitalWrite(MOTOR_LEFT_INA,  LOW);
   pinMode(MOTOR_LEFT_INB,  OUTPUT); digitalWrite(MOTOR_LEFT_INB,  LOW);
   pinMode(MOTOR_RIGHT_INA, OUTPUT); digitalWrite(MOTOR_RIGHT_INA, LOW);
@@ -406,6 +409,14 @@ void setup() {
   // VNH5019 ENB pins: half-bridge B enable — set HIGH only after ENA is already 0.
   pinMode(MOTOR_LEFT_ENB,  OUTPUT); digitalWrite(MOTOR_LEFT_ENB,  HIGH);
   pinMode(MOTOR_RIGHT_ENB, OUTPUT); digitalWrite(MOTOR_RIGHT_ENB, HIGH);
+
+  // Symmetric boot pulse for left motor: mirrors the GPIO5 strapping-pin twitch that
+  // naturally occurs on the right motor so both wheels confirm wiring is alive on reset.
+  digitalWrite(MOTOR_LEFT_INA, HIGH);
+  ledcWrite(MOTOR_LEFT_ENA, 80);
+  delay(60);
+  digitalWrite(MOTOR_LEFT_INA, LOW);
+  ledcWrite(MOTOR_LEFT_ENA, 0);
 
   // Encoder inputs
   pinMode(ENC_LEFT_A,  INPUT_PULLUP); pinMode(ENC_LEFT_B,  INPUT_PULLUP);
